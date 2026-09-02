@@ -29,8 +29,8 @@ importers:
         specifier: ^1.0.3
         version: 1.0.3
       '@antelopejs/core':
-        specifier: link:../../antelopejs
-        version: link:../../antelopejs
+        specifier: ^1.5.0
+        version: 1.5.0(@types/node@22.20.1)
       '@antelopejs/data-api':
         specifier: ^1.1.1
         version: 1.1.1(patch_hash=0111e6547b42343ec2bb8881a8bf5619462a837b7ce1c075ca90abe0a5e36867)(@antelopejs/interface-api-util@0.1.2(@antelopejs/interface-api@0.0.2)(@antelopejs/interface-core@0.0.12))
@@ -235,8 +235,8 @@ packages:
   '@antelopejs/auth-jwt@1.0.3':
     resolution: {integrity: sha512-/4jrTpFjQjn5W74/00U3ftyI8xQouhX+uhiOk5+cWsS+3zvhfO4WfJ0TRta+MaPhqyOISucH2IYf402JtSyOSw==}
 
-  '@antelopejs/core@1.4.11':
-    resolution: {integrity: sha512-Fsk0n0yBqs+s3mDmCPWkSJOEFsTWMLTt7UKoOk4cGh4F94byZJSFjnBkEzy+F5t3V8Wr4QUS3ke5YKmATIGGyA==}
+  '@antelopejs/core@1.5.0':
+    resolution: {integrity: sha512-4IJ0TgekPw5l6Tq1+V5m3evxczu92TqYkcqEUQYBMdOn4+eEy/UJkXDt8HZb3isFfOXQd4iZ8enkST+wdARJqA==}
     hasBin: true
 
   '@antelopejs/data-api@1.1.1':
@@ -3343,7 +3343,7 @@ snapshots:
   '@antelopejs-private/cms@0.6.5(@types/node@22.20.1)':
     dependencies:
       2fa: 0.1.2
-      '@antelopejs/core': 1.4.11(@types/node@22.20.1)
+      '@antelopejs/core': 1.5.0(@types/node@22.20.1)
       '@antelopejs/interface-api': 0.0.13(@antelopejs/interface-core@0.0.12)
       '@antelopejs/interface-api-util': 0.1.2(@antelopejs/interface-api@0.0.13(@antelopejs/interface-core@0.0.12))(@antelopejs/interface-core@0.0.12)
       '@antelopejs/interface-auth': 0.0.6(@antelopejs/interface-api@0.0.13(@antelopejs/interface-core@0.0.12))(@antelopejs/interface-core@0.0.12)
@@ -3401,7 +3401,7 @@ snapshots:
       jsonwebtoken: 9.0.3
       mocha: 11.8.0
 
-  '@antelopejs/core@1.4.11(@types/node@22.20.1)':
+  '@antelopejs/core@1.5.0(@types/node@22.20.1)':
     dependencies:
       '@antelopejs/interface-core': 0.0.12
       '@types/proper-lockfile': 4.1.4

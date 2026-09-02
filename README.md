@@ -106,8 +106,7 @@ This is **not specific to running embedded** — the same failure occurs under
 `patchedDependencies` block from `pnpm-workspace.yaml`, and reinstall once both
 modules are republished with corrected ranges.
 
-## Status
+## Requirements
 
-`@antelopejs/core` is installed from a local file link because the embedded runtime
-is not released yet. Once it ships, replace the `link:` dependency in
-`package.json` with a published version.
+The embedded runtime shipped in `@antelopejs/core` 1.5.0, which is what this
+template depends on. Earlier versions do not export `createRuntime`.
