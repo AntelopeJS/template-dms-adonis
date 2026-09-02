@@ -1,0 +1,3 @@
+patchedDependencies:
+  '@antelopejs/data-api@1.1.1': patches/@antelopejs__data-api@1.1.1.patch
+  '@antelopejs/database-decorators@1.1.1': patches/@antelopejs__database-decorators@1.1.1.patch
