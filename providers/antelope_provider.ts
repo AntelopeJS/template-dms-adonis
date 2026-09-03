@@ -63,8 +63,6 @@ export default class AntelopeProvider {
         '@antelopejs/nodemailer': {
           config: { ethereal: true },
         },
-        '@antelopejs/data-api': {},
-        '@antelopejs/database-decorators': {},
       },
       uses: ['@antelopejs-private/cms'],
     })

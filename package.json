@@ -54,8 +54,6 @@
     "@antelopejs/api": "^1.2.4",
     "@antelopejs/auth-jwt": "^1.0.3",
     "@antelopejs/core": "^1.5.0",
-    "@antelopejs/data-api": "^1.1.1",
-    "@antelopejs/database-decorators": "^1.1.1",
     "@antelopejs/file-storage-local": "^0.1.3",
     "@antelopejs/mongodb": "^1.2.7",
     "@antelopejs/nodemailer": "^0.0.4",
