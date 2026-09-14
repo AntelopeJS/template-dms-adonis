@@ -4,7 +4,7 @@ A minimal template running the [AntelopeJS](https://antelopejs.com) CMS **inside
 AdonisJS application**. AdonisJS owns the process — its HTTP server, signals, logger
 and configuration — and the CMS runs as a subsystem alongside it.
 
-This is the inverse of [`template-cms-demo`](../template-cms-demo), where the
+This is the inverse of [`template-cms-demo`](https://github.com/AntelopeJS/template-cms-demo), where the
 AntelopeJS CLI (`ajs project run`) is the process owner and modules are declared in
 `antelope.config.ts`. Here there is no `antelope.config.ts` at all: modules are
 ordinary npm dependencies, and the module list lives in the service provider.
@@ -51,24 +51,32 @@ today; the two listeners coexist.
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 22 and pnpm
 - A running MongoDB instance (`mongodb://localhost:27017` by default)
-- Access to the private registry (`.npmrc` points `@antelopejs-private` at
-  `https://npm.antelopejs.cloud/`)
 
 ## Getting started
 
 ```bash
-pnpm install
-cp .env.example .env    # then set APP_KEY (node ace generate:key)
+git clone https://github.com/AntelopeJS/template-cms-adonis.git my-app
+cd my-app
+pnpm install --frozen-lockfile
+cp .env.example .env
+node ace generate:key
 pnpm dev
 ```
+
+Use a disposable `template_cms_adonis` MongoDB database and replace development
+secrets before deploying.
 
 Then:
 
 ```bash
 curl http://localhost:3333/cms/info
 ```
+
+This checks the embedded backend, not a rendered dashboard. The template does
+not include the `acms` frontend dependency or a `frontend:dev` script. Start
+with `template-cms-demo` if your goal is the complete dashboard quickstart.
 
 ## Configuration
 
@@ -86,25 +94,6 @@ Everything is driven by `.env` (see `.env.example`) and mapped onto module confi
 
 To add a CMS feature module (`cms-api`, `cms-database`, `cms-lang`, …), install it
 and add an entry to the `modules` map in the provider. No other wiring is needed.
-
-## Temporary local patches
-
-`patches/` contains two patches applied through `pnpm-workspace.yaml`:
-
-- `@antelopejs/data-api@1.1.1`
-- `@antelopejs/database-decorators@1.1.1`
-
-Both modules declare `^0.0.3` for their `@antelopejs/interface-*` dependencies.
-Under pre-1.0 semver a caret range does not widen past the patch version, so
-`^0.0.3` cannot be satisfied by the current canonical `@antelopejs/interface-core`
-(0.0.12) and startup fails version validation. The patches only widen those ranges
-to the `>=x.y.z <1.0.0` policy the other AntelopeJS modules already use; no code is
-changed.
-
-This is **not specific to running embedded** — the same failure occurs under
-`ajs project run` with the same module versions. Delete `patches/`, remove the
-`patchedDependencies` block from `pnpm-workspace.yaml`, and reinstall once both
-modules are republished with corrected ranges.
 
 ## Requirements
 
