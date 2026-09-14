@@ -53,8 +53,6 @@ today; the two listeners coexist.
 
 - Node.js 22 and pnpm
 - A running MongoDB instance (`mongodb://localhost:27017` by default)
-- Access to the private registry (`.npmrc` points `@antelopejs-private` at
-  `https://npm.antelopejs.cloud/`)
 
 ## Getting started
 
@@ -67,9 +65,6 @@ node ace generate:key
 pnpm dev
 ```
 
-Configure the registry credential in your user-level `~/.npmrc`, not in a
-committed project file. Keep the current `@antelopejs-private/*` package names;
-the planned interface extraction does not make public replacements available.
 Use a disposable `template_cms_adonis` MongoDB database and replace development
 secrets before deploying.
 
