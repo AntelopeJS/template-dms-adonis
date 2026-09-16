@@ -19,14 +19,14 @@ export default class AntelopeProvider {
     this.runtime = createRuntime({
       projectFolder: this.app.makePath(),
       modules: {
-        '@antelopejs-private/cms': {
+        '@antelopejs/dms': {
           config: {
             homepage: '/home',
-            apiBaseUrl: env.get('ANTELOPE_API_BASE_URL'),
-            clientBaseUrl: env.get('ANTELOPE_CLIENT_BASE_URL'),
+            apiBaseUrl: env.get('DMS_API_BASE_URL'),
+            clientBaseUrl: env.get('DMS_CLIENT_BASE_URL'),
             meta: {
-              title: 'AntelopeJS CMS on AdonisJS',
-              description: 'CMS running as a guest of an AdonisJS application',
+              title: 'AntelopeJS DMS on AdonisJS',
+              description: 'DMS running as a guest of an AdonisJS application',
             },
           },
         },
@@ -35,12 +35,12 @@ export default class AntelopeProvider {
             servers: [
               {
                 protocol: 'http',
-                host: env.get('ANTELOPE_API_HOST'),
-                port: env.get('ANTELOPE_API_PORT'),
+                host: env.get('DMS_API_HOST'),
+                port: env.get('DMS_API_PORT'),
               },
             ],
             cors: {
-              allowedOrigins: [env.get('ANTELOPE_CLIENT_BASE_URL')],
+              allowedOrigins: [env.get('DMS_CLIENT_BASE_URL')],
             },
           },
         },
@@ -51,12 +51,12 @@ export default class AntelopeProvider {
           },
         },
         '@antelopejs/auth-jwt': {
-          config: { secret: env.get('ANTELOPE_JWT_SECRET') },
+          config: { secret: env.get('DMS_JWT_SECRET') },
         },
         '@antelopejs/file-storage-local': {
           config: {
             storagePath: '.antelope/file-storage',
-            baseUrl: env.get('ANTELOPE_API_BASE_URL'),
+            baseUrl: env.get('DMS_API_BASE_URL'),
             defaultVisibility: 'private',
           },
         },
@@ -64,7 +64,7 @@ export default class AntelopeProvider {
           config: { ethereal: true },
         },
       },
-      uses: ['@antelopejs-private/cms'],
+      uses: ['@antelopejs/interface-dms'],
     })
 
     this.app.container.bindValue(AntelopeRuntimeBinding, this.runtime)

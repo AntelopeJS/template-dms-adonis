@@ -21,9 +21,9 @@ export default await Env.create(new URL('../', import.meta.url), {
   MONGODB_URL: Env.schema.string(),
   MONGODB_DATABASE: Env.schema.string(),
 
-  ANTELOPE_API_HOST: Env.schema.string(),
-  ANTELOPE_API_PORT: Env.schema.number(),
-  ANTELOPE_API_BASE_URL: Env.schema.string(),
-  ANTELOPE_CLIENT_BASE_URL: Env.schema.string(),
-  ANTELOPE_JWT_SECRET: Env.schema.string(),
+  DMS_API_HOST: Env.schema.string(),
+  DMS_API_PORT: Env.schema.number(),
+  DMS_API_BASE_URL: Env.schema.string(),
+  DMS_CLIENT_BASE_URL: Env.schema.string(),
+  DMS_JWT_SECRET: Env.schema.string(),
 })
