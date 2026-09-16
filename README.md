@@ -52,7 +52,7 @@ GET /dms/info  → DMS client base URL and frontend modules, read through runtim
 ```
 
 The DMS's own API server is separate and listens on `:5010` (see
-`ANTELOPE_API_PORT`). Mounting it into the AdonisJS HTTP server is not supported
+`DMS_API_PORT`). Mounting it into the AdonisJS HTTP server is not supported
 today; the two listeners coexist.
 
 ## Prerequisites
@@ -90,14 +90,14 @@ your goal is the complete dashboard quickstart.
 Everything is driven by `.env` (see `.env.example`) and mapped onto module config in
 `providers/antelope_provider.ts`:
 
-| Variable                   | Purpose                                  |
-| -------------------------- | ---------------------------------------- |
-| `MONGODB_URL`              | MongoDB connection string                |
-| `MONGODB_DATABASE`         | Database name                            |
-| `ANTELOPE_API_HOST` / `_PORT` | Where the DMS API server listens      |
-| `ANTELOPE_API_BASE_URL`    | Public URL of that API server            |
-| `ANTELOPE_CLIENT_BASE_URL` | DMS frontend origin, used for CORS       |
-| `ANTELOPE_JWT_SECRET`      | Auth signing secret                      |
+| Variable                 | Purpose                            |
+| ------------------------ | ---------------------------------- |
+| `MONGODB_URL`            | MongoDB connection string          |
+| `MONGODB_DATABASE`       | Database name                      |
+| `DMS_API_HOST` / `_PORT` | Where the DMS API server listens   |
+| `DMS_API_BASE_URL`       | Public URL of that API server      |
+| `DMS_CLIENT_BASE_URL`    | DMS frontend origin, used for CORS |
+| `DMS_JWT_SECRET`         | Auth signing secret                |
 
 To add a DMS feature module (`@antelopejs/dms-api`, `@antelopejs/dms-database`,
 `@antelopejs/dms-lang`, …), install it and add an entry to the `modules` map in
