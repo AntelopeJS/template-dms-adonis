@@ -19,14 +19,14 @@ export default class AntelopeProvider {
     this.runtime = createRuntime({
       projectFolder: this.app.makePath(),
       modules: {
-        '@antelopejs-private/cms': {
+        '@antelopejs-private/dms': {
           config: {
             homepage: '/home',
             apiBaseUrl: env.get('ANTELOPE_API_BASE_URL'),
             clientBaseUrl: env.get('ANTELOPE_CLIENT_BASE_URL'),
             meta: {
-              title: 'AntelopeJS CMS on AdonisJS',
-              description: 'CMS running as a guest of an AdonisJS application',
+              title: 'AntelopeJS DMS on AdonisJS',
+              description: 'DMS running as a guest of an AdonisJS application',
             },
           },
         },
@@ -64,7 +64,7 @@ export default class AntelopeProvider {
           config: { ethereal: true },
         },
       },
-      uses: ['@antelopejs-private/cms'],
+      uses: ['@antelopejs-private/dms'],
     })
 
     this.app.container.bindValue(AntelopeRuntimeBinding, this.runtime)

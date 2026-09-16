@@ -1,5 +1,5 @@
 {
-  "name": "template-cms-adonis",
+  "name": "template-dms-adonis",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@adonisjs/core": "^6.18.0",
-    "@antelopejs-private/cms": "^0.8.3",
+    "@antelopejs-private/dms": "^0.8.3",
     "@antelopejs/api": "^1.2.4",
     "@antelopejs/auth-jwt": "^1.0.3",
     "@antelopejs/core": "^1.5.0",

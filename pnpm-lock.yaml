@@ -11,7 +11,7 @@ importers:
       '@adonisjs/core':
         specifier: ^6.18.0
         version: 6.21.0(@adonisjs/assembler@7.8.2(typescript@5.8.3))
-      '@antelopejs-private/cms':
+      '@antelopejs-private/dms':
         specifier: ^0.8.3
         version: 0.8.3(@types/node@22.20.1)(supports-color@10.2.2)
       '@antelopejs/api':
@@ -207,11 +207,11 @@ packages:
   '@adonisjs/tsconfig@1.4.1':
     resolution: {integrity: sha512-b7bHdnTaDRGfec4XVtpwsSEukZ549MgqOShScCd1b4xkMK8z1q/jb0Xs4iUL86oIDhty2y7k5vvA6aoQKPAvXQ==}
 
-  '@antelopejs-private/cms@0.8.3':
-    resolution: {integrity: sha512-9Em+n5pMWvzKaL863uvHyi9URiK3VMOI437zZ6lyQltPyixb6Neyah5s7/3HCqk2SNAqPpzDWnTf/lAxq8fvjQ==, tarball: http://127.0.0.1:4873/cms.tgz}
+  '@antelopejs-private/dms@0.8.3':
+    resolution: {integrity: sha512-9Em+n5pMWvzKaL863uvHyi9URiK3VMOI437zZ6lyQltPyixb6Neyah5s7/3HCqk2SNAqPpzDWnTf/lAxq8fvjQ==}
 
-  '@antelopejs-private/interface-cms-automation@0.0.3':
-    resolution: {integrity: sha512-KulNvPAjN+3YuSucpFv7tjwX4jaQ0VHDKgaZtGiXLeDa8z/rmWR/Sn90RtNENDu5eSUpKb9FJ7nOvinb+aL0rQ==, tarball: http://127.0.0.1:4873/auto.tgz}
+  '@antelopejs-private/interface-dms-automation@0.0.3':
+    resolution: {integrity: sha512-KulNvPAjN+3YuSucpFv7tjwX4jaQ0VHDKgaZtGiXLeDa8z/rmWR/Sn90RtNENDu5eSUpKb9FJ7nOvinb+aL0rQ==}
     peerDependencies:
       '@antelopejs/interface-core': '>=0.0.6 <1.0.0'
 
@@ -3318,7 +3318,7 @@ snapshots:
 
   '@adonisjs/tsconfig@1.4.1': {}
 
-  '@antelopejs-private/cms@0.8.3(@types/node@22.20.1)(supports-color@10.2.2)':
+  '@antelopejs-private/dms@0.8.3(@types/node@22.20.1)(supports-color@10.2.2)':
     dependencies:
       2fa: 0.1.2
       '@antelopejs/core': 1.5.0(@types/node@22.20.1)
@@ -3344,7 +3344,7 @@ snapshots:
       zod: 3.24.4
       zod-to-json-schema: 3.24.6(zod@3.24.4)
     optionalDependencies:
-      '@antelopejs-private/interface-cms-automation': 0.0.3(@antelopejs/interface-core@0.0.12)
+      '@antelopejs-private/interface-dms-automation': 0.0.3(@antelopejs/interface-core@0.0.12)
       '@antelopejs/interface-redis': 0.0.8(@antelopejs/interface-core@0.0.12)(supports-color@10.2.2)
     transitivePeerDependencies:
       - '@types/node'
@@ -3353,7 +3353,7 @@ snapshots:
       - react-native-b4a
       - supports-color
 
-  '@antelopejs-private/interface-cms-automation@0.0.3(@antelopejs/interface-core@0.0.12)':
+  '@antelopejs-private/interface-dms-automation@0.0.3(@antelopejs/interface-core@0.0.12)':
     dependencies:
       '@antelopejs/interface-core': 0.0.12
     optional: true

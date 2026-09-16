@@ -3,9 +3,9 @@ import app from '@adonisjs/core/services/app'
 import type { AntelopeRuntime } from '@antelopejs/core'
 import { AntelopeRuntimeBinding } from '#providers/antelope_provider'
 
-const CMS_PACKAGE = '@antelopejs-private/cms'
+const DMS_PACKAGE = '@antelopejs-private/dms'
 
-type CmsInterface = {
+type DmsInterface = {
   getConfig(): {
     homepage?: string
     apiBaseUrl?: string
@@ -22,14 +22,14 @@ router.get('/', async () => {
   const rt = await runtime()
   return {
     host: 'adonisjs',
-    cms: { running: rt.isRunning, modules: rt.manager.listModules() },
+    dms: { running: rt.isRunning, modules: rt.manager.listModules() },
   }
 })
 
-router.get('/cms/info', async () => {
+router.get('/dms/info', async () => {
   const rt = await runtime()
-  const cms = rt.use<CmsInterface>(CMS_PACKAGE)
-  const config = cms.getConfig()
+  const dms = rt.use<DmsInterface>(DMS_PACKAGE)
+  const config = dms.getConfig()
 
   return {
     servedBy: 'adonis',
