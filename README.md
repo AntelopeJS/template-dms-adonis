@@ -34,15 +34,21 @@ would create a second, unattached copy of the interface. Instead it goes through
 runtime handle, which resolves the runtime's own provider-bound copy:
 
 ```ts
-const dms = runtime.use<DmsInterface>('@antelopejs-private/dms')
+const { GetClientBaseUrl } = runtime.use<DmsClientBaseUrl>(
+  '@antelopejs/interface-dms/client-base-url'
+)
 ```
 
+The request is an interface package name (or one of its subpaths), never the
+runtime package: `@antelopejs/dms` implements `@antelopejs/interface-dms`, and the
+runtime hands back its own bound copy of that interface.
+
 `start/routes.ts` contains the single example: an ordinary AdonisJS route on the
-Adonis port (`:3333`) that reads DMS configuration through that handle.
+Adonis port (`:3333`) that reads DMS state through that handle.
 
 ```
 GET /          → runtime status and the loaded module list
-GET /dms/info  → DMS configuration, read through runtime.use()
+GET /dms/info  → DMS client base URL and frontend modules, read through runtime.use()
 ```
 
 The DMS's own API server is separate and listens on `:5010` (see
@@ -75,7 +81,7 @@ curl http://localhost:3333/dms/info
 ```
 
 This checks the embedded backend, not a rendered dashboard. The template does
-not include the `adms` frontend dependency or a `frontend:dev` script. Start
+not include the dashboard frontend dependency or a `frontend:dev` script. Start
 with `template-dms-demo` if your goal is the complete dashboard quickstart.
 
 ## Configuration
@@ -92,8 +98,9 @@ Everything is driven by `.env` (see `.env.example`) and mapped onto module confi
 | `ANTELOPE_CLIENT_BASE_URL` | DMS frontend origin, used for CORS       |
 | `ANTELOPE_JWT_SECRET`      | Auth signing secret                      |
 
-To add a DMS feature module (`dms-api`, `dms-database`, `dms-lang`, …), install it
-and add an entry to the `modules` map in the provider. No other wiring is needed.
+To add a DMS feature module (`@antelopejs/dms-api`, `@antelopejs/dms-database`,
+`@antelopejs/dms-lang`, …), install it and add an entry to the `modules` map in
+the provider, keyed by its package name. No other wiring is needed.
 
 ## Requirements
 
