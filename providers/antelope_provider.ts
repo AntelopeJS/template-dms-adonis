@@ -19,7 +19,7 @@ export default class AntelopeProvider {
     this.runtime = createRuntime({
       projectFolder: this.app.makePath(),
       modules: {
-        '@antelopejs-private/dms': {
+        '@antelopejs/dms': {
           config: {
             homepage: '/home',
             apiBaseUrl: env.get('ANTELOPE_API_BASE_URL'),
@@ -64,7 +64,7 @@ export default class AntelopeProvider {
           config: { ethereal: true },
         },
       },
-      uses: ['@antelopejs-private/dms'],
+      uses: ['@antelopejs/interface-dms'],
     })
 
     this.app.container.bindValue(AntelopeRuntimeBinding, this.runtime)
