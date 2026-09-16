@@ -81,8 +81,9 @@ curl http://localhost:3333/dms/info
 ```
 
 This checks the embedded backend, not a rendered dashboard. The template does
-not include the dashboard frontend dependency or a `frontend:dev` script. Start
-with `template-dms-demo` if your goal is the complete dashboard quickstart.
+not include the dashboard frontend loader (`@antelopejs/dms-frontend`, run with
+`ajs-dms dev`) or a `frontend:dev` script. Start with `template-dms-demo` if
+your goal is the complete dashboard quickstart.
 
 ## Configuration
 
