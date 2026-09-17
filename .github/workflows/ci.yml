@@ -1,0 +1,63 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  # No branch filter: pull requests get stacked on top of each other, and a
+  # filter on `main` would leave every intermediate step without a gate.
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      COREPACK_DEFAULT_TO_LATEST: 0
+    services:
+      # `node ace test` boots the whole application, and the Antelope runtime
+      # connects to MongoDB while constructing its modules: without a reachable
+      # server the boot fails before any test runs. The port and database match
+      # the `MONGODB_URL` / `MONGODB_DATABASE` defaults of `.env.example`.
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # No .nvmrc in this repository: 24 is the version of record across the
+          # fleet, and the one the AdonisJS toolchain is exercised on.
+          node-version: 24
+      # Node's bundled corepack predates the pnpm version pinned in
+      # packageManager. Pinned so a corepack release cannot break every
+      # build at once.
+      - run: npm i -g --force corepack@0.34.0 && corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm build
+      # The application validates its whole environment at boot (start/env.ts),
+      # so the test run needs a .env. `.env.example` holds every key with
+      # values that work as-is in CI; only APP_KEY is left empty there and is
+      # generated per run. Neither lint, typecheck nor build read it.
+      - run: cp .env.example .env
+      - run: node ace generate:key
+      # The repository ships no spec file yet, so this only asserts that the
+      # application boots: the Antelope runtime constructs and starts the DMS,
+      # api, mongodb, auth-jwt, file-storage and nodemailer modules.
+      - run: pnpm test
