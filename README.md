@@ -106,4 +106,4 @@ the provider, keyed by its package name. No other wiring is needed.
 ## Requirements
 
 The embedded runtime shipped in `@antelopejs/core` 1.5.0; earlier versions do
-not export `createRuntime`. This template depends on `@antelopejs/core` 2.x.
+not export `createRuntime`. This template depends on `@antelopejs/core` 1.7.x.
