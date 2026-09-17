@@ -19,7 +19,7 @@ importers:
         version: 1.0.3
       '@antelopejs/core':
         specifier: ^2.0.0
-        version: 2.0.0(@types/node@22.20.1)
+        version: 2.0.1(@types/node@22.20.1)
       '@antelopejs/dms':
         specifier: '>=0.0.1 <1.0.0'
         version: 0.2.0(@antelopejs/interface-auth@0.0.6(@antelopejs/interface-api@0.0.13(@antelopejs/interface-core@0.0.12))(@antelopejs/interface-core@0.0.12))(@types/node@22.20.1)
@@ -213,12 +213,12 @@ packages:
   '@antelopejs/auth-jwt@1.0.3':
     resolution: {integrity: sha512-/4jrTpFjQjn5W74/00U3ftyI8xQouhX+uhiOk5+cWsS+3zvhfO4WfJ0TRta+MaPhqyOISucH2IYf402JtSyOSw==}
 
-  '@antelopejs/core@1.5.0':
-    resolution: {integrity: sha512-4IJ0TgekPw5l6Tq1+V5m3evxczu92TqYkcqEUQYBMdOn4+eEy/UJkXDt8HZb3isFfOXQd4iZ8enkST+wdARJqA==}
+  '@antelopejs/core@1.6.0':
+    resolution: {integrity: sha512-x2C4EHlTEYfJb2NfChXc5CNnXWVN7KnIDQp76NvN/7D75m+lcZY4THf1Tzv8oBSpSO0115Amo5/QmkjvKpybfw==}
     hasBin: true
 
-  '@antelopejs/core@2.0.0':
-    resolution: {integrity: sha512-2g64Oz/P0ccyar9ASQlG/fRCtAR+CMG+VRbb9KWzKksoFcsF/bIORtr2VrU7oo6PgKhmrxuTL+saL64eELFAag==}
+  '@antelopejs/core@2.0.1':
+    resolution: {integrity: sha512-DVoyXFysNc3cxxF80p30KyWIi3HwgMw6/T4joI9Av3WgL2vgTVmoUkuxrPNr94JRv3xHKLxVOsiZ2DH9zrjW7w==}
     hasBin: true
 
   '@antelopejs/dms@0.2.0':
@@ -1235,10 +1235,6 @@ packages:
   cli-cursor@5.0.0:
     resolution: {integrity: sha512-aCj4O5wKyszjMmDT4tZj93kxyydN/K5zPWSCe6/0AV/AA1pqe5ZBIw0a2ZfPQV7lL5/yb5HsUreJ6UFAF1tEQw==}
     engines: {node: '>=18'}
-
-  cli-progress@3.12.0:
-    resolution: {integrity: sha512-tRkV3HJ1ASwm19THiiLIXLO7Im7wlTuKnvkYaTkyoAPefqjNg7W7DHKUlGRxy9vxDvbyCYQkQozvptuMkGCg8A==}
-    engines: {node: '>=4'}
 
   cli-table3@0.6.5:
     resolution: {integrity: sha512-+W/5efTR7y5HRD7gACw9yQjqMVvEMLBHmboM/kPWam+H+Hmyrgjh6YncVKK122YZkXrLudzTuAukUw9FnMf7IQ==}
@@ -3344,13 +3340,12 @@ snapshots:
       jsonwebtoken: 9.0.3
       mocha: 11.8.0
 
-  '@antelopejs/core@1.5.0(@types/node@22.20.1)':
+  '@antelopejs/core@1.6.0(@types/node@22.20.1)':
     dependencies:
       '@antelopejs/interface-core': 0.0.12
       '@types/proper-lockfile': 4.1.4
       boxen: 8.0.1
       chalk: 4.1.2
-      cli-progress: 3.12.0
       commander: 13.1.0
       figlet: 1.11.4
       inly: 5.0.1
@@ -3364,7 +3359,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@antelopejs/core@2.0.0(@types/node@22.20.1)':
+  '@antelopejs/core@2.0.1(@types/node@22.20.1)':
     dependencies:
       '@antelopejs/interface-core': 0.0.12
       '@types/proper-lockfile': 4.1.4
@@ -3386,7 +3381,7 @@ snapshots:
   '@antelopejs/dms@0.2.0(@antelopejs/interface-auth@0.0.6(@antelopejs/interface-api@0.0.13(@antelopejs/interface-core@0.0.12))(@antelopejs/interface-core@0.0.12))(@types/node@22.20.1)':
     dependencies:
       2fa: 0.1.2
-      '@antelopejs/core': 1.5.0(@types/node@22.20.1)
+      '@antelopejs/core': 1.6.0(@types/node@22.20.1)
       '@antelopejs/interface-api': 0.0.13(@antelopejs/interface-core@0.0.12)
       '@antelopejs/interface-api-util': 0.1.2(@antelopejs/interface-api@0.0.13(@antelopejs/interface-core@0.0.12))(@antelopejs/interface-core@0.0.12)
       '@antelopejs/interface-core': 0.0.12
@@ -4483,10 +4478,6 @@ snapshots:
   cli-cursor@5.0.0:
     dependencies:
       restore-cursor: 5.1.0
-
-  cli-progress@3.12.0:
-    dependencies:
-      string-width: 4.2.3
 
   cli-table3@0.6.5:
     dependencies:
