@@ -30,6 +30,10 @@ export default class AntelopeProvider {
             },
           },
         },
+        '@antelopejs/dms-api': {},
+        '@antelopejs/dms-media': {},
+        '@antelopejs/dms-automation': {},
+        '@antelopejs/dms-database': {},
         '@antelopejs/api': {
           config: {
             servers: [
