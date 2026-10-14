@@ -92,6 +92,25 @@ through the loader's proxy, which forwards only the prefixes declared to it:
 the DMS declares `/api/**` and `/dms/**`, and a module serving anything else to
 the browser declares it with `backendProxies`.
 
+## Claude Code
+
+The DMS ships its own Claude Code skills (pages and blocks, auth and
+permissions, module authoring, best practices). The
+[antelopejs plugin](https://github.com/AntelopeJS/claude-antelopejs) syncs them
+into `.claude/skills/` after `pnpm install`, and this repository's
+`.claude/settings.json` registers it: open the project in Claude Code, accept
+the folder trust dialog, and the plugin is enabled. To install it by hand
+instead:
+
+```bash
+claude plugin marketplace add AntelopeJS/claude-antelopejs
+claude plugin install antelopejs@antelopejs
+```
+
+The plugin repository is internal to the AntelopeJS organization for now: your
+git credentials need read access to it. `/antelopejs:skills` lists the synced
+skills; start with the `dms` skill.
+
 ## Configuration
 
 Everything is driven by `.env` (see `.env.example`) and mapped onto module config in
