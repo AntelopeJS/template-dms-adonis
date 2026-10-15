@@ -21,7 +21,7 @@ export default class AntelopeProvider {
       modules: {
         '@antelopejs/dms': {
           config: {
-            homepage: '/home',
+            homepage: '/modules',
             apiBaseUrl: env.get('DMS_API_BASE_URL'),
             clientBaseUrl: env.get('DMS_CLIENT_BASE_URL'),
             meta: {
