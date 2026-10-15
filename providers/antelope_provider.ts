@@ -36,6 +36,9 @@ export default class AntelopeProvider {
         '@antelopejs/dms-database': {},
         '@antelopejs/api': {
           config: {
+            // Required outside development, where the runtime runs embedded:
+            // the origin browsers reach this API at.
+            publicBaseUrl: env.get('DMS_API_BASE_URL'),
             servers: [
               {
                 protocol: 'http',
