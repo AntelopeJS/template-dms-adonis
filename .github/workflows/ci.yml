@@ -57,7 +57,20 @@ jobs:
       # generated per run. Neither lint, typecheck nor build read it.
       - run: cp .env.example .env
       - run: node ace generate:key
-      # The repository ships no spec file yet, so this only asserts that the
-      # application boots: the Antelope runtime constructs and starts the DMS,
-      # api, mongodb, auth-jwt, file-storage and nodemailer modules.
+      # The specs boot the whole application: the Antelope runtime constructs
+      # and starts the DMS, api, mongodb, auth-jwt, file-storage and nodemailer
+      # modules, and the specs read the DMS through its interface.
       - run: pnpm test
+      # The server a user starts: AdonisJS on :3333 with the DMS API on :5010.
+      # `/dms/info` answers only once the runtime has started every module.
+      - name: Boot the server and query the embedded DMS
+        run: |
+          node ace serve > server.log 2>&1 &
+          for _ in $(seq 1 60); do
+            curl -sf http://localhost:3333/dms/info > info.json && break
+            sleep 2
+          done
+          cat info.json || { cat server.log; exit 1; }
+          curl -sf http://localhost:3333/ | grep -q '"running":true'
+          grep -q '@antelopejs/dms-frontend-vue' info.json
+          curl -s -o /dev/null -w '%{http_code}' http://localhost:5010/dms/page?path=/modules | grep -q 200

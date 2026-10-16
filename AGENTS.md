@@ -21,6 +21,9 @@ Codex from `.agents/skills/`. When they seem missing:
 Start with the `dms` skill for the mental model and its routing, and follow
 `dms-best-practices` when building pages and blocks. The DMS skills assume an
 `ajs`-driven project when they talk about `antelope.config.ts` and dev servers:
-here, configure modules in the provider and run the app with `pnpm dev`.
+here, configure modules in the provider and run the app with `pnpm dev`. The
+dashboard is built and served with `pnpm frontend:build` then
+`pnpm frontend:start` while `pnpm dev` runs; `ajs dms dev` does not work in
+embedded mode.
 
 Checks: `pnpm lint`, `pnpm typecheck`, `pnpm test`.
