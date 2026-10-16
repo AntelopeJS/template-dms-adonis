@@ -26,4 +26,5 @@ export default await Env.create(new URL('../', import.meta.url), {
   DMS_API_BASE_URL: Env.schema.string(),
   DMS_CLIENT_BASE_URL: Env.schema.string(),
   DMS_JWT_SECRET: Env.schema.string(),
+  DMS_BOOTSTRAP_SECRET: Env.schema.string(),
 })

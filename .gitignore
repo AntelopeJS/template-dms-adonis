@@ -26,3 +26,6 @@ yarn-error.log
 
 # AntelopeJS runtime artifacts
 .antelope
+
+# Claude Code session state
+.claude/scheduled_tasks.lock
