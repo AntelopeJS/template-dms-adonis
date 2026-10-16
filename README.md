@@ -114,10 +114,12 @@ claude plugin install antelopejs@antelopejs
 
 ### Codex
 
-Add the marketplace, then install `antelopejs` from `/plugins` in Codex:
+Install the plugin from your shell (or from `/plugins` in Codex once the
+marketplace is added):
 
 ```bash
 codex plugin marketplace add AntelopeJS/agent-skills
+codex plugin add antelopejs@antelopejs
 ```
 
 Sync the skills into `.agents/skills/` from the project root, and again after
