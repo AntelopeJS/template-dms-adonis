@@ -92,24 +92,40 @@ through the loader's proxy, which forwards only the prefixes declared to it:
 the DMS declares `/api/**` and `/dms/**`, and a module serving anything else to
 the browser declares it with `backendProxies`.
 
-## Claude Code
+## AI coding agents
 
-The DMS ships its own Claude Code skills (pages and blocks, auth and
-permissions, module authoring, best practices). The
-[antelopejs plugin](https://github.com/AntelopeJS/claude-antelopejs) syncs them
-into `.claude/skills/` after `pnpm install`, and this repository's
-`.claude/settings.json` registers it: open the project in Claude Code, accept
-the folder trust dialog, and the plugin is enabled. To install it by hand
-instead:
+The DMS ships its own agent skills (pages and blocks, auth and permissions,
+module authoring, best practices). The
+[antelopejs plugin](https://github.com/AntelopeJS/agent-skills) syncs them into
+the project after `pnpm install`. Start with the `dms` skill. `AGENTS.md`
+(which `CLAUDE.md` imports) holds the agent guidance for this project.
+
+### Claude Code
+
+This repository's `.claude/settings.json` registers the plugin: open the
+project in Claude Code, accept the folder trust dialog, and the plugin is
+enabled. It syncs the skills into `.claude/skills/`, and `/antelopejs:skills`
+lists them. To install it by hand instead:
 
 ```bash
-claude plugin marketplace add AntelopeJS/claude-antelopejs
+claude plugin marketplace add AntelopeJS/agent-skills
 claude plugin install antelopejs@antelopejs
 ```
 
-The plugin repository is internal to the AntelopeJS organization for now: your
-git credentials need read access to it. `/antelopejs:skills` lists the synced
-skills; start with the `dms` skill.
+### Codex
+
+Add the marketplace, then install `antelopejs` from `/plugins` in Codex:
+
+```bash
+codex plugin marketplace add AntelopeJS/agent-skills
+```
+
+Sync the skills into `.agents/skills/` from the project root, and again after
+installing or upgrading packages:
+
+```bash
+npx -y github:AntelopeJS/agent-skills sync --target codex
+```
 
 ## Configuration
 
