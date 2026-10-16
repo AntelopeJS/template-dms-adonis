@@ -85,6 +85,13 @@ not include the dashboard frontend loader (`@antelopejs/dms-frontend`, run with
 `ajs dms dev`) or a `frontend:dev` script. Start with `template-dms-demo` if
 your goal is the complete dashboard quickstart.
 
+If you point the loader at this backend yourself, note that `ajs dms dev`
+listens on `127.0.0.1` only; run it with `HOST=0.0.0.0` to reach the dashboard
+from another machine (a container, a VM). The dashboard reaches the backend
+through the loader's proxy, which forwards only the prefixes declared to it:
+the DMS declares `/api/**` and `/dms/**`, and a module serving anything else to
+the browser declares it with `backendProxies`.
+
 ## Configuration
 
 Everything is driven by `.env` (see `.env.example`) and mapped onto module config in
