@@ -1,24 +1,45 @@
-# template-dms-adonis
+# AntelopeJS DMS AdonisJS Template
 
-A minimal template running the [AntelopeJS](https://antelopejs.com) DMS **inside an
-AdonisJS application**. AdonisJS owns the process — its HTTP server, signals, logger
-and configuration — and the DMS runs as a subsystem alongside it.
+<div align="center">
+<a href="https://discord.gg/sjK28QHrA7"><img src="https://img.shields.io/badge/Discord-18181B?logo=discord&style=for-the-badge&color=000000" alt="Discord"></a>
+<a href="https://dms.antelopejs.com/docs/getting-started/quickstart"><img src="https://img.shields.io/badge/Docs-18181B?style=for-the-badge&color=000000" alt="Documentation"></a>
+</div>
+
+An AdonisJS application that runs the [AntelopeJS DMS](https://dms.antelopejs.com)
+as an embedded subsystem. AdonisJS owns the process (its HTTP server, signals,
+logger and configuration), and the DMS starts and stops with it.
 
 This is the inverse of [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo), where the
 AntelopeJS CLI (`ajs project run`) is the process owner and modules are declared in
 `antelope.config.ts`. Here there is no `antelope.config.ts` at all: modules are
 ordinary npm dependencies, and the module list lives in the service provider.
 
-## How it works
+## What you get
+
+```
+my-app/
+├── providers/antelope_provider.ts  # creates the DMS runtime and lists its modules
+├── start/routes.ts                 # GET / and GET /dms/info, read through runtime.use()
+├── start/env.ts                    # validates the variables of .env
+├── .env.example                    # MongoDB, DMS API and auth settings
+├── app/, bin/, config/, tests/     # a standard AdonisJS application
+└── package.json                    # the DMS modules are ordinary npm dependencies
+```
+
+The runtime loads `@antelopejs/dms` with the `dms-api`, `dms-database`,
+`dms-automation` and `dms-media` feature modules, on MongoDB, `auth-jwt`,
+local file storage and nodemailer.
+
+### How it works
 
 `providers/antelope_provider.ts` creates the runtime and ties it to the AdonisJS
 service-provider lifecycle:
 
-| AdonisJS hook | Action |
-| ------------- | ------ |
-| `register()`  | `createRuntime({ ... })`, bound into the container |
+| AdonisJS hook | Action                                                       |
+| ------------- | ------------------------------------------------------------ |
+| `register()`  | `createRuntime({ ... })`, bound into the container           |
 | `start()`     | `runtime.start()` — boots the DMS before HTTP serving begins |
-| `shutdown()`  | `runtime.stop()` — tears the DMS down with the app |
+| `shutdown()`  | `runtime.stop()` — tears the DMS down with the app           |
 
 The runtime is a **guest**: it installs no `uncaughtException` / `unhandledRejection`
 handlers, claims no `SIGINT` / `SIGTERM`, draws no spinners and does not touch the
@@ -27,7 +48,7 @@ global logger. All of that stays with AdonisJS.
 Modules are resolved from this application's own `node_modules`, so nothing is
 downloaded at boot and no `.antelope/cache` directory is created.
 
-### Reaching the DMS from application code
+#### Reaching the DMS from application code
 
 Host code never imports an `@antelopejs/interface-*` package directly — doing so
 would create a second, unattached copy of the interface. Instead it goes through the
@@ -92,6 +113,29 @@ through the loader's proxy, which forwards only the prefixes declared to it:
 the DMS declares `/api/**` and `/dms/**`, and a module serving anything else to
 the browser declares it with `backendProxies`.
 
+## Configuration
+
+Everything is driven by `.env` (see `.env.example`) and mapped onto module config in
+`providers/antelope_provider.ts`:
+
+| Variable                 | Purpose                            |
+| ------------------------ | ---------------------------------- |
+| `MONGODB_URL`            | MongoDB connection string          |
+| `MONGODB_DATABASE`       | Database name                      |
+| `DMS_API_HOST` / `_PORT` | Where the DMS API server listens   |
+| `DMS_API_BASE_URL`       | Public URL of that API server      |
+| `DMS_CLIENT_BASE_URL`    | DMS frontend origin, used for CORS |
+| `DMS_JWT_SECRET`         | Auth signing secret                |
+
+To add a DMS feature module (`@antelopejs/dms-api`, `@antelopejs/dms-database`,
+`@antelopejs/dms-lang`, …), install it and add an entry to the `modules` map in
+the provider, keyed by its package name. No other wiring is needed.
+
+## Compatibility
+
+The embedded runtime shipped in `@antelopejs/core` 1.5.0; earlier versions do
+not export `createRuntime`. This template depends on `@antelopejs/core` `^1.13.4` and `@antelopejs/dms` `>=0.9.0 <1.0.0`.
+
 ## AI coding agents
 
 The DMS ships its own agent skills (pages and blocks, auth and permissions,
@@ -129,25 +173,20 @@ installing or upgrading packages:
 npx -y github:AntelopeJS/agent-skills sync --target codex
 ```
 
-## Configuration
+## Documentation
 
-Everything is driven by `.env` (see `.env.example`) and mapped onto module config in
-`providers/antelope_provider.ts`:
+- [Quickstart](https://dms.antelopejs.com/docs/getting-started/quickstart):
+  how this template compares with `template-dms-demo`.
+- [Project setup](https://dms.antelopejs.com/docs/building/project-setup): the
+  modules a DMS project loads and their configuration.
+- [AntelopeJS framework](https://framework.antelopejs.com/docs/get-started/introduction):
+  modules, interfaces and the core that `createRuntime` comes from.
 
-| Variable                 | Purpose                            |
-| ------------------------ | ---------------------------------- |
-| `MONGODB_URL`            | MongoDB connection string          |
-| `MONGODB_DATABASE`       | Database name                      |
-| `DMS_API_HOST` / `_PORT` | Where the DMS API server listens   |
-| `DMS_API_BASE_URL`       | Public URL of that API server      |
-| `DMS_CLIENT_BASE_URL`    | DMS frontend origin, used for CORS |
-| `DMS_JWT_SECRET`         | Auth signing secret                |
+## Contributing
 
-To add a DMS feature module (`@antelopejs/dms-api`, `@antelopejs/dms-database`,
-`@antelopejs/dms-lang`, …), install it and add an entry to the `modules` map in
-the provider, keyed by its package name. No other wiring is needed.
+See [CONTRIBUTING.md](./CONTRIBUTING.md). Before you open a pull request, run
+`pnpm lint`, `pnpm typecheck` and `pnpm test`.
 
-## Requirements
+## License
 
-The embedded runtime shipped in `@antelopejs/core` 1.5.0; earlier versions do
-not export `createRuntime`. This template depends on `@antelopejs/core` 1.13.x.
+This repository does not ship a license file yet.
