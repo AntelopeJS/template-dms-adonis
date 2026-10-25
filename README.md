@@ -35,7 +35,7 @@ cp .env.example .env
 node ace generate:key
 ```
 
-You need Node.js 22 or later, pnpm, and a MongoDB server on
+You need Node.js 22.18 or later, pnpm, and a MongoDB server on
 `mongodb://localhost:27017` (`MONGODB_URL` in `.env`).
 
 ## Quick start
@@ -86,7 +86,7 @@ you deploy.
 | `@antelopejs/core`         | `^1.15.2`        |
 | `@antelopejs/dms`          | `>=0.9.2 <1.0.0` |
 | `@antelopejs/dms-frontend` | `>=0.6.1 <0.7.0` |
-| Node.js                    | 22 or later      |
+| Node.js                    | 22.18 or later   |
 
 `@antelopejs/dms` 0.9.2 requires `@antelopejs/core` 1.15.2 or later. Only
 AdonisJS 6 is tested.
@@ -104,7 +104,7 @@ map, not with `ajs project modules add`.
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md). Before you open a pull request, run
-`pnpm lint`, `pnpm typecheck` and `pnpm test` (the tests need MongoDB).
+`pnpm run checks` (the tests need MongoDB).
 
 ## License
 
