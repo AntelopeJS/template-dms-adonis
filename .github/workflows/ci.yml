@@ -16,61 +16,25 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  ubuntu:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    env:
-      COREPACK_DEFAULT_TO_LATEST: 0
-    services:
-      # `node ace test` boots the whole application, and the Antelope runtime
-      # connects to MongoDB while constructing its modules: without a reachable
-      # server the boot fails before any test runs. The port and database match
-      # the `MONGODB_URL` / `MONGODB_DATABASE` defaults of `.env.example`.
-      mongodb:
-        image: mongo:7
-        ports:
-          - 27017:27017
-        options: >-
-          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok'"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          # No .nvmrc in this repository: 24 is the version of record across the
-          # fleet, and the one the AdonisJS toolchain is exercised on.
-          node-version: 24
-      # Node's bundled corepack predates the pnpm version pinned in
-      # packageManager. Pinned so a corepack release cannot break every
-      # build at once.
-      - run: npm i -g --force corepack@0.34.0 && corepack enable
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
-      - run: pnpm typecheck
-      - run: pnpm build
-      # The application validates its whole environment at boot (start/env.ts),
-      # so the test run needs a .env. `.env.example` holds every key with
-      # values that work as-is in CI; only APP_KEY is left empty there and is
-      # generated per run. Neither lint, typecheck nor build read it.
-      - run: cp .env.example .env
-      - run: node ace generate:key
-      # The specs boot the whole application: the Antelope runtime constructs
-      # and starts the DMS, api, mongodb, auth-jwt, file-storage and nodemailer
-      # modules, and the specs read the DMS through its interface.
-      - run: pnpm test
-      # The server a user starts: AdonisJS on :3333 with the DMS API on :5010.
-      # `/dms/info` answers only once the runtime has started every module.
-      - name: Boot the server and query the embedded DMS
-        run: |
-          node ace serve > server.log 2>&1 &
-          for _ in $(seq 1 60); do
-            curl -sf http://localhost:3333/dms/info > info.json && break
-            sleep 2
-          done
-          cat info.json || { cat server.log; exit 1; }
-          curl -sf http://localhost:3333/ | grep -q '"running":true'
-          grep -q '@antelopejs/dms-frontend-vue' info.json
-          curl -s -o /dev/null -w '%{http_code}' http://localhost:5010/dms/page?path=/modules | grep -q 200
+  ci:
+    uses: AntelopeJS/.github/.github/workflows/ci-node.yml@v1
+    with:
+      # `pnpm test` boots the whole application, and the Antelope runtime
+      # connects to MongoDB while constructing its modules.
+      services-compose-file: .github/compose.yml
+      # The build, then the server a user starts: AdonisJS on :3333 with the
+      # DMS API on :5010. `/dms/info` answers only once the runtime has started
+      # every module. `node ace serve` validates its environment from `.env`.
+      extra-commands: |
+        pnpm build
+        cp .env.example .env
+        node ace generate:key
+        node ace serve > server.log 2>&1 &
+        for _ in $(seq 1 60); do
+          curl -sf http://localhost:3333/dms/info > info.json && break
+          sleep 2
+        done
+        cat info.json || { cat server.log; exit 1; }
+        curl -sf http://localhost:3333/ | grep -q '"running":true'
+        grep -q '@antelopejs/dms-frontend-vue' info.json
+        curl -s -o /dev/null -w '%{http_code}' 'http://localhost:5010/dms/page?path=/modules' | grep -q 200

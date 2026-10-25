@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "antelopejs/no-comments": 18,
+    "anti-slop/no-unknown-parameters": 2,
+    "typescript/no-floating-promises": 3,
+    "unicorn/no-useless-spread": 1
+  },
+  "oversizeFiles": {}
+}
