@@ -1,0 +1,13 @@
+diff --git a/start/routes.ts b/start/routes.ts
+index 13c9634..01b44d6 100644
+--- a/start/routes.ts
++++ b/start/routes.ts
+@@ -34,7 +34,7 @@ router.get('/dms/info', async () => {
+   const frontendModules = await rt.use<DmsPages>(DMS_INTERFACE).GetFrontendModules()
+ 
+   return {
+-    servedBy: 'adonis',
++    servedBy: 'adonisjs',
+     clientBaseUrl,
+     frontendModules: frontendModules.map((module) => module.name),
+   }

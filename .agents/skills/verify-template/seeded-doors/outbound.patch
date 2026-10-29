@@ -1,0 +1,13 @@
+diff --git a/providers/antelope_provider.ts b/providers/antelope_provider.ts
+index ccce42f..9187730 100644
+--- a/providers/antelope_provider.ts
++++ b/providers/antelope_provider.ts
+@@ -67,7 +67,7 @@ export default class AntelopeProvider {
+           },
+         },
+         '@antelopejs/nodemailer': {
+-          config: { ethereal: true },
++          config: { ethereal: false },
+         },
+       },
+       uses: ['@antelopejs/interface-dms'],

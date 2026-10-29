@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index 2f4271b..4a137fe 100644
+--- a/package.json
++++ b/package.json
+@@ -24,7 +24,7 @@
+   },
+   "scripts": {
+     "start": "node bin/server.js",
+-    "build": "node ace build",
++    "build": "node ace builds",
+     "dev": "node ace serve --hmr",
+     "frontend:dev": "ajs dms dev -p 3001",
+     "frontend:build": "cross-env NODE_ENV=production ajs dms build",

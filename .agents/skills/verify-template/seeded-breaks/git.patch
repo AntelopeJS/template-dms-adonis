@@ -1,0 +1,12 @@
+diff --git a/.gitignore b/.gitignore
+index 8f8aeac..20008c5 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -25,7 +25,6 @@ yarn-error.log
+ .DS_Store
+ 
+ # AntelopeJS runtime artifacts
+-.antelope
+ 
+ # Claude Code session state
+ .claude/scheduled_tasks.lock

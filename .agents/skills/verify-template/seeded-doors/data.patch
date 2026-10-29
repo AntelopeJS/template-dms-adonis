@@ -1,0 +1,13 @@
+diff --git a/.env.example b/.env.example
+index d3b596f..4ae1cab 100644
+--- a/.env.example
++++ b/.env.example
+@@ -6,7 +6,7 @@ APP_KEY=
+ NODE_ENV=development
+ 
+ MONGODB_URL=mongodb://localhost:27017
+-MONGODB_DATABASE=template_dms_adonis
++MONGODB_DATABASE=template_dms
+ 
+ DMS_API_HOST=localhost
+ DMS_API_PORT=5010

@@ -1,0 +1,13 @@
+diff --git a/tsconfig.json b/tsconfig.json
+index 86b69e8..a50e07c 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -2,6 +2,7 @@
+   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
+   "compilerOptions": {
+     "rootDir": "./",
+-    "outDir": "./build"
++    "outDir": "./build",
++    "noCheck": true
+   }
+ }

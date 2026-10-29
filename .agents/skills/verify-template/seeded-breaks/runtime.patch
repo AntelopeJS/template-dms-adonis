@@ -1,0 +1,13 @@
+diff --git a/providers/antelope_provider.ts b/providers/antelope_provider.ts
+index ccce42f..abd8fa2 100644
+--- a/providers/antelope_provider.ts
++++ b/providers/antelope_provider.ts
+@@ -53,7 +53,7 @@ export default class AntelopeProvider {
+         '@antelopejs/mongodb': {
+           config: {
+             url: env.get('MONGODB_URL'),
+-            database: env.get('MONGODB_DATABASE'),
++            database: 'template_dms_adonis',
+           },
+         },
+         '@antelopejs/auth-jwt': {
