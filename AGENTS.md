@@ -1,7 +1,8 @@
 # AntelopeJS DMS inside AdonisJS
 
 This AdonisJS application runs the AntelopeJS DMS as an embedded guest runtime:
-there is no `antelope.config.ts`. `providers/antelope_provider.ts` creates the
+`antelope.config.ts` is only a placeholder that `ajs project init` keeps instead of
+writing its own. `providers/antelope_provider.ts` creates the
 runtime with `createRuntime` and lists the modules, which are ordinary npm
 dependencies. Host code reaches the DMS through
 `runtime.use('<interface package>[/subpath]')`, never by importing an

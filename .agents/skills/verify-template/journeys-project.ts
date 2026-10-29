@@ -3,7 +3,7 @@ import { join } from "node:path";
 
 import { equal, exists, exitIs, has, type Journey } from "@antelopejs/tooling-configs/verify";
 
-import { abandon, cloneTree, freePort, prepared, type Server, serve, sleep, stop, withMongo, writeEnv } from "./stack.ts";
+import { abandon, scaffoldTree, freePort, prepared, type Server, serve, sleep, stop, withMongo, writeEnv } from "./stack.ts";
 
 const SCRIPTS_IN_README = ["dev", "frontend:build", "frontend:start", "checks"];
 
@@ -149,10 +149,10 @@ export const projectJourneys = {
     },
   },
   "docs-commands": {
-    title: "what the README claims is true of the clone: its commands are scripts, its variables and ports are in `.env.example` and `start/env.ts`, its route is served, and its compatibility table matches `package.json`",
-    entryPoint: "reading `README.md` of a fresh clone",
+    title: "what the README claims is true of the scaffolded project: its commands are scripts, its variables and ports are in `.env.example` and `start/env.ts`, its route is served, and its compatibility table matches `package.json`",
+    entryPoint: "reading `README.md` of a scaffolded project",
     async run(context) {
-      const project = await cloneTree(context);
+      const project = await scaffoldTree(context);
       const manifest = manifestOf(project);
       const readme = readFileSync(join(project, "README.md"), "utf8");
       const example = readFileSync(join(project, ".env.example"), "utf8");

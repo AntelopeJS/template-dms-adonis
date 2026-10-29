@@ -28,7 +28,7 @@ const config: VerifyConfig = {
     publish: null,
   },
   setup: [],
-  template: { name: "DMS Adonis", probe: { path: "/", body: /running/ } },
+  template: { name: "DMS Adonis", project: true, probe: { path: "/", body: /running/ } },
   journeys: { ...runJourneys, ...projectJourneys },
 };
 

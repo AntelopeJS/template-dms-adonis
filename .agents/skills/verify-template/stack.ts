@@ -2,9 +2,10 @@ import { readFileSync } from "node:fs";
 import { createServer, type AddressInfo } from "node:net";
 import { join } from "node:path";
 
-import { equal, exitIs, type CommandResult, type JourneyContext } from "@antelopejs/tooling-configs/verify";
+import { equal, exists, exitIs, type CommandResult, type JourneyContext } from "@antelopejs/tooling-configs/verify";
 
 export const DEFAULT_DATABASE = "template_dms_adonis";
+export const SYSTEM_DATABASES = ["admin", "config", "local"];
 export const EXPECTED_MODULES = ["@antelopejs/dms", "@antelopejs/api", "@antelopejs/mongodb", "@antelopejs/auth-jwt", "@antelopejs/file-storage-local", "@antelopejs/nodemailer"];
 const BOOT_TIMEOUT_MS = 90_000;
 const STOP_TIMEOUT_MS = 20_000;
@@ -42,14 +43,11 @@ export function freePort(): Promise<number> {
   });
 }
 
-/** Copies the template's tracked and untracked files, the working tree under verification, into a fresh project folder: what `git clone` gives the user. */
-export async function cloneTree(context: JourneyContext): Promise<string> {
+/** Scaffolds the project the way a user does, with `ajs project init` from the run's offline manifest: the template's working tree under verification, uncommitted changes included. */
+export async function scaffoldTree(context: JourneyContext): Promise<string> {
   const project = join(context.work, "app");
-  const copy = await context.command("copy the template tree", "sh", [
-    "-c",
-    `mkdir -p ${project} && git -C ${context.repo} ls-files -z --cached --others --exclude-standard | tar -C ${context.repo} --null -T - --ignore-failed-read -cf - | tar -xf - -C ${project}`,
-  ]);
-  context.expect(copy.folder, [exitIs(copy, 0)], { critical: true });
+  const init = await context.scaffold("ajs project init", project);
+  context.expect(init.folder, [exitIs(init, 0), exists(join(project, "antelope.config.ts"))], { critical: true });
   context.tree("project tree", project);
   return project;
 }
@@ -61,7 +59,7 @@ export async function install(context: JourneyContext, project: string): Promise
 
 /** A project copy with its dependencies installed. */
 export async function prepared(context: JourneyContext): Promise<string> {
-  const project = await cloneTree(context);
+  const project = await scaffoldTree(context);
   await install(context, project);
   return project;
 }
