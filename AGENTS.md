@@ -43,7 +43,7 @@ suppressions and sync, and prints only what failed.
 - `guardrails.suppressions.json` caps the lint directives, `@ts-expect-error`,
   `@ts-ignore` and `SAFETY:` comments; its numbers only go down. After you
   remove suppressions, run `pnpm run suppressions:update` and commit the
-  lowered file. The pre-commit hook rejects a suppression over its ceiling.
+  lowered file. `pnpm run checks` fails when a count rises above its ceiling.
 - The code style is AdonisJS's (no semicolons, single quotes, 100 columns), set
   in `oxfmt.config.ts`. `oxlint.config.ts` carries the `@adonisjs/eslint-config`
   rules oxlint has. `node ace make:*` output still needs `pnpm format`; delete
