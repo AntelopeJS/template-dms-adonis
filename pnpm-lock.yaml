@@ -61,8 +61,8 @@ importers:
         specifier: '>=0.6.1 <0.7.0'
         version: 0.6.1(@antelopejs/core@1.15.2)
       '@antelopejs/tooling-configs':
-        specifier: ^0.2.0
-        version: 0.2.0(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))
+        specifier: ^0.2.11
+        version: 0.2.11(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))
       '@japa/assert':
         specifier: ^4.0.1
         version: 4.2.0(@japa/runner@4.5.0)
@@ -355,8 +355,8 @@ packages:
   '@antelopejs/nodemailer@0.0.5':
     resolution: {integrity: sha512-dmPIwUmFttgk3/4hLU6jQ3GMeAB2oK2QkiTryeDC7cVcvfRXswd5GZXzRVWZTuo2X4qovbK+qZCSCeACj1Uf0A==}
 
-  '@antelopejs/tooling-configs@0.2.0':
-    resolution: {integrity: sha512-D3yCA9ZuvuDfzz8lS5VKyP8sgDkSdM0k1Awp3Q8qwq3u1/dc8UF4ep3SHW5fZpTQpLwNRcEDv1DSrRx+b7w9aA==}
+  '@antelopejs/tooling-configs@0.2.11':
+    resolution: {integrity: sha512-11reej4rSQuPEQqQgef60SyQZ8XGWlUSshD4RXLXPBpyFGVQmOqagKmj1zTg8QAktzwxxokhk/8JrIyChIv3LA==}
     engines: {node: '>=22.18.0'}
     hasBin: true
     peerDependencies:
@@ -1920,6 +1920,11 @@ packages:
   dotenv@16.6.1:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
+
+  dts-bundle-generator@9.5.1:
+    resolution: {integrity: sha512-DxpJOb2FNnEyOzMkG11sxO2dmxPjthoVWxfKqWYJ/bI/rT1rvTMktF5EKjAYrRZu6Z6t3NhOUZ0sZ5ZXevOfbA==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -4116,9 +4121,11 @@ snapshots:
       '@antelopejs/interface-email': 0.0.5(@antelopejs/interface-core@0.2.3)
       nodemailer: 6.10.1
 
-  '@antelopejs/tooling-configs@0.2.0(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))':
+  '@antelopejs/tooling-configs@0.2.11(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))':
     dependencies:
       '@oxlint/plugins': 1.81.0
+      dts-bundle-generator: 9.5.1
+      typescript: 5.9.3
       yaml: 2.9.1
     optionalDependencies:
       knip: 6.43.0
@@ -5389,6 +5396,11 @@ snapshots:
   diff@7.0.0: {}
 
   dotenv@16.6.1: {}
+
+  dts-bundle-generator@9.5.1:
+    dependencies:
+      typescript: 5.8.3
+      yargs: 17.7.3
 
   dunder-proto@1.0.1:
     dependencies:

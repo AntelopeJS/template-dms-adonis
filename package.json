@@ -41,7 +41,9 @@
     "ratchet": "antelopejs-ratchet",
     "sync": "antelopejs-sync --profile template",
     "ratchet:update": "antelopejs-ratchet --update",
-    "sync:check": "antelopejs-sync --check --profile template"
+    "sync:check": "antelopejs-sync --check --profile template",
+    "suppressions": "antelopejs-suppressions",
+    "suppressions:update": "antelopejs-suppressions --update"
   },
   "dependencies": {
     "@adonisjs/core": "^6.18.0",
@@ -63,7 +65,7 @@
     "@adonisjs/eslint-plugin": "^2.2.2",
     "@adonisjs/tsconfig": "^1.4.0",
     "@antelopejs/dms-frontend": ">=0.6.1 <0.7.0",
-    "@antelopejs/tooling-configs": "^0.2.0",
+    "@antelopejs/tooling-configs": "^0.2.11",
     "@japa/assert": "^4.0.1",
     "@japa/plugin-adonisjs": "^4.0.0",
     "@japa/runner": "^4.2.0",
