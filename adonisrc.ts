@@ -6,6 +6,10 @@ export default defineConfig({
     shutdownInReverseOrder: true,
   },
 
+  /**
+   * Ace commands registered from packages. The application's own commands are scanned from the
+   * `./commands` directory.
+   */
   commands: [() => import('@adonisjs/core/commands')],
 
   providers: [
@@ -21,6 +25,7 @@ export default defineConfig({
   preloads: [() => import('#start/routes'), () => import('#start/kernel')],
 
   tests: {
+    /** The test suites `node ace test` runs. Add or remove suites as the application needs. */
     suites: [
       {
         files: ['tests/unit/**/*.spec(.ts|.js)'],
