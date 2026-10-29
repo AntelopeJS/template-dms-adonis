@@ -4,6 +4,7 @@ covers:
   - start/env.ts
   - config/**
   - .env.example
+  - antelope.config.ts
 docs:
   - README.md
 journeys:
