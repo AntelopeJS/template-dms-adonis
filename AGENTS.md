@@ -57,6 +57,8 @@ suppressions and sync, and prints only what failed.
 
 Lint with `oxlint` and format with `oxfmt`; both read the configs at the repository root. Fix every finding: no rule warns.
 
+Prove a change works with the verification skill in [`.agents/skills/verify-template/SKILL.md`](.agents/skills/verify-template/SKILL.md) before you call it done.
+
 ### Comments
 
 Say it in code. A constraint belongs in a type, a lint rule, or a test. A public item's contract belongs in TSDoc (`/** */`) on that item. The only other comments are lint directives that name their rules, `@ts-expect-error <reason>`, `SAFETY: <reason>` above a type assertion, `/*!` license headers, and bundler or formatter directives.

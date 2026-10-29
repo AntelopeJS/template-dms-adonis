@@ -1,0 +1,13 @@
+diff --git a/start/routes.ts b/start/routes.ts
+index 13c9634..884d457 100644
+--- a/start/routes.ts
++++ b/start/routes.ts
+@@ -18,7 +18,7 @@ async function runtime(): Promise<AntelopeRuntime> {
+   return app.container.make(AntelopeRuntimeBinding)
+ }
+ 
+-router.get('/', async () => {
++ {=>router.get('/home', async () => {=> {
+   const rt = await runtime()
+   return {
+     host: 'adonisjs',

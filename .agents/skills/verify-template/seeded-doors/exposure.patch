@@ -1,0 +1,12 @@
+diff --git a/.gitignore b/.gitignore
+index 8f8aeac..b914985 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -4,7 +4,6 @@ build
+ tmp
+ 
+ # Secrets
+-.env
+ .env.local
+ .env.production.local
+ .env.development.local

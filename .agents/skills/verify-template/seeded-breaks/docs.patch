@@ -1,0 +1,13 @@
+diff --git a/README.md b/README.md
+index 534817f..bde4e1c 100644
+--- a/README.md
++++ b/README.md
+@@ -56,7 +56,7 @@ curl http://localhost:3333/dms/info
+ In a second terminal, while the backend runs, build and start the dashboard:
+ 
+ ```bash
+-pnpm frontend:build
++pnpm frontend:compile
+ pnpm frontend:start
+ ```
+ 
