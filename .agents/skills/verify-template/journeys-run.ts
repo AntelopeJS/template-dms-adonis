@@ -7,6 +7,7 @@ import {
   databases,
   DEFAULT_DATABASE,
   EXPECTED_MODULES,
+  SYSTEM_DATABASES,
   mongosh,
   prepared,
   type Server,
@@ -119,17 +120,40 @@ export const runJourneys = {
     },
   },
   "config-mapping": {
-    title: "`.env` decides where the DMS writes: with another MONGODB_DATABASE every DMS collection lands there and the default database is never created",
-    entryPoint: "`MONGODB_DATABASE` and `DMS_CLIENT_BASE_URL` of `.env`",
+    title: "the `.env` the README tells the user to copy decides where the DMS writes: the default `MONGODB_DATABASE` is the database every DMS collection lands in, and no other database is created",
+    entryPoint: "`cp .env.example .env`, with `DMS_CLIENT_BASE_URL` changed, then `node ace serve`",
     async run(context) {
       await withMongo(context, async (mongo) => {
         const project = await prepared(context);
-        const ports = await writeEnv(context, project, mongo, { MONGODB_DATABASE: "verify_mapped", DMS_CLIENT_BASE_URL: "http://localhost:4242" });
+        const ports = await writeEnv(context, project, mongo, { DMS_CLIENT_BASE_URL: "http://localhost:4242" });
         let server: Server | undefined;
         try {
           server = await serve(context, project, "node ace serve", ports);
           const info = await context.http("GET /dms/info", `${server.url}/dms/info`);
           context.expect(info.folder, [equal("the client base url follows .env", body<Info>(info).clientBaseUrl, "http://localhost:4242")]);
+          const names = await databases(context, "databases", mongo);
+          const written = await collections(context, `collections of ${DEFAULT_DATABASE}`, mongo, DEFAULT_DATABASE);
+          context.expect(context.tree("databases", project).folder, [
+            equal("the databases the run created", names.filter((name) => !SYSTEM_DATABASES.includes(name)), [DEFAULT_DATABASE]),
+            equal("the DMS wrote its collections to the default database", written.includes("dms-core__users"), true),
+          ]);
+        } finally {
+          if (server) await stop(context, server, "stop");
+          await abandon(context, server);
+        }
+      });
+    },
+  },
+  "database-override": {
+    title: "with another MONGODB_DATABASE every DMS collection lands there and the default database is never created",
+    entryPoint: "`MONGODB_DATABASE` of `.env`",
+    async run(context) {
+      await withMongo(context, async (mongo) => {
+        const project = await prepared(context);
+        const ports = await writeEnv(context, project, mongo, { MONGODB_DATABASE: "verify_mapped" });
+        let server: Server | undefined;
+        try {
+          server = await serve(context, project, "node ace serve", ports);
           const names = await databases(context, "databases", mongo);
           const mapped = await collections(context, "collections of verify_mapped", mongo, "verify_mapped");
           context.expect(context.tree("databases", project).folder, [

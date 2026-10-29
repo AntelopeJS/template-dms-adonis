@@ -12,7 +12,8 @@ and its dashboard inside your own app, in **embedded** mode.
 
 - AdonisJS owns the process: its HTTP server, signals, logger and configuration.
   The DMS starts and stops with it, from `providers/antelope_provider.ts`.
-- No `antelope.config.ts`: the DMS modules are ordinary npm dependencies, listed
+- No project configuration to maintain: `antelope.config.ts` is a placeholder for
+  `ajs project init`, and the DMS modules are ordinary npm dependencies, listed
   in the provider's `modules` map.
 - Application code reaches the DMS through `runtime.use()`; `start/routes.ts`
   has an example on `GET /dms/info`.
@@ -27,13 +28,19 @@ if you do not already have a Node.js app: there the `ajs` CLI owns the process
 
 ## Install
 
+Install the CLI once with `pnpm add -g @antelopejs/core` (version 1.16 or later),
+then create a project from this template:
+
 ```bash
-git clone https://github.com/AntelopeJS/template-dms-adonis.git my-app
+ajs project init my-app --template "DMS Adonis" --pm pnpm
 cd my-app
-pnpm install --frozen-lockfile
 cp .env.example .env
 node ace generate:key
 ```
+
+`ajs project init` copies the template and installs its dependencies. It leaves
+the `antelope.config.ts` of the template as it is: that file is a placeholder,
+and the DMS modules are listed in `providers/antelope_provider.ts`.
 
 You need Node.js 22.18 or later, pnpm, and a MongoDB server on
 `mongodb://localhost:27017` (`MONGODB_URL` in `.env`).
@@ -83,7 +90,7 @@ you deploy.
 | Package                    | Version          |
 | -------------------------- | ---------------- |
 | `@adonisjs/core`           | `^6.18.0`        |
-| `@antelopejs/core`         | `^1.15.2`        |
+| `@antelopejs/core`         | `^1.16.0`        |
 | `@antelopejs/dms`          | `>=0.9.2 <1.0.0` |
 | `@antelopejs/dms-frontend` | `>=0.6.1 <0.7.0` |
 | Node.js                    | 22.18 or later   |
@@ -100,6 +107,18 @@ DMS agent skills into the project after `pnpm install`. This repository's
 `codex plugin add antelopejs@antelopejs`. `AGENTS.md` holds the agent guidance
 for this project. In embedded mode, add a module to the provider's `modules`
 map, not with `ajs project modules add`.
+
+## Working on the template itself
+
+Clone the repository instead of scaffolding it:
+
+```bash
+git clone https://github.com/AntelopeJS/template-dms-adonis.git
+cd template-dms-adonis
+pnpm install --frozen-lockfile
+cp .env.example .env
+node ace generate:key
+```
 
 ## Contributing
 

@@ -8,7 +8,7 @@ journeys:
 
 # Smoke
 
-The fixed journey every verdict runs, whatever the diff touches: copy the template, install it, boot `node ace serve` against a MongoDB container, read `/` and `/dms/info`, check MongoDB, stop.
+The fixed journey every verdict runs, whatever the diff touches: scaffold the template with `ajs project init`, install it, boot `node ace serve` against a MongoDB container, read `/` and `/dms/info`, check MongoDB, stop.
 
 ## Sub-features
 
@@ -16,7 +16,7 @@ The fixed journey every verdict runs, whatever the diff touches: copy the templa
 
 ## How to get to it (user POV)
 
-- `git clone`, `pnpm install --frozen-lockfile`, `cp .env.example .env`, `node ace generate:key`, `pnpm dev`.
+- `ajs project init my-app --template "DMS Adonis"`, `cp .env.example .env`, `node ace generate:key`, `pnpm dev`.
 
 ## Driving it with antelopejs-verify
 
