@@ -1,15 +1,3 @@
-/*
-|--------------------------------------------------------------------------
-| Test runner entrypoint
-|--------------------------------------------------------------------------
-|
-| The "test.ts" file is the entrypoint for running tests using Japa.
-|
-| Either you can run this file directly or use the "test"
-| command to run this file and monitor file changes.
-|
-*/
-
 process.env.NODE_ENV = 'test'
 
 import 'reflect-metadata'
@@ -17,8 +5,8 @@ import { Ignitor, prettyPrintError } from '@adonisjs/core'
 import { configure, processCLIArgs, run } from '@japa/runner'
 
 /**
- * URL to the application root. AdonisJS need it to resolve
- * paths to file and directories for scaffolding commands
+ * URL to the application root. AdonisJS needs it to resolve
+ * paths to files and directories for scaffolding commands
  */
 const APP_ROOT = new URL('../', import.meta.url)
 

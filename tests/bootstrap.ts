@@ -5,10 +5,6 @@ import { pluginAdonisJS } from '@japa/plugin-adonisjs'
 import testUtils from '@adonisjs/core/services/test_utils'
 
 /**
- * This file is imported by the "bin/test.ts" entrypoint file
- */
-
-/**
  * Configure Japa plugins in the plugins array.
  * Learn more - https://japa.dev/docs/runner-config#plugins-optional
  */

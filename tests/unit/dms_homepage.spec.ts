@@ -16,11 +16,13 @@ test.group('DMS homepage', () => {
     const homepage = modules.find((module) => module.options?.homepage)?.options?.homepage
     assert.isString(homepage)
 
-    // Where the dashboard sends a visitor after sign-in and from `/`: an
-    // unknown path answers 404 there, signed in or not.
     const url = new URL('/dms/page', env.get('DMS_API_BASE_URL'))
     url.searchParams.set('path', homepage!)
     const response = await fetch(url)
-    assert.notEqual(response.status, 404, `${homepage} is not a DMS page`)
+    assert.notEqual(
+      response.status,
+      404,
+      `${homepage}, where the dashboard sends visitors after sign-in and from /, is not a DMS page`
+    )
   })
 })

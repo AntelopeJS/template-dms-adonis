@@ -24,9 +24,6 @@ export default class AntelopeProvider {
             homepage: '/modules',
             apiBaseUrl: env.get('DMS_API_BASE_URL'),
             clientBaseUrl: env.get('DMS_CLIENT_BASE_URL'),
-            // The embedded runtime never runs in dev mode, so the DMS does not
-            // publish a per-boot credential for `ajs dms dev`: both read this
-            // one from `.env`.
             frontend: { bootstrapSecret: env.get('DMS_BOOTSTRAP_SECRET') },
             meta: {
               title: 'AntelopeJS DMS on AdonisJS',
@@ -40,8 +37,6 @@ export default class AntelopeProvider {
         '@antelopejs/dms-database': {},
         '@antelopejs/api': {
           config: {
-            // Required outside development, where the runtime runs embedded:
-            // the origin browsers reach this API at.
             publicBaseUrl: env.get('DMS_API_BASE_URL'),
             servers: [
               {
