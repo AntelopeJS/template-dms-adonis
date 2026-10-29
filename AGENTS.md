@@ -29,7 +29,7 @@ embedded mode.
 ## Checks
 
 `pnpm run checks` runs typecheck, lint, format, knip, `pnpm test`, size,
-ratchet, suppressions and sync, and prints only what failed.
+suppressions and sync, and prints only what failed.
 
 - `pnpm test` boots the whole application, so it needs MongoDB on
   `mongodb://localhost:27017`. It reads `.env.test` (`NODE_ENV=test`) and
@@ -40,14 +40,10 @@ ratchet, suppressions and sync, and prints only what failed.
   `node ace serve` and queries `/dms/info` and the DMS API: see
   `.github/workflows/ci.yml`. Neither checks the dashboard
   (`pnpm frontend:build`).
-- `guardrails.ratchet.json` records the lint findings the template already had;
-  its numbers only go down. After you remove debt, run
-  `pnpm run ratchet:update` and commit the lowered file. The pre-commit hook
-  rejects new findings on the lines you add.
 - `guardrails.suppressions.json` caps the lint directives, `@ts-expect-error`,
-  `@ts-ignore` and `SAFETY:` comments; its numbers only go down too. After you
+  `@ts-ignore` and `SAFETY:` comments; its numbers only go down. After you
   remove suppressions, run `pnpm run suppressions:update` and commit the
-  lowered file.
+  lowered file. The pre-commit hook rejects a suppression over its ceiling.
 - The code style is AdonisJS's (no semicolons, single quotes, 100 columns), set
   in `oxfmt.config.ts`. `oxlint.config.ts` carries the `@adonisjs/eslint-config`
   rules oxlint has. `node ace make:*` output still needs `pnpm format`; delete
