@@ -1,22 +1,9 @@
-/*
-|--------------------------------------------------------------------------
-| Ace entry point
-|--------------------------------------------------------------------------
-|
-| The "console.ts" file is the entrypoint for booting the AdonisJS
-| command-line framework and executing commands.
-|
-| Commands do not boot the application, unless the currently running command
-| has "options.startApp" flag set to true.
-|
-*/
-
 import 'reflect-metadata'
 import { Ignitor, prettyPrintError } from '@adonisjs/core'
 
 /**
- * URL to the application root. AdonisJS need it to resolve
- * paths to file and directories for scaffolding commands
+ * URL to the application root. AdonisJS needs it to resolve
+ * paths to files and directories for scaffolding commands
  */
 const APP_ROOT = new URL('../', import.meta.url)
 
@@ -43,5 +30,5 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
   .handle(process.argv.splice(2))
   .catch((error) => {
     process.exitCode = 1
-    prettyPrintError(error)
+    void prettyPrintError(error)
   })

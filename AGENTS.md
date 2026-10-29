@@ -29,7 +29,7 @@ embedded mode.
 ## Checks
 
 `pnpm run checks` runs typecheck, lint, format, knip, `pnpm test`, size,
-ratchet and sync, and prints only what failed.
+suppressions and sync, and prints only what failed.
 
 - `pnpm test` boots the whole application, so it needs MongoDB on
   `mongodb://localhost:27017`. It reads `.env.test` (`NODE_ENV=test`) and
@@ -40,10 +40,10 @@ ratchet and sync, and prints only what failed.
   `node ace serve` and queries `/dms/info` and the DMS API: see
   `.github/workflows/ci.yml`. Neither checks the dashboard
   (`pnpm frontend:build`).
-- `guardrails.ratchet.json` records the lint findings the template already had;
-  its numbers only go down. After you remove debt, run
-  `pnpm run ratchet:update` and commit the lowered file. The pre-commit hook
-  rejects new findings on the lines you add.
+- `guardrails.suppressions.json` caps the lint directives, `@ts-expect-error`,
+  `@ts-ignore` and `SAFETY:` comments; its numbers only go down. After you
+  remove suppressions, run `pnpm run suppressions:update` and commit the
+  lowered file. The pre-commit hook rejects a suppression over its ceiling.
 - The code style is AdonisJS's (no semicolons, single quotes, 100 columns), set
   in `oxfmt.config.ts`. `oxlint.config.ts` carries the `@adonisjs/eslint-config`
   rules oxlint has. `node ace make:*` output still needs `pnpm format`; delete
@@ -61,6 +61,10 @@ Lint with `oxlint` and format with `oxfmt`; both read the configs at the reposit
 
 Say it in code. A constraint belongs in a type, a lint rule, or a test. A public item's contract belongs in TSDoc (`/** */`) on that item. The only other comments are lint directives that name their rules, `@ts-expect-error <reason>`, `SAFETY: <reason>` above a type assertion, `/*!` license headers, and bundler or formatter directives.
 
+Before suppressing a type rule, try inference or a type derived from its owner with `Parameters`, `ReturnType`, or indexed access. A private alias can still appear in a published declaration. Keep a suppression only after checking the published contract and the unchecked boundary it protects.
+
+Check each directive reason against the current line and its callers. Returning a value is not the same as awaiting and discarding it. A reason must describe what the code does now.
+
 ### Tests
 
 Hold every test you write or keep to this checklist:
@@ -69,17 +73,40 @@ Hold every test you write or keep to this checklist:
 - No test reads the file it tests. Drive the behaviour through the public interface.
 - An invariant over many files is a lint rule, not a test.
 
+### Cleanup proof
+
+A behaviour-preserving cleanup PR shows `antelopejs-api-diff <base-ref>` passing. Published declarations and built runtime exports stay unchanged; pass `--allow-added <glob>` (repeatable, e.g. `'**/internal/**'`) to let added entries under that glob pass when their module is `@internal`, and copy its "Added (allowed)" list. A comment-only PR shows `antelopejs-comment-proof <base-ref>` passing instead of a verifier. Both compare committed HEAD.
+
+Copy counts from the proof's base and HEAD table. Never type counts by hand. Keep the command and the committed head beside the copied output. The table counts a lint directive once per rule it names, inline directives included.
+
+Pass `--probe <file.cjs>` to api-diff when changing receivers, positional calls, or modules that no published entry reaches. The same captured script runs against both worktree roots, supplied as `argv[2]`, and prints JSON observations. Matching metadata alone does not prove those behaviours.
+
+An entry-only rule exempts only its own module. Add a second module entry rather than exempting another importer. A no-upward rule must reject peers in the same tier as well as higher tiers. Probe the rank decision with an import, not just a reading of the configuration.
+
+Moving a method body into a function keeps how it is called: the same receiver, argument count, read order and laziness.
+
+Verify a boundary against the imports a developer or agent would plausibly write: static and dynamic imports, re-exports, Vue `src`, CSS `@import`, and worker or child-process entries in normally named files. A construction only an evasion would write, an edit to resolution configuration (`package.json` `browser`, `exports`, `main` or `imports`, bundler aliases, tsconfig `paths`), and a difference observable only by patching private fields or internal methods go under Attention and never block. Public API and ordinary subclass behaviour stay part of the contract.
+
 ### What enforces what
 
-| Rule                                                                           | Enforced by                               |
-| ------------------------------------------------------------------------------ | ----------------------------------------- |
-| Formatting                                                                     | oxfmt                                     |
-| Lint findings are errors; no rule warns                                        | oxlint preset                             |
-| Comments are TSDoc, directives, or `SAFETY:` only                              | `antelopejs/no-comments`                  |
-| Every test asserts                                                             | `antelopejs/require-assertion`            |
-| Tests read no files outside fixtures, helpers, locales                         | `antelopejs/no-fs-read-in-tests`          |
-| No assertion that restates a constant                                          | `antelopejs/no-constant-value-assertion`  |
-| No test whose only check is "is a function"                                    | `antelopejs/no-typeof-function-only-test` |
-| Params ≤ 5, function ≤ 120 lines, file ≤ 500 lines, depth ≤ 4, complexity ≤ 20 | `eslint/max-*`, `eslint/complexity`       |
+| Rule                                                                           | Enforced by                                         |
+| ------------------------------------------------------------------------------ | --------------------------------------------------- |
+| Formatting                                                                     | oxfmt                                               |
+| Lint findings are errors; no rule warns                                        | oxlint preset                                       |
+| Comments are TSDoc, directives, or `SAFETY:` only                              | `antelopejs/no-comments`                            |
+| Every test asserts                                                             | `antelopejs/require-assertion`                      |
+| Tests read no files outside fixtures, helpers, locales                         | `antelopejs/no-fs-read-in-tests`                    |
+| Tests import the code under test from local source, not their own package name | `antelopejs/no-self-import-in-tests`                |
+| No assertion that restates a constant                                          | `antelopejs/no-constant-value-assertion`            |
+| No test whose only check is "is a function"                                    | `antelopejs/no-typeof-function-only-test`           |
+| Params ≤ 5, function ≤ 120 lines, file ≤ 500 lines, depth ≤ 4, complexity ≤ 20 | `eslint/max-*`, `eslint/complexity`                 |
+| Cleanup preserves declarations and built runtime export metadata               | `antelopejs-api-diff <base-ref>`                    |
+| Comment-only changes preserve JavaScript emit                                  | `antelopejs-comment-proof <base-ref>`               |
+| PR-body counts come from tracked code files                                    | api-diff and comment-proof tables                   |
+| Receiver, positional and unpublished-module behaviour                          | `antelopejs-api-diff <base-ref> --probe <file.cjs>` |
+| Directive and `SAFETY:` reasons are true of the code                           | review; no tool                                     |
+| Evasion-only and patched-internal findings go under Attention                  | review; no tool                                     |
+| No-upward rules reject same-tier peers                                         | review and import probes                            |
+| No `@ts-ignore`                                                                | `typescript/ban-ts-comment`                         |
 
 <!-- antelopejs-guardrails:end -->

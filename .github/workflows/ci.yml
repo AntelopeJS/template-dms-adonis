@@ -8,6 +8,7 @@ on:
   # filter on `main` would leave every intermediate step without a gate.
   pull_request:
 
+  workflow_dispatch: null
 permissions:
   contents: read
 
@@ -38,3 +39,6 @@ jobs:
         curl -sf http://localhost:3333/ | grep -q '"running":true'
         grep -q '@antelopejs/dms-frontend-vue' info.json
         curl -s -o /dev/null -w '%{http_code}' 'http://localhost:5010/dms/page?path=/modules' | grep -q 200
+    permissions:
+      contents: write
+      actions: write
