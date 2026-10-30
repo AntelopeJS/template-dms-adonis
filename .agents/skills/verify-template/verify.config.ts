@@ -1,7 +1,7 @@
 import type { VerifyConfig } from "@antelopejs/tooling-configs/verify";
 
-import { projectJourneys } from "./journeys-project.ts";
-import { runJourneys } from "./journeys-run.ts";
+import { projectJourneys } from "./journeys_project.ts";
+import { runJourneys } from "./journeys_run.ts";
 
 const config: VerifyConfig = {
   doors: {

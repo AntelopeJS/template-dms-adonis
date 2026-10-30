@@ -162,7 +162,7 @@ export const projectJourneys = {
       const variables = [...new Set([...readme.matchAll(/`([A-Z][A-Z0-9]*_[A-Z0-9_]+)`/g)].map((match) => match[1] ?? ""))];
       const curled = [...readme.matchAll(/curl http:\/\/localhost:(\d+)(\/\S*)/g)];
       const compatibility = [...readme.matchAll(/^\| `(@[\w/-]+)`\s+\| `([^`]+)`/gm)].map((match) => ({ name: match[1] ?? "", range: match[2] ?? "" }));
-      const declared: Record<string, string> = { ...manifest.dependencies, ...manifest.devDependencies };
+      const declared = { ...manifest.dependencies, ...manifest.devDependencies };
       const port = (name: string) => new RegExp(`^${name}=(\\d+)`, "m").exec(example)?.[1];
       context.expect(context.tree("project files", project).folder, [
         equal("README commands without a script", named.filter((name) => !manifest.scripts[name]), []),
