@@ -61,8 +61,8 @@ importers:
         specifier: '>=0.6.1 <0.7.0'
         version: 0.6.1(@antelopejs/core@1.18.0)
       '@antelopejs/tooling-configs':
-        specifier: ^0.2.12
-        version: 0.2.12(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))
+        specifier: ^0.2.17
+        version: 0.2.17(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))
       '@japa/assert':
         specifier: ^4.0.1
         version: 4.2.0(@japa/runner@4.5.0)
@@ -355,8 +355,8 @@ packages:
   '@antelopejs/nodemailer@0.0.5':
     resolution: {integrity: sha512-dmPIwUmFttgk3/4hLU6jQ3GMeAB2oK2QkiTryeDC7cVcvfRXswd5GZXzRVWZTuo2X4qovbK+qZCSCeACj1Uf0A==}
 
-  '@antelopejs/tooling-configs@0.2.12':
-    resolution: {integrity: sha512-giwZ5U5kSd1EsmYio8+X36TcFZ2QhVWGjGddrF+A2zNqsWP9w15vVBaHOkUqkR8oH3An2wm/5hYLLGrLhGB/FQ==}
+  '@antelopejs/tooling-configs@0.2.17':
+    resolution: {integrity: sha512-8fwh7xQPzazP/l/ivEwRKpfN8qShV9+PRizpI9cBewe2TwoRPu4n95w6sYSlygiRmm0HxLJYZFhmSPRgtiNo1Q==}
     engines: {node: '>=22.18.0'}
     hasBin: true
     peerDependencies:
@@ -4066,7 +4066,7 @@ snapshots:
       '@antelopejs/interface-email': 0.0.5(@antelopejs/interface-core@0.2.3)
       nodemailer: 6.10.1
 
-  '@antelopejs/tooling-configs@0.2.12(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))':
+  '@antelopejs/tooling-configs@0.2.17(knip@6.43.0)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))':
     dependencies:
       '@oxlint/plugins': 1.81.0
       dts-bundle-generator: 9.5.1

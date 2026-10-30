@@ -39,6 +39,13 @@ jobs:
         curl -sf http://localhost:3333/ | grep -q '"running":true'
         grep -q '@antelopejs/dms-frontend-vue' info.json
         curl -s -o /dev/null -w '%{http_code}' 'http://localhost:5010/dms/page?path=/modules' | grep -q 200
+      renovate-sync: false
+    permissions:
+      contents: read
+  renovate-sync:
+    if: >-
+      github.event_name == 'pull_request' && startsWith(github.head_ref, 'renovate/') && github.event.pull_request.head.repo.full_name == github.repository
     permissions:
       contents: write
       actions: write
+    uses: AntelopeJS/.github/.github/workflows/ci-renovate-sync.yml@v1
