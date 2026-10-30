@@ -1,9 +1,0 @@
-{
-  "pack": "0.2.17",
-  "rules": {
-    "typescript/no-unnecessary-type-parameters": 1,
-    "typescript/no-unsafe-return": 1,
-    "typescript/use-unknown-in-catch-callback-variable": 3
-  },
-  "oversizeFiles": {}
-}
