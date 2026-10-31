@@ -1,7 +1,7 @@
 # AntelopeJS DMS AdonisJS Template
 
 <div align="center">
-<a href="https://discord.gg/kxzZMWqdFU"><img src="https://img.shields.io/badge/Discord-18181B?logo=discord&style=for-the-badge&color=000000" alt="Discord"></a>
+<a href="https://discord.gg/g4pFt6eXqu"><img src="https://img.shields.io/badge/Discord-18181B?logo=discord&style=for-the-badge&color=000000" alt="Discord"></a>
 <a href="https://dms.antelopejs.com/docs/getting-started/adonisjs"><img src="https://img.shields.io/badge/Docs-18181B?style=for-the-badge&color=000000" alt="Documentation"></a>
 </div>
 
