@@ -98,6 +98,12 @@ you deploy.
 `@antelopejs/dms` 0.9.2 requires `@antelopejs/core` 1.15.2 or later. Only
 AdonisJS 6 is tested.
 
+## AI assistant
+
+This template does not load the AI assistant, `@antelopejs/dms-ai`. The assistant lives in the dashboard that `ajs dms dev` serves, so try it in [`template-dms`](https://github.com/AntelopeJS/template-dms) or [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo).
+
+There it runs a coding agent, Claude Code or Codex, on your own subscription. When the project runs on your machine, the assistant uses the Claude Code login you already have, with no token and no API key. Codex needs one **Sign in with ChatGPT** in **Assistant** > **Settings**. The [AI assistant section of `template-dms`](https://github.com/AntelopeJS/template-dms#ai-assistant) has the steps, including what a Docker container needs.
+
 ## AI coding agents
 
 The [antelopejs plugin](https://github.com/AntelopeJS/agent-skills) syncs the
