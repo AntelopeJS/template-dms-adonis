@@ -127,4 +127,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md). Before you open a pull request, run
 
 ## License
 
-This repository does not ship a license file yet.
+[Apache-2.0](./LICENSE)
