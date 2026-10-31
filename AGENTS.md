@@ -78,9 +78,9 @@ Hold every test you write or keep to this checklist:
 
 ### Cleanup proof
 
-A behaviour-preserving cleanup PR shows `antelopejs-api-diff <base-ref>` passing. Published declarations and built runtime exports stay unchanged; pass `--allow-added <glob>` (repeatable, e.g. `'**/internal/**'`) to let added entries under that glob pass when their module is `@internal`, and copy its "Added (allowed)" list. A comment-only PR shows `antelopejs-comment-proof <base-ref>` passing instead of a verifier. Both compare committed HEAD.
+A behaviour-preserving cleanup PR shows `antelopejs-api-diff <base-ref>` passing. Published declarations, built runtime exports and the names and signatures a DMS frontend module auto-imports stay unchanged; pass `--allow-added <glob>` (repeatable, e.g. `'**/internal/**'`) to let added entries under that glob pass when their module is `@internal`, and copy its "Added (allowed)" list. Every export under a directory that `dms.frontend.build.ts` auto-imports is published, `@internal` or not; a helper that must stay private goes under `app/build/`. A comment-only PR shows `antelopejs-comment-proof <base-ref>` passing instead of a verifier. Both compare committed HEAD.
 
-Copy counts from the proof's base and HEAD table. Never type counts by hand. Keep the command and the committed head beside the copied output. The table counts a lint directive once per rule it names, inline directives included.
+Copy the proof's whole output into the PR body, down to its closing `<!-- antelopejs-proof ... -->` line, which stamps the command, base, committed head and a digest. Never type counts by hand. List the lint findings a PR leaves in place by pasting the block `antelopejs-body-check --findings` prints and replacing each `<why>`. `antelopejs-body-check <body.md>` fails an edited or stale proof block, proof output outside one, and a findings line that is not a live diagnostic at HEAD; counts in prose are not checked, so leave them out. The table counts a lint directive once per rule it names, inline directives included.
 
 Pass `--probe <file.cjs>` to api-diff when changing receivers, positional calls, or modules that no published entry reaches. The same captured script runs against both worktree roots, supplied as `argv[2]`, and prints JSON observations. Matching metadata alone does not prove those behaviours.
 
@@ -102,14 +102,20 @@ Verify a boundary against the imports a developer or agent would plausibly write
 | Tests import the code under test from local source, not their own package name | `antelopejs/no-self-import-in-tests`                |
 | No assertion that restates a constant                                          | `antelopejs/no-constant-value-assertion`            |
 | No test whose only check is "is a function"                                    | `antelopejs/no-typeof-function-only-test`           |
+| String-keyed object tables are read through own keys only                      | `antelopejs/no-inherited-key-lookup`                |
+| A type guard checks each member it narrows to; keys with `Object.hasOwn`       | `antelopejs/no-presence-only-type-guard`            |
+| A type guard checks the nested elements and values it claims                   | review; no tool                                     |
 | Params ≤ 5, function ≤ 120 lines, file ≤ 500 lines, depth ≤ 4, complexity ≤ 20 | `eslint/max-*`, `eslint/complexity`                 |
-| Cleanup preserves declarations and built runtime export metadata               | `antelopejs-api-diff <base-ref>`                    |
+| Cleanup preserves declarations, runtime exports and DMS auto-imports           | `antelopejs-api-diff <base-ref>`                    |
 | Comment-only changes preserve JavaScript emit                                  | `antelopejs-comment-proof <base-ref>`               |
-| PR-body counts come from tracked code files                                    | api-diff and comment-proof tables                   |
+| PR-body proof tables are copied unedited from the current head                 | `antelopejs-body-check <body.md>`                   |
+| PR-body findings-left lines are live diagnostics at HEAD                       | `antelopejs-body-check <body.md>`                   |
 | Receiver, positional and unpublished-module behaviour                          | `antelopejs-api-diff <base-ref> --probe <file.cjs>` |
 | Directive and `SAFETY:` reasons are true of the code                           | review; no tool                                     |
 | Evasion-only and patched-internal findings go under Attention                  | review; no tool                                     |
 | No-upward rules reject same-tier peers                                         | review and import probes                            |
 | No `@ts-ignore`                                                                | `typescript/ban-ts-comment`                         |
+| No once-used type parameter standing in for `unknown`                          | `typescript/no-unnecessary-type-parameters`         |
+| No `any` passed, assigned or returned where a type is declared                 | `typescript/no-unsafe-{argument,assignment,return}` |
 
 <!-- antelopejs-guardrails:end -->
