@@ -1,9 +1,9 @@
 diff --git a/start/routes.ts b/start/routes.ts
-index 13c9634..01b44d6 100644
+index b33c10d..a30e7fc 100644
 --- a/start/routes.ts
 +++ b/start/routes.ts
-@@ -34,7 +34,7 @@ router.get('/dms/info', async () => {
-   const frontendModules = await rt.use<DmsPages>(DMS_INTERFACE).GetFrontendModules()
+@@ -24,7 +24,7 @@ router.get('/dms/info', async () => {
+   const frontendModules = await rt.use(DMS_INTERFACE).GetFrontendModules()
  
    return {
 -    servedBy: 'adonis',
