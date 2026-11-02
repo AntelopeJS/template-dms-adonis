@@ -10,6 +10,17 @@ declare module '@adonisjs/core/types' {
   }
 }
 
+declare module '@antelopejs/core' {
+  interface EmbeddedInterfaces {
+    '@antelopejs/interface-dms': {
+      GetFrontendModules(): Promise<{ name: string; options?: { homepage?: string } }[]>
+    }
+    '@antelopejs/interface-dms/client-base-url': {
+      GetClientBaseUrl(): Promise<string | undefined>
+    }
+  }
+}
+
 export default class AntelopeProvider {
   private runtime?: AntelopeRuntime
 

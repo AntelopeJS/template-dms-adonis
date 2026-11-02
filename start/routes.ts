@@ -6,14 +6,6 @@ import { AntelopeRuntimeBinding } from '#providers/antelope_provider'
 const DMS_INTERFACE = '@antelopejs/interface-dms'
 const DMS_CLIENT_BASE_URL_INTERFACE = '@antelopejs/interface-dms/client-base-url'
 
-type DmsClientBaseUrl = {
-  GetClientBaseUrl(): Promise<string | undefined>
-}
-
-type DmsPages = {
-  GetFrontendModules(): Promise<{ name: string }[]>
-}
-
 async function runtime(): Promise<AntelopeRuntime> {
   return app.container.make(AntelopeRuntimeBinding)
 }
@@ -28,10 +20,8 @@ router.get('/', async () => {
 
 router.get('/dms/info', async () => {
   const rt = await runtime()
-  const clientBaseUrl = await rt
-    .use<DmsClientBaseUrl>(DMS_CLIENT_BASE_URL_INTERFACE)
-    .GetClientBaseUrl()
-  const frontendModules = await rt.use<DmsPages>(DMS_INTERFACE).GetFrontendModules()
+  const clientBaseUrl = await rt.use(DMS_CLIENT_BASE_URL_INTERFACE).GetClientBaseUrl()
+  const frontendModules = await rt.use(DMS_INTERFACE).GetFrontendModules()
 
   return {
     servedBy: 'adonis',

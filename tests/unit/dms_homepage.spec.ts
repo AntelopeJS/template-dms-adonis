@@ -3,16 +3,10 @@ import app from '@adonisjs/core/services/app'
 import env from '#start/env'
 import { AntelopeRuntimeBinding } from '#providers/antelope_provider'
 
-type DmsFrontendModules = {
-  GetFrontendModules(): Promise<{ name: string; options?: { homepage?: string } }[]>
-}
-
 test.group('DMS homepage', () => {
   test('is a page the DMS serves', async ({ assert }) => {
     const runtime = await app.container.make(AntelopeRuntimeBinding)
-    const modules = await runtime
-      .use<DmsFrontendModules>('@antelopejs/interface-dms')
-      .GetFrontendModules()
+    const modules = await runtime.use('@antelopejs/interface-dms').GetFrontendModules()
     const homepage = modules.find((module) => module.options?.homepage)?.options?.homepage
     assert.isString(homepage)
 
