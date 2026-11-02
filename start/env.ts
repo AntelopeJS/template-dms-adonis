@@ -23,6 +23,8 @@ export default await Env.create(new URL('../', import.meta.url), {
   DMS_API_BASE_URL: Env.schema.string(),
   DMS_CLIENT_BASE_URL: Env.schema.string(),
   DMS_JWT_SECRET: Env.schema.string(),
+  /** Signs the backend's calls to the dashboard's HTML renderer; the dashboard holds the same value. */
+  DMS_HTML_RENDER_SECRET: Env.schema.string(),
   /**
    * The dashboard bootstrap credential. The embedded runtime never runs in development, so the DMS
    * publishes no per-boot credential for `ajs dms dev`: the DMS and the dashboard (`ajs dms dev`,

@@ -1,7 +1,7 @@
 # AntelopeJS DMS AdonisJS Template
 
 <div align="center">
-<a href="https://discord.gg/sjK28QHrA7"><img src="https://img.shields.io/badge/Discord-18181B?logo=discord&style=for-the-badge&color=000000" alt="Discord"></a>
+<a href="https://discord.gg/g4pFt6eXqu"><img src="https://img.shields.io/badge/Discord-18181B?logo=discord&style=for-the-badge&color=000000" alt="Discord"></a>
 <a href="https://dms.antelopejs.com/docs/getting-started/adonisjs"><img src="https://img.shields.io/badge/Docs-18181B?style=for-the-badge&color=000000" alt="Documentation"></a>
 </div>
 
@@ -87,16 +87,22 @@ you deploy.
 
 ## Compatibility
 
-| Package                    | Version          |
-| -------------------------- | ---------------- |
-| `@adonisjs/core`           | `^6.18.0`        |
-| `@antelopejs/core`         | `^1.16.0`        |
-| `@antelopejs/dms`          | `>=0.9.2 <1.0.0` |
-| `@antelopejs/dms-frontend` | `>=0.6.1 <0.7.0` |
-| Node.js                    | 22.18 or later   |
+| Package                    | Version           |
+| -------------------------- | ----------------- |
+| `@adonisjs/core`           | `^6.18.0`         |
+| `@antelopejs/core`         | `^1.17.0`         |
+| `@antelopejs/dms`          | `>=0.15.0 <1.0.0` |
+| `@antelopejs/dms-frontend` | `>=0.9.2 <0.10.0` |
+| Node.js                    | 22.18 or later    |
 
-`@antelopejs/dms` 0.9.2 requires `@antelopejs/core` 1.15.2 or later. Only
+`@antelopejs/dms` 0.15.0 requires `@antelopejs/core` 1.17.0 or later. Only
 AdonisJS 6 is tested.
+
+## AI assistant
+
+This template does not load the AI assistant, `@antelopejs/dms-ai`. The assistant lives in the dashboard that `ajs dms dev` serves, so try it in [`template-dms`](https://github.com/AntelopeJS/template-dms) or [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo).
+
+There it runs a coding agent, Claude Code or Codex, on your own subscription. When the project runs on your machine, the assistant uses the Claude Code login you already have, with no token and no API key. Codex needs one **Sign in with ChatGPT** in **Assistant** > **Settings**. The [AI assistant section of `template-dms`](https://github.com/AntelopeJS/template-dms#ai-assistant) has the steps, including what a Docker container needs.
 
 ## AI coding agents
 
@@ -127,4 +133,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md). Before you open a pull request, run
 
 ## License
 
-This repository does not ship a license file yet.
+[Apache-2.0](./LICENSE)
