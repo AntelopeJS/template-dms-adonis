@@ -35,6 +35,8 @@ export default class AntelopeProvider {
             homepage: '/modules',
             apiBaseUrl: env.get('DMS_API_BASE_URL'),
             clientBaseUrl: env.get('DMS_CLIENT_BASE_URL'),
+            auth: { jwtSecret: env.get('DMS_JWT_SECRET') },
+            htmlRender: { serviceSecret: env.get('DMS_HTML_RENDER_SECRET') },
             frontend: { bootstrapSecret: env.get('DMS_BOOTSTRAP_SECRET') },
             meta: {
               title: 'AntelopeJS DMS on AdonisJS',
