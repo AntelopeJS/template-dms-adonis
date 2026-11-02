@@ -87,13 +87,13 @@ you deploy.
 
 ## Compatibility
 
-| Package                    | Version          |
-| -------------------------- | ---------------- |
-| `@adonisjs/core`           | `^6.18.0`        |
-| `@antelopejs/core`         | `^1.17.0`        |
+| Package                    | Version           |
+| -------------------------- | ----------------- |
+| `@adonisjs/core`           | `^6.18.0`         |
+| `@antelopejs/core`         | `^1.17.0`         |
 | `@antelopejs/dms`          | `>=0.15.0 <1.0.0` |
 | `@antelopejs/dms-frontend` | `>=0.9.2 <0.10.0` |
-| Node.js                    | 22.18 or later   |
+| Node.js                    | 22.18 or later    |
 
 `@antelopejs/dms` 0.15.0 requires `@antelopejs/core` 1.17.0 or later. Only
 AdonisJS 6 is tested.
