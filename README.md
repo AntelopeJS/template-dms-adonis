@@ -1,21 +1,22 @@
-# AntelopeJS DMS AdonisJS Template
+# `template-dms-adonis`
 
 <div align="center">
-<a href="https://discord.gg/g4pFt6eXqu"><img src="https://img.shields.io/badge/Discord-18181B?logo=discord&style=for-the-badge&color=000000" alt="Discord"></a>
-<a href="https://dms.antelopejs.com/docs/getting-started/adonisjs"><img src="https://img.shields.io/badge/Docs-18181B?style=for-the-badge&color=000000" alt="Documentation"></a>
+<a href="https://discord.gg/g4pFt6eXqu"><img src="https://img.shields.io/badge/Discord-18181B?logo=discord&style=for-the-badge&color=000000" alt="Discord" data-illustration></a>
+<a href="https://dms.antelopejs.com/docs/getting-started/adonisjs"><img src="https://img.shields.io/badge/Docs-18181B?style=for-the-badge&color=000000" alt="Documentation" data-illustration></a>
 </div>
 
-An AdonisJS 6 application that runs the [AntelopeJS DMS](https://dms.antelopejs.com)
+An AdonisJS application that runs the [AntelopeJS DMS](https://dms.antelopejs.com)
 and its dashboard inside your own app, in **embedded** mode.
 
 ## What it does
 
-- AdonisJS owns the process: its HTTP server, signals, logger and configuration.
-  The DMS starts and stops with it, from `providers/antelope_provider.ts`.
-- No project configuration to maintain: `antelope.config.ts` is a placeholder for
-  `ajs project init`, and the DMS modules are ordinary npm dependencies, listed
-  in the provider's `modules` map.
-- Application code reaches the DMS through `runtime.use()`; `start/routes.ts`
+- AdonisJS owns the process, with its HTTP server, signals, logger and
+  configuration. The DMS starts and stops with it, from
+  `providers/antelope_provider.ts`.
+- There is no project configuration to maintain. `antelope.config.ts` is a
+  placeholder for `ajs project init`, and the DMS modules are ordinary npm
+  dependencies, listed in the provider's `modules` map.
+- Application code reaches the DMS through `runtime.use()`. `start/routes.ts`
   has an example on `GET /dms/info`.
 - The dashboard (`@antelopejs/dms-frontend`) is built against the embedded DMS
   API and served on `:3001`.
@@ -23,13 +24,13 @@ and its dashboard inside your own app, in **embedded** mode.
   `dms-media`, on MongoDB, `auth-jwt`, local file storage and nodemailer.
 
 Prefer [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo)
-if you do not already have a Node.js app: there the `ajs` CLI owns the process
+if you do not already have a Node.js app. There the `ajs` CLI owns the process
 (**standalone** mode) and the dashboard runs with hot reload.
 
 ## Install
 
-Install the CLI once with `pnpm add -g @antelopejs/core` (version 1.16 or later),
-then create a project from this template:
+Install the CLI once with `pnpm add -g @antelopejs/core`, then create a project
+from this template:
 
 ```bash
 ajs project init my-app --template "DMS Adonis" --pm pnpm
@@ -39,10 +40,10 @@ node ace generate:key
 ```
 
 `ajs project init` copies the template and installs its dependencies. It leaves
-the `antelope.config.ts` of the template as it is: that file is a placeholder,
+the `antelope.config.ts` of the template as it is. That file is a placeholder,
 and the DMS modules are listed in `providers/antelope_provider.ts`.
 
-You need Node.js 22.18 or later, pnpm, and a MongoDB server on
+You need the Node.js version that `.nvmrc` names, pnpm, and a MongoDB server on
 `mongodb://localhost:27017` (`MONGODB_URL` in `.env`).
 
 ## Quick start
@@ -68,12 +69,12 @@ pnpm frontend:start
 ```
 
 Open `http://localhost:3001`. A fresh database has no account, so the dashboard
-opens the first-run wizard that creates the administrator; after that it shows
+opens the first-run wizard that creates the administrator. After that it shows
 the sign-in page. Run `pnpm frontend:build` again after you add or remove a DMS
 module.
 
-`ajs dms dev` (hot reload) does not work in embedded mode: it needs a backend
-started by `ajs project dev`. Replace the development secrets of `.env` before
+`ajs dms dev` (hot reload) does not work in embedded mode, because it needs a
+backend started by `ajs project dev`. Replace the development secrets of `.env` before
 you deploy.
 
 ## Documentation
@@ -87,28 +88,23 @@ you deploy.
 
 ## Compatibility
 
-| Package                    | Version           |
-| -------------------------- | ----------------- |
-| `@adonisjs/core`           | `^6.18.0`         |
-| `@antelopejs/core`         | `^1.17.0`         |
-| `@antelopejs/dms`          | `>=0.15.0 <1.0.0` |
-| `@antelopejs/dms-frontend` | `>=0.9.2 <0.10.0` |
-| Node.js                    | 22.18 or later    |
+The versions this template runs are the ones it pins. `package.json` holds the
+ranges of `@adonisjs/core`, `@antelopejs/core`, `@antelopejs/dms` and
+`@antelopejs/dms-frontend`, and `pnpm-lock.yaml` holds the versions CI tests.
+`.nvmrc` names the Node.js version. CI tests only the AdonisJS major that
+`@adonisjs/core` pins.
 
-`@antelopejs/dms` 0.15.0 requires `@antelopejs/core` 1.17.0 or later. Only
-AdonisJS 6 is tested.
-
-## AI assistant
+## The assistant
 
 This template does not load the AI assistant, `@antelopejs/dms-ai`. The assistant lives in the dashboard that `ajs dms dev` serves, so try it in [`template-dms`](https://github.com/AntelopeJS/template-dms) or [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo).
 
 There it runs a coding agent, Claude Code or Codex, on your own subscription. When the project runs on your machine, the assistant uses the Claude Code login you already have, with no token and no API key. Codex needs one **Sign in with ChatGPT** in **Assistant** > **Settings**. The [AI assistant section of `template-dms`](https://github.com/AntelopeJS/template-dms#ai-assistant) has the steps, including what a Docker container needs.
 
-## AI coding agents
+## Coding agents
 
-The [antelopejs plugin](https://github.com/AntelopeJS/agent-skills) syncs the
+The [AntelopeJS agent skills plugin](https://github.com/AntelopeJS/agent-skills) syncs the
 DMS agent skills into the project after `pnpm install`. This repository's
-`.claude/settings.json` enables it in Claude Code; in Codex, run
+`.claude/settings.json` enables it in Claude Code. In Codex, run
 `codex plugin marketplace add AntelopeJS/agent-skills` then
 `codex plugin add antelopejs@antelopejs`. `AGENTS.md` holds the agent guidance
 for this project. In embedded mode, add a module to the provider's `modules`
