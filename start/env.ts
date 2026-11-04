@@ -31,4 +31,9 @@ export default await Env.create(new URL('../', import.meta.url), {
    * `ajs dms build`) both read this one from `.env`.
    */
   DMS_BOOTSTRAP_SECRET: Env.schema.string(),
+  /**
+   * The setup token of the first administrator, at least 16 characters. When it is empty, the DMS
+   * generates one and prints the onboarding address with it in the `pnpm dev` terminal.
+   */
+  DMS_SETUP_TOKEN: Env.schema.string.optional(),
 })
