@@ -29,17 +29,16 @@ if you do not already have a Node.js app. There the `ajs` CLI owns the process
 
 ## Install
 
-Install the CLI once with `pnpm add -g @antelopejs/core`, then create a project
-from this template:
+Create a project from this template:
 
 ```bash
-ajs project init my-app --template "DMS Adonis" --pm pnpm
+npx @antelopejs/core project init my-app --template dms-adonis --pm pnpm
 cd my-app
 cp .env.example .env
 node ace generate:key
 ```
 
-`ajs project init` copies the template and installs its dependencies. It leaves
+`project init` copies the template and installs its dependencies. It leaves
 the `antelope.config.ts` of the template as it is. That file is a placeholder,
 and the DMS modules are listed in `providers/antelope_provider.ts`.
 
@@ -68,10 +67,19 @@ pnpm frontend:build
 pnpm frontend:start
 ```
 
-Open `http://localhost:3001`. A fresh database has no account, so the dashboard
-opens the first-run wizard that creates the administrator. After that it shows
-the sign-in page. Run `pnpm frontend:build` again after you add or remove a DMS
-module.
+A fresh database has no account. The `pnpm dev` terminal prints the address
+that creates the administrator, with a one-time setup token:
+
+```text
+[WARN] [DMS] No owner exists yet. To create it, open http://localhost:3001/onboarding?token=...
+```
+
+Open that address. The first-run wizard creates the administrator; after that
+the dashboard at `http://localhost:3001` shows the sign-in page. The line
+repeats at every start until an administrator exists. To choose the token
+yourself, set `DMS_SETUP_TOKEN` in `.env` to at least 16 characters: the line
+then prints `token=<DMS_SETUP_TOKEN>` and you put your value in the address. Run
+`pnpm frontend:build` again after you add or remove a DMS module.
 
 `ajs dms dev` (hot reload) does not work in embedded mode, because it needs a
 backend started by `ajs project dev`. Replace the development secrets of `.env` before

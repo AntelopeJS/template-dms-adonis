@@ -84,6 +84,7 @@ export default class AntelopeProvider {
         },
       },
       uses: ['@antelopejs/interface-dms'],
+      logging: { channelFilter: { '*': 'warn' } },
     })
 
     this.app.container.bindValue(AntelopeRuntimeBinding, this.runtime)
