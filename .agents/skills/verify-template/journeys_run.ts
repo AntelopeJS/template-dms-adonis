@@ -29,9 +29,46 @@ interface Info {
   frontendModules?: string[];
 }
 
-function body<Value>(result: HttpResult): Value {
-  // SAFETY: the template's routes answer JSON objects of these shapes.
-  return result.json as Value;
+type Json = HttpResult["json"];
+
+function isRecord(value: Json): value is Exclude<Json, string | number | boolean | null | unknown[] | undefined> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function isString(value: Json): value is string {
+  return typeof value === "string";
+}
+
+function isBoolean(value: Json): value is boolean {
+  return typeof value === "boolean";
+}
+
+function isStrings(value: Json): value is string[] {
+  return Array.isArray(value) && value.every(isString);
+}
+
+function homeOf(result: HttpResult): Home {
+  const root = result.json;
+  if (!isRecord(root)) return {};
+  const dms = root.dms;
+  const home: Home = {};
+  if (isString(root.host)) home.host = root.host;
+  if (isRecord(dms)) {
+    home.dms = {};
+    if (isBoolean(dms.running)) home.dms.running = dms.running;
+    if (isStrings(dms.modules)) home.dms.modules = dms.modules;
+  }
+  return home;
+}
+
+function infoOf(result: HttpResult): Info {
+  const root = result.json;
+  if (!isRecord(root)) return {};
+  const info: Info = {};
+  if (isString(root.servedBy)) info.servedBy = root.servedBy;
+  if (isString(root.clientBaseUrl)) info.clientBaseUrl = root.clientBaseUrl;
+  if (isStrings(root.frontendModules)) info.frontendModules = root.frontendModules;
+  return info;
 }
 
 export const runJourneys = {
@@ -46,7 +83,7 @@ export const runJourneys = {
         try {
           server = await serve(context, project, "node ace serve", ports);
           const home = await context.http("GET /", `${server.url}/`);
-          const root = body<Home>(home);
+          const root = homeOf(home);
           context.expect(home.folder, [
             equal("status", home.status, 200),
             equal("served by adonisjs", root.host, "adonisjs"),
@@ -54,7 +91,7 @@ export const runJourneys = {
             equal("every module of the provider is loaded", EXPECTED_MODULES.filter((name) => !root.dms?.modules?.includes(name)), []),
           ]);
           const info = await context.http("GET /dms/info", `${server.url}/dms/info`);
-          const dms = body<Info>(info);
+          const dms = infoOf(info);
           context.expect(info.folder, [
             equal("served by adonis", dms.servedBy, "adonis"),
             equal("the client base url is the configured one", dms.clientBaseUrl, "http://localhost:3001"),
@@ -108,7 +145,7 @@ export const runJourneys = {
         try {
           server = await serve(context, project, "node ace serve --hmr", ports, ["--hmr"]);
           const home = await context.http("GET /", `${server.url}/`);
-          context.expect(home.folder, [equal("the runtime is running", body<Home>(home).dms?.running, true)]);
+          context.expect(home.folder, [equal("the runtime is running", homeOf(home).dms?.running, true)]);
           const ended = await stop(context, server, "stop");
           context.expect(context.tree("after stop", project).folder, [equal("SIGINT ended the server", ended, true)]);
           const after = await context.http("GET / after stop", `${server.url}/`);
@@ -130,7 +167,7 @@ export const runJourneys = {
         try {
           server = await serve(context, project, "node ace serve", ports);
           const info = await context.http("GET /dms/info", `${server.url}/dms/info`);
-          context.expect(info.folder, [equal("the client base url follows .env", body<Info>(info).clientBaseUrl, "http://localhost:4242")]);
+          context.expect(info.folder, [equal("the client base url follows .env", infoOf(info).clientBaseUrl, "http://localhost:4242")]);
           const names = await databases(context, "databases", mongo);
           const written = await collections(context, `collections of ${DEFAULT_DATABASE}`, mongo, DEFAULT_DATABASE);
           context.expect(context.tree("databases", project).folder, [

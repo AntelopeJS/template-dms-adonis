@@ -42,7 +42,7 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
     })
   })
   .run(() => run())
-  .catch((error) => {
+  .catch((error: unknown) => {
     process.exitCode = 1
     void prettyPrintError(error)
   })
