@@ -28,17 +28,16 @@ if you do not already have a Node.js app: there the `ajs` CLI owns the process
 
 ## Install
 
-Install the CLI once with `pnpm add -g @antelopejs/core` (version 1.16 or later),
-then create a project from this template:
+Create a project from this template:
 
 ```bash
-ajs project init my-app --template "DMS Adonis" --pm pnpm
+npx @antelopejs/core project init my-app --template dms-adonis --pm pnpm
 cd my-app
 cp .env.example .env
 node ace generate:key
 ```
 
-`ajs project init` copies the template and installs its dependencies. It leaves
+`project init` copies the template and installs its dependencies. It leaves
 the `antelope.config.ts` of the template as it is: that file is a placeholder,
 and the DMS modules are listed in `providers/antelope_provider.ts`.
 
@@ -90,7 +89,7 @@ you deploy.
 | Package                    | Version           |
 | -------------------------- | ----------------- |
 | `@adonisjs/core`           | `^6.18.0`         |
-| `@antelopejs/core`         | `^1.17.0`         |
+| `@antelopejs/core`         | `^1.19.0`         |
 | `@antelopejs/dms`          | `>=0.15.0 <1.0.0` |
 | `@antelopejs/dms-frontend` | `>=0.9.2 <0.10.0` |
 | Node.js                    | 22.18 or later    |
