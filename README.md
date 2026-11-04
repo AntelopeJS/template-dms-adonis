@@ -66,10 +66,19 @@ pnpm frontend:build
 pnpm frontend:start
 ```
 
-Open `http://localhost:3001`. A fresh database has no account, so the dashboard
-opens the first-run wizard that creates the administrator; after that it shows
-the sign-in page. Run `pnpm frontend:build` again after you add or remove a DMS
-module.
+A fresh database has no account. The `pnpm dev` terminal prints the address
+that creates the administrator, with a one-time setup token:
+
+```text
+[WARN] [DMS] No owner exists yet. To create it, open http://localhost:3001/onboarding?token=...
+```
+
+Open that address. The first-run wizard creates the administrator; after that
+the dashboard at `http://localhost:3001` shows the sign-in page. The line
+repeats at every start until an administrator exists. To choose the token
+yourself, set `DMS_SETUP_TOKEN` in `.env` to at least 16 characters: the line
+then prints `token=<DMS_SETUP_TOKEN>` and you put your value in the address. Run
+`pnpm frontend:build` again after you add or remove a DMS module.
 
 `ajs dms dev` (hot reload) does not work in embedded mode: it needs a backend
 started by `ajs project dev`. Replace the development secrets of `.env` before
@@ -90,11 +99,11 @@ you deploy.
 | -------------------------- | ----------------- |
 | `@adonisjs/core`           | `^6.18.0`         |
 | `@antelopejs/core`         | `^1.19.0`         |
-| `@antelopejs/dms`          | `>=0.15.0 <1.0.0` |
-| `@antelopejs/dms-frontend` | `>=0.9.2 <0.10.0` |
+| `@antelopejs/dms`          | `>=0.15.1 <1.0.0` |
+| `@antelopejs/dms-frontend` | `>=0.9.3 <0.10.0` |
 | Node.js                    | 22.18 or later    |
 
-`@antelopejs/dms` 0.15.0 requires `@antelopejs/core` 1.17.0 or later. Only
+`@antelopejs/dms` 0.15.1 requires `@antelopejs/core` 1.17.0 or later. Only
 AdonisJS 6 is tested.
 
 ## AI assistant
