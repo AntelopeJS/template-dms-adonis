@@ -4,6 +4,7 @@ covers:
   - oxfmt.config.ts
   - knip.config.ts
   - tsconfig.json
+  - tsconfig.ace.json
   - guardrails.suppressions.json
   - renovate.json
   - .editorconfig

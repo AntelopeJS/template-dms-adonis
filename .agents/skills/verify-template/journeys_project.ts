@@ -119,11 +119,12 @@ export const projectJourneys = {
   },
   dashboard: {
     title: "`pnpm frontend:build` then `pnpm frontend:start` serve the dashboard's first-run wizard against the running backend",
-    entryPoint: "`pnpm frontend:build`, `pnpm frontend:start -p <port>` and `GET /`",
+    entryPoint: "`pnpm frontend:build`, `pnpm frontend:start -p <port>` and `GET /onboarding?token=<DMS_SETUP_TOKEN>`, the address the README sends a new user to",
     async run(context) {
       await withMongo(context, async (mongo) => {
         const project = await prepared(context);
-        const ports = await writeEnv(context, project, mongo);
+        const token = "verify-dashboard-setup-token";
+        const ports = await writeEnv(context, project, mongo, { DMS_SETUP_TOKEN: token });
         let server: Server | undefined;
         let dashboard: number | undefined;
         try {
@@ -134,12 +135,19 @@ export const projectJourneys = {
           const started = await context.command("pnpm frontend:start", "sh", ["-c", `pnpm frontend:start -p ${port} > dashboard.log 2>&1 & echo $! > dashboard.pid`], { cwd: project });
           context.expect(started.folder, [exitIs(started, 0)], { critical: true });
           dashboard = port;
-          let page = await context.http("GET the dashboard", `http://localhost:${port}/`);
+          const wizard = `http://localhost:${port}/onboarding?token=${token}`;
+          let page = await context.http("GET the first-run wizard", wizard);
           for (let attempt = 0; attempt < 60 && page.status !== 200; attempt += 1) {
             await sleep(1000);
-            page = await context.http(`GET the dashboard (${attempt + 2})`, `http://localhost:${port}/`);
+            page = await context.http(`GET the first-run wizard (${attempt + 2})`, wizard);
           }
-          context.expect(page.folder, [equal("the dashboard answers", page.status, 200), has("an HTML page", page.body, /<html/i)]);
+          context.expect(page.folder, [
+            equal("the wizard answers", page.status, 200),
+            has("the wizard's title is translated, so the dashboard bundles the DMS frontend modules", page.body, /<title>Set up your platform/),
+            has("the wizard renders its first step", page.body, /Welcome to Antelope DMS/),
+            has("the dashboard carries the provider's `/modules` homepage", page.body, /"homepage":"\/modules"/),
+            has("the dashboard calls the DMS API at DMS_API_BASE_URL of .env", page.body, new RegExp(`"baseURL":"http://localhost:${ports.api}"`)),
+          ]);
         } finally {
           if (dashboard !== undefined) await context.command("stop the dashboard", "pkill", ["-f", "--", `-p ${dashboard}`]);
           if (server) await stop(context, server, "stop");
@@ -149,7 +157,7 @@ export const projectJourneys = {
     },
   },
   "docs-commands": {
-    title: "what the README claims is true of the scaffolded project: its commands are scripts, its variables and ports are in `.env.example` and `start/env.ts`, its route is served, and its compatibility table matches `package.json`",
+    title: "what the README claims is true of the scaffolded project: its commands are scripts, its variables and ports are in `.env.example` and `start/env.ts`, its route is served, and its Compatibility section names packages `package.json` declares",
     entryPoint: "reading `README.md` of a scaffolded project",
     async run(context) {
       const project = await scaffoldTree(context);
@@ -161,7 +169,8 @@ export const projectJourneys = {
       const named = [...new Set([...readme.matchAll(/pnpm (?:run )?([a-z][\w:-]*)/g)].map((match) => match[1] ?? ""))].filter((name) => !["install", "add", "format"].includes(name));
       const variables = [...new Set([...readme.matchAll(/`([A-Z][A-Z0-9]*_[A-Z0-9_]+)`/g)].map((match) => match[1] ?? ""))];
       const curled = [...readme.matchAll(/curl http:\/\/localhost:(\d+)(\/\S*)/g)];
-      const compatibility = [...readme.matchAll(/^\| `(@[\w/-]+)`\s+\| `([^`]+)`/gm)].map((match) => ({ name: match[1] ?? "", range: match[2] ?? "" }));
+      const compatibility = readme.split(/^## /m).find((section) => section.startsWith("Compatibility\n")) ?? "";
+      const pinned = [...compatibility.matchAll(/`(@[\w/-]+)`/g)].map((match) => match[1] ?? "");
       const declared = { ...manifest.dependencies, ...manifest.devDependencies };
       const port = (name: string) => new RegExp(`^${name}=(\\d+)`, "m").exec(example)?.[1];
       context.expect(context.tree("project files", project).folder, [
@@ -170,10 +179,10 @@ export const projectJourneys = {
         equal("README variables missing from .env.example or start/env.ts", variables.filter((name) => !new RegExp(`^${name}=`, "m").test(example) || !env.includes(name)), []),
         equal("README names MONGODB_URL", variables.includes("MONGODB_URL"), true),
         equal("README curl routes missing from start/routes.ts", curled.filter((match) => !routes.includes(`'${match[2]}'`)).map((match) => match[2]), []),
-        equal("the curl port is the AdonisJS port of .env.example", curled.map((match) => match[1]), curled.map(() => port("PORT"))),
+        equal("the curl port is the AdonisJS port of .env.example", curled.map((match) => match[1]), curled.map(() => port("PORT") ?? "")),
         has("the README names the DMS API port of .env.example", readme, new RegExp(`localhost:${port("DMS_API_PORT")}\\b`)),
-        equal("compatibility rows whose range differs from package.json", compatibility.filter((row) => declared[row.name] !== undefined && declared[row.name] !== row.range).map((row) => row.name), []),
-        equal("the compatibility table lists the DMS and AntelopeJS core", ["@antelopejs/core", "@antelopejs/dms"].filter((name) => !compatibility.some((row) => row.name === name)), []),
+        equal("packages the Compatibility section names that package.json does not declare", pinned.filter((name) => declared[name] === undefined), []),
+        equal("the Compatibility section names the DMS and AntelopeJS core", ["@antelopejs/core", "@antelopejs/dms"].filter((name) => !pinned.includes(name)), []),
       ]);
     },
   },

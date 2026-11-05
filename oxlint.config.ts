@@ -11,6 +11,7 @@ export default defineConfig({
   jsPlugins: [{ name: 'adonisjs', specifier: '@adonisjs/eslint-plugin' }],
   ignorePatterns: [
     ...ANTELOPE_IGNORE_PATTERNS,
+    '.dms-frontend/**',
     'public/assets/**',
     'resources/**',
     '**/__snapshots__/**',

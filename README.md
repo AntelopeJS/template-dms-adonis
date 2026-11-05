@@ -13,9 +13,12 @@ and its dashboard inside your own app, in **embedded** mode.
 - AdonisJS owns the process, with its HTTP server, signals, logger and
   configuration. The DMS starts and stops with it, from
   `providers/antelope_provider.ts`.
-- There is no project configuration to maintain. `antelope.config.ts` is a
-  placeholder for `ajs project init`, and the DMS modules are ordinary npm
-  dependencies, listed in the provider's `modules` map.
+- The DMS modules are ordinary npm dependencies, listed in the provider's
+  `modules` map. The public options of `@antelopejs/dms` are in
+  `providers/dms_config.ts`, which the provider and `antelope.config.ts` share.
+  `antelope.config.ts` tells `pnpm frontend:build` and `pnpm frontend:start`
+  which installed modules ship a dashboard frontend, found in `package.json`,
+  and gives `@antelopejs/dms` those public options.
 - Application code reaches the DMS through `runtime.use()`. `start/routes.ts`
   has an example on `GET /dms/info`.
 - The dashboard (`@antelopejs/dms-frontend`) is built against the embedded DMS
@@ -39,8 +42,8 @@ node ace generate:key
 ```
 
 `project init` copies the template and installs its dependencies. It leaves
-the `antelope.config.ts` of the template as it is. That file is a placeholder,
-and the DMS modules are listed in `providers/antelope_provider.ts`.
+the `antelope.config.ts` of the template as it is. The DMS modules are listed
+in `providers/antelope_provider.ts`.
 
 You need the Node.js version that `.nvmrc` names, pnpm, and a MongoDB server on
 `mongodb://localhost:27017` (`MONGODB_URL` in `.env`).

@@ -27,5 +27,8 @@ yarn-error.log
 # AntelopeJS runtime artifacts
 .antelope
 
+# AntelopeJS DMS dashboard workspace (pnpm frontend:build)
+.dms-frontend
+
 # Claude Code session state
 .claude/scheduled_tasks.lock

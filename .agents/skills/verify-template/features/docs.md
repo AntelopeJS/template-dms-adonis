@@ -16,7 +16,7 @@ The pages the user reads first.
 
 ## Sub-features
 
-- `docs-commands`: every `pnpm` command the README names exists as a script, the documented scripts are named, its variables are in `.env.example` and `start/env.ts`, the `curl` route is in `start/routes.ts` on the `.env.example` port, and its compatibility table matches the ranges of `package.json`.
+- `docs-commands`: every `pnpm` command the README names exists as a script, the documented scripts are named, its variables are in `.env.example` and `start/env.ts`, the `curl` route is in `start/routes.ts` on the `.env.example` port, and its Compatibility section names `@antelopejs/core` and `@antelopejs/dms` and only packages `package.json` declares.
 
 ## How to get to it (user POV)
 

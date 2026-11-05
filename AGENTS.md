@@ -1,8 +1,10 @@
 # AntelopeJS DMS inside AdonisJS
 
 This AdonisJS application runs the AntelopeJS DMS as an embedded guest runtime:
-`antelope.config.ts` is only a placeholder that `ajs project init` keeps instead of
-writing its own. `providers/antelope_provider.ts` creates the
+`antelope.config.ts` is read only by `ajs dms build` and `ajs dms start`, and lists
+the installed dependencies that ship a dashboard frontend. It gives `@antelopejs/dms`
+the public options of `providers/dms_config.ts`, as the provider does, so the dashboard and
+the runtime agree on the homepage and URLs. `providers/antelope_provider.ts` creates the
 runtime with `createRuntime` and lists the modules, which are ordinary npm
 dependencies. Host code reaches the DMS through
 `runtime.use('<interface package>[/subpath]')`, never by importing an
@@ -105,6 +107,7 @@ Verify a boundary against the imports a developer or agent would plausibly write
 | String-keyed object tables are read through own keys only                      | `antelopejs/no-inherited-key-lookup`                |
 | A type guard checks each member it narrows to; keys with `Object.hasOwn`       | `antelopejs/no-presence-only-type-guard`            |
 | A type guard checks the nested elements and values it claims                   | review; no tool                                     |
+| Every file type-aware lint reads is listed by a tsconfig                       | `antelopejs/require-tsconfig-include`               |
 | Params ≤ 5, function ≤ 120 lines, file ≤ 500 lines, depth ≤ 4, complexity ≤ 20 | `eslint/max-*`, `eslint/complexity`                 |
 | Cleanup preserves declarations, runtime exports and DMS auto-imports           | `antelopejs-api-diff <base-ref>`                    |
 | Comment-only changes preserve JavaScript emit                                  | `antelopejs-comment-proof <base-ref>`               |

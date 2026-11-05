@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "composite": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "rootDir": ".",
+    "outDir": "node_modules/.cache/ace",
+    "tsBuildInfoFile": "node_modules/.cache/ace/.tsbuildinfo"
+  },
+  "include": ["./ace.js"]
+}
