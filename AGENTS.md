@@ -2,13 +2,21 @@
 
 This AdonisJS application runs the AntelopeJS DMS as an embedded guest runtime:
 `antelope.config.ts` is read only by `ajs dms build` and `ajs dms start`, and lists
-the installed dependencies that ship a dashboard frontend. It gives `@antelopejs/dms`
-the public options of `providers/dms_config.ts`, as the provider does, so the dashboard and
-the runtime agree on the homepage and URLs. `providers/antelope_provider.ts` creates the
-runtime with `createRuntime` and lists the modules, which are ordinary npm
-dependencies. Host code reaches the DMS through
-`runtime.use('<interface package>[/subpath]')`, never by importing an
+the installed dependencies that ship a dashboard frontend, plus the demo module in `demo/`.
+It gives each module whose frontend reads its config the public options of
+`providers/public_module_options.ts`, as the provider does, so the dashboard and the runtime
+agree on the homepage, URLs and keys. `providers/antelope_provider.ts` creates the
+runtime with `createRuntime` and lists the modules: the DMS modules are ordinary npm
+dependencies, and `template-dms-demo` is the local module in `demo/`. Host code reaches the
+DMS through `runtime.use('<interface package>[/subpath]')`, never by importing an
 `@antelopejs/interface-*` package.
+
+`demo/` holds the pages, seed data and frontend of the demo, Helio: `demo/src` is an
+AntelopeJS module (its pages, tables, fixtures and controllers), `demo/content` the Markdown
+its home page reads, `demo/frontend-vue` its frontend module and translations. It is a
+workspace package with its own TypeScript, oxlint, oxfmt and knip configs, in the demo's
+style (double quotes, semicolons), built to `demo/dist` by `pnpm dev` and `pnpm build`.
+The root scripts run its checks after the application's.
 
 The DMS guidance ships as skills inside its packages, synced into the project
 once `pnpm install` has run: Claude Code reads them from `.claude/skills/`,

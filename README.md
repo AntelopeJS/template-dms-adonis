@@ -6,7 +6,10 @@
 </div>
 
 An AdonisJS application that runs the [AntelopeJS DMS](https://dms.antelopejs.com)
-and its dashboard inside your own app, in **embedded** mode.
+and its dashboard inside your own app, in **embedded** mode. It ships the same
+content as [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo):
+an editorial home page and Helio, the complete back office of a fictional solar
+installer, translated in English and French.
 
 ## What it does
 
@@ -14,21 +17,31 @@ and its dashboard inside your own app, in **embedded** mode.
   configuration. The DMS starts and stops with it, from
   `providers/antelope_provider.ts`.
 - The DMS modules are ordinary npm dependencies, listed in the provider's
-  `modules` map. The public options of `@antelopejs/dms` are in
-  `providers/dms_config.ts`, which the provider and `antelope.config.ts` share.
-  `antelope.config.ts` tells `pnpm frontend:build` and `pnpm frontend:start`
-  which installed modules ship a dashboard frontend, found in `package.json`,
-  and gives `@antelopejs/dms` those public options.
+  `modules` map. The public options of the modules whose dashboard frontend
+  reads its config (`@antelopejs/dms`, `dms-saas`, `dms-marketing`) are in
+  `providers/public_module_options.ts`, which the provider and
+  `antelope.config.ts` share. `antelope.config.ts` tells `pnpm frontend:build`
+  and `pnpm frontend:start` which installed modules ship a dashboard frontend,
+  found in `package.json`, adds the demo module and gives each module those
+  public options.
+- The demo is a local AntelopeJS module in `demo/`, loaded by the provider from
+  that folder. `demo/src` holds its pages, MongoDB tables, fixtures and
+  controllers, `demo/content` the Markdown of its home page and
+  `demo/frontend-vue` its frontend module and translations. It is a workspace
+  package with its own TypeScript, lint and format configs, built to
+  `demo/dist` by `pnpm dev` and `pnpm build`.
 - Application code reaches the DMS through `runtime.use()`. `start/routes.ts`
   has an example on `GET /dms/info`.
 - The dashboard (`@antelopejs/dms-frontend`) is built against the embedded DMS
   API and served on `:3001`.
-- Loads `@antelopejs/dms` with `dms-api`, `dms-database`, `dms-automation` and
-  `dms-media`, on MongoDB, `auth-jwt`, local file storage and nodemailer.
+- Loads `@antelopejs/dms` with `dms-api`, `dms-database`, `dms-automation`,
+  `dms-saas`, `dms-lang`, `dms-media`, `dms-marketing` and `dms-mailing`, on
+  MongoDB, `auth-jwt`, local file storage and nodemailer.
 
 Prefer [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo)
 if you do not already have a Node.js app. There the `ajs` CLI owns the process
-(**standalone** mode) and the dashboard runs with hot reload.
+(**standalone** mode), the dashboard runs with hot reload, and the assistant and
+the page Builder are available (see [The assistant](#the-assistant)).
 
 ## Install
 
@@ -56,6 +69,9 @@ Start AdonisJS and the embedded DMS:
 pnpm dev
 ```
 
+`pnpm dev` builds the demo module to `demo/dist` first. A change under
+`demo/src` shows after you restart it.
+
 AdonisJS listens on `http://localhost:3333` and the DMS API on
 `http://localhost:5010`. Check that the DMS answers through AdonisJS:
 
@@ -78,7 +94,11 @@ that creates the administrator, with a one-time setup token:
 ```
 
 Open that address. The first-run wizard creates the administrator; after that
-the dashboard at `http://localhost:3001` shows the sign-in page. The line
+the dashboard at `http://localhost:3001` shows the sign-in page, and the demo's
+home page once you sign in. The DMS writes the Helio data once, when it
+creates its `default` tenant on an empty database. To get it back, start
+against an empty database. Set `HELIO_SIMULATORS=off` in the environment to
+stop the live service desk and fleet monitoring simulators. The line
 repeats at every start until an administrator exists. To choose the token
 yourself, set `DMS_SETUP_TOKEN` in `.env` to at least 16 characters: the line
 then prints `token=<DMS_SETUP_TOKEN>` and you put your value in the address. Run
@@ -86,7 +106,18 @@ then prints `token=<DMS_SETUP_TOKEN>` and you put your value in the address. Run
 
 `ajs dms dev` (hot reload) does not work in embedded mode, because it needs a
 backend started by `ajs project dev`. Replace the development secrets of `.env` before
-you deploy.
+you deploy. The `STRIPE_*` placeholders of `.env` boot `dms-saas` and let you
+browse every page. Real keys are only needed for its billing flows.
+
+To run the production build, `pnpm build` writes it to `build/`, with the demo
+module under `build/demo`:
+
+```bash
+pnpm build
+cd build
+pnpm i --prod
+node bin/server.js
+```
 
 ## Documentation
 
@@ -103,13 +134,13 @@ The versions this template runs are the ones it pins. `package.json` holds the
 ranges of `@adonisjs/core`, `@antelopejs/core`, `@antelopejs/dms` and
 `@antelopejs/dms-frontend`, and `pnpm-lock.yaml` holds the versions CI tests.
 `.nvmrc` names the Node.js version. CI tests only the AdonisJS major that
-`@adonisjs/core` pins.
+`@adonisjs/core` pins, AdonisJS 7, which needs Node.js 24 or later.
 
 ## The assistant
 
-This template does not load the AI assistant, `@antelopejs/dms-ai`. The assistant lives in the dashboard that `ajs dms dev` serves, so try it in [`template-dms`](https://github.com/AntelopeJS/template-dms) or [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo).
+This template does not load the AI assistant, `@antelopejs/dms-ai`, nor the page Builder, `@antelopejs/dms-builder`. Both show in development builds of the dashboard only, the ones `ajs dms dev` serves, and embedded mode serves a production build. Try them in [`template-dms`](https://github.com/AntelopeJS/template-dms) or [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo).
 
-There it runs a coding agent, Claude Code or Codex, on your own subscription. When the project runs on your machine, the assistant uses the Claude Code login you already have, with no token and no API key. Codex needs one **Sign in with ChatGPT** in **Assistant** > **Settings**. The [AI assistant section of `template-dms`](https://github.com/AntelopeJS/template-dms#ai-assistant) has the steps, including what a Docker container needs.
+There the assistant runs a coding agent, Claude Code or Codex, on your own subscription. When the project runs on your machine, the assistant uses the Claude Code login you already have, with no token and no API key. Codex needs one **Sign in with ChatGPT** in **Assistant** > **Settings**. The [AI assistant section of `template-dms`](https://github.com/AntelopeJS/template-dms#ai-assistant) has the steps, including what a Docker container needs.
 
 ## Coding agents
 
@@ -132,6 +163,19 @@ pnpm install --frozen-lockfile
 cp .env.example .env
 node ace generate:key
 ```
+
+`demo/` is a copy of the module of `template-dms-demo`, without the files that
+only serve that repository (its screenshot capture scripts and the tests of its
+own `package.json`). To bring a change over, check out `template-dms-demo` and
+run:
+
+```bash
+pnpm demo:sync ../template-dms-demo
+```
+
+The script copies `src/`, `content/` and `frontend-vue/` into `demo/`.
+`git diff demo/` then shows what the demo changed, and is empty when the two
+templates match.
 
 ## Contributing
 
