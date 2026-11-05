@@ -1,0 +1,151 @@
+{
+	"helio": {
+		"team": {
+			"columns": {
+				"name": "Membre",
+				"email": "E-mail",
+				"phone": "Téléphone",
+				"role": "Fonction",
+				"region": "Région",
+				"online": "Disponibilité",
+				"skills": "Compétences",
+				"avatar": "Photo",
+				"color": "Couleur au planning",
+				"hiredAt": "Arrivée",
+				"bio": "Présentation"
+			},
+			"placeholders": {
+				"name": "Prénom et nom",
+				"email": "prenom.nom{'@'}helio.example",
+				"skills": "Ajouter une compétence"
+			},
+			"hints": {
+				"avatar": "Adresse (URL) d'une image, affichée comme avatar du membre."
+			},
+			"roles": {
+				"manager": "Direction",
+				"sales": "Commercial",
+				"technician": "Technicien",
+				"office": "Administration"
+			},
+			"regions": {
+				"liege": "Liège",
+				"namur": "Namur",
+				"brussels": "Bruxelles",
+				"hainaut": "Hainaut",
+				"luxembourg": "Luxembourg"
+			},
+			"status": {
+				"online": "Disponible",
+				"offline": "Indisponible"
+			},
+			"page": {
+				"name": "Équipe",
+				"description": "Qui travaille chez Helio, qui est disponible aujourd'hui et quelle est la charge de chaque technicien."
+			},
+			"groups": {
+				"identity": {
+					"label": "Identité",
+					"description": "Nom, coordonnées et photo."
+				},
+				"assignment": {
+					"label": "Fonction et région",
+					"description": "Où le membre intervient et depuis quand."
+				},
+				"availability": {
+					"label": "Disponibilité",
+					"description": "Si le membre peut être affecté aujourd’hui, et sa couleur sur le planning."
+				},
+				"profile": {
+					"label": "Profil",
+					"description": "Compétences utilisées pour composer les équipes de chantier et courte présentation."
+				}
+			},
+			"stats": {
+				"label": "L'équipe en bref",
+				"headcount": "Effectif",
+				"headcount_detail": "Techniciens : {technicians} · commerciaux : {sales} · direction et administration : {office}",
+				"available": "Disponibles",
+				"available_detail": "Tout le monde est joignable | {count} membre indisponible | {count} membres indisponibles",
+				"on_site": "Techniciens sur chantier",
+				"on_site_value": "{onSite} / {total}",
+				"on_site_detail": "Aucun chantier en cours aujourd'hui | {count} chantier en cours aujourd'hui | {count} chantiers en cours aujourd'hui",
+				"per_tech": "Tickets / technicien",
+				"per_tech_detail": "Tous les tickets ouverts sont attribués | {count} ticket ouvert non attribué | {count} tickets ouverts non attribués",
+				"on_site_detail_weekend": "Week-end : aucun chantier en cours | Week-end : {count} chantier en cours, reprise lundi | Week-end : {count} chantiers en cours, reprise lundi"
+			},
+			"load": {
+				"tickets_title": "Charge SAV",
+				"tickets_description": "Tickets ouverts par personne",
+				"tickets_detail": "Urgents : {urgent} · hors SLA : {late}",
+				"tickets_empty": "Aucun ticket ouvert : le SAV est à jour.",
+				"tickets_action": "Service après-vente",
+				"sites_title": "Affectations chantier",
+				"sites_description": "Actifs ou démarrant sous 14 jours",
+				"sites_detail": "Responsable de {lead} · en renfort sur {crew}",
+				"sites_empty": "Aucun chantier actif à pourvoir.",
+				"sites_action": "Chantiers"
+			},
+			"capacity": {
+				"title": "Capacité du jour",
+				"description": "Équipe terrain, disponibilité et répartition des tickets",
+				"on_site": "Sur chantier",
+				"on_site_hint": "aucun chantier en cours | {count} chantier en cours | {count} chantiers en cours",
+				"availability": "Disponibilité de l'équipe",
+				"availability_hint": "tout le monde est joignable | {count} indisponible | {count} indisponibles",
+				"tickets": "Tickets ouverts par responsable",
+				"tickets_value": "aucun ticket ouvert | {count} ouvert | {count} ouverts",
+				"tickets_technicians": "{count} chez les techniciens",
+				"tickets_office": "{count} à l'administration",
+				"tickets_unassigned": "aucun non attribué | {count} non attribué | {count} non attribués",
+				"on_site_hint_weekend": "week-end | week-end, reprise lundi | week-end, reprise lundi"
+			},
+			"table": {
+				"caption": "Membres de l'équipe",
+				"search": "Rechercher un nom ou un e-mail",
+				"count": "Aucun membre | {count} membre | {count} membres",
+				"summary_available": "Disponibles",
+				"summary_technicians": "Techniciens",
+				"expand_label": "Profil et coordonnées",
+				"expand_bio": "Présentation"
+			},
+			"views": {
+				"everyone": "Tout le monde",
+				"available": "Disponibles",
+				"by_role": "Par fonction",
+				"newcomers": "Arrivés cette année",
+				"directory": "Annuaire téléphonique"
+			},
+			"empty": {
+				"first_title": "Aucun membre pour l'instant",
+				"first_description": "Ajoutez vos techniciens, commerciaux et collaborateurs administratifs pour planifier les chantiers et attribuer les tickets.",
+				"filtered_title": "Aucun membre ne correspond",
+				"filtered_description": "Essayez une autre fonction, une autre région ou un autre nom."
+			},
+			"form": {
+				"new_title": "Nouveau membre",
+				"new_description": "Sa fonction et sa région déterminent les chantiers et les tickets qui lui sont confiés.",
+				"edit_title": "Modifier le membre",
+				"edit_description": "Les modifications s'appliquent immédiatement aux plannings et à l'attribution des tickets.",
+				"details_title": "Membre de l'équipe",
+				"online_label": "Joignable maintenant"
+			},
+			"delete": {
+				"title": "Retirer {name} de l'équipe ? | Retirer ces {count} membres de l'équipe ?",
+				"description": "Les tickets ouverts concernés redeviennent non attribués ; les chantiers gardent leur historique mais devront être réattribués.",
+				"confirm": "Retirer le membre | Retirer {count} membres"
+			},
+			"quick": {
+				"add": "Nouveau membre de l'équipe"
+			},
+			"quickView": {
+				"action": "Aperçu",
+				"title": "Membre de l'équipe",
+				"description": "Rôle, région, compétences et coordonnées.",
+				"position": "Membre {index} sur {total}",
+				"notFoundTitle": "Ce membre ne fait plus partie de l'équipe",
+				"notFoundDescription": "Il a été retiré de l'équipe, ou le lien est erroné."
+			}
+		}
+	}
+}

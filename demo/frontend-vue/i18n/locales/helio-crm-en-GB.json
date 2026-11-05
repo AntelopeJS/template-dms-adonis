@@ -1,0 +1,223 @@
+{
+	"helio": {
+		"crm": {
+			"kinds": {
+				"residential": "Residential",
+				"business": "Business"
+			},
+			"sources": {
+				"website": "Website",
+				"referral": "Referral",
+				"fair": "Trade fair",
+				"partner": "Partner",
+				"phone": "Phone"
+			},
+			"stages": {
+				"lead": "Lead",
+				"qualified": "Qualified",
+				"siteVisit": "Site visit",
+				"proposal": "Proposal",
+				"negotiation": "Negotiation",
+				"won": "Won",
+				"lost": "Lost"
+			},
+			"lostReasons": {
+				"price": "Price too high",
+				"competitor": "Went with a competitor",
+				"timing": "Postponed",
+				"financing": "Financing refused",
+				"roof": "Roof unsuitable",
+				"noResponse": "No response"
+			},
+			"customers": {
+				"columns": {
+					"name": "Customer",
+					"kind": "Type",
+					"vatNumber": "VAT number",
+					"contactName": "Contact",
+					"email": "E-mail",
+					"phone": "Phone",
+					"address": "Address",
+					"segments": "Segments",
+					"source": "Source",
+					"isVip": "VIP",
+					"owner": "Account manager",
+					"website": "Website",
+					"notes": "Notes",
+					"createdAt": "Customer since"
+				},
+				"placeholders": {
+					"name": "Household or company name",
+					"contactName": "First and last name",
+					"email": "name{'@'}example.be",
+					"segments": "Add a segment",
+					"owner": "Assign a sales rep",
+					"notes": "Roof, consumption, wishes…"
+				},
+				"badges": {
+					"vip": "VIP",
+					"archived": "Archived"
+				},
+				"standard": "Standard",
+				"vipSwitch": "VIP customer: priority on planning and service",
+				"nav": "Customers",
+				"description": "Households and companies Helio advises, equips and maintains.",
+				"caption": "Customers",
+				"search": "Search a customer, a contact, an e-mail or a VAT number",
+				"count": "{count} customer | {count} customers",
+				"menuLabel": "Actions for {name}",
+				"segmentChip": "Segment",
+				"quickAction": "New customer",
+				"archived": "Customer archived | {count} customers archived",
+				"restored": "Customer restored | {count} customers restored",
+				"quickFilters": {
+					"owner": "Account manager",
+					"source": "Source"
+				},
+				"summary": {
+					"vip": "VIP",
+					"business": "Businesses"
+				},
+				"groups": {
+					"identity": "Customer",
+					"identityHint": "A household or a company: a company is invoiced with its VAT number.",
+					"contact": "Contact",
+					"location": "Installation address",
+					"relationship": "Relationship",
+					"relationshipHint": "Who follows the account, how it reached us and what it is interested in."
+				},
+				"form": {
+					"newTitle": "New customer",
+					"newDescription": "A household or a company: the VAT number is asked for companies only.",
+					"editTitle": "Edit customer",
+					"detailsTitle": "Customer details"
+				},
+				"quickView": {
+					"action": "Quick view",
+					"title": "Customer",
+					"description": "Contact details, address and account manager.",
+					"position": "Customer {index} of {total}",
+					"notFoundTitle": "This customer no longer exists",
+					"notFoundDescription": "It was deleted, or the link is wrong."
+				},
+				"actions": {
+					"deals": "See the deals",
+					"email": "Send an e-mail",
+					"quotes": "View quotes",
+					"projects": "View projects",
+					"invoices": "View invoices"
+				},
+				"empty": {
+					"firstRunTitle": "No customer yet",
+					"firstRunDescription": "Add your first household or company, or create it straight from a deal.",
+					"filteredTitle": "No customer matches",
+					"filteredDescription": "Try another name, segment or account manager."
+				},
+				"deleteConfirm": {
+					"title": "Delete {name} for good?",
+					"description": "The customer leaves the CRM for good. Type its name to confirm.",
+					"confirm": "Delete the customer",
+					"impactDeals": "Closed deals no longer linked to a customer",
+					"blockedTitle": "{name} still has deals in progress",
+					"blockedDescription": "Close or reassign its open deal first. | Close or reassign its {count} open deals first.",
+					"activeTitle": "Archive {name} first",
+					"activeDescription": "Only an archived customer can be deleted: archive it, then delete it from the archived customers."
+				},
+				"errors": {
+					"openDeals": "This customer still has deals in progress.",
+					"notArchived": "Only archived customers can be deleted: archive them first.",
+					"notFound": "This customer no longer exists.",
+					"vatFormat": "Invalid VAT number: BE followed by 10 digits (e.g. BE0123.456.749), or the number of another EU country."
+				},
+				"newCustomer": "New customer"
+			},
+			"deals": {
+				"columns": {
+					"title": "Deal",
+					"customer": "Customer",
+					"stage": "Stage",
+					"amount": "Amount excl. VAT",
+					"probability": "Probability",
+					"weightedAmount": "Weighted amount",
+					"owner": "Sales rep",
+					"source": "Source",
+					"expectedClose": "Expected close",
+					"lastActivityAt": "Last activity",
+					"nextStep": "Next step",
+					"lostReason": "Reason lost",
+					"isOpen": "Open deal",
+					"customerName": "Customer name"
+				},
+				"placeholders": {
+					"title": "e.g. 6.4 kWp installation + 10 kWh battery",
+					"customer": "Find a customer",
+					"owner": "Assign a sales rep",
+					"nextStep": "e.g. Plan the site visit"
+				},
+				"addCustomer": {
+					"title": "New customer",
+					"description": "Create the customer without leaving the deal."
+				},
+				"activeNow": "Just now",
+				"kickoffNextStep": "Plan the kick-off call (quote {number} signed)"
+			},
+			"pipeline": {
+				"nav": "Pipeline",
+				"description": "Every sales opportunity, from the first call to the signed order.",
+				"caption": "Deals",
+				"search": "Search a deal, a customer or a next step",
+				"count": "{count} deal | {count} deals",
+				"menuLabel": "Actions for {title}",
+				"customerChip": "Customer",
+				"deleted": "Deal deleted | {count} deals deleted",
+				"quickFilters": {
+					"owner": "Sales rep",
+					"source": "Source"
+				},
+				"summary": {
+					"open": "Open pipeline",
+					"weighted": "Weighted",
+					"won": "Won"
+				},
+				"views": {
+					"board": "Board",
+					"closing": "Closing within 30 days",
+					"big": "Big deals",
+					"stalled": "Stalled",
+					"won": "Won",
+					"lost": "Lost"
+				},
+				"form": {
+					"newTitle": "New deal",
+					"newDescription": "The customer, the amount and when it should close.",
+					"editTitle": "Edit deal",
+					"detailsTitle": "Deal details"
+				},
+				"actions": {
+					"customer": "Open the customer"
+				},
+				"empty": {
+					"firstRunTitle": "The pipeline is empty",
+					"firstRunDescription": "Add the first opportunity: a call, a fair contact or a referral.",
+					"filteredTitle": "No deal matches",
+					"filteredDescription": "Try another sales rep, source or search."
+				},
+				"deleteConfirm": {
+					"title": "Delete the deal {title}? | Delete these {count} deals?",
+					"description": "Its amount and history leave the pipeline. Mark it as lost instead to keep track of it. | Their amounts and history leave the pipeline. Mark them as lost instead to keep track of them.",
+					"confirm": "Delete the deal | Delete {count} deals"
+				},
+				"newDeal": "New deal",
+				"quickView": {
+					"action": "Quick view",
+					"title": "Deal",
+					"description": "Stage, amount, owner and next step of the deal.",
+					"position": "Deal {index} of {total}",
+					"notFoundTitle": "This deal no longer exists",
+					"notFoundDescription": "It was deleted, or the link is wrong."
+				},
+				"ownerChip": "Sales rep"
+			}
+		}
+	}
+}

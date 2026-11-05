@@ -1,0 +1,169 @@
+{
+	"helio": {
+		"monitoring": {
+			"title": "Supervision du parc",
+			"description": "Production en direct de chaque installation suivie par Helio : puissance, énergie, onduleurs à vérifier.",
+			"inverterStatuses": {
+				"online": "En ligne",
+				"degraded": "Dégradé",
+				"offline": "Hors ligne"
+			},
+			"sites": {
+				"columns": {
+					"name": "Site",
+					"city": "Localité",
+					"customer": "Client",
+					"project": "Chantier",
+					"inverterStatus": "Onduleur",
+					"capacityKwp": "Puissance installée",
+					"todayKwh": "Aujourd'hui",
+					"last7Days": "7 derniers jours",
+					"lastSeenAt": "Dernier relevé",
+					"commissionedAt": "Mise en service"
+				},
+				"placeholders": {
+					"name": "Toiture famille Dupont",
+					"customer": "Choisir un client",
+					"project": "Lier le chantier d'installation"
+				},
+				"liveNow": "En direct"
+			},
+			"units": {
+				"kw": "kW",
+				"kwp": "kWc",
+				"kwh": "kWh",
+				"kwValue": "{value} kW",
+				"kwpValue": "{value} kWc",
+				"kwhValue": "{value} kWh",
+				"yield": "kWh/kWc"
+			},
+			"live": {
+				"missed": "{count} site a transmis | {count} sites ont transmis"
+			},
+			"stats": {
+				"label": "Le parc en ce moment",
+				"capacity": "Puissance installée",
+				"capacityDetail": "{count} site suivi | {count} sites suivis",
+				"power": "Production actuelle",
+				"powerDetail": "{share} de la puissance installée",
+				"today": "Énergie du jour",
+				"todayDetail": "La consommation journalière de {count} ménage | La consommation journalière de {count} ménages",
+				"sites": "Sites en ligne",
+				"sitesValue": "{online} / {total}",
+				"sitesDetail": "{degraded} · {offline}",
+				"degradedCount": "aucun dégradé | {count} dégradé | {count} dégradés",
+				"offlineCount": "aucun hors ligne | {count} hors ligne | {count} hors ligne"
+			},
+			"production": {
+				"title": "Production du parc (kWh)",
+				"description": "Énergie produite par intervalle par l'ensemble des sites, en kWh.",
+				"primaryLabel": "Cette période",
+				"comparisonLabel": "Comparaison",
+				"series": "Production",
+				"comparisonSeries": "Période de comparaison"
+			},
+			"health": {
+				"title": "État du parc",
+				"description": "Mis à jour à chaque relevé des onduleurs."
+			},
+			"meters": {
+				"output": "Production",
+				"outputHint": "{power} kW sur {capacity} kWc",
+				"attention": "Puissance perdue",
+				"attentionHint": "{degraded} kWc dégradés · {offline} kWc hors ligne",
+				"attentionAction": "Voir les sites hors ligne"
+			},
+			"heatmap": {
+				"title": "Production par heure",
+				"description": "Énergie du parc heure par heure sur les sept derniers jours, en kWh."
+			},
+			"weekdays": {
+				"mon": "Lundi",
+				"tue": "Mardi",
+				"wed": "Mercredi",
+				"thu": "Jeudi",
+				"fri": "Vendredi",
+				"sat": "Samedi",
+				"sun": "Dimanche"
+			},
+			"top": {
+				"title": "Meilleurs producteurs",
+				"description": "Les plus productifs sur la période.",
+				"itemDescription": "{city} · {capacity} kWc",
+				"empty": "Aucune production sur cette période."
+			},
+			"errors": {
+				"siteNotFound": "Ce site n'est pas suivi."
+			},
+			"facts": {
+				"groups": {
+					"site": {
+						"label": "Site",
+						"description": "À qui appartient l'installation, où, et depuis quand."
+					},
+					"inverter": {
+						"label": "Onduleur",
+						"description": "Son état et le temps écoulé depuis son dernier relevé."
+					},
+					"production": {
+						"label": "Production",
+						"description": "Puissance installée et production du jour."
+					}
+				},
+				"customer": "Client",
+				"city": "Localité",
+				"commissioned": "Mise en service",
+				"project": "Chantier",
+				"status": "État",
+				"sinceLastReport": "Depuis le dernier relevé",
+				"capacity": "Puissance installée",
+				"power": "Production actuelle",
+				"today": "Énergie du jour",
+				"yield": "Rendement spécifique du jour"
+			},
+			"table": {
+				"caption": "Sites",
+				"search": "Rechercher un site, un client ou une localité",
+				"allCities": "Toutes les localités",
+				"count": "{count} site | {count} sites",
+				"hint": "Cliquez sur un site pour le consulter, J / K pour passer au suivant",
+				"menu": "Actions du site",
+				"columns": {
+					"site": "Site",
+					"city": "Localité",
+					"inverter": "Onduleur",
+					"power": "Puissance",
+					"powerDescription": "Ce que l'onduleur produit en ce moment, et sa part de la puissance installée.",
+					"capacity": "Installé",
+					"period": "Période",
+					"periodDescription": "Énergie produite sur la période choisie.",
+					"today": "Aujourd'hui",
+					"lastSeen": "Dernier relevé",
+					"trend": "Tendance",
+					"trendDescription": "L'évolution de l'énergie produite sur la période choisie.",
+					"capacityDescription": "Puissance crête installée sur le site.",
+					"todayDescription": "Énergie produite depuis minuit."
+				},
+				"degradedDetail": "Production sous l'attendu",
+				"offlineDetail": "Dernier signal {since}",
+				"empty": {
+					"title": "Aucun site suivi pour l'instant",
+					"description": "Les sites apparaissent ici dès la mise en service de leur installation.",
+					"filteredTitle": "Aucun site ne correspond",
+					"filteredDescription": "Essayez un autre statut, une autre localité ou une autre recherche."
+				},
+				"actions": {
+					"open": "Détails du site",
+					"project": "Ouvrir le chantier d'installation"
+				},
+				"panel": {
+					"title": "Site",
+					"position": "Site {index} sur {total}",
+					"notFoundTitle": "Ce site n'est plus suivi",
+					"notFoundDescription": "Il a été retiré du parc, ou le lien est erroné."
+				},
+				"powerShare": "{share} de la puissance crête"
+			}
+		}
+	}
+}

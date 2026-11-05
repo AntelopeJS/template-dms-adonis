@@ -1,0 +1,72 @@
+{
+	"helio": {
+		"platform": {
+			"automation": {
+				"triggers": {
+					"ticketOpened": {
+						"name": "Helio · Ticket ouvert",
+						"description": "Se déclenche à la création d'un ticket de service (formulaire, demande client ou alerte de monitoring)",
+						"priority": "Uniquement les tickets de priorité (vide : toutes)"
+					},
+					"quoteAccepted": {
+						"name": "Helio · Devis accepté",
+						"description": "Se déclenche quand un client signe un devis envoyé"
+					}
+				},
+				"actions": {
+					"createTicket": {
+						"name": "Helio · Ouvrir un ticket depuis une alerte",
+						"description": "Ouvre un ticket de service sur une installation suivie à partir d'une alerte de monitoring (siteId, alert, severity, message) ; une alerte déjà ouverte sur l'installation n'est pas dupliquée",
+						"payload": "Alerte"
+					},
+					"assignOnCall": {
+						"name": "Helio · Affecter le technicien de garde",
+						"description": "Confie un ticket non attribué au technicien qui a le moins de tickets ouverts"
+					},
+					"findManagers": {
+						"name": "Helio · Trouver les responsables",
+						"description": "Les utilisateurs du tableau de bord qui gèrent Helio, pour une notification"
+					},
+					"remindOverdue": {
+						"name": "Helio · Relancer les factures échues",
+						"description": "Envoie à chaque facture échue la relance suivante du calendrier des paramètres dès qu'elle a assez de retard, et y note la relance",
+						"minDaysOverdue": "Jours après l'échéance, sans calendrier dans les paramètres",
+						"minDaysBetween": "Jours entre deux rappels"
+					},
+					"planKickoff": {
+						"name": "Helio · Planifier le lancement",
+						"description": "Ajoute un appel de lancement au chantier d'un devis signé, ou à la prochaine étape de son affaire"
+					},
+					"confirmInstallations": {
+						"name": "Helio · Confirmer les dates d'installation",
+						"description": "Envoie la date, l'adresse et le chef d'équipe aux clients des chantiers planifiés qui commencent bientôt (une fois par chantier)",
+						"daysAhead": "Chantiers commençant dans les (jours)"
+					}
+				},
+				"fields": {
+					"alertsOn": "Alertes de tickets urgents",
+					"amountDue": "Montant dû",
+					"assignee": "Technicien",
+					"at": "Date",
+					"category": "Catégorie",
+					"channel": "Canal",
+					"confirmed": "Confirmations",
+					"created": "Créé",
+					"customerId": "Client",
+					"dealId": "Affaire",
+					"link": "Lien",
+					"number": "Numéro",
+					"priority": "Priorité",
+					"quoteId": "Devis",
+					"reminded": "Relances",
+					"subject": "Objet",
+					"summary": "Résumé",
+					"target": "Cible",
+					"ticketId": "Ticket",
+					"total": "Total",
+					"userIds": "Utilisateurs"
+				}
+			}
+		}
+	}
+}

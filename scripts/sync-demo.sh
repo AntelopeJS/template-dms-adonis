@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ $# -ne 1 ]; then
+  echo "usage: scripts/sync-demo.sh <template-dms-demo checkout>" >&2
+  exit 2
+fi
+
+source_root=$(cd "$1" && pwd)
+target_root="$(cd "$(dirname "$0")/.." && pwd)/demo"
+
+mkdir -p "$target_root"
+rsync -a --delete \
+  --exclude '/capture-*' \
+  --exclude '/process-group*' \
+  --exclude '/package-manager.test.ts' \
+  --exclude '/dms-frontend-pin.test.ts' \
+  "$source_root/src/" "$target_root/src/"
+rsync -a --delete "$source_root/content/" "$target_root/content/"
+rsync -a --delete \
+  --exclude node_modules \
+  --exclude .nuxt \
+  --exclude .output \
+  --exclude pnpm-lock.yaml \
+  "$source_root/frontend-vue/" "$target_root/frontend-vue/"

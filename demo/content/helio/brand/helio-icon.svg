@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Helio</title>
+  <rect width="512" height="512" rx="112" fill="#EA580C"/>
+  <circle cx="256" cy="188" r="78" fill="#FFFFFF"/>
+  <g fill="#FFFFFF" opacity="0.9">
+    <rect x="248" y="60" width="16" height="40" rx="8"/>
+    <rect x="128" y="180" width="40" height="16" rx="8"/>
+    <rect x="344" y="180" width="40" height="16" rx="8"/>
+    <rect x="160" y="94" width="16" height="40" rx="8" transform="rotate(-45 168 114)"/>
+    <rect x="336" y="94" width="16" height="40" rx="8" transform="rotate(45 344 114)"/>
+  </g>
+  <polygon points="118,436 170,300 342,300 394,436" fill="#FFFFFF"/>
+  <g stroke="#EA580C" stroke-width="10">
+    <line x1="227" y1="300" x2="211" y2="436"/>
+    <line x1="285" y1="300" x2="301" y2="436"/>
+    <line x1="146" y1="368" x2="366" y2="368"/>
+  </g>
+</svg>

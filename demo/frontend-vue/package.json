@@ -1,0 +1,37 @@
+{
+	"name": "template-dms-demo-frontend-vue",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"main": "./dms.frontend.ts",
+	"packageManager": "pnpm@10.2.0",
+	"engines": {
+		"@antelopejs/dms-frontend": ">=0.10.0 <0.11.0"
+	},
+	"scripts": {
+		"dev": "pnpm --dir .. frontend:dev",
+		"build": "pnpm --dir .. exec ajs dms build",
+		"format": "prettier --write .",
+		"lint": "node scripts/check-locales.mjs && eslint .",
+		"lint:fix": "eslint . --fix",
+		"test": "vitest run"
+	},
+	"dependencies": {
+		"entities": "^8.0.0",
+		"marked": "^17.0.6",
+		"vue": "^3.5.44"
+	},
+	"devDependencies": {
+		"@nuxt/ui": "4.12.0",
+		"@typescript/native": "npm:typescript@^7.0.2",
+		"@vitejs/plugin-vue": "^6.0.10",
+		"eslint": "^10.13.0",
+		"eslint-plugin-vue": "^10.11.1",
+		"jsdom": "^30.1.3",
+		"prettier": "^3.9.10",
+		"prettier-plugin-tailwindcss": "^0.8.1",
+		"typescript": "npm:@typescript/typescript6@^6.0.2",
+		"typescript-eslint": "^8.71.2",
+		"vitest": "^5.0.5"
+	}
+}

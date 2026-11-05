@@ -1,0 +1,164 @@
+{
+	"helio": {
+		"sales": {
+			"quotes": {
+				"page": {
+					"name": "Devis",
+					"description": "Rédigez les devis ligne par ligne, envoyez-les pour signature et suivez-les jusqu'à leur acceptation."
+				},
+				"table": {
+					"caption": "Devis",
+					"search": "Rechercher un numéro de devis ou un client",
+					"count": "{count} devis | {count} devis"
+				},
+				"columns": {
+					"number": "Numéro",
+					"customer": "Client",
+					"deal": "Opportunité",
+					"status": "Statut",
+					"lines": "Lignes",
+					"subtotal": "Total HTVA",
+					"vatRate": "Taux de TVA",
+					"vatAmount": "TVA",
+					"total": "Total TVAC",
+					"issuedAt": "Émis le",
+					"validUntil": "Validité",
+					"sentAt": "Envoyé le",
+					"signedAt": "Signé le",
+					"notes": "Notes internes",
+					"rejectionReason": "Motif du refus",
+					"otherLines": "Autres lignes",
+					"customerName": "Nom du client",
+					"firstLines": "Lignes"
+				},
+				"placeholders": {
+					"customer": "Choisir un client",
+					"deal": "Lier une opportunité (facultatif)",
+					"notes": "Accès, type de toiture, modalités de paiement…",
+					"product": "Choisir un produit en vente"
+				},
+				"hints": {
+					"vatRate": "6 % pour une habitation privée de plus de 10 ans, 21 % pour une entreprise ou une habitation récente. Laissé vide, le taux par défaut des paramètres s'applique."
+				},
+				"addCustomer": {
+					"title": "Nouveau client",
+					"description": "Créez le client, puis terminez le devis."
+				},
+				"statuses": {
+					"draft": "Brouillon",
+					"sent": "Envoyé",
+					"accepted": "Accepté",
+					"rejected": "Refusé",
+					"expired": "Expiré"
+				},
+				"lines": {
+					"product": "Produit",
+					"label": "Désignation",
+					"qty": "Qté",
+					"unitPrice": "Prix unitaire",
+					"add": "Ajouter une ligne"
+				},
+				"linesSummary": "{label} | {label} + {count} autre ligne | {label} + {count} autres lignes",
+				"detail": {
+					"signed": "Signé le {date}",
+					"validUntil": "Valable jusqu'au {date}",
+					"rejected": "Refusé : {reason}"
+				},
+				"views": {
+					"all": "Tous les devis",
+					"awaiting": "En attente de signature",
+					"expiring": "Expirent cette semaine",
+					"accepted": "Signés ces 30 derniers jours"
+				},
+				"quickFilters": {
+					"customer": "Client"
+				},
+				"chips": {
+					"customer": "Client",
+					"deal": "Opportunité"
+				},
+				"expand": {
+					"label": "Lignes et montants",
+					"line": "{qty} × {label} · {amount}",
+					"more": "{count} autre ligne · {amount} | {count} autres lignes · {amount}",
+					"none": "Aucune autre ligne"
+				},
+				"footer": {
+					"total": "Total TVAC",
+					"accepted": "Acceptés",
+					"awaiting": "En attente de signature"
+				},
+				"empty": {
+					"firstRunTitle": "Aucun devis pour l'instant",
+					"firstRunDescription": "Rédigez un premier devis pour un client : choisissez les produits et les quantités, puis envoyez-le pour signature.",
+					"filteredTitle": "Aucun devis ne correspond",
+					"filteredDescription": "Essayez un autre client, statut ou période."
+				},
+				"form": {
+					"newTitle": "Nouveau devis",
+					"newDescription": "Il reçoit son numéro à l'enregistrement et reste un brouillon jusqu'à son envoi.",
+					"editTitle": "Modifier le devis",
+					"editDescription": "Seuls les brouillons se modifient : ce que le client a reçu reste tel quel.",
+					"detailsTitle": "Devis"
+				},
+				"quickView": {
+					"title": "Devis",
+					"description": "Le devis tel qu'il est, avec ses lignes et ses montants.",
+					"position": "Devis {index} sur {total}",
+					"notFoundTitle": "Ce devis n'existe plus",
+					"notFoundDescription": "Il a été supprimé, ou le lien est erroné."
+				},
+				"actions": {
+					"new": "Nouveau devis",
+					"quickView": "Aperçu",
+					"send": "Envoyer au client",
+					"accept": "Marquer comme accepté",
+					"reject": "Marquer comme refusé",
+					"portalLink": "Copier le lien du portail",
+					"download": "Télécharger le PDF",
+					"customer": "Ouvrir le client",
+					"deals": "Opportunités du client",
+					"duplicate": "Dupliquer en nouveau brouillon"
+				},
+				"send": {
+					"title": "Envoyer le devis {number} à {customer} ?",
+					"description": "Le client reçoit le devis par e-mail, avec un lien pour le consulter et le signer en ligne.",
+					"confirm": "Envoyer le devis",
+					"impactEmail": "Envoyé par e-mail à {email}",
+					"impactLines": "Lignes du devis",
+					"impactPortal": "Le client peut l'accepter depuis le portail",
+					"impactLocked": "Le devis ne pourra plus être modifié",
+					"blockedTitle": "Le devis {number} a déjà été envoyé",
+					"blockedDescription": "Seul un brouillon peut être envoyé. Dupliquez-le pour envoyer une nouvelle version.",
+					"success": "Devis envoyé au client"
+				},
+				"accept": {
+					"title": "Marquer le devis {number} comme accepté ?",
+					"description": "La signature du client est enregistrée à la date du jour. Le chantier peut ensuite être planifié.",
+					"confirm": "Marquer comme accepté",
+					"success": "Devis marqué comme accepté"
+				},
+				"reject": {
+					"title": "Marquer le devis {number} comme refusé ?",
+					"description": "Le devis est clôturé comme perdu. Le motif éventuel est conservé avec le devis.",
+					"confirm": "Marquer comme refusé",
+					"reason": "Motif",
+					"reasonPlaceholder": "Prix, délai, concurrent retenu…",
+					"success": "Devis marqué comme refusé"
+				},
+				"portalLink": {
+					"success": "Lien du portail copié"
+				},
+				"deleted": "{count} devis supprimé | {count} devis supprimés",
+				"errors": {
+					"notFound": "Ce devis n'existe plus.",
+					"notDraft": "Ce devis n'est plus un brouillon.",
+					"notSent": "Ce devis n'est pas en attente de signature.",
+					"noPortalLink": "Un brouillon n'a pas encore de lien de portail : envoyez-le d'abord.",
+					"businessVat": "Un client entreprise est facturé à 21 % : le taux de 6 % ne vaut que pour une habitation privée de plus de 10 ans."
+				},
+				"quickAction": "Nouveau devis"
+			}
+		}
+	}
+}

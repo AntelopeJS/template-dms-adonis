@@ -1,0 +1,285 @@
+{
+	"helio": {
+		"projects": {
+			"columns": {
+				"code": "Code",
+				"name": "Project",
+				"customer": "Customer",
+				"quote": "Quote",
+				"type": "Type",
+				"status": "Status",
+				"progress": "Tasks",
+				"plannedStart": "Start",
+				"plannedEnd": "End",
+				"leadTechnician": "Lead technician",
+				"crew": "Crew",
+				"address": "Site address",
+				"capacityKwp": "Capacity",
+				"budget": "Budget (excl. VAT)",
+				"notes": "Notes"
+			},
+			"placeholders": {
+				"code": "Leave empty for the next code",
+				"name": "Solar installation 6.2 kWp — Dupont family",
+				"customer": "Choose a customer",
+				"quote": "Link the signed quote",
+				"leadTechnician": "Choose the lead technician",
+				"crew": "Add technicians",
+				"notes": "Access, constraints, contacts on site…"
+			},
+			"types": {
+				"residentialPv": "Residential solar",
+				"commercialPv": "Commercial solar",
+				"battery": "Home battery",
+				"evCharger": "EV charger"
+			},
+			"statuses": {
+				"planned": "Planned",
+				"scheduled": "Scheduled",
+				"inProgress": "In progress",
+				"inspection": "Inspection",
+				"done": "Done",
+				"onHold": "On hold"
+			},
+			"taskStatuses": {
+				"todo": "To do",
+				"doing": "In progress",
+				"done": "Done"
+			},
+			"tasks": {
+				"columns": {
+					"position": "Order",
+					"title": "Task",
+					"project": "Project",
+					"status": "Status",
+					"assignee": "Assignee",
+					"dueDate": "Due",
+					"estimateHours": "Estimate"
+				},
+				"groups": {
+					"schedule": "Schedule"
+				},
+				"placeholders": {
+					"title": "Order the inverter",
+					"project": "Choose a project",
+					"assignee": "Assign to someone"
+				}
+			},
+			"units": {
+				"kwp": "kWp",
+				"hours": "h"
+			},
+			"page": {
+				"title": "Projects",
+				"description": "Every installation from signed quote to handover: the weekly planning, the site board and each project's progress."
+			},
+			"table": {
+				"caption": "Installation projects",
+				"search": "Search a project or a code…",
+				"count": "no project | {count} project | {count} projects",
+				"open": "Open the project",
+				"menuLabel": "Actions for {name}",
+				"quickFilters": {
+					"type": "Type",
+					"lead": "Lead technician"
+				},
+				"summary": {
+					"budget": "Budget (excl. VAT)",
+					"capacity": "Capacity (kWp)"
+				},
+				"empty": {
+					"firstRunTitle": "No installation project yet",
+					"firstRunDescription": "A project starts when a quote is signed: create it here to plan the crew and the tasks.",
+					"filteredTitle": "No project matches",
+					"filteredDescription": "No installation fits these filters. Widen the dates or clear the filters."
+				},
+				"deleteConfirm": {
+					"title": "Delete {name}? | Delete these {count} projects?",
+					"description": "The project and its planning will be removed for the whole team. | These projects and their planning will be removed for the whole team.",
+					"confirm": "Delete the project | Delete {count} projects"
+				},
+				"add": "New project",
+				"filters": {
+					"customer": "Customer"
+				}
+			},
+			"views": {
+				"planning": "Planning",
+				"thisWeek": "Starting within 7 days",
+				"onSite": "On site",
+				"late": "Late",
+				"onHold": "On hold",
+				"board": "Board",
+				"all": "All projects"
+			},
+			"form": {
+				"newTitle": "New installation project",
+				"newDescription": "Link the customer and the signed quote, then plan the dates and the crew.",
+				"editTitle": "Edit project",
+				"detailsTitle": "Project details"
+			},
+			"activity": {
+				"quoteIssued": "Quote {number} drafted",
+				"quoteSent": "Quote {number} sent to the customer",
+				"quoteAccepted": "Quote {number} signed",
+				"projectStarted": "Work started on site",
+				"projectDone": "Installation handed over",
+				"invoiceIssued": "Invoice {number} issued",
+				"invoicePaid": "Invoice {number} paid",
+				"invoiceOverdue": "Invoice {number} overdue",
+				"amount": "{amount}",
+				"by": "by {name}"
+			},
+			"detail": {
+				"page": {
+					"title": "Project",
+					"description": "One installation: its facts, its tasks, its history and its invoices."
+				},
+				"notFound": "This project does not exist or was deleted.",
+				"notFoundTitle": "Project not found",
+				"notFoundDescription": "This project does not exist or was deleted. It may have been opened from an old link.",
+				"backToProjects": "Back to the projects",
+				"actions": {
+					"route": "Route",
+					"edit": "Edit",
+					"done": "Mark as done"
+				},
+				"done": {
+					"title": "Mark {code} as done?",
+					"description": "{name} will be handed over to the customer and leave the planning.",
+					"confirm": "Mark as done",
+					"impactTasks": "Open tasks closed",
+					"impactEnd": "End date set to today",
+					"impactInvoices": "Invoices still to be paid (unchanged)",
+					"success": "Project marked as done",
+					"alreadyTitle": "{code} is already done",
+					"alreadyDescription": "This installation was already handed over.",
+					"notStartedTitle": "{code} has not started yet",
+					"notStartedDescription": "A project can only be closed once work has started on site.",
+					"refused": "Only a project under way can be marked as done."
+				},
+				"stats": {
+					"label": "Project figures",
+					"status": "Status",
+					"ends": "Ends {date}",
+					"late": "Past its planned end",
+					"start": "Start",
+					"date": "{date}",
+					"relative": "{when}",
+					"tasks": "Tasks",
+					"tasksValue": "{done} of {total}",
+					"tasksOpen": "nothing left to do | {count} still open | {count} still open",
+					"invoiced": "Invoiced incl. VAT",
+					"money": "{amount}",
+					"due": "{amount} still due",
+					"settled": "Nothing left to pay",
+					"noTasks": "No tasks",
+					"noInvoices": "No invoices"
+				},
+				"banner": {
+					"onHoldTitle": "This project is on hold",
+					"onHoldDescription": "Work is paused. Check the notes before planning the crew again.",
+					"lateTitle": "This project is late",
+					"lateDescription": "It should have been finished on {date}."
+				},
+				"tabs": {
+					"overview": "Overview",
+					"tasks": "Tasks",
+					"activity": "Activity",
+					"invoices": "Invoices",
+					"quote": "Quote",
+					"details": "Details"
+				},
+				"overview": {
+					"facts": "Project",
+					"progress": "Progress",
+					"contact": "Contact on site"
+				},
+				"facts": {
+					"capacity": "{kwp} kWp",
+					"late": "late",
+					"unassigned": "Not assigned",
+					"vip": "VIP customer"
+				},
+				"contact": {
+					"name": "Contact",
+					"phone": "Phone",
+					"email": "Email",
+					"vat": "VAT number"
+				},
+				"progress": {
+					"label": "Tasks",
+					"value": "{done} / {total}",
+					"done": "{count} done",
+					"doing": "{count} in progress",
+					"todo": "{count} to do"
+				},
+				"invoicing": {
+					"label": "Budget invoiced",
+					"hint": "{invoiced} of {budget} excl. VAT"
+				},
+				"tasks": {
+					"caption": "Tasks",
+					"search": "Search a task…",
+					"count": "no task | {count} task | {count} tasks",
+					"hours": "Estimate (h)",
+					"emptyTitle": "No task planned yet",
+					"emptyDescription": "Add the steps of the installation: site visit, ordering, mounting, commissioning, inspection.",
+					"newTitle": "New task",
+					"newDescription": "It is added to this project.",
+					"editTitle": "Edit task",
+					"add": "New task",
+					"projectRequired": "A task belongs to a project: add it from the project page."
+				},
+				"activity": {
+					"title": "Project history",
+					"emptyTitle": "Nothing happened yet",
+					"emptyDescription": "The quote, the work on site and the invoices of this project will show here."
+				},
+				"invoices": {
+					"caption": "Invoices",
+					"count": "no invoice | {count} invoice | {count} invoices",
+					"total": "Invoiced",
+					"due": "Still due",
+					"emptyTitle": "Nothing invoiced yet",
+					"emptyDescription": "The deposit and the balance of this project are invoiced from the Invoices page.",
+					"detailsTitle": "Invoice"
+				},
+				"quote": {
+					"title": "Signed quote",
+					"number": "Number",
+					"status": "Status",
+					"issuedAt": "Issued",
+					"signedAt": "Signed",
+					"subtotal": "Subtotal (excl. VAT)",
+					"vat": "VAT",
+					"vatRate": "{rate}",
+					"total": "Total (incl. VAT)",
+					"emptyTitle": "No quote linked",
+					"emptyDescription": "Link the signed quote in the Details tab.",
+					"linesCaption": "Quote lines",
+					"linesEmptyTitle": "This project has no quote lines",
+					"columns": {
+						"label": "Item",
+						"qty": "Quantity",
+						"unitPrice": "Unit price",
+						"lineTotal": "Line total"
+					}
+				},
+				"details": {
+					"title": "Project details",
+					"description": "Changes are saved for the whole team."
+				}
+			},
+			"quickActions": {
+				"newProject": "New installation project",
+				"planning": "Installation planning"
+			},
+			"rules": {
+				"codeTaken": "Another project already uses this code. Leave it empty to take the next one.",
+				"endBeforeStart": "The planned end cannot come before the start.",
+				"quoteOfOtherCustomer": "This quote is made out to another customer. Pick one of this customer's quotes or leave the field empty."
+			}
+		}
+	}
+}

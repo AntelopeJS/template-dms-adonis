@@ -1,0 +1,96 @@
+{
+	"demo": {
+		"nav": {
+			"home": "Home"
+		},
+		"pages": {
+			"home": {
+				"description": "A demonstration of the AntelopeJS DMS: Helio, the template, and where to start"
+			}
+		},
+		"home": {
+			"hero": {
+				"eyebrow": "AntelopeJS DMS · Helio demo",
+				"title": "A real business platform, built in a day.",
+				"highlight": "in a day",
+				"lead": "Helio is a fictional solar installer. Its whole back office — sales, quotes, projects, after-sales service, invoices, fleet monitoring, automations, marketing and a SaaS subscription — runs here, on the AntelopeJS DMS. Not a mock-up: real data, permissions, forms and tables that work.",
+				"open": "Open Helio",
+				"docs": "Read the documentation"
+			},
+			"figures": {
+				"label": "Helio in figures, counted live",
+				"pages": {
+					"eyebrow": "Helio pages",
+					"detail": "No detail or form page | Plus {count} detail or form page | Plus {count} detail and form pages"
+				},
+				"collections": {
+					"eyebrow": "Collections",
+					"detail": "MongoDB tables with demo data"
+				},
+				"controllers": {
+					"eyebrow": "Controllers",
+					"detail": "CRUD, export, permissions generated"
+				},
+				"vue": {
+					"eyebrow": "Vue blocks",
+					"detail": "Custom, counted in the build"
+				},
+				"modules": {
+					"eyebrow": "Modules",
+					"detail": "DMS modules loaded"
+				}
+			},
+			"links": {
+				"title": "Go further",
+				"helio": {
+					"title": "Open Helio",
+					"description": "The installer's complete back office, ready to use."
+				},
+				"docs": {
+					"title": "Documentation",
+					"description": "The DMS, its blocks, APIs and modules, explained."
+				},
+				"quickstart": {
+					"title": "Quickstart",
+					"description": "From the init command to your first screen."
+				},
+				"modules": {
+					"title": "Modules",
+					"description": "What is installed here and what each module brings."
+				},
+				"store": {
+					"title": "Module store",
+					"description": "The official modules you can add to a project."
+				},
+				"github": {
+					"title": "GitHub",
+					"description": "The source code of the DMS and its modules, to contribute."
+				}
+			},
+			"prose": {
+				"anchor": "Link to this section",
+				"task_done": "Done",
+				"task_todo": "To do",
+				"error": "This section could not be loaded.",
+				"retry": "Try again",
+				"callout": {
+					"note": "Note",
+					"tip": "Tip",
+					"important": "Important",
+					"warning": "Warning",
+					"caution": "Caution"
+				}
+			},
+			"blocks": {
+				"hero": {
+					"name": "Home hero",
+					"description": "The opening of the home page: headline, lead and links."
+				},
+				"prose": {
+					"name": "Home section",
+					"description": "A long-form section of the home page, in Markdown."
+				}
+			}
+		}
+	}
+}

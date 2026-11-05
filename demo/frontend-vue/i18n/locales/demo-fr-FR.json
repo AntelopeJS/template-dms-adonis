@@ -1,0 +1,96 @@
+{
+	"demo": {
+		"nav": {
+			"home": "Accueil"
+		},
+		"pages": {
+			"home": {
+				"description": "Une démonstration du DMS AntelopeJS : Helio, le template et par où commencer"
+			}
+		},
+		"home": {
+			"hero": {
+				"eyebrow": "AntelopeJS DMS · Démo Helio",
+				"title": "Une vraie plateforme métier, montée en une journée.",
+				"highlight": "en une journée",
+				"lead": "Helio est un installateur photovoltaïque fictif. Son back-office complet — commercial, devis, chantiers, SAV, factures, supervision du parc, automatisations, marketing et abonnement SaaS — tourne ici, sur le DMS AntelopeJS. Pas de maquette : des données, des droits, des formulaires et des tableaux qui fonctionnent.",
+				"open": "Ouvrir Helio",
+				"docs": "Lire la documentation"
+			},
+			"figures": {
+				"label": "Helio en chiffres, comptés en direct",
+				"pages": {
+					"eyebrow": "Pages Helio",
+					"detail": "Aucune page de détail ou de formulaire | Plus {count} page de détail ou de formulaire | Plus {count} pages de détail et de formulaire"
+				},
+				"collections": {
+					"eyebrow": "Collections",
+					"detail": "Tables MongoDB et données de démo"
+				},
+				"controllers": {
+					"eyebrow": "Contrôleurs",
+					"detail": "CRUD, export et droits générés"
+				},
+				"vue": {
+					"eyebrow": "Blocs Vue",
+					"detail": "Sur mesure, comptés dans le code"
+				},
+				"modules": {
+					"eyebrow": "Modules",
+					"detail": "Modules DMS chargés"
+				}
+			},
+			"links": {
+				"title": "Aller plus loin",
+				"helio": {
+					"title": "Ouvrir Helio",
+					"description": "Le back-office complet de l'installateur, prêt à manipuler."
+				},
+				"docs": {
+					"title": "Documentation",
+					"description": "Le DMS, ses blocs, ses API et ses modules, expliqués."
+				},
+				"quickstart": {
+					"title": "Démarrage rapide",
+					"description": "De la commande d'initialisation au premier écran."
+				},
+				"modules": {
+					"title": "Modules",
+					"description": "Ce qui est installé ici et ce que chaque module apporte."
+				},
+				"store": {
+					"title": "Store de modules",
+					"description": "Les modules officiels à ajouter à un projet."
+				},
+				"github": {
+					"title": "GitHub",
+					"description": "Le code source du DMS et de ses modules, pour contribuer."
+				}
+			},
+			"prose": {
+				"anchor": "Lien vers cette section",
+				"task_done": "Fait",
+				"task_todo": "À faire",
+				"error": "Cette section n’a pas pu être chargée.",
+				"retry": "Réessayer",
+				"callout": {
+					"note": "Remarque",
+					"tip": "Astuce",
+					"important": "Important",
+					"warning": "Attention",
+					"caution": "Prudence"
+				}
+			},
+			"blocks": {
+				"hero": {
+					"name": "En-tête de l’accueil",
+					"description": "L’ouverture de la page d’accueil : titre, introduction et liens."
+				},
+				"prose": {
+					"name": "Section de l’accueil",
+					"description": "Une section de texte long de la page d’accueil, en Markdown."
+				}
+			}
+		}
+	}
+}

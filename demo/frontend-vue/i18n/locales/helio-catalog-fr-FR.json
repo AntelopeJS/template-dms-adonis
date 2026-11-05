@@ -1,0 +1,155 @@
+{
+	"helio": {
+		"catalog": {
+			"categories": {
+				"columns": {
+					"name": "Catégorie",
+					"parent": "Famille",
+					"productCount": "Produits"
+				},
+				"placeholders": {
+					"name": "p. ex. Onduleurs hybrides",
+					"parent": "Aucune (famille principale)"
+				},
+				"caption": "Gammes",
+				"search": "Rechercher une gamme…",
+				"footer": {
+					"count": "{count} gamme | {count} gammes"
+				},
+				"empty": {
+					"title": "Aucune gamme pour l'instant",
+					"description": "Créez d'abord les familles du catalogue, puis les gammes dans lesquelles ranger les produits."
+				},
+				"form": {
+					"newTitle": "Nouvelle gamme",
+					"newDescription": "Une famille n'a pas de parent ; une gamme se range sous une famille.",
+					"editTitle": "Modifier la gamme"
+				},
+				"delete": {
+					"title": "Supprimer cette gamme ?",
+					"description": "Seule une gamme vide peut être supprimée : déplacez d'abord ses produits vers une autre gamme.",
+					"confirm": "Supprimer la gamme"
+				},
+				"errors": {
+					"inUse": "Cette gamme contient encore des produits : déplacez-les vers une autre gamme avant de la supprimer.",
+					"hasRanges": "Cette famille contient encore des gammes : supprimez-les ou déplacez-les d'abord."
+				}
+			},
+			"products": {
+				"columns": {
+					"name": "Produit",
+					"sku": "Référence",
+					"category": "Catégorie",
+					"description": "Description",
+					"price": "Prix HTVA",
+					"cost": "Prix d'achat",
+					"margin": "Marge",
+					"power": "Puissance / capacité",
+					"unit": "Unité",
+					"stock": "Stock",
+					"stockMin": "Seuil de réapprovisionnement",
+					"lowStock": "Sous le seuil",
+					"image": "URL de l'image",
+					"tags": "Étiquettes",
+					"warrantyYears": "Garantie",
+					"isActive": "Statut",
+					"displayOrder": "Position",
+					"family": "Famille",
+					"picture": "Visuel",
+					"stockLevel": "État du stock"
+				},
+				"placeholders": {
+					"name": "p. ex. Helio Mono 430 W Black",
+					"category": "Choisir une gamme",
+					"tags": "Ajouter une étiquette"
+				},
+				"badges": {
+					"inactive": "Plus commercialisé"
+				},
+				"stock": {
+					"low": "À commander",
+					"ok": "En stock",
+					"min": "Seuil {min}",
+					"belowMin": "Sous le seuil de {min}",
+					"notStocked": "Non stocké"
+				},
+				"active": "En vente",
+				"activeSwitch": "Proposé dans les nouvelles offres",
+				"powerSuffix": "W / Wh",
+				"yearsSuffix": "ans",
+				"caption": "Produits",
+				"search": "Rechercher un produit, une référence…",
+				"imageHint": "Adresse de la photo du produit, sur le web ou sur ce serveur.",
+				"views": {
+					"all": "Tous les produits",
+					"active": "En vente",
+					"toReorder": "À commander",
+					"hardware": "Matériel",
+					"services": "Services",
+					"byFamily": "Par gamme",
+					"discontinued": "Plus commercialisés"
+				},
+				"footer": {
+					"count": "{count} produit | {count} produits",
+					"units": "Unités en stock",
+					"onSale": "En vente"
+				},
+				"empty": {
+					"firstRunTitle": "Le catalogue est vide",
+					"firstRunDescription": "Ajoutez les panneaux, onduleurs, batteries et services que vos offres proposeront.",
+					"filteredTitle": "Aucun produit ne correspond à « {search} »",
+					"filteredDescription": "Essayez un autre nom ou une autre référence, ou effacez les filtres."
+				},
+				"form": {
+					"newTitle": "Nouveau produit",
+					"newDescription": "Il est proposé dans les nouvelles offres dès qu'il est en vente.",
+					"editTitle": "Modifier le produit",
+					"editDescription": "Les offres déjà envoyées gardent le prix auquel elles ont été envoyées.",
+					"detailsTitle": "Fiche produit"
+				},
+				"delete": {
+					"title": "Supprimer ce produit ? | Supprimer ces {count} produits ?",
+					"description": "Les offres qui le reprennent gardent leur ligne. Pour ne plus le proposer, marquez-le plutôt comme plus commercialisé. | Les offres qui les reprennent gardent leur ligne. Pour ne plus les proposer, marquez-les plutôt comme plus commercialisés.",
+					"confirm": "Supprimer le produit | Supprimer {count} produits"
+				},
+				"stockLevels": {
+					"inStock": "En stock",
+					"runningLow": "Stock bas",
+					"reorder": "À commander",
+					"notStocked": "Non stocké"
+				},
+				"stockHint": "Laissez vide pour un service : il n'est pas stocké."
+			},
+			"units": {
+				"piece": "Pièce",
+				"hour": "Heure",
+				"year": "Année",
+				"flat": "Forfait"
+			},
+			"page": {
+				"name": "Catalogue",
+				"description": "Les produits et services que Helio vend et installe, avec leur stock et leur marge."
+			},
+			"families": {
+				"panels": "Panneaux solaires",
+				"inverters": "Onduleurs",
+				"storage": "Stockage",
+				"ev": "Recharge VE",
+				"services": "Services"
+			},
+			"stats": {
+				"amount": "{amount}",
+				"percent": "{value}",
+				"onSale": "En vente",
+				"onSaleDetail": "Produits : {hardware} · services : {services}",
+				"stockValue": "Valeur du stock",
+				"stockValueDetail": "Au prix d'achat · {units} unités en entrepôt",
+				"toReorder": "À commander",
+				"toReorderDetail": "{names}",
+				"toReorderNone": "Tous les produits sont au-dessus de leur seuil",
+				"margin": "Marge moyenne",
+				"marginDetail": "Sur le matériel en vente, hors installation"
+			}
+		}
+	}
+}

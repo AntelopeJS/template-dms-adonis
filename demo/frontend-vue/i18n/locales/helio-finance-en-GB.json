@@ -1,0 +1,161 @@
+{
+	"helio": {
+		"finance": {
+			"statuses": {
+				"draft": "Draft",
+				"sent": "Sent",
+				"overdue": "Overdue",
+				"paid": "Paid",
+				"cancelled": "Cancelled"
+			},
+			"paymentMethods": {
+				"transfer": "Bank transfer",
+				"directDebit": "Direct debit",
+				"card": "Card"
+			},
+			"invoices": {
+				"columns": {
+					"number": "Number",
+					"customer": "Customer",
+					"project": "Project",
+					"quote": "Quote",
+					"status": "Status",
+					"issuedAt": "Issued",
+					"dueAt": "Due",
+					"paidAt": "Paid",
+					"amountExcl": "Amount (excl. VAT)",
+					"vatRate": "VAT rate",
+					"vatAmount": "VAT",
+					"total": "Total (incl. VAT)",
+					"amountDue": "Amount due",
+					"paymentMethod": "Payment method",
+					"remindedAt": "Last reminder"
+				},
+				"placeholders": {
+					"number": "Assigned automatically from the numbering pattern",
+					"customer": "Choose a customer",
+					"project": "Link a project (optional)",
+					"quote": "Link a quote (optional)"
+				},
+				"detail": {
+					"paid": "Paid {date}",
+					"late": "{count} day late | {count} days late",
+					"due": "Due {date}",
+					"lateReminded": "{count} day late · reminded {date} | {count} days late · reminded {date}"
+				},
+				"caption": "Invoices",
+				"search": "Search by invoice number",
+				"download": "Download the invoice",
+				"deleted": "Invoice deleted | {count} invoices deleted",
+				"views": {
+					"dueThisWeek": "Due this week",
+					"overdue30": "Overdue > 30 days",
+					"paidRecently": "Paid in the last 30 days",
+					"outstanding": "Outstanding"
+				},
+				"form": {
+					"new": "New invoice",
+					"newDescription": "Leave the number empty: the next one of the year is assigned on save.",
+					"edit": "Edit invoice",
+					"details": "Invoice details"
+				},
+				"footer": {
+					"count": "{count} invoice | {count} invoices",
+					"invoiced": "Invoiced",
+					"due": "Amount due",
+					"overdue": "Overdue"
+				},
+				"empty": {
+					"title": "No invoice yet",
+					"description": "Invoices issued for deposits, balances and service calls appear here.",
+					"filteredTitle": "No invoice matches",
+					"filteredDescription": "Try another status, view or search."
+				},
+				"markPaid": {
+					"action": "Mark as paid",
+					"title": "Record the payment | Record {count} payments",
+					"description": "The invoice is marked paid and nothing remains due. The customer leaves the reminder schedule. | The invoices are marked paid and nothing remains due. Their customers leave the reminder schedule.",
+					"confirm": "Record payment | Record {count} payments",
+					"paidAt": "Payment date",
+					"paidAtHint": "Today by default: change it to the day the money arrived.",
+					"success": "Payment recorded | {count} payments recorded",
+					"futureDate": "A payment cannot be dated in the future.",
+					"methodRequired": "Choose how the customer paid.",
+					"nothing": "None of these invoices is waiting for a payment."
+				},
+				"remind": {
+					"action": "Send reminder",
+					"title": "Send a payment reminder | Send {count} payment reminders",
+					"description": "The customer receives a reminder with the invoice and the payment details. | Each customer receives a reminder with the invoice and the payment details.",
+					"confirm": "Send reminder | Send {count} reminders",
+					"impactEmail": "Sent to the customer's billing e-mail address",
+					"impactStamp": "The reminder date is recorded on the invoice",
+					"success": "Reminder sent | {count} reminders sent",
+					"nothing": "Only overdue invoices can be reminded."
+				},
+				"quickView": {
+					"action": "Quick view",
+					"title": "Invoice",
+					"description": "Amounts, due date and payment of the invoice.",
+					"position": "Invoice {index} of {total}",
+					"notFoundTitle": "This invoice no longer exists",
+					"notFoundDescription": "It was deleted, or the link is wrong."
+				},
+				"cancel": {
+					"action": "Cancel the invoice",
+					"title": "Cancel this invoice?",
+					"description": "A credit note cancels the invoice: nothing remains due and the customer leaves the reminder schedule. Its number stays used.",
+					"confirm": "Cancel the invoice",
+					"impactCredit": "Recorded as credited, nothing left to pay",
+					"impactLocked": "No longer editable, can be archived",
+					"success": "Invoice cancelled",
+					"nothing": "None of these invoices can be cancelled: only an issued, unpaid invoice can."
+				},
+				"customerChip": "Customer",
+				"hints": {
+					"dueAt": "Left empty, the invoice falls due after the payment terms of the settings.",
+					"vatRate": "Left empty, the default rate of the settings applies (21% for a business)."
+				},
+				"errors": {
+					"numberTaken": "Another invoice already has this number."
+				}
+			},
+			"nav": {
+				"invoices": "Invoices"
+			},
+			"page": {
+				"description": "Issued invoices, payments received and collection of overdue amounts."
+			},
+			"quickActions": {
+				"newInvoice": "New invoice",
+				"overdue": "Overdue invoices"
+			},
+			"banner": {
+				"overdue": "{count} invoice overdue · {amount} to collect | {count} invoices overdue · {amount} to collect",
+				"action": "See overdue invoices"
+			},
+			"kpis": {
+				"label": "Receivables at a glance",
+				"amount": "{amount}",
+				"outstanding": {
+					"label": "Outstanding",
+					"detail": "No invoice awaiting payment | {count} invoice awaiting payment | {count} invoices awaiting payment"
+				},
+				"overdue": {
+					"label": "Overdue",
+					"detail": "{count} invoice · oldest {days} days late | {count} invoices · oldest {days} days late",
+					"none": "Nothing overdue"
+				},
+				"collected": {
+					"label": "Collected in the last 30 days",
+					"detail": "No payment yet | {count} payment received | {count} payments received"
+				},
+				"dso": {
+					"label": "DSO",
+					"value": "{count} day | {count} days",
+					"detail": "{receivable} due for {sales} invoiced in {days} days"
+				}
+			}
+		}
+	}
+}
