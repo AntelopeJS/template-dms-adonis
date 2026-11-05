@@ -76,6 +76,7 @@ export default class AntelopeProvider {
           config: {
             url: env.get('MONGODB_URL'),
             database: env.get('MONGODB_DATABASE'),
+            ...(this.app.inTest && { options: { serverSelectionTimeoutMS: 2000 } }),
           },
         },
         '@antelopejs/auth-jwt': {
@@ -101,7 +102,22 @@ export default class AntelopeProvider {
   }
 
   async start() {
-    await this.runtime?.start()
+    try {
+      await this.runtime?.start()
+    } catch (error) {
+      const mongoUnreachable =
+        error instanceof AggregateError &&
+        error.errors.some(
+          (cause) => cause instanceof Error && cause.name === 'MongoServerSelectionError'
+        )
+      if (mongoUnreachable) {
+        throw new Error(
+          `MongoDB is unreachable at ${env.get('MONGODB_URL')}. Start it with \`docker compose -f .github/compose.yml up -d --wait\`.`,
+          { cause: error }
+        )
+      }
+      throw error
+    }
   }
 
   async shutdown() {
