@@ -115,9 +115,13 @@ module under `build/demo`:
 ```bash
 pnpm build
 cd build
-pnpm i --prod
+pnpm i --prod --ignore-workspace
 node bin/server.js
 ```
+
+`--ignore-workspace` keeps the install inside `build/`. Without it, pnpm finds the
+project's `pnpm-workspace.yaml` and reinstalls the whole workspace without its
+development dependencies.
 
 ## Documentation
 
