@@ -4,6 +4,7 @@ covers:
   - CONTRIBUTING.md
   - AGENTS.md
   - CLAUDE.md
+  - LICENSE
 docs:
   - README.md
 journeys:
