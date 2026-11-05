@@ -21,7 +21,7 @@ The embedded DMS runtime and the `.env` that drives it: the provider wires each 
 
 ## Sub-features
 
-- `config-mapping`: the `.env` copied from `.env.example`, with only `DMS_CLIENT_BASE_URL` changed: `/dms/info` reports the new base url, the only database the run creates is the literal `template_dms_adonis` the example names, and every DMS collection lands in it. This is the containment journey of the Data door.
+- `config-mapping`: the `.env` copied from `.env.example`, with only `DMS_CLIENT_BASE_URL` changed: `/dms/info` reports the new base url, the only database the run creates is the literal `template_dms_adonis` the example names, and every DMS collection lands in it.
 - `database-override`: with another `MONGODB_DATABASE` every DMS collection lands there and the default database is never created.
 - `missing-env`: without `.env` the server exits non-zero naming `APP_KEY` and `MONGODB_URL`.
 - `mongo-unreachable`: with nothing at `MONGODB_URL` the runtime fails to construct its modules after about 30 seconds, the process exits non-zero and no server starts.

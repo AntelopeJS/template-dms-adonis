@@ -40,6 +40,7 @@ jobs:
         grep -q '@antelopejs/dms-frontend-vue' info.json
         curl -s -o /dev/null -w '%{http_code}' 'http://localhost:5010/dms/page?path=/home' | grep -q 200
       renovate-sync: false
+      test-job: true
     permissions:
       contents: read
   renovate-sync:
