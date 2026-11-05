@@ -1,0 +1,10 @@
+import "./team";
+import "./crm";
+import "./catalog";
+import "./sales";
+import "./projects";
+import "./service";
+import "./finance";
+import "./monitoring";
+import "./settings";
+import "./dashboard";

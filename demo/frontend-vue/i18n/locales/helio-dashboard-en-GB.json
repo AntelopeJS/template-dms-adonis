@@ -1,0 +1,107 @@
+{
+	"helio": {
+		"dashboard": {
+			"title": "Dashboard",
+			"description": "Sales, installations, service and cash at a glance, over the period you choose.",
+			"compareLabel": "vs comparison",
+			"activityTypes": {
+				"dealWon": "Deal won",
+				"quoteSent": "Quote sent",
+				"quoteAccepted": "Quote accepted",
+				"projectStarted": "Work started",
+				"projectDone": "Installation finished",
+				"ticketOpened": "Ticket opened",
+				"ticketResolved": "Ticket resolved",
+				"ticketReopened": "Ticket reopened",
+				"invoicePaid": "Invoice paid",
+				"invoiceOverdue": "Invoice overdue"
+			},
+			"offline": {
+				"title": "{count} site has stopped reporting | {count} sites have stopped reporting",
+				"description": "{sites}: no data since {since}. Their production is lost until a technician steps in.",
+				"service": "Service desk",
+				"action": "Fleet monitoring"
+			},
+			"snapshot": {
+				"label": "Right now",
+				"money": "{amount}",
+				"pipeline": "Open pipeline",
+				"pipelineDetail": "{count} open deal, {weighted} weighted | {count} open deals, {weighted} weighted",
+				"worksites": "Worksites in progress",
+				"worksitesDetail": "none starting in the next 14 days | {count} starting in the next 14 days | {count} starting in the next 14 days",
+				"fleet": "Sites online",
+				"fleetValue": "{online} / {total}",
+				"fleetDetail": "{offline} offline, {degraded} degraded",
+				"urgent": "Urgent tickets",
+				"urgentDetail": "No SLA at risk in the next 24 h | {count} SLA due within 24 h or breached | {count} SLAs due within 24 h or breached"
+			},
+			"kpis": {
+				"revenue": "Revenue invoiced",
+				"revenueDescription": "Invoices issued, excluding VAT",
+				"signed": "Order intake",
+				"signedDescription": "Quotes signed, excluding VAT",
+				"conversion": "Quote conversion",
+				"conversionDescription": "Accepted out of decided quotes",
+				"tickets": "New tickets",
+				"ticketsDescription": "Service requests opened over the period"
+			},
+			"revenueTrend": {
+				"title": "Cumulative revenue",
+				"description": "Revenue invoiced day after day, against the comparison period",
+				"current": "This period",
+				"previous": "Comparison period"
+			},
+			"productMix": {
+				"title": "Product mix",
+				"description": "What the signed quotes sold, by product family",
+				"series": "Order intake"
+			},
+			"installations": {
+				"title": "Installations in the period",
+				"description": "Worksites started over the period, per month and type"
+			},
+			"topReps": {
+				"title": "Top sales reps",
+				"description": "By quotes signed",
+				"signed": "No quote signed | {count} quote signed | {count} quotes signed",
+				"empty": "No sales rep yet",
+				"action": "Pipeline"
+			},
+			"ticketHeatmap": {
+				"title": "When customers reach us",
+				"description": "Tickets opened by weekday and two-hour slot (hour of the day)"
+			},
+			"activity": {
+				"title": "Latest activity"
+			},
+			"shortcuts": {
+				"title": "Workspaces",
+				"description": "Where each part of the business is run.",
+				"pipeline": "Pipeline",
+				"pipelineDescription": "Deals from first contact to signature.",
+				"pipelineState": "No deal closing within 30 days | {count} deal closing within 30 days | {count} deals closing within 30 days",
+				"quotes": "Quotes",
+				"quotesDescription": "Proposals, their lines and signatures.",
+				"quotesState": "No quote awaiting signature | {count} quote awaiting signature | {count} quotes awaiting signature",
+				"customers": "Customers",
+				"customersDescription": "Homes and businesses we work for.",
+				"customersState": "No active customer | {count} active customer | {count} active customers",
+				"projects": "Projects",
+				"projectsDescription": "Worksites, crews and planning.",
+				"projectsState": "No worksite in progress | {count} worksite in progress | {count} worksites in progress",
+				"service": "Service desk",
+				"serviceDescription": "After-sales requests and their SLAs.",
+				"serviceState": "No open ticket | {count} open ticket | {count} open tickets",
+				"team": "Team",
+				"teamDescription": "Sales reps, technicians and office.",
+				"teamState": "{online} of {total} online",
+				"invoices": "Invoices",
+				"invoicesDescription": "Billing, payments and reminders.",
+				"invoicesState": "{amount} to collect",
+				"monitoring": "Fleet monitoring",
+				"monitoringDescription": "Live production of the installed sites.",
+				"monitoringState": "{kwh} kWh produced today"
+			}
+		}
+	}
+}

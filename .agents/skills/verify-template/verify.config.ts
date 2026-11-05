@@ -1,5 +1,6 @@
 import type { VerifyConfig } from "@antelopejs/tooling-configs/verify";
 
+import { demoJourneys } from "./journeys_demo.ts";
 import { projectJourneys } from "./journeys_project.ts";
 import { runJourneys } from "./journeys_run.ts";
 
@@ -29,7 +30,7 @@ const config: VerifyConfig = {
   },
   setup: [],
   template: { name: "DMS Adonis", project: true, probe: { path: "/", body: /running/ } },
-  journeys: { ...runJourneys, ...projectJourneys },
+  journeys: { ...runJourneys, ...projectJourneys, ...demoJourneys },
 };
 
 export default config;

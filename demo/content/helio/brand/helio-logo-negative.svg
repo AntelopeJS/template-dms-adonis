@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 240" width="880" height="240">
+  <title>Helio (version négative)</title>
+  <rect width="880" height="240" rx="24" fill="#111827"/>
+  <g transform="translate(20 20) scale(0.390625)">
+    <rect width="512" height="512" rx="112" fill="#EA580C"/>
+    <circle cx="256" cy="188" r="78" fill="#FFFFFF"/>
+    <polygon points="118,436 170,300 342,300 394,436" fill="#FFFFFF"/>
+    <g stroke="#EA580C" stroke-width="10">
+      <line x1="227" y1="300" x2="211" y2="436"/>
+      <line x1="285" y1="300" x2="301" y2="436"/>
+      <line x1="146" y1="368" x2="366" y2="368"/>
+    </g>
+  </g>
+  <text x="250" y="148" fill="#FFFFFF" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="120" font-weight="700" letter-spacing="-3">helio</text>
+  <text x="256" y="196" fill="#FDBA74" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="28" font-weight="500" letter-spacing="4">ÉNERGIE SOLAIRE · LIÈGE</text>
+</svg>

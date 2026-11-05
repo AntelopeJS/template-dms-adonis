@@ -11,4 +11,5 @@ One file per feature. `covers:` lists the source globs it owns, `docs:` the page
 | [build](build.md) | Runs `pnpm build`. | build-output |
 | [docs](docs.md) | Follows the README. | docs-commands |
 | [git](git.md) | Commits in a clone. | gitignore |
+| [demo](demo.md) | Opens the demo pages and syncs `demo/` from template-dms-demo. | demo-content, demo-sync |
 | [smoke](smoke.md) | The fixed journey every verdict runs: install, serve, read the routes, stop. | serve-structure |

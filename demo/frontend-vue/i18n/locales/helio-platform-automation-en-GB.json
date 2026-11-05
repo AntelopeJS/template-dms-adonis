@@ -1,0 +1,72 @@
+{
+	"helio": {
+		"platform": {
+			"automation": {
+				"triggers": {
+					"ticketOpened": {
+						"name": "Helio · Ticket opened",
+						"description": "Fires when a service ticket is created (form, customer request or monitoring alert)",
+						"priority": "Only tickets of priority (empty: any)"
+					},
+					"quoteAccepted": {
+						"name": "Helio · Quote accepted",
+						"description": "Fires when a customer signs a sent quote"
+					}
+				},
+				"actions": {
+					"createTicket": {
+						"name": "Helio · Open a ticket from an alert",
+						"description": "Opens a service ticket on a monitored site from a monitoring alert (siteId, alert, severity, message); an alert already open on the site is not duplicated",
+						"payload": "Alert"
+					},
+					"assignOnCall": {
+						"name": "Helio · Assign the on-call technician",
+						"description": "Gives an unassigned ticket to the technician with the fewest open tickets"
+					},
+					"findManagers": {
+						"name": "Helio · Find the managers",
+						"description": "The dashboard users who manage Helio, for a notification"
+					},
+					"remindOverdue": {
+						"name": "Helio · Remind overdue invoices",
+						"description": "Sends every overdue invoice the next reminder of the settings schedule once it is late enough, and stamps the reminder on it",
+						"minDaysOverdue": "Days past the due date, without a schedule in the settings",
+						"minDaysBetween": "Days between two reminders"
+					},
+					"planKickoff": {
+						"name": "Helio · Plan the kick-off",
+						"description": "Adds a kick-off call to the project of a signed quote, or to its deal's next step"
+					},
+					"confirmInstallations": {
+						"name": "Helio · Confirm installation dates",
+						"description": "E-mails the date, address and team lead to the customers of scheduled projects starting soon (once per project)",
+						"daysAhead": "Projects starting within (days)"
+					}
+				},
+				"fields": {
+					"alertsOn": "Urgent ticket alerts",
+					"amountDue": "Amount due",
+					"assignee": "Technician",
+					"at": "Date",
+					"category": "Category",
+					"channel": "Channel",
+					"confirmed": "Confirmations",
+					"created": "Created",
+					"customerId": "Customer",
+					"dealId": "Deal",
+					"link": "Link",
+					"number": "Number",
+					"priority": "Priority",
+					"quoteId": "Quote",
+					"reminded": "Reminders",
+					"subject": "Subject",
+					"summary": "Summary",
+					"target": "Target",
+					"ticketId": "Ticket",
+					"total": "Total",
+					"userIds": "Users"
+				}
+			}
+		}
+	}
+}

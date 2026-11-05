@@ -1,0 +1,285 @@
+{
+	"helio": {
+		"projects": {
+			"columns": {
+				"code": "Code",
+				"name": "Chantier",
+				"customer": "Client",
+				"quote": "Devis",
+				"type": "Type",
+				"status": "Statut",
+				"progress": "Tâches",
+				"plannedStart": "Début",
+				"plannedEnd": "Fin",
+				"leadTechnician": "Chef de chantier",
+				"crew": "Équipe",
+				"address": "Adresse du chantier",
+				"capacityKwp": "Puissance",
+				"budget": "Budget HTVA",
+				"notes": "Notes"
+			},
+			"placeholders": {
+				"code": "Laisser vide pour le code suivant",
+				"name": "Installation photovoltaïque 6,2 kWc — Famille Dupont",
+				"customer": "Choisir un client",
+				"quote": "Lier le devis signé",
+				"leadTechnician": "Choisir le chef de chantier",
+				"crew": "Ajouter des techniciens",
+				"notes": "Accès, contraintes, contacts sur place…"
+			},
+			"types": {
+				"residentialPv": "Photovoltaïque résidentiel",
+				"commercialPv": "Photovoltaïque professionnel",
+				"battery": "Batterie domestique",
+				"evCharger": "Borne de recharge"
+			},
+			"statuses": {
+				"planned": "Planifié",
+				"scheduled": "Programmé",
+				"inProgress": "En cours",
+				"inspection": "Contrôle",
+				"done": "Terminé",
+				"onHold": "En attente"
+			},
+			"taskStatuses": {
+				"todo": "À faire",
+				"doing": "En cours",
+				"done": "Fait"
+			},
+			"tasks": {
+				"columns": {
+					"position": "Ordre",
+					"title": "Tâche",
+					"project": "Chantier",
+					"status": "Statut",
+					"assignee": "Responsable",
+					"dueDate": "Échéance",
+					"estimateHours": "Estimation"
+				},
+				"groups": {
+					"schedule": "Planning"
+				},
+				"placeholders": {
+					"title": "Commander l'onduleur",
+					"project": "Choisir un chantier",
+					"assignee": "Attribuer à quelqu'un"
+				}
+			},
+			"units": {
+				"kwp": "kWc",
+				"hours": "h"
+			},
+			"page": {
+				"title": "Chantiers",
+				"description": "Chaque installation, du devis signé à la réception : le planning de la semaine, le tableau des chantiers et l'avancement de chacun."
+			},
+			"table": {
+				"caption": "Chantiers d'installation",
+				"search": "Rechercher un chantier ou un code…",
+				"count": "aucun chantier | {count} chantier | {count} chantiers",
+				"open": "Ouvrir le chantier",
+				"menuLabel": "Actions pour {name}",
+				"quickFilters": {
+					"type": "Type",
+					"lead": "Chef d'équipe"
+				},
+				"summary": {
+					"budget": "Budget (HTVA)",
+					"capacity": "Puissance (kWc)"
+				},
+				"empty": {
+					"firstRunTitle": "Aucun chantier pour l'instant",
+					"firstRunDescription": "Un chantier démarre à la signature d'un devis : créez-le ici pour planifier l'équipe et les tâches.",
+					"filteredTitle": "Aucun chantier ne correspond",
+					"filteredDescription": "Aucune installation ne répond à ces filtres. Élargissez les dates ou effacez les filtres."
+				},
+				"deleteConfirm": {
+					"title": "Supprimer {name} ? | Supprimer ces {count} chantiers ?",
+					"description": "Le chantier et son planning seront supprimés pour toute l'équipe. | Ces chantiers et leur planning seront supprimés pour toute l'équipe.",
+					"confirm": "Supprimer le chantier | Supprimer {count} chantiers"
+				},
+				"add": "Nouveau chantier",
+				"filters": {
+					"customer": "Client"
+				}
+			},
+			"views": {
+				"planning": "Planning",
+				"thisWeek": "Démarrent sous 7 jours",
+				"onSite": "En cours",
+				"late": "En retard",
+				"onHold": "En pause",
+				"board": "Tableau",
+				"all": "Tous les chantiers"
+			},
+			"form": {
+				"newTitle": "Nouveau chantier",
+				"newDescription": "Liez le client et le devis signé, puis planifiez les dates et l'équipe.",
+				"editTitle": "Modifier le chantier",
+				"detailsTitle": "Détails du chantier"
+			},
+			"activity": {
+				"quoteIssued": "Devis {number} rédigé",
+				"quoteSent": "Devis {number} envoyé au client",
+				"quoteAccepted": "Devis {number} signé",
+				"projectStarted": "Début des travaux sur place",
+				"projectDone": "Installation réceptionnée",
+				"invoiceIssued": "Facture {number} émise",
+				"invoicePaid": "Facture {number} payée",
+				"invoiceOverdue": "Facture {number} en retard de paiement",
+				"amount": "{amount}",
+				"by": "par {name}"
+			},
+			"detail": {
+				"page": {
+					"title": "Chantier",
+					"description": "Une installation : ses informations, ses tâches, son historique et ses factures."
+				},
+				"notFound": "Ce chantier n'existe pas ou a été supprimé.",
+				"notFoundTitle": "Chantier introuvable",
+				"notFoundDescription": "Ce chantier n'existe pas ou a été supprimé. Le lien utilisé est peut-être ancien.",
+				"backToProjects": "Retour aux chantiers",
+				"actions": {
+					"route": "Itinéraire",
+					"edit": "Modifier",
+					"done": "Marquer terminé"
+				},
+				"done": {
+					"title": "Marquer {code} comme terminé ?",
+					"description": "{name} sera réceptionné par le client et sortira du planning.",
+					"confirm": "Marquer terminé",
+					"impactTasks": "Tâches ouvertes clôturées",
+					"impactEnd": "Date de fin fixée à aujourd'hui",
+					"impactInvoices": "Factures restant à payer (inchangées)",
+					"success": "Chantier marqué comme terminé",
+					"alreadyTitle": "{code} est déjà terminé",
+					"alreadyDescription": "Cette installation a déjà été réceptionnée.",
+					"notStartedTitle": "{code} n'a pas encore démarré",
+					"notStartedDescription": "Un chantier ne peut être clôturé qu'une fois les travaux commencés sur place.",
+					"refused": "Seul un chantier en cours peut être marqué comme terminé."
+				},
+				"stats": {
+					"label": "Chiffres du chantier",
+					"status": "Statut",
+					"ends": "Fin le {date}",
+					"late": "Date de fin dépassée",
+					"start": "Début",
+					"date": "{date}",
+					"relative": "{when}",
+					"tasks": "Tâches",
+					"tasksValue": "{done} sur {total}",
+					"tasksOpen": "plus rien à faire | {count} encore ouverte | {count} encore ouvertes",
+					"invoiced": "Facturé TVAC",
+					"money": "{amount}",
+					"due": "{amount} restant dû",
+					"settled": "Plus rien à payer",
+					"noTasks": "Aucune tâche",
+					"noInvoices": "Aucune facture"
+				},
+				"banner": {
+					"onHoldTitle": "Ce chantier est en pause",
+					"onHoldDescription": "Les travaux sont suspendus. Consultez les notes avant de replanifier l'équipe.",
+					"lateTitle": "Ce chantier est en retard",
+					"lateDescription": "Il aurait dû être terminé le {date}."
+				},
+				"tabs": {
+					"overview": "Aperçu",
+					"tasks": "Tâches",
+					"activity": "Historique",
+					"invoices": "Factures",
+					"quote": "Devis",
+					"details": "Détails"
+				},
+				"overview": {
+					"facts": "Chantier",
+					"progress": "Avancement",
+					"contact": "Contact sur place"
+				},
+				"facts": {
+					"capacity": "{kwp} kWc",
+					"late": "en retard",
+					"unassigned": "Non attribué",
+					"vip": "Client VIP"
+				},
+				"contact": {
+					"name": "Contact",
+					"phone": "Téléphone",
+					"email": "E-mail",
+					"vat": "Numéro de TVA"
+				},
+				"progress": {
+					"label": "Tâches",
+					"value": "{done} / {total}",
+					"done": "Terminées : {count}",
+					"doing": "{count} en cours",
+					"todo": "{count} à faire"
+				},
+				"invoicing": {
+					"label": "Budget facturé",
+					"hint": "{invoiced} sur {budget} HTVA"
+				},
+				"tasks": {
+					"caption": "Tâches",
+					"search": "Rechercher une tâche…",
+					"count": "aucune tâche | {count} tâche | {count} tâches",
+					"hours": "Estimation (h)",
+					"emptyTitle": "Aucune tâche planifiée",
+					"emptyDescription": "Ajoutez les étapes de l'installation : visite technique, commande, pose, mise en service, contrôle.",
+					"newTitle": "Nouvelle tâche",
+					"newDescription": "Elle est ajoutée à ce chantier.",
+					"editTitle": "Modifier la tâche",
+					"add": "Nouvelle tâche",
+					"projectRequired": "Une tâche appartient à un chantier : ajoutez-la depuis la page du chantier."
+				},
+				"activity": {
+					"title": "Historique du chantier",
+					"emptyTitle": "Rien à signaler pour l'instant",
+					"emptyDescription": "Le devis, les travaux et les factures de ce chantier apparaîtront ici."
+				},
+				"invoices": {
+					"caption": "Factures",
+					"count": "aucune facture | {count} facture | {count} factures",
+					"total": "Facturé",
+					"due": "Restant dû",
+					"emptyTitle": "Rien de facturé pour l'instant",
+					"emptyDescription": "L'acompte et le solde de ce chantier se facturent depuis la page Factures.",
+					"detailsTitle": "Facture"
+				},
+				"quote": {
+					"title": "Devis signé",
+					"number": "Numéro",
+					"status": "Statut",
+					"issuedAt": "Émis le",
+					"signedAt": "Signé le",
+					"subtotal": "Sous-total (HTVA)",
+					"vat": "TVA",
+					"vatRate": "{rate}",
+					"total": "Total (TVAC)",
+					"emptyTitle": "Aucun devis lié",
+					"emptyDescription": "Liez le devis signé dans l'onglet Détails.",
+					"linesCaption": "Lignes du devis",
+					"linesEmptyTitle": "Ce chantier n'a pas de lignes de devis",
+					"columns": {
+						"label": "Article",
+						"qty": "Quantité",
+						"unitPrice": "Prix unitaire",
+						"lineTotal": "Total de la ligne"
+					}
+				},
+				"details": {
+					"title": "Détails du chantier",
+					"description": "Les modifications sont enregistrées pour toute l'équipe."
+				}
+			},
+			"quickActions": {
+				"newProject": "Nouveau chantier",
+				"planning": "Planning des chantiers"
+			},
+			"rules": {
+				"codeTaken": "Ce code est déjà utilisé par un autre chantier. Laissez-le vide pour prendre le code suivant.",
+				"endBeforeStart": "La fin prévue ne peut pas précéder le début.",
+				"quoteOfOtherCustomer": "Ce devis est adressé à un autre client. Choisissez un devis de ce client ou laissez le champ vide."
+			}
+		}
+	}
+}

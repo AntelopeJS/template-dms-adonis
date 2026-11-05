@@ -1,0 +1,164 @@
+{
+	"helio": {
+		"sales": {
+			"quotes": {
+				"page": {
+					"name": "Quotes",
+					"description": "Draft quotes with their lines, send them for signature and follow them until they are accepted."
+				},
+				"table": {
+					"caption": "Quotes",
+					"search": "Search a quote number or a customer",
+					"count": "{count} quote | {count} quotes"
+				},
+				"columns": {
+					"number": "Number",
+					"customer": "Customer",
+					"deal": "Deal",
+					"status": "Status",
+					"lines": "Lines",
+					"subtotal": "Excl. VAT",
+					"vatRate": "VAT rate",
+					"vatAmount": "VAT",
+					"total": "Incl. VAT",
+					"issuedAt": "Issued",
+					"validUntil": "Expires",
+					"sentAt": "Sent",
+					"signedAt": "Signed",
+					"notes": "Internal notes",
+					"rejectionReason": "Rejection reason",
+					"otherLines": "Other lines",
+					"customerName": "Customer name",
+					"firstLines": "Lines"
+				},
+				"placeholders": {
+					"customer": "Choose a customer",
+					"deal": "Link a deal (optional)",
+					"notes": "Access, roof type, payment terms…",
+					"product": "Choose a product on sale"
+				},
+				"hints": {
+					"vatRate": "6% for a private home over 10 years old, 21% for a business or a recent home. Left empty, the default rate of the settings applies."
+				},
+				"addCustomer": {
+					"title": "New customer",
+					"description": "Create the customer, then finish the quote."
+				},
+				"statuses": {
+					"draft": "Draft",
+					"sent": "Sent",
+					"accepted": "Accepted",
+					"rejected": "Rejected",
+					"expired": "Expired"
+				},
+				"lines": {
+					"product": "Product",
+					"label": "Description",
+					"qty": "Qty",
+					"unitPrice": "Unit price",
+					"add": "Add a line"
+				},
+				"linesSummary": "{label} | {label} + {count} more line | {label} + {count} more lines",
+				"detail": {
+					"signed": "Signed {date}",
+					"validUntil": "Valid until {date}",
+					"rejected": "Rejected: {reason}"
+				},
+				"views": {
+					"all": "All quotes",
+					"awaiting": "Awaiting signature",
+					"expiring": "Expiring this week",
+					"accepted": "Signed in the last 30 days"
+				},
+				"quickFilters": {
+					"customer": "Customer"
+				},
+				"chips": {
+					"customer": "Customer",
+					"deal": "Deal"
+				},
+				"expand": {
+					"label": "Lines and amounts",
+					"line": "{qty} × {label} · {amount}",
+					"more": "{count} more line · {amount} | {count} more lines · {amount}",
+					"none": "No other line"
+				},
+				"footer": {
+					"total": "Total incl. VAT",
+					"accepted": "Accepted",
+					"awaiting": "Awaiting signature"
+				},
+				"empty": {
+					"firstRunTitle": "No quote yet",
+					"firstRunDescription": "Draft a first quote for a customer: pick the products and quantities, then send it for signature.",
+					"filteredTitle": "No quote matches",
+					"filteredDescription": "Try another customer, status or period."
+				},
+				"form": {
+					"newTitle": "New quote",
+					"newDescription": "It gets its number on save and stays a draft until you send it.",
+					"editTitle": "Edit quote",
+					"editDescription": "Only drafts can be changed: what a customer received stays as sent.",
+					"detailsTitle": "Quote"
+				},
+				"quickView": {
+					"title": "Quote",
+					"description": "The quote as it stands, with its lines and amounts.",
+					"position": "Quote {index} of {total}",
+					"notFoundTitle": "This quote no longer exists",
+					"notFoundDescription": "It was deleted, or the link is wrong."
+				},
+				"actions": {
+					"new": "New quote",
+					"quickView": "Quick view",
+					"send": "Send to customer",
+					"accept": "Mark as accepted",
+					"reject": "Mark as rejected",
+					"portalLink": "Copy portal link",
+					"download": "Download PDF",
+					"customer": "Open customer",
+					"deals": "Customer's deals",
+					"duplicate": "Duplicate as a new draft"
+				},
+				"send": {
+					"title": "Send {number} to {customer}?",
+					"description": "The customer receives the quote by email, with a link to read and sign it online.",
+					"confirm": "Send the quote",
+					"impactEmail": "Emailed to {email}",
+					"impactLines": "Lines quoted",
+					"impactPortal": "The customer can accept it from the portal",
+					"impactLocked": "The quote can no longer be edited",
+					"blockedTitle": "{number} has already been sent",
+					"blockedDescription": "Only a draft can be sent. Duplicate it to send a new version.",
+					"success": "Quote sent to the customer"
+				},
+				"accept": {
+					"title": "Mark {number} as accepted?",
+					"description": "Records the customer's signature today. The installation can then be planned.",
+					"confirm": "Mark as accepted",
+					"success": "Quote marked as accepted"
+				},
+				"reject": {
+					"title": "Mark {number} as rejected?",
+					"description": "The quote is closed as lost. The reason, if you give one, is kept with the quote.",
+					"confirm": "Mark as rejected",
+					"reason": "Reason",
+					"reasonPlaceholder": "Price, timing, chose a competitor…",
+					"success": "Quote marked as rejected"
+				},
+				"portalLink": {
+					"success": "Portal link copied"
+				},
+				"deleted": "{count} quote deleted | {count} quotes deleted",
+				"errors": {
+					"notFound": "This quote no longer exists.",
+					"notDraft": "This quote is no longer a draft.",
+					"notSent": "This quote is not awaiting a signature.",
+					"noPortalLink": "A draft has no portal link yet: send it first.",
+					"businessVat": "A business customer pays 21% VAT: the 6% rate only covers a private home over 10 years old."
+				},
+				"quickAction": "New quote"
+			}
+		}
+	}
+}

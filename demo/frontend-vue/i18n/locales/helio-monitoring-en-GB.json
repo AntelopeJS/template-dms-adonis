@@ -1,0 +1,169 @@
+{
+	"helio": {
+		"monitoring": {
+			"title": "Fleet monitoring",
+			"description": "Live production of every installation Helio maintains: output, energy, inverters to check.",
+			"inverterStatuses": {
+				"online": "Online",
+				"degraded": "Degraded",
+				"offline": "Offline"
+			},
+			"sites": {
+				"columns": {
+					"name": "Site",
+					"city": "City",
+					"customer": "Customer",
+					"project": "Project",
+					"inverterStatus": "Inverter",
+					"capacityKwp": "Capacity",
+					"todayKwh": "Today",
+					"last7Days": "Last 7 days",
+					"lastSeenAt": "Last seen",
+					"commissionedAt": "Commissioned"
+				},
+				"placeholders": {
+					"name": "Dupont family roof",
+					"customer": "Choose a customer",
+					"project": "Link the installation project"
+				},
+				"liveNow": "Live"
+			},
+			"units": {
+				"kw": "kW",
+				"kwp": "kWp",
+				"kwh": "kWh",
+				"kwValue": "{value} kW",
+				"kwpValue": "{value} kWp",
+				"kwhValue": "{value} kWh",
+				"yield": "kWh/kWp"
+			},
+			"live": {
+				"missed": "{count} site reported | {count} sites reported"
+			},
+			"stats": {
+				"label": "Fleet right now",
+				"capacity": "Installed capacity",
+				"capacityDetail": "{count} site monitored | {count} sites monitored",
+				"power": "Output now",
+				"powerDetail": "{share} of installed capacity",
+				"today": "Energy today",
+				"todayDetail": "The daily use of {count} household | The daily use of {count} households",
+				"sites": "Sites online",
+				"sitesValue": "{online} / {total}",
+				"sitesDetail": "{degraded} · {offline}",
+				"degradedCount": "none degraded | {count} degraded | {count} degraded",
+				"offlineCount": "none offline | {count} offline | {count} offline"
+			},
+			"production": {
+				"title": "Fleet production (kWh)",
+				"description": "Energy produced per interval by every site, in kWh.",
+				"primaryLabel": "This period",
+				"comparisonLabel": "Comparison",
+				"series": "Production",
+				"comparisonSeries": "Comparison period"
+			},
+			"health": {
+				"title": "Fleet health",
+				"description": "Updated with every round of inverter reports."
+			},
+			"meters": {
+				"output": "Output",
+				"outputHint": "{power} kW of {capacity} kWp",
+				"attention": "Peak power lost",
+				"attentionHint": "{degraded} kWp degraded · {offline} kWp offline",
+				"attentionAction": "See offline sites"
+			},
+			"heatmap": {
+				"title": "Production by hour",
+				"description": "Fleet energy per hour over the last seven days, in kWh."
+			},
+			"weekdays": {
+				"mon": "Monday",
+				"tue": "Tuesday",
+				"wed": "Wednesday",
+				"thu": "Thursday",
+				"fri": "Friday",
+				"sat": "Saturday",
+				"sun": "Sunday"
+			},
+			"top": {
+				"title": "Top producers",
+				"description": "Best producers over the period.",
+				"itemDescription": "{city} · {capacity} kWp",
+				"empty": "No production over this period."
+			},
+			"errors": {
+				"siteNotFound": "This site is not monitored."
+			},
+			"facts": {
+				"groups": {
+					"site": {
+						"label": "Site",
+						"description": "Whose installation it is, where, and since when."
+					},
+					"inverter": {
+						"label": "Inverter",
+						"description": "Its state and how long ago it last reported."
+					},
+					"production": {
+						"label": "Production",
+						"description": "Installed power and what the site produces today."
+					}
+				},
+				"customer": "Customer",
+				"city": "City",
+				"commissioned": "Commissioned",
+				"project": "Project",
+				"status": "State",
+				"sinceLastReport": "Since last report",
+				"capacity": "Capacity",
+				"power": "Output now",
+				"today": "Energy today",
+				"yield": "Specific yield today"
+			},
+			"table": {
+				"caption": "Sites",
+				"search": "Search a site, a customer or a city",
+				"allCities": "Every city",
+				"count": "{count} site | {count} sites",
+				"hint": "Click a site to read it, J / K to step",
+				"menu": "Site actions",
+				"columns": {
+					"site": "Site",
+					"city": "City",
+					"inverter": "Inverter",
+					"power": "Output",
+					"powerDescription": "What the inverter reports right now, and its share of the capacity.",
+					"capacity": "Capacity",
+					"period": "Period",
+					"periodDescription": "Energy produced over the selected period.",
+					"today": "Today",
+					"lastSeen": "Last report",
+					"trend": "Trend",
+					"trendDescription": "How the energy produced evolved over the selected period.",
+					"capacityDescription": "Peak power installed on the site.",
+					"todayDescription": "Energy produced since midnight."
+				},
+				"degradedDetail": "Output below expected",
+				"offlineDetail": "Last signal {since}",
+				"empty": {
+					"title": "No site monitored yet",
+					"description": "Sites appear here once their installation is commissioned.",
+					"filteredTitle": "No site matches",
+					"filteredDescription": "Try another status, city or search."
+				},
+				"actions": {
+					"open": "Site details",
+					"project": "Open the installation project"
+				},
+				"panel": {
+					"title": "Site",
+					"position": "Site {index} of {total}",
+					"notFoundTitle": "This site is no longer monitored",
+					"notFoundDescription": "It was removed from the fleet, or the link is wrong."
+				},
+				"powerShare": "{share} of peak"
+			}
+		}
+	}
+}

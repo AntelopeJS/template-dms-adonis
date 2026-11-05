@@ -1,0 +1,178 @@
+{
+	"helio": {
+		"service": {
+			"statuses": {
+				"new": "Nouveau",
+				"open": "Ouvert",
+				"waiting": "En attente du client",
+				"resolved": "Résolu",
+				"closed": "Clôturé"
+			},
+			"priorities": {
+				"low": "Basse",
+				"normal": "Normale",
+				"high": "Haute",
+				"urgent": "Urgente"
+			},
+			"categories": {
+				"noProduction": "Pas de production",
+				"inverterError": "Erreur d'onduleur",
+				"monitoring": "Monitoring",
+				"damage": "Dégâts",
+				"billing": "Facturation",
+				"other": "Autre"
+			},
+			"channels": {
+				"phone": "Téléphone",
+				"email": "E-mail",
+				"portal": "Portail client",
+				"monitoringAlert": "Alerte monitoring"
+			},
+			"tickets": {
+				"columns": {
+					"number": "N°",
+					"subject": "Objet",
+					"customer": "Client",
+					"site": "Site",
+					"category": "Catégorie",
+					"priority": "Priorité",
+					"status": "Statut",
+					"channel": "Canal",
+					"assignee": "Responsable",
+					"slaDueAt": "SLA",
+					"createdAt": "Ouvert le",
+					"resolvedAt": "Résolu le",
+					"description": "Description",
+					"pinned": "Épinglé"
+				},
+				"placeholders": {
+					"number": "Numéro suivant",
+					"subject": "L'onduleur affiche un code d'erreur",
+					"customer": "Choisir un client",
+					"site": "Choisir l'installation",
+					"assignee": "Attribuer à un technicien",
+					"description": "Ce que signale le client, ce qui a déjà été vérifié…"
+				},
+				"detail": {
+					"resolved": "Résolu le {date}",
+					"slaBreached": "SLA dépassé"
+				},
+				"justNow": "À l'instant"
+			},
+			"page": {
+				"name": "Service après-vente",
+				"description": "Les tickets SAV au fil de l'eau : triez-les, attribuez-les et résolvez-les en ouvrant chacun dans un volet."
+			},
+			"live": {
+				"missed": "{count} nouveau ticket | {count} nouveaux tickets",
+				"newTickets": "{count} nouveau ticket | {count} nouveaux tickets"
+			},
+			"stats": {
+				"label": "Le SAV en un coup d'œil",
+				"open": "Tickets ouverts",
+				"openDetail": "Nouveaux : {fresh} · sans technicien : {unassigned}",
+				"urgent": "Urgents",
+				"urgentDetail": "Ouverts, résolution promise sous {hours} heure | Ouverts, résolution promise sous {hours} heures",
+				"breaching": "Hors délai",
+				"breachingDetail": "Toujours ouverts au-delà du délai de résolution promis",
+				"resolution": "Résolution moyenne",
+				"resolutionValue": "{hours} h",
+				"resolutionDetail": "Tickets résolus ces 30 derniers jours"
+			},
+			"table": {
+				"caption": "Tickets",
+				"search": "Rechercher un numéro ou un objet",
+				"count": "{count} ticket | {count} tickets",
+				"expandLabel": "Message du client",
+				"filters": {
+					"assignee": "Responsable",
+					"priority": "Priorité",
+					"category": "Catégorie",
+					"ticket": "Ticket"
+				},
+				"footer": {
+					"urgent": "Urgents ouverts",
+					"waiting": "En attente du client"
+				},
+				"empty": {
+					"firstRunTitle": "Aucun ticket pour l'instant",
+					"firstRunDescription": "Les demandes des clients, les alertes du monitoring et les appels notés par le secrétariat arrivent ici.",
+					"filteredTitle": "Rien à traiter ici",
+					"filteredDescription": "Aucun ticket ne correspond à ces filtres. Effacez-les pour revoir tout le SAV."
+				}
+			},
+			"views": {
+				"all": "Tous les tickets",
+				"open": "Ouverts",
+				"urgent": "Urgents",
+				"unassigned": "Sans technicien",
+				"waiting": "En attente du client",
+				"breaching": "Hors délai",
+				"resolvedRecently": "Résolus ces 30 derniers jours"
+			},
+			"form": {
+				"newTitle": "Nouveau ticket",
+				"newDescription": "Enregistrez une demande client. Le numéro et le délai de réponse sont fixés automatiquement.",
+				"editTitle": "Modifier le ticket",
+				"detailsTitle": "Détail du ticket"
+			},
+			"actions": {
+				"assign": "Attribuer à…",
+				"resolve": "Résoudre",
+				"reopen": "Rouvrir"
+			},
+			"bulk": {
+				"assign": {
+					"title": "Attribuer le ticket | Attribuer {count} tickets",
+					"description": "Choisissez qui le prend en charge. Un nouveau ticket passe au statut « Ouvert ». | Choisissez qui les prend en charge. Les nouveaux tickets passent au statut « Ouvert ».",
+					"field": "Attribuer à",
+					"placeholder": "Choisir un technicien",
+					"confirm": "Attribuer",
+					"done": "Ticket attribué | {count} tickets attribués",
+					"invalid": "Choisissez une personne de l'équipe SAV"
+				},
+				"resolve": {
+					"title": "Résoudre ce ticket ? | Résoudre ces {count} tickets ?",
+					"description": "Le ticket est marqué résolu maintenant. | Les tickets ouverts sont marqués résolus maintenant ; les tickets résolus ou clôturés restent inchangés.",
+					"confirm": "Résoudre",
+					"done": "Ticket résolu | {count} tickets résolus"
+				},
+				"reopen": {
+					"title": "Rouvrir ce ticket ? | Rouvrir ces {count} tickets ?",
+					"description": "Le ticket repasse au statut « Ouvert » et son délai de résolution compte à nouveau. | Les tickets résolus ou clôturés repassent au statut « Ouvert » et leur délai de résolution compte à nouveau ; les tickets encore ouverts restent inchangés.",
+					"confirm": "Rouvrir",
+					"done": "Ticket rouvert | {count} tickets rouverts"
+				}
+			},
+			"quickActions": {
+				"newTicket": "Nouveau ticket SAV"
+			},
+			"notifications": {
+				"category": "Service après-vente",
+				"categoryDescription": "Les tickets SAV qui demandent votre attention",
+				"urgentSubject": "Tickets urgents",
+				"urgentSubjectDescription": "Un client a ouvert un ticket urgent (réponse sous 4 heures)",
+				"urgent": {
+					"title": "Ticket urgent {number}",
+					"description": "{customer} : {subject}"
+				}
+			},
+			"quickView": {
+				"action": "Aperçu",
+				"title": "Ticket",
+				"description": "La demande du client, son SLA et qui la traite.",
+				"position": "Ticket {index} sur {total}",
+				"notFoundTitle": "Ce ticket n'existe plus",
+				"notFoundDescription": "Il a été supprimé, ou le lien est erroné."
+			},
+			"delete": {
+				"title": "Supprimer ce ticket ? | Supprimer ces {count} tickets ?",
+				"description": "Seul un ticket résolu ou clôturé peut être supprimé. Cette action est définitive. | Seuls les tickets résolus ou clôturés peuvent être supprimés. Cette action est définitive.",
+				"confirm": "Supprimer"
+			},
+			"rules": {
+				"siteOfOtherCustomer": "Cette installation appartient à un autre client. Choisissez une installation de ce client ou laissez le champ vide."
+			}
+		}
+	}
+}

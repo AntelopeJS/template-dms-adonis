@@ -1,0 +1,223 @@
+{
+	"helio": {
+		"crm": {
+			"kinds": {
+				"residential": "Particulier",
+				"business": "Entreprise"
+			},
+			"sources": {
+				"website": "Site web",
+				"referral": "Recommandation",
+				"fair": "Salon",
+				"partner": "Partenaire",
+				"phone": "Téléphone"
+			},
+			"stages": {
+				"lead": "Piste",
+				"qualified": "Qualifié",
+				"siteVisit": "Visite technique",
+				"proposal": "Offre",
+				"negotiation": "Négociation",
+				"won": "Gagné",
+				"lost": "Perdu"
+			},
+			"lostReasons": {
+				"price": "Prix trop élevé",
+				"competitor": "Parti chez un concurrent",
+				"timing": "Projet reporté",
+				"financing": "Financement refusé",
+				"roof": "Toiture inadaptée",
+				"noResponse": "Sans réponse"
+			},
+			"customers": {
+				"columns": {
+					"name": "Client",
+					"kind": "Type",
+					"vatNumber": "Numéro de TVA",
+					"contactName": "Contact",
+					"email": "E-mail",
+					"phone": "Téléphone",
+					"address": "Adresse",
+					"segments": "Segments",
+					"source": "Origine",
+					"isVip": "VIP",
+					"owner": "Gestionnaire",
+					"website": "Site web",
+					"notes": "Notes",
+					"createdAt": "Client depuis"
+				},
+				"placeholders": {
+					"name": "Nom du ménage ou de la société",
+					"contactName": "Prénom et nom",
+					"email": "nom{'@'}exemple.be",
+					"segments": "Ajouter un segment",
+					"owner": "Attribuer à un commercial",
+					"notes": "Toiture, consommation, souhaits…"
+				},
+				"badges": {
+					"vip": "VIP",
+					"archived": "Archivé"
+				},
+				"standard": "Standard",
+				"vipSwitch": "Client VIP : prioritaire au planning et au SAV",
+				"nav": "Clients",
+				"description": "Les ménages et entreprises que Helio conseille, équipe et entretient.",
+				"caption": "Clients",
+				"search": "Rechercher un client, un contact, un e-mail ou un numéro de TVA",
+				"count": "{count} client | {count} clients",
+				"menuLabel": "Actions pour {name}",
+				"segmentChip": "Segment",
+				"quickAction": "Nouveau client",
+				"archived": "Client archivé | {count} clients archivés",
+				"restored": "Client restauré | {count} clients restaurés",
+				"quickFilters": {
+					"owner": "Gestionnaire",
+					"source": "Origine"
+				},
+				"summary": {
+					"vip": "VIP",
+					"business": "Entreprises"
+				},
+				"groups": {
+					"identity": "Client",
+					"identityHint": "Un particulier ou une entreprise : une entreprise est facturée avec son numéro de TVA.",
+					"contact": "Contact",
+					"location": "Adresse de l'installation",
+					"relationship": "Relation commerciale",
+					"relationshipHint": "Qui suit le compte, comment il nous a connus et ce qui l'intéresse."
+				},
+				"form": {
+					"newTitle": "Nouveau client",
+					"newDescription": "Un particulier ou une entreprise : le numéro de TVA n'est demandé qu'aux entreprises.",
+					"editTitle": "Modifier le client",
+					"detailsTitle": "Fiche client"
+				},
+				"quickView": {
+					"action": "Aperçu",
+					"title": "Client",
+					"description": "Coordonnées, adresse et gestionnaire du compte.",
+					"position": "Client {index} sur {total}",
+					"notFoundTitle": "Ce client n'existe plus",
+					"notFoundDescription": "Il a été supprimé, ou le lien est erroné."
+				},
+				"actions": {
+					"deals": "Voir les affaires",
+					"email": "Envoyer un e-mail",
+					"quotes": "Voir les devis",
+					"projects": "Voir les chantiers",
+					"invoices": "Voir les factures"
+				},
+				"empty": {
+					"firstRunTitle": "Aucun client pour l'instant",
+					"firstRunDescription": "Ajoutez votre premier particulier ou votre première entreprise, ou créez-le directement depuis une affaire.",
+					"filteredTitle": "Aucun client ne correspond",
+					"filteredDescription": "Essayez un autre nom, segment ou gestionnaire."
+				},
+				"deleteConfirm": {
+					"title": "Supprimer définitivement {name} ?",
+					"description": "Le client quitte définitivement le CRM. Tapez son nom pour confirmer.",
+					"confirm": "Supprimer le client",
+					"impactDeals": "Affaires clôturées qui ne seront plus liées à un client",
+					"blockedTitle": "{name} a encore des affaires en cours",
+					"blockedDescription": "Clôturez ou réattribuez d'abord son affaire en cours. | Clôturez ou réattribuez d'abord ses {count} affaires en cours.",
+					"activeTitle": "Archivez d'abord {name}",
+					"activeDescription": "Seul un client archivé peut être supprimé : archivez-le, puis supprimez-le depuis les clients archivés."
+				},
+				"errors": {
+					"openDeals": "Ce client a encore des affaires en cours.",
+					"notArchived": "Seuls les clients archivés peuvent être supprimés : archivez-les d'abord.",
+					"notFound": "Ce client n'existe plus.",
+					"vatFormat": "Numéro de TVA invalide : BE suivi de 10 chiffres (ex. BE0123.456.749), ou le numéro d'un autre pays de l'UE."
+				},
+				"newCustomer": "Nouveau client"
+			},
+			"deals": {
+				"columns": {
+					"title": "Opportunité",
+					"customer": "Client",
+					"stage": "Étape",
+					"amount": "Montant HTVA",
+					"probability": "Probabilité",
+					"weightedAmount": "Montant pondéré",
+					"owner": "Commercial",
+					"source": "Origine",
+					"expectedClose": "Signature prévue",
+					"lastActivityAt": "Dernière activité",
+					"nextStep": "Prochaine étape",
+					"lostReason": "Motif de perte",
+					"isOpen": "Affaire en cours",
+					"customerName": "Nom du client"
+				},
+				"placeholders": {
+					"title": "p. ex. Installation 6,4 kWc + batterie 10 kWh",
+					"customer": "Rechercher un client",
+					"owner": "Attribuer à un commercial",
+					"nextStep": "p. ex. Planifier la visite technique"
+				},
+				"addCustomer": {
+					"title": "Nouveau client",
+					"description": "Créez le client sans quitter l'opportunité."
+				},
+				"activeNow": "À l'instant",
+				"kickoffNextStep": "Planifier l'appel de lancement (devis {number} signé)"
+			},
+			"pipeline": {
+				"nav": "Pipeline",
+				"description": "Toutes les opportunités commerciales, du premier appel au bon de commande signé.",
+				"caption": "Affaires",
+				"search": "Rechercher une affaire, un client ou une prochaine étape",
+				"count": "{count} affaire | {count} affaires",
+				"menuLabel": "Actions pour {title}",
+				"customerChip": "Client",
+				"deleted": "Affaire supprimée | {count} affaires supprimées",
+				"quickFilters": {
+					"owner": "Commercial",
+					"source": "Origine"
+				},
+				"summary": {
+					"open": "Pipeline en cours",
+					"weighted": "Pondéré",
+					"won": "Gagné"
+				},
+				"views": {
+					"board": "Par étape",
+					"closing": "Signature sous 30 jours",
+					"big": "Grosses affaires",
+					"stalled": "À l'arrêt",
+					"won": "Gagnées",
+					"lost": "Perdues"
+				},
+				"form": {
+					"newTitle": "Nouvelle affaire",
+					"newDescription": "Le client, le montant et la date de signature prévue.",
+					"editTitle": "Modifier l'affaire",
+					"detailsTitle": "Détail de l'affaire"
+				},
+				"actions": {
+					"customer": "Ouvrir le client"
+				},
+				"empty": {
+					"firstRunTitle": "Le pipeline est vide",
+					"firstRunDescription": "Ajoutez la première opportunité : un appel, un contact de salon ou une recommandation.",
+					"filteredTitle": "Aucune affaire ne correspond",
+					"filteredDescription": "Essayez un autre commercial, une autre origine ou une autre recherche."
+				},
+				"deleteConfirm": {
+					"title": "Supprimer l'affaire {title} ? | Supprimer ces {count} affaires ?",
+					"description": "Son montant et son historique quittent le pipeline. Marquez-la plutôt comme perdue pour en garder la trace. | Leurs montants et leur historique quittent le pipeline. Marquez-les plutôt comme perdues pour en garder la trace.",
+					"confirm": "Supprimer l'affaire | Supprimer {count} affaires"
+				},
+				"newDeal": "Nouvelle affaire",
+				"quickView": {
+					"action": "Aperçu",
+					"title": "Affaire",
+					"description": "Étape, montant, responsable et prochaine action de l'affaire.",
+					"position": "Affaire {index} sur {total}",
+					"notFoundTitle": "Cette affaire n'existe plus",
+					"notFoundDescription": "Elle a été supprimée, ou le lien est erroné."
+				},
+				"ownerChip": "Commercial"
+			}
+		}
+	}
+}

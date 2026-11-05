@@ -7,7 +7,7 @@ import { Env } from '@adonisjs/core/env'
 export default await Env.create(new URL('../', import.meta.url), {
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
   PORT: Env.schema.number(),
-  APP_KEY: Env.schema.string(),
+  APP_KEY: Env.schema.secret(),
   HOST: Env.schema.string({ format: 'host' }),
   LOG_LEVEL: Env.schema.string(),
 
@@ -36,4 +36,9 @@ export default await Env.create(new URL('../', import.meta.url), {
    * generates one and prints the onboarding address with it in the `pnpm dev` terminal.
    */
   DMS_SETUP_TOKEN: Env.schema.string.optional(),
+
+  /** The Stripe account of `@antelopejs/dms-saas`. The demo runs on test placeholders. */
+  STRIPE_SECRET_KEY: Env.schema.string(),
+  STRIPE_PUBLISHABLE_KEY: Env.schema.string(),
+  STRIPE_WEBHOOK_SECRET: Env.schema.string(),
 })

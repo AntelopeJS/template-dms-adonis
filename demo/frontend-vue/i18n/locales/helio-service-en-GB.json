@@ -1,0 +1,178 @@
+{
+	"helio": {
+		"service": {
+			"statuses": {
+				"new": "New",
+				"open": "Open",
+				"waiting": "Waiting on customer",
+				"resolved": "Resolved",
+				"closed": "Closed"
+			},
+			"priorities": {
+				"low": "Low",
+				"normal": "Normal",
+				"high": "High",
+				"urgent": "Urgent"
+			},
+			"categories": {
+				"noProduction": "No production",
+				"inverterError": "Inverter error",
+				"monitoring": "Monitoring",
+				"damage": "Damage",
+				"billing": "Billing",
+				"other": "Other"
+			},
+			"channels": {
+				"phone": "Phone",
+				"email": "Email",
+				"portal": "Customer portal",
+				"monitoringAlert": "Monitoring alert"
+			},
+			"tickets": {
+				"columns": {
+					"number": "No.",
+					"subject": "Subject",
+					"customer": "Customer",
+					"site": "Site",
+					"category": "Category",
+					"priority": "Priority",
+					"status": "Status",
+					"channel": "Channel",
+					"assignee": "Assignee",
+					"slaDueAt": "SLA",
+					"createdAt": "Opened",
+					"resolvedAt": "Resolved",
+					"description": "Description",
+					"pinned": "Pinned"
+				},
+				"placeholders": {
+					"number": "Next number",
+					"subject": "Inverter shows an error code",
+					"customer": "Choose a customer",
+					"site": "Choose the installation",
+					"assignee": "Assign to a technician",
+					"description": "What the customer reports, what was already checked…"
+				},
+				"detail": {
+					"resolved": "Resolved {date}",
+					"slaBreached": "SLA breached"
+				},
+				"justNow": "Just now"
+			},
+			"page": {
+				"name": "Service desk",
+				"description": "After-sales tickets as they arrive: triage, assign and resolve them, opening each one in a drawer."
+			},
+			"live": {
+				"missed": "{count} new ticket | {count} new tickets",
+				"newTickets": "{count} new ticket | {count} new tickets"
+			},
+			"stats": {
+				"label": "Service desk at a glance",
+				"open": "Open tickets",
+				"openDetail": "{fresh} new · {unassigned} unassigned",
+				"urgent": "Urgent",
+				"urgentDetail": "Open, resolution promised within {hours} hour | Open, resolution promised within {hours} hours",
+				"breaching": "Past their SLA",
+				"breachingDetail": "Still open past the promised resolution time",
+				"resolution": "Average resolution",
+				"resolutionValue": "{hours} h",
+				"resolutionDetail": "Tickets resolved in the last 30 days"
+			},
+			"table": {
+				"caption": "Tickets",
+				"search": "Search a ticket number or subject",
+				"count": "{count} ticket | {count} tickets",
+				"expandLabel": "Customer's message",
+				"filters": {
+					"assignee": "Assignee",
+					"priority": "Priority",
+					"category": "Category",
+					"ticket": "Ticket"
+				},
+				"footer": {
+					"urgent": "Urgent open",
+					"waiting": "Waiting on customer"
+				},
+				"empty": {
+					"firstRunTitle": "No ticket yet",
+					"firstRunDescription": "Customer requests, monitoring alerts and calls logged by the office land here.",
+					"filteredTitle": "Nothing to handle here",
+					"filteredDescription": "No ticket matches these filters. Clear them to see the whole desk."
+				}
+			},
+			"views": {
+				"all": "All tickets",
+				"open": "Open",
+				"urgent": "Urgent",
+				"unassigned": "Unassigned",
+				"waiting": "Waiting on customer",
+				"breaching": "Breaching SLA",
+				"resolvedRecently": "Resolved in the last 30 days"
+			},
+			"form": {
+				"newTitle": "New ticket",
+				"newDescription": "Log a customer request. The number and the SLA are set automatically.",
+				"editTitle": "Edit ticket",
+				"detailsTitle": "Ticket details"
+			},
+			"actions": {
+				"assign": "Assign to…",
+				"resolve": "Resolve",
+				"reopen": "Reopen"
+			},
+			"bulk": {
+				"assign": {
+					"title": "Assign the ticket | Assign {count} tickets",
+					"description": "Pick who takes it over. A new ticket becomes open. | Pick who takes them over. New tickets become open.",
+					"field": "Assign to",
+					"placeholder": "Choose a technician",
+					"confirm": "Assign",
+					"done": "Ticket assigned | {count} tickets assigned",
+					"invalid": "Choose someone from the service team"
+				},
+				"resolve": {
+					"title": "Resolve this ticket? | Resolve these {count} tickets?",
+					"description": "The ticket is marked resolved now. | Open tickets are marked resolved now; resolved and closed ones stay as they are.",
+					"confirm": "Resolve",
+					"done": "Ticket resolved | {count} tickets resolved"
+				},
+				"reopen": {
+					"title": "Reopen this ticket? | Reopen these {count} tickets?",
+					"description": "The ticket goes back to \"Open\" and its resolution time counts again. | Resolved or closed tickets go back to \"Open\" and their resolution time counts again; tickets still open are left as they are.",
+					"confirm": "Reopen",
+					"done": "Ticket reopened | {count} tickets reopened"
+				}
+			},
+			"quickActions": {
+				"newTicket": "New service ticket"
+			},
+			"notifications": {
+				"category": "Service desk",
+				"categoryDescription": "After-sales tickets that need attention",
+				"urgentSubject": "Urgent tickets",
+				"urgentSubjectDescription": "A customer opened an urgent ticket (4-hour SLA)",
+				"urgent": {
+					"title": "Urgent ticket {number}",
+					"description": "{customer}: {subject}"
+				}
+			},
+			"quickView": {
+				"action": "Quick view",
+				"title": "Ticket",
+				"description": "The customer's request, its SLA and who handles it.",
+				"position": "Ticket {index} of {total}",
+				"notFoundTitle": "This ticket no longer exists",
+				"notFoundDescription": "It was deleted, or the link is wrong."
+			},
+			"delete": {
+				"title": "Delete this ticket? | Delete these {count} tickets?",
+				"description": "Only a resolved or closed ticket can be deleted. This cannot be undone. | Only resolved or closed tickets can be deleted. This cannot be undone.",
+				"confirm": "Delete"
+			},
+			"rules": {
+				"siteOfOtherCustomer": "This installation belongs to another customer. Pick one of this customer's installations or leave the field empty."
+			}
+		}
+	}
+}

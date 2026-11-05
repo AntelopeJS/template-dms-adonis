@@ -4,5 +4,10 @@
     "rootDir": "./",
     "outDir": "./build"
   },
-  "references": [{ "path": "./tsconfig.ace.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.ace.json"
+    }
+  ],
+  "exclude": ["demo", "build", "node_modules"]
 }

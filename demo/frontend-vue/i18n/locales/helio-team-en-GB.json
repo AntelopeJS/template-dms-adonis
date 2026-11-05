@@ -1,0 +1,151 @@
+{
+	"helio": {
+		"team": {
+			"columns": {
+				"name": "Member",
+				"email": "E-mail",
+				"phone": "Phone",
+				"role": "Role",
+				"region": "Region",
+				"online": "Availability",
+				"skills": "Skills",
+				"avatar": "Photo",
+				"color": "Planning colour",
+				"hiredAt": "Joined",
+				"bio": "About"
+			},
+			"placeholders": {
+				"name": "First and last name",
+				"email": "first.last{'@'}helio.example",
+				"skills": "Add a skill"
+			},
+			"hints": {
+				"avatar": "Address (URL) of an image, shown as the member's avatar."
+			},
+			"roles": {
+				"manager": "Manager",
+				"sales": "Sales",
+				"technician": "Technician",
+				"office": "Back office"
+			},
+			"regions": {
+				"liege": "Liège",
+				"namur": "Namur",
+				"brussels": "Brussels",
+				"hainaut": "Hainaut",
+				"luxembourg": "Luxembourg"
+			},
+			"status": {
+				"online": "Available",
+				"offline": "Unavailable"
+			},
+			"page": {
+				"name": "Team",
+				"description": "Who works at Helio, who is available today and how loaded each technician is."
+			},
+			"groups": {
+				"identity": {
+					"label": "Identity",
+					"description": "Name, contact details and photo."
+				},
+				"assignment": {
+					"label": "Role and region",
+					"description": "Where the member works and since when."
+				},
+				"availability": {
+					"label": "Availability",
+					"description": "Whether the member can take work today, and their colour on the planning."
+				},
+				"profile": {
+					"label": "Profile",
+					"description": "Skills used to staff sites and the short bio shown to colleagues."
+				}
+			},
+			"stats": {
+				"label": "Team at a glance",
+				"headcount": "Headcount",
+				"headcount_detail": "Technicians: {technicians} · sales: {sales} · office & management: {office}",
+				"available": "Available now",
+				"available_detail": "Everyone is reachable | {count} member unavailable | {count} members unavailable",
+				"on_site": "Technicians on site",
+				"on_site_value": "{onSite} / {total}",
+				"on_site_detail": "No site running today | {count} site running today | {count} sites running today",
+				"per_tech": "Tickets per tech",
+				"per_tech_detail": "Every open ticket is assigned | {count} open ticket unassigned | {count} open tickets unassigned",
+				"on_site_detail_weekend": "Weekend: no site running | Weekend: {count} site running, resumes Monday | Weekend: {count} sites running, resume Monday"
+			},
+			"load": {
+				"tickets_title": "Service load",
+				"tickets_description": "Open tickets each person holds",
+				"tickets_detail": "Urgent: {urgent} · past SLA: {late}",
+				"tickets_empty": "No open ticket: the service desk is clear.",
+				"tickets_action": "Service desk",
+				"sites_title": "Site assignments",
+				"sites_description": "Active or starting within 14 days",
+				"sites_detail": "Lead on {lead} · crew on {crew}",
+				"sites_empty": "No active project to staff.",
+				"sites_action": "Projects"
+			},
+			"capacity": {
+				"title": "Capacity today",
+				"description": "Field team, availability and ticket coverage",
+				"on_site": "On site",
+				"on_site_hint": "no site running | {count} site running | {count} sites running",
+				"availability": "Team availability",
+				"availability_hint": "everyone reachable | {count} unavailable | {count} unavailable",
+				"tickets": "Open tickets by holder",
+				"tickets_value": "no open ticket | {count} open | {count} open",
+				"tickets_technicians": "{count} with technicians",
+				"tickets_office": "{count} with the office",
+				"tickets_unassigned": "none unassigned | {count} unassigned | {count} unassigned",
+				"on_site_hint_weekend": "weekend | weekend, resumes Monday | weekend, resume Monday"
+			},
+			"table": {
+				"caption": "Team members",
+				"search": "Search a name or an e-mail",
+				"count": "No member | {count} member | {count} members",
+				"summary_available": "Available",
+				"summary_technicians": "Technicians",
+				"expand_label": "Profile and contact",
+				"expand_bio": "About"
+			},
+			"views": {
+				"everyone": "Everyone",
+				"available": "Available now",
+				"by_role": "By role",
+				"newcomers": "Joined this year",
+				"directory": "Phone directory"
+			},
+			"empty": {
+				"first_title": "No team member yet",
+				"first_description": "Add your technicians, sales reps and office staff to plan sites and assign tickets.",
+				"filtered_title": "No member matches",
+				"filtered_description": "Try another role, region or name."
+			},
+			"form": {
+				"new_title": "New team member",
+				"new_description": "Their role and region decide which sites and tickets they receive.",
+				"edit_title": "Edit team member",
+				"edit_description": "Changes apply to plannings and ticket assignment straight away.",
+				"details_title": "Team member",
+				"online_label": "Reachable now"
+			},
+			"delete": {
+				"title": "Remove {name} from the team? | Remove these {count} members from the team?",
+				"description": "Their open tickets become unassigned again. Their sites keep the history but will need a new owner.",
+				"confirm": "Remove member | Remove {count} members"
+			},
+			"quick": {
+				"add": "New team member"
+			},
+			"quickView": {
+				"action": "Quick view",
+				"title": "Team member",
+				"description": "Role, region, skills and contact details.",
+				"position": "Member {index} of {total}",
+				"notFoundTitle": "This team member is no longer listed",
+				"notFoundDescription": "They were removed from the team, or the link is wrong."
+			}
+		}
+	}
+}

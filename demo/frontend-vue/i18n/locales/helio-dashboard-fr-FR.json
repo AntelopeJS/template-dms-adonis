@@ -1,0 +1,107 @@
+{
+	"helio": {
+		"dashboard": {
+			"title": "Tableau de bord",
+			"description": "Ventes, chantiers, service après-vente et trésorerie en un coup d'œil, sur la période de votre choix.",
+			"compareLabel": "vs comparaison",
+			"activityTypes": {
+				"dealWon": "Affaire gagnée",
+				"quoteSent": "Devis envoyé",
+				"quoteAccepted": "Devis accepté",
+				"projectStarted": "Chantier démarré",
+				"projectDone": "Installation terminée",
+				"ticketOpened": "Ticket ouvert",
+				"ticketResolved": "Ticket résolu",
+				"ticketReopened": "Ticket rouvert",
+				"invoicePaid": "Facture payée",
+				"invoiceOverdue": "Facture en retard"
+			},
+			"offline": {
+				"title": "{count} site ne remonte plus de données | {count} sites ne remontent plus de données",
+				"description": "{sites} : aucune donnée depuis {since}. Leur production est perdue jusqu'à l'intervention d'un technicien.",
+				"service": "Service après-vente",
+				"action": "Supervision du parc"
+			},
+			"snapshot": {
+				"label": "En ce moment",
+				"money": "{amount}",
+				"pipeline": "Pipeline ouvert",
+				"pipelineDetail": "{count} affaire en cours, {weighted} pondérés | {count} affaires en cours, {weighted} pondérés",
+				"worksites": "Chantiers en cours",
+				"worksitesDetail": "aucun ne démarre dans les 14 prochains jours | {count} démarre dans les 14 prochains jours | {count} démarrent dans les 14 prochains jours",
+				"fleet": "Sites en ligne",
+				"fleetValue": "{online} / {total}",
+				"fleetDetail": "hors ligne : {offline} · dégradés : {degraded}",
+				"urgent": "Tickets urgents",
+				"urgentDetail": "Aucun SLA menacé dans les 24 h | {count} SLA échu ou à échéance sous 24 h | {count} SLA échus ou à échéance sous 24 h"
+			},
+			"kpis": {
+				"revenue": "Chiffre d'affaires facturé",
+				"revenueDescription": "Factures émises, hors TVA",
+				"signed": "Prises de commande",
+				"signedDescription": "Devis signés, hors TVA",
+				"conversion": "Taux de transformation",
+				"conversionDescription": "Devis acceptés sur devis tranchés",
+				"tickets": "Nouveaux tickets",
+				"ticketsDescription": "Demandes de service ouvertes sur la période"
+			},
+			"revenueTrend": {
+				"title": "Chiffre d'affaires cumulé",
+				"description": "Facturation jour après jour, comparée à la période de référence",
+				"current": "Période",
+				"previous": "Période de comparaison"
+			},
+			"productMix": {
+				"title": "Répartition des ventes",
+				"description": "Ce que les devis signés ont vendu, par famille de produits",
+				"series": "Prises de commande"
+			},
+			"installations": {
+				"title": "Installations de la période",
+				"description": "Chantiers démarrés sur la période, par mois et par type"
+			},
+			"topReps": {
+				"title": "Commerciaux",
+				"description": "Par devis signés",
+				"signed": "Aucun devis signé | {count} devis signé | {count} devis signés",
+				"empty": "Aucun commercial pour le moment",
+				"action": "Pipeline"
+			},
+			"ticketHeatmap": {
+				"title": "Quand les clients nous contactent",
+				"description": "Tickets ouverts par jour de la semaine et tranche de deux heures (heure de début)"
+			},
+			"activity": {
+				"title": "Activité récente"
+			},
+			"shortcuts": {
+				"title": "Espaces de travail",
+				"description": "Là où se gère chaque pan de l'activité.",
+				"pipeline": "Pipeline",
+				"pipelineDescription": "Les affaires, du premier contact à la signature.",
+				"pipelineState": "Aucune affaire à conclure sous 30 jours | {count} affaire à conclure sous 30 jours | {count} affaires à conclure sous 30 jours",
+				"quotes": "Devis",
+				"quotesDescription": "Les offres, leurs lignes et leurs signatures.",
+				"quotesState": "Aucun devis en attente de signature | {count} devis en attente de signature | {count} devis en attente de signature",
+				"customers": "Clients",
+				"customersDescription": "Les particuliers et entreprises pour qui nous travaillons.",
+				"customersState": "Aucun client actif | {count} client actif | {count} clients actifs",
+				"projects": "Chantiers",
+				"projectsDescription": "Les chantiers, les équipes et le planning.",
+				"projectsState": "Aucun chantier en cours | {count} chantier en cours | {count} chantiers en cours",
+				"service": "Service après-vente",
+				"serviceDescription": "Les demandes des clients et leurs SLA.",
+				"serviceState": "Aucun ticket ouvert | {count} ticket ouvert | {count} tickets ouverts",
+				"team": "Équipe",
+				"teamDescription": "Commerciaux, techniciens et administration.",
+				"teamState": "{online} sur {total} en ligne",
+				"invoices": "Factures",
+				"invoicesDescription": "Facturation, paiements et relances.",
+				"invoicesState": "{amount} à encaisser",
+				"monitoring": "Supervision du parc",
+				"monitoringDescription": "La production en direct des sites installés.",
+				"monitoringState": "{kwh} kWh produits aujourd'hui"
+			}
+		}
+	}
+}
