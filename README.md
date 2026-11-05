@@ -16,8 +16,9 @@ and its dashboard inside your own app, in **embedded** mode.
 - The DMS modules are ordinary npm dependencies, listed in the provider's
   `modules` map. The public options of `@antelopejs/dms` are in
   `providers/dms_config.ts`, which the provider and `antelope.config.ts` share.
-  `antelope.config.ts` only tells `pnpm frontend:build` which installed modules
-  ship a dashboard frontend, and finds them in `package.json` by itself.
+  `antelope.config.ts` tells `pnpm frontend:build` and `pnpm frontend:start`
+  which installed modules ship a dashboard frontend, found in `package.json`,
+  and gives `@antelopejs/dms` those public options.
 - Application code reaches the DMS through `runtime.use()`. `start/routes.ts`
   has an example on `GET /dms/info`.
 - The dashboard (`@antelopejs/dms-frontend`) is built against the embedded DMS

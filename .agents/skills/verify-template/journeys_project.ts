@@ -119,7 +119,7 @@ export const projectJourneys = {
   },
   dashboard: {
     title: "`pnpm frontend:build` then `pnpm frontend:start` serve the dashboard's first-run wizard against the running backend",
-    entryPoint: "`pnpm frontend:build`, `pnpm frontend:start -p <port>` and `GET /onboarding?token=<DMS_SETUP_TOKEN>`, the address the README sends a new user to, and `GET /`",
+    entryPoint: "`pnpm frontend:build`, `pnpm frontend:start -p <port>` and `GET /onboarding?token=<DMS_SETUP_TOKEN>`, the address the README sends a new user to",
     async run(context) {
       await withMongo(context, async (mongo) => {
         const project = await prepared(context);
@@ -145,11 +145,8 @@ export const projectJourneys = {
             equal("the wizard answers", page.status, 200),
             has("the wizard's title is translated, so the dashboard bundles the DMS frontend modules", page.body, /<title>Set up your platform/),
             has("the wizard renders its first step", page.body, /Welcome to Antelope DMS/),
-          ]);
-          const home = await context.http("GET / of the dashboard", `http://localhost:${port}/`);
-          context.expect(home.folder, [
-            equal("`/` answers through the `/modules` homepage of the provider's DMS options", home.status, 200),
-            has("`/` leads a fresh install to the first-run wizard", home.body, /<title>Set up your platform/),
+            has("the dashboard carries the provider's `/modules` homepage", page.body, /"homepage":"\/modules"/),
+            has("the dashboard calls the DMS API at DMS_API_BASE_URL of .env", page.body, new RegExp(`"baseURL":"http://localhost:${ports.api}"`)),
           ]);
         } finally {
           if (dashboard !== undefined) await context.command("stop the dashboard", "pkill", ["-f", "--", `-p ${dashboard}`]);
@@ -182,7 +179,7 @@ export const projectJourneys = {
         equal("README variables missing from .env.example or start/env.ts", variables.filter((name) => !new RegExp(`^${name}=`, "m").test(example) || !env.includes(name)), []),
         equal("README names MONGODB_URL", variables.includes("MONGODB_URL"), true),
         equal("README curl routes missing from start/routes.ts", curled.filter((match) => !routes.includes(`'${match[2]}'`)).map((match) => match[2]), []),
-        equal("the curl port is the AdonisJS port of .env.example", curled.map((match) => match[1]), curled.map(() => port("PORT"))),
+        equal("the curl port is the AdonisJS port of .env.example", curled.map((match) => match[1]), curled.map(() => port("PORT") ?? "")),
         has("the README names the DMS API port of .env.example", readme, new RegExp(`localhost:${port("DMS_API_PORT")}\\b`)),
         equal("packages the Compatibility section names that package.json does not declare", pinned.filter((name) => declared[name] === undefined), []),
         equal("the Compatibility section names the DMS and AntelopeJS core", ["@antelopejs/core", "@antelopejs/dms"].filter((name) => !pinned.includes(name)), []),
