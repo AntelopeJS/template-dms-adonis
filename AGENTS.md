@@ -3,7 +3,7 @@
 This AdonisJS application runs the AntelopeJS DMS as an embedded guest runtime:
 `antelope.config.ts` is read only by `ajs dms build` and `ajs dms start`, and lists
 the installed dependencies that ship a dashboard frontend. It gives `@antelopejs/dms`
-the options of `providers/dms_config.ts`, as the provider does, so the dashboard and
+the public options of `providers/dms_config.ts`, as the provider does, so the dashboard and
 the runtime agree on the homepage and URLs. `providers/antelope_provider.ts` creates the
 runtime with `createRuntime` and lists the modules, which are ordinary npm
 dependencies. Host code reaches the DMS through

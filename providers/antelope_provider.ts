@@ -1,7 +1,7 @@
 import type { ApplicationService } from '@adonisjs/core/types'
 import { createRuntime, type AntelopeRuntime } from '@antelopejs/core'
 import env from '#start/env'
-import { dmsConfig } from '#providers/dms_config'
+import { dmsOptions } from '#providers/dms_config'
 
 export const AntelopeRuntimeBinding = 'antelope.runtime'
 
@@ -31,7 +31,14 @@ export default class AntelopeProvider {
     this.runtime = createRuntime({
       projectFolder: this.app.makePath(),
       modules: {
-        '@antelopejs/dms': { config: dmsConfig((name) => env.get(name)) },
+        '@antelopejs/dms': {
+          config: {
+            ...dmsOptions((name) => env.get(name)),
+            auth: { jwtSecret: env.get('DMS_JWT_SECRET') },
+            htmlRender: { serviceSecret: env.get('DMS_HTML_RENDER_SECRET') },
+            frontend: { bootstrapSecret: env.get('DMS_BOOTSTRAP_SECRET') },
+          },
+        },
         '@antelopejs/dms-api': {},
         '@antelopejs/dms-media': {},
         '@antelopejs/dms-automation': {},
