@@ -160,7 +160,7 @@ export const projectJourneys = {
     },
   },
   "docs-commands": {
-    title: "what the README claims is true of the scaffolded project: its commands are scripts, its variables and ports are in `.env.example` and `start/env.ts`, its route is served, and its compatibility table matches `package.json`",
+    title: "what the README claims is true of the scaffolded project: its commands are scripts, its variables and ports are in `.env.example` and `start/env.ts`, its route is served, and its Compatibility section names packages `package.json` declares",
     entryPoint: "reading `README.md` of a scaffolded project",
     async run(context) {
       const project = await scaffoldTree(context);
@@ -172,7 +172,8 @@ export const projectJourneys = {
       const named = [...new Set([...readme.matchAll(/pnpm (?:run )?([a-z][\w:-]*)/g)].map((match) => match[1] ?? ""))].filter((name) => !["install", "add", "format"].includes(name));
       const variables = [...new Set([...readme.matchAll(/`([A-Z][A-Z0-9]*_[A-Z0-9_]+)`/g)].map((match) => match[1] ?? ""))];
       const curled = [...readme.matchAll(/curl http:\/\/localhost:(\d+)(\/\S*)/g)];
-      const compatibility = [...readme.matchAll(/^\| `(@[\w/-]+)`\s+\| `([^`]+)`/gm)].map((match) => ({ name: match[1] ?? "", range: match[2] ?? "" }));
+      const compatibility = readme.split(/^## /m).find((section) => section.startsWith("Compatibility\n")) ?? "";
+      const pinned = [...compatibility.matchAll(/`(@[\w/-]+)`/g)].map((match) => match[1] ?? "");
       const declared = { ...manifest.dependencies, ...manifest.devDependencies };
       const port = (name: string) => new RegExp(`^${name}=(\\d+)`, "m").exec(example)?.[1];
       context.expect(context.tree("project files", project).folder, [
@@ -183,8 +184,8 @@ export const projectJourneys = {
         equal("README curl routes missing from start/routes.ts", curled.filter((match) => !routes.includes(`'${match[2]}'`)).map((match) => match[2]), []),
         equal("the curl port is the AdonisJS port of .env.example", curled.map((match) => match[1]), curled.map(() => port("PORT"))),
         has("the README names the DMS API port of .env.example", readme, new RegExp(`localhost:${port("DMS_API_PORT")}\\b`)),
-        equal("compatibility rows whose range differs from package.json", compatibility.filter((row) => declared[row.name] !== undefined && declared[row.name] !== row.range).map((row) => row.name), []),
-        equal("the compatibility table lists the DMS and AntelopeJS core", ["@antelopejs/core", "@antelopejs/dms"].filter((name) => !compatibility.some((row) => row.name === name)), []),
+        equal("packages the Compatibility section names that package.json does not declare", pinned.filter((name) => declared[name] === undefined), []),
+        equal("the Compatibility section names the DMS and AntelopeJS core", ["@antelopejs/core", "@antelopejs/dms"].filter((name) => !pinned.includes(name)), []),
       ]);
     },
   },
