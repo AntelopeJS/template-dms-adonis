@@ -106,13 +106,14 @@ export default class AntelopeProvider {
       await this.runtime?.start()
     } catch (error) {
       const mongoUnreachable =
+        this.app.inTest &&
         error instanceof AggregateError &&
         error.errors.some(
           (cause) => cause instanceof Error && cause.name === 'MongoServerSelectionError'
         )
       if (mongoUnreachable) {
         throw new Error(
-          `MongoDB is unreachable at ${env.get('MONGODB_URL')}. Start it with \`docker compose -f .github/compose.yml up -d --wait\`.`,
+          'The tests need MongoDB at MONGODB_URL and none answered. Start it with `docker compose -f .github/compose.yml up -d --wait`.',
           { cause: error }
         )
       }
