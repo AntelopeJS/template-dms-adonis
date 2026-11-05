@@ -9,8 +9,8 @@
 		"@antelopejs/dms-frontend": ">=0.10.0 <0.11.0"
 	},
 	"scripts": {
-		"dev": "pnpm --dir .. frontend:dev",
-		"build": "pnpm --dir .. exec ajs dms build",
+		"dev": "pnpm --dir ../.. frontend:dev",
+		"build": "pnpm --dir ../.. frontend:build",
 		"format": "prettier --write .",
 		"lint": "node scripts/check-locales.mjs && eslint .",
 		"lint:fix": "eslint . --fix",

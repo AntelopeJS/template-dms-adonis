@@ -23,3 +23,12 @@ rsync -a --delete \
   --exclude .output \
   --exclude pnpm-lock.yaml \
   "$source_root/frontend-vue/" "$target_root/frontend-vue/"
+
+node -e '
+const fs = require("node:fs");
+const file = process.argv[1];
+const manifest = JSON.parse(fs.readFileSync(file, "utf8"));
+manifest.scripts.dev = "pnpm --dir ../.. frontend:dev";
+manifest.scripts.build = "pnpm --dir ../.. frontend:build";
+fs.writeFileSync(file, `${JSON.stringify(manifest, null, "\t")}\n`);
+' "$target_root/frontend-vue/package.json"

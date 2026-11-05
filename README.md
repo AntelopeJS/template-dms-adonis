@@ -173,9 +173,10 @@ run:
 pnpm demo:sync ../template-dms-demo
 ```
 
-The script copies `src/`, `content/` and `frontend-vue/` into `demo/`.
-`git diff demo/` then shows what the demo changed, and is empty when the two
-templates match.
+The script copies `src/`, `content/` and `frontend-vue/` into `demo/`, and
+points the `dev` and `build` scripts of `demo/frontend-vue` at the project root,
+where `frontend:dev` and `frontend:build` live. `git diff demo/` then shows what
+the demo changed, and is empty when the two templates match.
 
 ## Contributing
 
