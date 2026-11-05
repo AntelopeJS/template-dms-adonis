@@ -1,6 +1,38 @@
+import { existsSync, readFileSync } from 'node:fs'
+
+const isObject = (value: unknown): value is object => typeof value === 'object' && value !== null
+
+const readManifest = (path: string) => {
+  const url = new URL(path, import.meta.url)
+  if (!existsSync(url)) return {}
+  const manifest: unknown = JSON.parse(readFileSync(url, 'utf8'))
+  return isObject(manifest) ? manifest : {}
+}
+
+const manifest = readManifest('./package.json')
+
+const dependencies =
+  'dependencies' in manifest && isObject(manifest.dependencies)
+    ? Object.keys(manifest.dependencies)
+    : []
+
+const frontendModules = dependencies.filter(
+  (name) => 'dmsFrontend' in readManifest(`./node_modules/${name}/package.json`)
+)
+
 /**
- * Not read at runtime: `ajs project init` keeps a template's own `antelope.config.ts` instead of
- * writing one and building a module that an AdonisJS application does not have. The modules this
- * application loads are listed in `providers/antelope_provider.ts`.
+ * Read by `ajs dms build` and `ajs dms start` only: they bundle the dashboard frontend of each
+ * module listed here. It lists every dependency that ships one (`dmsFrontend` in its
+ * `package.json`), so a DMS module added with `pnpm add` reaches the dashboard after
+ * `pnpm frontend:build`. The modules the application runs, and their options, are in
+ * `providers/antelope_provider.ts`.
  */
-export default { name: 'template-dms-adonis', modules: {} }
+export default {
+  name: 'template-dms-adonis',
+  modules: Object.fromEntries(
+    frontendModules.map((name) => [
+      name,
+      { source: { type: 'local', path: `node_modules/${name}` } },
+    ])
+  ),
+}

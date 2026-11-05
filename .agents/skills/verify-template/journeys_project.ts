@@ -119,11 +119,12 @@ export const projectJourneys = {
   },
   dashboard: {
     title: "`pnpm frontend:build` then `pnpm frontend:start` serve the dashboard's first-run wizard against the running backend",
-    entryPoint: "`pnpm frontend:build`, `pnpm frontend:start -p <port>` and `GET /`",
+    entryPoint: "`pnpm frontend:build`, `pnpm frontend:start -p <port>` and `GET /onboarding?token=<DMS_SETUP_TOKEN>`, the address the README sends a new user to",
     async run(context) {
       await withMongo(context, async (mongo) => {
         const project = await prepared(context);
-        const ports = await writeEnv(context, project, mongo);
+        const token = "verify-dashboard-setup-token";
+        const ports = await writeEnv(context, project, mongo, { DMS_SETUP_TOKEN: token });
         let server: Server | undefined;
         let dashboard: number | undefined;
         try {
@@ -134,12 +135,17 @@ export const projectJourneys = {
           const started = await context.command("pnpm frontend:start", "sh", ["-c", `pnpm frontend:start -p ${port} > dashboard.log 2>&1 & echo $! > dashboard.pid`], { cwd: project });
           context.expect(started.folder, [exitIs(started, 0)], { critical: true });
           dashboard = port;
-          let page = await context.http("GET the dashboard", `http://localhost:${port}/`);
+          const wizard = `http://localhost:${port}/onboarding?token=${token}`;
+          let page = await context.http("GET the first-run wizard", wizard);
           for (let attempt = 0; attempt < 60 && page.status !== 200; attempt += 1) {
             await sleep(1000);
-            page = await context.http(`GET the dashboard (${attempt + 2})`, `http://localhost:${port}/`);
+            page = await context.http(`GET the first-run wizard (${attempt + 2})`, wizard);
           }
-          context.expect(page.folder, [equal("the dashboard answers", page.status, 200), has("an HTML page", page.body, /<html/i)]);
+          context.expect(page.folder, [
+            equal("the wizard answers", page.status, 200),
+            has("the wizard's title is translated, so the dashboard bundles the DMS frontend modules", page.body, /<title>Set up your platform/),
+            has("the wizard renders its first step", page.body, /Welcome to Antelope DMS/),
+          ]);
         } finally {
           if (dashboard !== undefined) await context.command("stop the dashboard", "pkill", ["-f", "--", `-p ${dashboard}`]);
           if (server) await stop(context, server, "stop");

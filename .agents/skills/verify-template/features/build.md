@@ -3,6 +3,7 @@ covers:
   - package.json
   - pnpm-lock.yaml
   - adonisrc.ts
+  - antelope.config.ts
 docs:
   - README.md
 journeys:
@@ -12,12 +13,12 @@ journeys:
 
 # Build
 
-The scripts, the dependency set and the AdonisJS manifest.
+The scripts, the dependency set, the AdonisJS manifest, and `antelope.config.ts`, which tells the dashboard build which modules ship a frontend.
 
 ## Sub-features
 
 - `build-output`: `pnpm build` writes `build/bin/server.js`, `build/ace.js`, `build/package.json`, the provider and the routes.
-- `dashboard`: with the backend running, `pnpm frontend:build` then `pnpm frontend:start -p <port>` serve an HTML page at `/` (the first-run wizard of an empty database).
+- `dashboard`: with the backend running and `DMS_SETUP_TOKEN` set, `pnpm frontend:build` then `pnpm frontend:start -p <port>` serve the first-run wizard of an empty database at `/onboarding?token=<DMS_SETUP_TOKEN>`, with its translated title and first step. An empty `modules` map in `antelope.config.ts` builds a dashboard with no DMS frontend module, whose wizard has an untranslated title and no content.
 
 ## How to get to it (user POV)
 
