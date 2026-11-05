@@ -13,10 +13,11 @@ and its dashboard inside your own app, in **embedded** mode.
 - AdonisJS owns the process, with its HTTP server, signals, logger and
   configuration. The DMS starts and stops with it, from
   `providers/antelope_provider.ts`.
-- There is no project configuration to maintain. The DMS modules are ordinary
-  npm dependencies, listed in the provider's `modules` map. `antelope.config.ts`
-  only tells `pnpm frontend:build` which installed modules ship a dashboard
-  frontend, and finds them in `package.json` by itself.
+- The DMS modules are ordinary npm dependencies, listed in the provider's
+  `modules` map. The options of `@antelopejs/dms` are in
+  `providers/dms_config.ts`, which the provider and `antelope.config.ts` share.
+  `antelope.config.ts` only tells `pnpm frontend:build` which installed modules
+  ship a dashboard frontend, and finds them in `package.json` by itself.
 - Application code reaches the DMS through `runtime.use()`. `start/routes.ts`
   has an example on `GET /dms/info`.
 - The dashboard (`@antelopejs/dms-frontend`) is built against the embedded DMS
