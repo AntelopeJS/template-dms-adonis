@@ -43,7 +43,7 @@
     "suppressions:update": "antelopejs-suppressions --update"
   },
   "dependencies": {
-    "@adonisjs/core": "^6.18.0",
+    "@adonisjs/core": "^7.6.0",
     "@antelopejs/api": "^1.7.0",
     "@antelopejs/auth-jwt": "^1.1.0",
     "@antelopejs/core": "^1.20.0",
@@ -58,25 +58,24 @@
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
-    "@adonisjs/assembler": "^7.8.2",
+    "@adonisjs/assembler": "^8.6.0",
     "@adonisjs/eslint-plugin": "^2.2.2",
-    "@adonisjs/tsconfig": "^1.4.0",
+    "@adonisjs/tsconfig": "^2.0.0",
     "@antelopejs/dms-frontend": ">=0.10.0 <1.0.0",
     "@antelopejs/tooling-configs": "^0.2.18",
-    "@japa/assert": "^4.0.1",
-    "@japa/plugin-adonisjs": "^4.0.0",
-    "@japa/runner": "^4.2.0",
-    "@swc/core": "1.11.24",
-    "@types/node": "^22.15.18",
+    "@japa/assert": "^4.2.0",
+    "@japa/plugin-adonisjs": "^5.2.0",
+    "@japa/runner": "^5.4.0",
+    "@poppinss/ts-exec": "^1.5.1",
+    "@types/node": "^24.0.0",
     "cross-env": "^10.1.0",
-    "hot-hook": "^0.4.0",
+    "hot-hook": "^1.0.0",
     "knip": "^6.44.1",
     "oxfmt": "^0.66.0",
     "oxlint": "1.81.0",
     "oxlint-tsgolint": "^7.0.2005",
-    "pino-pretty": "^13.0.0",
-    "ts-node-maintained": "^10.9.5",
-    "typescript": "~5.8"
+    "pino-pretty": "^13.2.0",
+    "typescript": "~6.0.3"
   },
   "packageManager": "pnpm@10.2.0",
   "pnpm": {

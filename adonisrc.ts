@@ -1,11 +1,6 @@
 import { defineConfig } from '@adonisjs/core/app'
 
 export default defineConfig({
-  experimental: {
-    mergeMultipartFieldsAndFiles: true,
-    shutdownInReverseOrder: true,
-  },
-
   /**
    * Ace commands registered from packages. The application's own commands are scanned from the
    * `./commands` directory.
@@ -28,12 +23,12 @@ export default defineConfig({
     /** The test suites `node ace test` runs. Add or remove suites as the application needs. */
     suites: [
       {
-        files: ['tests/unit/**/*.spec(.ts|.js)'],
+        files: ['tests/unit/**/*.spec.{ts,js}'],
         name: 'unit',
         timeout: 2000,
       },
       {
-        files: ['tests/functional/**/*.spec(.ts|.js)'],
+        files: ['tests/functional/**/*.spec.{ts,js}'],
         name: 'functional',
         timeout: 30000,
       },
