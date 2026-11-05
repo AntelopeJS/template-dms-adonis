@@ -36,4 +36,9 @@ export default await Env.create(new URL('../', import.meta.url), {
    * generates one and prints the onboarding address with it in the `pnpm dev` terminal.
    */
   DMS_SETUP_TOKEN: Env.schema.string.optional(),
+
+  /** The Stripe account of `@antelopejs/dms-saas`. The demo runs on test placeholders. */
+  STRIPE_SECRET_KEY: Env.schema.string(),
+  STRIPE_PUBLISHABLE_KEY: Env.schema.string(),
+  STRIPE_WEBHOOK_SECRET: Env.schema.string(),
 })

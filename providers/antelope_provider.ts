@@ -1,7 +1,7 @@
 import type { ApplicationService } from '@adonisjs/core/types'
 import { createRuntime, type AntelopeRuntime } from '@antelopejs/core'
 import env from '#start/env'
-import { dmsOptions } from '#providers/dms_config'
+import { publicModuleOptions } from '#providers/public_module_options'
 
 export const AntelopeRuntimeBinding = 'antelope.runtime'
 
@@ -28,21 +28,35 @@ export default class AntelopeProvider {
   constructor(protected app: ApplicationService) {}
 
   register() {
+    const publicOptions = publicModuleOptions((name) => env.get(name))
     this.runtime = createRuntime({
       projectFolder: this.app.makePath(),
       modules: {
         '@antelopejs/dms': {
           config: {
-            ...dmsOptions((name) => env.get(name)),
+            ...publicOptions['@antelopejs/dms'],
             auth: { jwtSecret: env.get('DMS_JWT_SECRET') },
             htmlRender: { serviceSecret: env.get('DMS_HTML_RENDER_SECRET') },
             frontend: { bootstrapSecret: env.get('DMS_BOOTSTRAP_SECRET') },
           },
         },
         '@antelopejs/dms-api': {},
-        '@antelopejs/dms-media': {},
-        '@antelopejs/dms-automation': {},
         '@antelopejs/dms-database': {},
+        '@antelopejs/dms-automation': {},
+        '@antelopejs/dms-saas': {
+          config: {
+            stripe: {
+              ...publicOptions['@antelopejs/dms-saas'].stripe,
+              secretKey: env.get('STRIPE_SECRET_KEY'),
+              webhookSecret: env.get('STRIPE_WEBHOOK_SECRET'),
+            },
+          },
+        },
+        '@antelopejs/dms-lang': { config: { editable: true } },
+        '@antelopejs/dms-media': {},
+        '@antelopejs/dms-marketing': { config: publicOptions['@antelopejs/dms-marketing'] },
+        '@antelopejs/dms-mailing': {},
+        'template-dms-demo': { path: this.app.makePath('demo') },
         '@antelopejs/api': {
           config: {
             publicBaseUrl: env.get('DMS_API_BASE_URL'),
@@ -72,6 +86,7 @@ export default class AntelopeProvider {
             storagePath: '.antelope/file-storage',
             baseUrl: env.get('DMS_API_BASE_URL'),
             defaultVisibility: 'private',
+            stagingExpiration: 24 * 60 * 60,
           },
         },
         '@antelopejs/nodemailer': {

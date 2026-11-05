@@ -24,23 +24,24 @@
   },
   "scripts": {
     "start": "node bin/server.js",
-    "build": "node ace build",
-    "dev": "node ace serve --hmr",
+    "build": "pnpm --dir demo build && node ace build",
+    "dev": "pnpm --dir demo build && node ace serve --hmr",
     "frontend:dev": "ajs dms dev -p 3001",
     "frontend:build": "cross-env NODE_ENV=production ajs dms build",
     "frontend:start": "cross-env NODE_ENV=production ajs dms start -p 3001",
-    "test": "node ace test",
-    "lint": "oxlint",
-    "format": "oxfmt .",
-    "typecheck": "tsc --noEmit",
-    "format:check": "oxfmt --check .",
-    "knip": "knip",
+    "test": "pnpm --dir demo test && node ace test",
+    "lint": "oxlint --disable-nested-config && pnpm --dir demo lint",
+    "format": "oxfmt . && pnpm --dir demo format",
+    "typecheck": "tsc --noEmit && pnpm --dir demo typecheck",
+    "format:check": "oxfmt --check . && pnpm --dir demo format:check",
+    "knip": "knip --workspace . && pnpm --dir demo knip",
     "checks": "antelopejs-checks",
     "size": "antelopejs-check-size",
     "sync": "antelopejs-sync --profile template",
     "sync:check": "antelopejs-sync --check --profile template",
     "suppressions": "antelopejs-suppressions",
-    "suppressions:update": "antelopejs-suppressions --update"
+    "suppressions:update": "antelopejs-suppressions --update",
+    "demo:sync": "scripts/sync-demo.sh"
   },
   "dependencies": {
     "@adonisjs/core": "^7.6.0",
@@ -51,7 +52,11 @@
     "@antelopejs/dms-api": ">=0.6.2 <1.0.0",
     "@antelopejs/dms-automation": ">=0.9.0 <1.0.0",
     "@antelopejs/dms-database": ">=0.4.1 <1.0.0",
+    "@antelopejs/dms-lang": ">=0.5.1 <1.0.0",
+    "@antelopejs/dms-mailing": ">=0.9.0 <1.0.0",
+    "@antelopejs/dms-marketing": ">=0.9.0 <1.0.0",
     "@antelopejs/dms-media": ">=0.7.1 <1.0.0",
+    "@antelopejs/dms-saas": ">=0.10.0 <1.0.0",
     "@antelopejs/file-storage-local": "^0.2.0",
     "@antelopejs/mongodb": "^1.6.2",
     "@antelopejs/nodemailer": "^0.0.8",
@@ -61,7 +66,7 @@
     "@adonisjs/assembler": "^8.6.0",
     "@adonisjs/eslint-plugin": "^2.2.2",
     "@adonisjs/tsconfig": "^2.0.0",
-    "@antelopejs/dms-frontend": ">=0.10.0 <1.0.0",
+    "@antelopejs/dms-frontend": ">=0.10.0 <0.11.0",
     "@antelopejs/tooling-configs": "^0.2.18",
     "@japa/assert": "^4.2.0",
     "@japa/plugin-adonisjs": "^5.2.0",
@@ -80,7 +85,8 @@
   "packageManager": "pnpm@10.2.0",
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@swc/core"
+      "@swc/core",
+      "sharp"
     ]
   },
   "hotHook": {

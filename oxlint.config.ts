@@ -12,6 +12,7 @@ export default defineConfig({
   ignorePatterns: [
     ...ANTELOPE_IGNORE_PATTERNS,
     '.dms-frontend/**',
+    'demo/**',
     'public/assets/**',
     'resources/**',
     '**/__snapshots__/**',

@@ -19,6 +19,17 @@ export default defineConfig({
 
   preloads: [() => import('#start/routes'), () => import('#start/kernel')],
 
+  /**
+   * The demo module the runtime loads from `demo/`, copied into the production build: its manifest,
+   * its compiled code, the Markdown it reads and the catalogs dms-lang edits.
+   */
+  metaFiles: [
+    { pattern: 'demo/package.json', reloadServer: false },
+    { pattern: 'demo/dist/**/*.js', reloadServer: false },
+    { pattern: 'demo/content/**', reloadServer: false },
+    { pattern: 'demo/frontend-vue/i18n/**', reloadServer: false },
+  ],
+
   tests: {
     /** The test suites `node ace test` runs. Add or remove suites as the application needs. */
     suites: [
