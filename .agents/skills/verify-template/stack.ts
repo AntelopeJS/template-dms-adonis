@@ -6,7 +6,24 @@ import { equal, exists, exitIs, type CommandResult, type JourneyContext } from "
 
 export const DEFAULT_DATABASE = "template_dms_adonis";
 export const SYSTEM_DATABASES = ["admin", "config", "local"];
-export const EXPECTED_MODULES = ["@antelopejs/dms", "@antelopejs/api", "@antelopejs/mongodb", "@antelopejs/auth-jwt", "@antelopejs/file-storage-local", "@antelopejs/nodemailer"];
+export const EXPECTED_MODULES = [
+  "@antelopejs/dms",
+  "@antelopejs/dms-api",
+  "@antelopejs/dms-database",
+  "@antelopejs/dms-automation",
+  "@antelopejs/dms-saas",
+  "@antelopejs/dms-lang",
+  "@antelopejs/dms-media",
+  "@antelopejs/dms-marketing",
+  "@antelopejs/dms-mailing",
+  "template-dms-demo",
+  "@antelopejs/api",
+  "@antelopejs/mongodb",
+  "@antelopejs/auth-jwt",
+  "@antelopejs/file-storage-local",
+  "@antelopejs/nodemailer",
+];
+export const DEMO_FRONTEND_MODULE = "template-dms-demo-frontend-vue";
 const BOOT_TIMEOUT_MS = 90_000;
 const STOP_TIMEOUT_MS = 20_000;
 

@@ -20,7 +20,7 @@ The application's HTTP surface: the AdonisJS server on `:3333` with the two exam
 
 ## Sub-features
 
-- `serve-structure`: `node ace serve` boots; `GET /` answers `{ host: 'adonisjs', dms: { running: true, modules } }` with the six provider modules; `GET /dms/info` answers `servedBy`, the client base url and the dashboard module names; MongoDB holds the DMS collections; Ctrl+C ends the server.
+- `serve-structure`: `node ace serve` boots; `GET /` answers `{ host: 'adonisjs', dms: { running: true, modules } }` with the every module the provider loads; `GET /dms/info` answers `servedBy`, the client base url and the dashboard module names; MongoDB holds the DMS collections; Ctrl+C ends the server.
 - `not-found`: an unknown route and a wrong method answer 404.
 - `serve-hmr`: `node ace serve --hmr` (what `pnpm dev` runs) answers the same routes, and the port refuses after Ctrl+C.
 

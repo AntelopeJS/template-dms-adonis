@@ -29,7 +29,7 @@ installer, translated in English and French.
   controllers, `demo/content` the Markdown of its home page and
   `demo/frontend-vue` its frontend module and translations. It is a workspace
   package with its own TypeScript, lint and format configs, built to
-  `demo/dist` by `pnpm dev` and `pnpm build`.
+  `demo/dist` by `pnpm install`, `pnpm dev` and `pnpm build`.
 - Application code reaches the DMS through `runtime.use()`. `start/routes.ts`
   has an example on `GET /dms/info`.
 - The dashboard (`@antelopejs/dms-frontend`) is built against the embedded DMS

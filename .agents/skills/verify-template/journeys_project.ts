@@ -145,7 +145,7 @@ export const projectJourneys = {
             equal("the wizard answers", page.status, 200),
             has("the wizard's title is translated, so the dashboard bundles the DMS frontend modules", page.body, /<title>Set up your platform/),
             has("the wizard renders its first step", page.body, /Welcome to Antelope DMS/),
-            has("the dashboard carries the provider's `/modules` homepage", page.body, /"homepage":"\/modules"/),
+            has("the dashboard carries the provider's `/home` homepage", page.body, /"homepage":"\/home"/),
             has("the dashboard calls the DMS API at DMS_API_BASE_URL of .env", page.body, new RegExp(`"baseURL":"http://localhost:${ports.api}"`)),
           ]);
         } finally {

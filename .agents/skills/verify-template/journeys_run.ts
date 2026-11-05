@@ -6,6 +6,7 @@ import {
   connections,
   databases,
   DEFAULT_DATABASE,
+  DEMO_FRONTEND_MODULE,
   EXPECTED_MODULES,
   SYSTEM_DATABASES,
   mongosh,
@@ -96,7 +97,7 @@ export const runJourneys = {
             equal("served by adonis", dms.servedBy, "adonis"),
             equal("the client base url is the configured one", dms.clientBaseUrl, "http://localhost:3001"),
             equal("the dashboard module is listed", dms.frontendModules?.includes("@antelopejs/dms-frontend-vue"), true),
-            equal("only module names are listed", (dms.frontendModules ?? []).filter((name) => !name.startsWith("@antelopejs/")), []),
+            equal("only module names are listed", (dms.frontendModules ?? []).filter((name) => !name.startsWith("@antelopejs/") && name !== DEMO_FRONTEND_MODULE), []),
           ]);
           const names = await collections(context, "MongoDB collections", mongo, DEFAULT_DATABASE);
           context.expect(context.tree("collections", project).folder, [

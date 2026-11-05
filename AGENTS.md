@@ -15,7 +15,7 @@ DMS through `runtime.use('<interface package>[/subpath]')`, never by importing a
 AntelopeJS module (its pages, tables, fixtures and controllers), `demo/content` the Markdown
 its home page reads, `demo/frontend-vue` its frontend module and translations. It is a
 workspace package with its own TypeScript, oxlint, oxfmt and knip configs, in the demo's
-style (double quotes, semicolons), built to `demo/dist` by `pnpm dev` and `pnpm build`.
+style (double quotes, semicolons), built to `demo/dist` by `pnpm install`, `pnpm dev` and `pnpm build`.
 The root scripts run its checks after the application's.
 
 The DMS guidance ships as skills inside its packages, synced into the project

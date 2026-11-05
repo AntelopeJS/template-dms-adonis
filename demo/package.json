@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "scripts": {
+    "prepare": "tsc",
     "build": "rimraf dist && tsc",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint && pnpm --dir frontend-vue lint",
