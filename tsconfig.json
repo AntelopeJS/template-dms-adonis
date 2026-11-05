@@ -3,5 +3,6 @@
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "./build"
-  }
+  },
+  "references": [{ "path": "./tsconfig.ace.json" }]
 }
