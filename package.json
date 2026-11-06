@@ -47,7 +47,7 @@
     "@adonisjs/core": "^7.6.0",
     "@antelopejs/api": "^1.7.1",
     "@antelopejs/auth-jwt": "^1.1.0",
-    "@antelopejs/core": "^1.21.0",
+    "@antelopejs/core": "^1.21.1",
     "@antelopejs/dms": ">=0.18.0 <1.0.0",
     "@antelopejs/dms-api": ">=0.6.2 <1.0.0",
     "@antelopejs/dms-automation": ">=0.9.1 <1.0.0",
