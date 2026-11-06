@@ -5,7 +5,7 @@ description: "Drive this AntelopeJS template the way a new user does: scaffold a
 
 # Verify template
 
-The user of a template is someone running `ajs project init --template`: they get a copy of the whole repository and expect it to install, pass its checks and run. Every deterministic step is an `antelopejs-verify` command: you choose which journeys to run and judge what they show. Never replace a command with a shell recipe. When a journey you need does not exist, add it to `verify.config.ts`, name it in its feature file, then run it.
+The user of a template is someone running `ajs project init --template`: they get a copy of the repository without `.agents/` and `.claude/skills/` and expect it to install, pass its checks and run. Every deterministic step is an `antelopejs-verify` command: you choose which journeys to run and judge what they show. Never replace a command with a shell recipe. When a journey you need does not exist, add it to `verify.config.ts`, name it in its feature file, then run it.
 
 `antelopejs-sync` writes this file, `package.json` and `tsconfig.json` here, and keeps them in sync. Everything else in `.agents/skills/verify-template/` is the repository's own layer, which sync never touches.
 
@@ -47,7 +47,7 @@ Each step writes `<run>/evidence/<feature>/<journey>/<NN-step>/` with `command.t
 pnpm exec antelopejs-verify clean <run>
 ```
 
-`clean` stops what the run started, by recorded PID and container name, and removes everything but `evidence/` and `run.json`. Run it after every run, failed ones included.
+Each journey deletes its scratch folder and `HOME`, its install included, when it ends: passed, failed or interrupted. Only its evidence stays. `clean` stops what the run started, by recorded PID and container name, and removes everything but `evidence/` and `run.json`. Run it after every run, failed ones included.
 
 ## The repository's own layer
 
@@ -114,7 +114,7 @@ The skill is not Trusted yet. It becomes Trusted when it passes a shadow run of 
 
 ## Gotchas
 
-- `ajs` copies the whole repository, `.agents/` and `.claude/` included, so the scaffolded project carries this skill too.
-- Every file a user gets is user-facing here, tests included; only `.agents/`, `.claude/` and `.github/` are not.
-- Runs live under the system temp folder (`TMPDIR`), and the shared caches under `~/.cache/antelopejs-verify`.
+- `ajs project init` leaves out `.agents/` and `.claude/skills/`, so the scaffolded project carries neither this skill nor anything else under `.agents/`. Never expect either folder there.
+- Every file a user gets is user-facing here, tests included; only `.github/` and `.claude/` outside `.claude/skills/` are not.
+- Runs live under the system temp folder (`TMPDIR`), and the shared caches under `~/.cache/antelopejs-verify`. `new` deletes every run no command touched for 7 days, unless a process it recorded is still alive.
 - A repository that outgrows this skill runs `antelopejs-sync --verify custom` and keeps its own `.agents/skills/verify-<repo>/`.
