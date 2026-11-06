@@ -42,7 +42,7 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
     })
   })
   .run(() => run())
-  .catch((error: unknown) => {
-    process.exitCode = 1
-    void prettyPrintError(error)
+  .catch(async (error: unknown) => {
+    await prettyPrintError(error)
+    process.exit(1)
   })
