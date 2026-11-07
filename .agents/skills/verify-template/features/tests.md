@@ -4,6 +4,7 @@ covers:
   - bin/test.ts
   - .env.test
   - adonisrc.ts
+  - demo/**
 docs:
   - README.md
   - AGENTS.md
