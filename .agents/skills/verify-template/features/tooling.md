@@ -9,6 +9,7 @@ covers:
   - renovate.json
   - .editorconfig
   - .nvmrc
+  - demo/**
 docs:
   - AGENTS.md
   - CONTRIBUTING.md

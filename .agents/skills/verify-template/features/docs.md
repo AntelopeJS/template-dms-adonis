@@ -5,6 +5,9 @@ covers:
   - AGENTS.md
   - CLAUDE.md
   - LICENSE
+  - .env.example
+  - start/env.ts
+  - start/routes.ts
 docs:
   - README.md
 journeys:
