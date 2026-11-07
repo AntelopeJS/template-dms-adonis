@@ -73,8 +73,8 @@ importers:
         specifier: '>=0.10.0 <0.11.0'
         version: 0.10.0(@antelopejs/core@1.21.1)
       '@antelopejs/tooling-configs':
-        specifier: ^0.3.3
-        version: 0.3.3(knip@6.44.1)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(sharp@0.34.5)
+        specifier: ^0.3.5
+        version: 0.3.5(knip@6.44.1)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(sharp@0.34.5)
       '@japa/assert':
         specifier: ^4.2.0
         version: 4.2.0(@japa/runner@5.4.0)
@@ -542,6 +542,40 @@ packages:
       knip: '>=6.0.0'
       mongodb-memory-server: '>=10.0.0'
       oxfmt: ^0.66.0
+      oxlint: 1.81.0
+      pixelmatch: '>=7.0.0'
+      playwright-core: '>=1.56.0'
+      sharp: '>=0.34.0'
+    peerDependenciesMeta:
+      '@nuxt/eslint-config':
+        optional: true
+      eslint-plugin-perfectionist:
+        optional: true
+      knip:
+        optional: true
+      mongodb-memory-server:
+        optional: true
+      oxfmt:
+        optional: true
+      oxlint:
+        optional: true
+      pixelmatch:
+        optional: true
+      playwright-core:
+        optional: true
+      sharp:
+        optional: true
+
+  '@antelopejs/tooling-configs@0.3.5':
+    resolution: {integrity: sha512-KOgUUdearIaU0HeIMMI9NY4bPsvnR0043WAJN95+B8O5nPyMjdw9XCh/duBc6Zz6yWKTnG8YrxLKPzPCnAlJMA==}
+    engines: {node: '>=22.18.0'}
+    hasBin: true
+    peerDependencies:
+      '@nuxt/eslint-config': '>=1.2.0'
+      eslint-plugin-perfectionist: '>=5.0.0'
+      knip: '>=6.0.0'
+      mongodb-memory-server: '>=10.0.0'
+      oxfmt: ^0.66.0 || ^0.77.0
       oxlint: 1.81.0
       pixelmatch: '>=7.0.0'
       playwright-core: '>=1.56.0'
@@ -6641,18 +6675,6 @@ snapshots:
       '@antelopejs/interface-email': 0.1.1(@antelopejs/interface-core@0.4.0)
       nodemailer: 6.10.1
 
-  '@antelopejs/tooling-configs@0.3.3(knip@6.44.1)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(sharp@0.34.5)':
-    dependencies:
-      '@oxlint/plugins': 1.81.0
-      dts-bundle-generator: 9.5.1
-      typescript: 5.9.3
-      yaml: 2.9.1
-    optionalDependencies:
-      knip: 6.44.1
-      oxfmt: 0.66.0
-      oxlint: 1.81.0(oxlint-tsgolint@7.0.2005)
-      sharp: 0.34.5
-
   '@antelopejs/tooling-configs@0.3.3(knip@6.44.1)(oxfmt@0.73.0)(oxlint@1.88.0(oxlint-tsgolint@7.0.2005))(sharp@0.34.5)':
     dependencies:
       '@oxlint/plugins': 1.81.0
@@ -6663,6 +6685,18 @@ snapshots:
       knip: 6.44.1
       oxfmt: 0.73.0
       oxlint: 1.88.0(oxlint-tsgolint@7.0.2005)
+      sharp: 0.34.5
+
+  '@antelopejs/tooling-configs@0.3.5(knip@6.44.1)(oxfmt@0.66.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(sharp@0.34.5)':
+    dependencies:
+      '@oxlint/plugins': 1.81.0
+      dts-bundle-generator: 9.5.1
+      typescript: 5.9.3
+      yaml: 2.9.1
+    optionalDependencies:
+      knip: 6.44.1
+      oxfmt: 0.66.0
+      oxlint: 1.81.0(oxlint-tsgolint@7.0.2005)
       sharp: 0.34.5
 
   '@antfu/install-pkg@2.1.0':

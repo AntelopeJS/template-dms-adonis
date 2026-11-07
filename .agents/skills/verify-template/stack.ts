@@ -61,8 +61,7 @@ export function freePort(): Promise<number> {
 }
 
 /** Scaffolds the project the way a user does, with `ajs project init` from the run's offline manifest: the template's working tree under verification, uncommitted changes included. */
-export async function scaffoldTree(context: JourneyContext): Promise<string> {
-  const project = join(context.work, "app");
+export async function scaffoldTree(context: JourneyContext, project = join(context.work, "app")): Promise<string> {
   const init = await context.scaffold("ajs project init", project);
   context.expect(init.folder, [exitIs(init, 0), exists(join(project, "antelope.config.ts"))], { critical: true });
   context.tree("project tree", project);
@@ -74,11 +73,12 @@ export async function install(context: JourneyContext, project: string): Promise
   context.expect(done.folder, [exitIs(done, 0)], { critical: true });
 }
 
-/** A project copy with its dependencies installed. */
-export async function prepared(context: JourneyContext): Promise<string> {
-  const project = await scaffoldTree(context);
-  await install(context, project);
-  return project;
+/** A project copy with its dependencies installed, scaffolded and installed once per run and copied into each journey. */
+export function prepared(context: JourneyContext): Promise<string> {
+  return context.prepared("installed-app", async (folder) => {
+    await scaffoldTree(context, folder);
+    await install(context, folder);
+  });
 }
 
 /** Runs the journey body with a MongoDB container of its own, removed afterwards even when the journey aborts. */
