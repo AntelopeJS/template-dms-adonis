@@ -4,6 +4,8 @@ covers:
   - pnpm-lock.yaml
   - adonisrc.ts
   - antelope.config.ts
+  - providers/public_module_options.ts
+  - demo/**
 docs:
   - README.md
 journeys:
