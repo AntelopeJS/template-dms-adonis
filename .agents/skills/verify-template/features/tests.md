@@ -3,6 +3,7 @@ covers:
   - tests/**
   - bin/test.ts
   - .env.test
+  - adonisrc.ts
 docs:
   - README.md
   - AGENTS.md
