@@ -76,7 +76,7 @@ export default class AntelopeProvider {
           config: {
             url: env.get('MONGODB_URL'),
             database: env.get('MONGODB_DATABASE'),
-            ...(this.app.inTest && { options: { serverSelectionTimeoutMS: 2000 } }),
+            ...(!this.app.inProduction && { options: { serverSelectionTimeoutMS: 2000 } }),
           },
         },
         '@antelopejs/auth-jwt': {
