@@ -66,7 +66,19 @@ suppressions and sync, and prints only what failed.
 
 ## Guardrails
 
-Lint with `oxlint` and format with `oxfmt`; both read the configs at the repository root. Fix every finding: no rule warns.
+Finish every change with `pnpm run checks`. It runs typecheck, lint, format, knip, tests, size, suppressions, and sync, and prints only what failed. The change is done when it prints no failure.
+
+### While you work
+
+`pnpm run checks` runs every step, so run it once, at the end. While you iterate, run only the check that covers what you changed:
+
+- `pnpm run typecheck` after you change types or signatures.
+- `pnpm exec oxlint <files>` and `pnpm exec oxfmt <files>` on the files you changed.
+- Run one test file instead of the whole suite. In a module that tests with `ajs module test`, run `pnpm run build`, then `pnpm exec ajs module test . -f dist/<path>.test.js`. Repeat `-f` for more files.
+
+Prove a change works with the verification skill in [`.agents/skills/verify-template/SKILL.md`](.agents/skills/verify-template/SKILL.md) before you call it done.
+
+The tools enforce most rules, listed in the table at the end. The sections below hold the rules no tool checks.
 
 ### Comments
 
@@ -98,6 +110,10 @@ Moving a method body into a function keeps how it is called: the same receiver, 
 
 Verify a boundary against the imports a developer or agent would plausibly write: static and dynamic imports, re-exports, Vue `src`, CSS `@import`, and worker or child-process entries in normally named files. A construction only an evasion would write, an edit to resolution configuration (`package.json` `browser`, `exports`, `main` or `imports`, bundler aliases, tsconfig `paths`), and a difference observable only by patching private fields or internal methods go under Attention and never block. Public API and ordinary subclass behaviour stay part of the contract.
 
+### Suppression budget
+
+`guardrails.suppressions.json` caps the suppressions in authored code, the repository's own files under `.agents/`, `.claude/` and the other agent directories included (`agentFiles`; only what `antelopejs-sync` writes there is skipped): lint directives per rule they name (`*` for none), `@ts-expect-error`, `@ts-ignore` and `SAFETY:` comments, and under `config` each rule a lint config (`oxlint.config.*`, `.oxlintrc.json`, `eslint.config.*`) switches off or to a warning, keyed by rule and `files` glob anchored at the config's directory, so widening or moving a scope is a new ceiling of 0, while narrowing one takes over the room it gives up. Switching a rule off in a config is a suppression too: fix the code its rule reports instead. A suppression over its ceiling fails: fix the code, or remove another suppression of the same kind. A rule that keeps needing suppressions should be changed in the preset. Never raise or remove a number in that file: the check fails a ceiling higher than on the pull request base, and only the operator approves a raise. A directive disabling `anti-slop/require-safety-comment-for-type-assertion` is burn-down debt: remove the assertion, or, where it holds, replace the directive with `SAFETY: <why it holds>`, which takes over its room without a raise. After you remove suppressions, run `pnpm run suppressions:update` and commit the lowered file.
+
 ### What enforces what
 
 | Rule                                                                           | Enforced by                                         |
@@ -126,5 +142,22 @@ Verify a boundary against the imports a developer or agent would plausibly write
 | No `@ts-ignore`                                                                | `typescript/ban-ts-comment`                         |
 | No once-used type parameter standing in for `unknown`                          | `typescript/no-unnecessary-type-parameters`         |
 | No `any` passed, assigned or returned where a type is declared                 | `typescript/no-unsafe-{argument,assignment,return}` |
+| Files ≤ 20,000 bytes, tests and agent files included                           | `antelopejs-check-size` (pre-commit)                |
+| Suppressions stay within `guardrails.suppressions.json`                        | `antelopejs-suppressions` (pre-commit, checks)      |
+| No lint config switches off a rule to stay under the budget                    | `antelopejs-suppressions` (pre-commit, checks)      |
+| No added directive disables the `SAFETY:`, comment or test rules               | `antelopejs-suppressions` (pre-commit, checks)      |
+| An added suppression gives a specific reason                                   | `antelopejs-suppressions` (pre-commit, checks)      |
+| A directive in a file a change touches suppresses something and gives a reason | `antelopejs-suppressions` (pre-commit, checks)      |
+| A block disable is closed in its file                                          | `antelopejs-suppressions` (pre-commit, checks)      |
+| Types check                                                                    | `tsc` (pre-push)                                    |
+| No dead files, exports, or dependencies                                        | knip                                                |
+| Managed files match the pack                                                   | `antelopejs-sync --check`                           |
+| A CI gate reads `needs.<id>` only of jobs in its `needs`                       | `antelopejs-sync --check`                           |
+| Entry-only rules exempt no tracked outsider                                    | `antelopejs-sync --check`                           |
+| A DMS layer's `build/backend-boundary.ts` is the pack's plugin                 | `antelopejs-sync --check`                           |
+| No `skipLibCheck` in the root tsconfig or one `typecheck` or `build` uses      | Reported by `antelopejs-sync` (note only)           |
+| `build` skips the lib check only over what `typecheck` checks                  | Reported by `antelopejs-sync` (note only)           |
+| `release` runs `typecheck`                                                     | Reported by `antelopejs-sync` (note only)           |
+| A test names the wrong implementation it catches                               | review; no tool                                     |
 
 <!-- antelopejs-guardrails:end -->

@@ -8,5 +8,12 @@ export default antelopeFmtPreset({
   trailingComma: 'es5',
   quoteProps: 'consistent',
   arrowParens: 'always',
-  ignorePatterns: ['.dms-frontend/**', 'demo/**', 'public/assets/**', 'resources/**', 'tmp/**'],
+  ignorePatterns: [
+    '.dms-frontend/**',
+    'demo/**',
+    'lefthook.yml',
+    'public/assets/**',
+    'resources/**',
+    'tmp/**',
+  ],
 })
