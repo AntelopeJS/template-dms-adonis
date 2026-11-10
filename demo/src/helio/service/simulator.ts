@@ -19,6 +19,7 @@ import { nextTicketNumber } from "./numbering";
 import { SERVICE_TOPIC } from "./options";
 import { refreshSlaHours, slaDueAt } from "./sla";
 import { SUBJECTS } from "./subjects";
+import { insertOnce } from "../shared/insert-once";
 
 const SIMULATED_PREFIX = "ticket-sim-";
 const MINUTE_MS = 60_000;
@@ -193,7 +194,9 @@ export async function simulateTicket(): Promise<void> {
     alertOnly: !officeHours,
     urgentAllowed: Date.now() - lastUrgent >= URGENT_SPACING_MS,
   });
-  await model.insert(ticket);
+  if (!(await insertOnce(model, ticket._id, () => model.insert(ticket)))) {
+    return;
+  }
   await announce("tickets.created", [ticket._id]);
   if (ticket.priority === "urgent") await notifyUrgentTicket(ticket);
   fireTicketOpened(ticket);
