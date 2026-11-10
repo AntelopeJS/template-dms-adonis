@@ -28,10 +28,13 @@ void describe("insertOnce", () => {
 
   void it("answers false when another replica stored the row first", async () => {
     const table = memoryTable(new Map([["row", { _id: "row" }]]));
-    const wrote = await insertOnce(table, "row", () =>
-      Promise.reject(duplicate),
-    );
+    let attempts = 0;
+    const wrote = await insertOnce(table, "row", () => {
+      attempts++;
+      return Promise.reject(duplicate);
+    });
     assert.strictEqual(wrote, false);
+    assert.strictEqual(attempts, 1);
   });
 
   void it("rethrows the insert's error when the row is still missing", async () => {
