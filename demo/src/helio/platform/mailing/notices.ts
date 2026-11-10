@@ -7,6 +7,7 @@ import {
   Table,
 } from "@antelopejs/interface-database-decorators";
 import { DEMO_SCHEMA_NAME } from "../../../schema";
+import { insertOnce } from "../../shared/insert-once";
 
 const TABLE_NAME = "helio_mail_notices";
 
@@ -46,5 +47,7 @@ export async function recordNotice(
   const model = GetModel(MailNoticeModel);
   const _id = noticeId(kind, recordId);
   if (await model.get(_id)) return;
-  await model.insert({ _id, kind, recordId, sentAt });
+  await insertOnce(model, _id, () =>
+    model.insert({ _id, kind, recordId, sentAt }),
+  );
 }

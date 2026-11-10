@@ -7,6 +7,7 @@ import {
   GetModel,
   triggerEvent,
 } from "@antelopejs/interface-database-decorators";
+import { insertOnce } from "../../shared/insert-once";
 
 const MS_PER_DAY = 86_400_000;
 
@@ -107,8 +108,10 @@ export async function insertMissing<T extends object>(
   let written = 0;
   for (const row of rows) {
     if (await table.get(row._id)) continue;
-    await table.insert(toStoredRow(model, row, prepare)).run();
-    written++;
+    const stored = toStoredRow(model, row, prepare);
+    if (await insertOnce(table, row._id, () => table.insert(stored).run())) {
+      written++;
+    }
   }
   return written;
 }

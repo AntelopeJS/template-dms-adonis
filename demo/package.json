@@ -8,7 +8,7 @@
     "prepare": "tsc",
     "build": "rimraf dist && tsc",
     "typecheck": "tsc --noEmit",
-    "lint": "oxlint && pnpm --dir frontend-vue lint",
+    "lint": "oxlint --type-aware --max-warnings=0 && pnpm --dir frontend-vue lint",
     "format": "oxfmt . && pnpm --dir frontend-vue format",
     "format:check": "oxfmt --check .",
     "knip": "knip --workspace . --dependencies",
@@ -28,7 +28,7 @@
     "@antelopejs/interface-dms-saas": "^0.7.0"
   },
   "devDependencies": {
-    "@antelopejs/tooling-configs": "^0.5.0",
+    "@antelopejs/tooling-configs": "^0.5.1",
     "@types/node": "^26.6.5",
     "knip": "^6.41.0",
     "oxfmt": "^0.77.0",
