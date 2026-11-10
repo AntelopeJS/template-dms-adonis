@@ -10,6 +10,7 @@ docs:
 journeys:
   - config-mapping
   - database-override
+  - first-run-setup-token
   - missing-env
   - mongo-unreachable
   - restart-persistence
@@ -23,6 +24,7 @@ The embedded DMS runtime and the `.env` that drives it: the provider wires each 
 
 - `config-mapping`: the `.env` copied from `.env.example`, with only `DMS_CLIENT_BASE_URL` changed: `/dms/info` reports the new base url, the only database the run creates is the literal `template_dms_adonis` the example names, and every DMS collection lands in it.
 - `database-override`: with another `MONGODB_DATABASE` every DMS collection lands there and the default database is never created.
+- `first-run-setup-token`: on an empty database, with the `.env` copied from `.env.example` (`DMS_SETUP_TOKEN` empty), the server log prints `No owner exists yet. To create it, open http://localhost:3001/onboarding?token=<generated token>`. The journey then does what the wizard at that address does: `POST /api/onboarding/register` on the DMS API with another token answers 403, with the printed token answers 200, `GET /api/onboarding/informations` turns `has_onboarded` to true, and one owner exists in `dms-core__users`. The `dashboard` journey of `build` renders the wizard itself, with a configured `DMS_SETUP_TOKEN`.
 - `missing-env`: without `.env` the server exits non-zero naming `APP_KEY` and `MONGODB_URL`.
 - `mongo-unreachable`: with nothing at `MONGODB_URL` the runtime fails to construct its modules after about 30 seconds, the process exits non-zero and no server starts.
 - `restart-persistence`: Ctrl+C closes every MongoDB connection (`serverStatus().connections` returns to the baseline) and a second start finds the data of the first (a marker document) and loses no collection.

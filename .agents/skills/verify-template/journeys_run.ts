@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+
 import { equal, has, lacks, refused, type HttpResult, type Journey } from "@antelopejs/tooling-configs/verify";
 
 import {
@@ -14,6 +16,7 @@ import {
   type Server,
   serve,
   settledConnections,
+  sleep,
   stop,
   withMongo,
   writeEnv,
@@ -70,6 +73,23 @@ function infoOf(result: HttpResult): Info {
   if (isString(root.clientBaseUrl)) info.clientBaseUrl = root.clientBaseUrl;
   if (isStrings(root.frontendModules)) info.frontendModules = root.frontendModules;
   return info;
+}
+
+const SETUP_LINE = /No owner exists yet\. To create it, open \S+\/onboarding\?token=([\w-]+)/;
+
+/** Reads the server log until the DMS announces the onboarding address, or 30 seconds pass. */
+async function announcement(log: string): Promise<RegExpExecArray | null> {
+  for (let attempt = 0; attempt < 60; attempt += 1) {
+    const found = SETUP_LINE.exec(readFileSync(log, "utf8"));
+    if (found) return found;
+    await sleep(500);
+  }
+  return null;
+}
+
+/** The body the first-run wizard posts for the administrator. */
+function administrator(setupToken: string) {
+  return { firstName: "Verify", lastName: "Owner", email: "owner@verify.invalid", password: "Verify0wner!", setupToken, platformName: "Verify" };
 }
 
 export const runJourneys = {
@@ -237,6 +257,41 @@ export const runJourneys = {
         ]);
         const names = await databases(context, "databases", mongo);
         context.expect(context.tree("databases", project).folder, [equal("the run's MongoDB received no database", names.includes(DEFAULT_DATABASE), false)]);
+      });
+    },
+  },
+  "first-run-setup-token": {
+    title: "on an empty database without `DMS_SETUP_TOKEN`, the terminal prints the onboarding address with a generated token, and that token, and only it, creates the administrator",
+    entryPoint: "`node ace serve` with the `.env` copied from `.env.example`, then the `/onboarding?token=...` address it prints",
+    async run(context) {
+      await withMongo(context, async (mongo) => {
+        const project = await prepared(context);
+        const ports = await writeEnv(context, project, mongo);
+        let server: Server | undefined;
+        try {
+          server = await serve(context, project, "node ace serve", ports);
+          const announced = await announcement(server.log);
+          const terminal = await context.command("the terminal", "cat", [server.log]);
+          const token = announced?.[1] ?? "";
+          context.expect(terminal.folder, [
+            has("the terminal prints the onboarding address of DMS_CLIENT_BASE_URL", terminal.stdout, /\[DMS\] No owner exists yet\. To create it, open http:\/\/localhost:3001\/onboarding\?token=/),
+            equal("the address carries a generated token, not the DMS_SETUP_TOKEN placeholder", token.length >= 16 && !token.startsWith("<"), true),
+          ], { critical: true });
+          const api = `http://localhost:${ports.api}/api/onboarding`;
+          const before = await context.http("GET /api/onboarding/informations before", `${api}/informations`);
+          context.expect(before.folder, [equal("the instance is not onboarded", isRecord(before.json) && before.json.has_onboarded, false)]);
+          const forged = await context.http("POST /api/onboarding/register with another token", `${api}/register`, { method: "POST", body: JSON.stringify(administrator(`${token}x`)) });
+          context.expect(forged.folder, [equal("another token is refused", forged.status, 403)]);
+          const registered = await context.http("POST /api/onboarding/register with the printed token", `${api}/register`, { method: "POST", body: JSON.stringify(administrator(token)) });
+          context.expect(registered.folder, [equal("the printed token creates the administrator", registered.status, 200)]);
+          const after = await context.http("GET /api/onboarding/informations after", `${api}/informations`);
+          context.expect(after.folder, [equal("the instance is onboarded", isRecord(after.json) && after.json.has_onboarded, true)]);
+          const owners = await mongosh(context, "owners", mongo, `db.getSiblingDB('${DEFAULT_DATABASE}').getCollection('dms-core__users').countDocuments({ owner: true })`);
+          context.expect(owners.folder, [equal("one owner exists", owners.stdout.trim(), "1")]);
+        } finally {
+          if (server) await stop(context, server, "stop");
+          await abandon(context, server);
+        }
       });
     },
   },
