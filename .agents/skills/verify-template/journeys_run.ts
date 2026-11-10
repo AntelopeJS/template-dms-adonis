@@ -75,7 +75,7 @@ function infoOf(result: HttpResult): Info {
   return info;
 }
 
-const SETUP_LINE = /No owner exists yet\. To create it, open \S+\/onboarding\?token=(\S+)/;
+const SETUP_LINE = /No owner exists yet\. To create it, open \S+\/onboarding\?token=([\w-]+)/;
 
 /** Reads the server log until the DMS announces the onboarding address, or 30 seconds pass. */
 async function announcement(log: string): Promise<RegExpExecArray | null> {
