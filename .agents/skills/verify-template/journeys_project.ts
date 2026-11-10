@@ -29,7 +29,7 @@ function manifestOf(project: string): Manifest {
 
 export const projectJourneys = {
   "test-suite": {
-    title: "`pnpm test` boots the application against MongoDB and runs both specs green",
+    title: "`pnpm test` boots the application against MongoDB and runs every spec green",
     entryPoint: "`pnpm test` in the project",
     async run(context) {
       await withMongo(context, async (mongo) => {
@@ -39,7 +39,7 @@ export const projectJourneys = {
         const test = await context.command("pnpm test", "pnpm", ["test"], { cwd: project, timeoutMs: 180_000 });
         context.expect(test.folder, [
           exitIs(test, 0),
-          has("two tests passed", test.stdout, /2 passed \(2\)/),
+          has("every spec passed", test.stdout, /\b([1-9]\d*) passed \(\1\)/),
         ]);
       });
     },
