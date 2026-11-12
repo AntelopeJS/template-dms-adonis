@@ -1,3 +1,4 @@
+import type { QueryValue } from "@antelopejs/interface-api";
 import { DAY_MS } from "../shared/seed";
 import { helioNow } from "../shared/clock";
 
@@ -12,10 +13,10 @@ export interface TimeRange {
  * inverted range means "all time" (or no comparison).
  */
 export interface PeriodQuery {
-  from?: string;
-  to?: string;
-  compareFrom?: string;
-  compareTo?: string;
+  from?: QueryValue;
+  to?: QueryValue;
+  compareFrom?: QueryValue;
+  compareTo?: QueryValue;
 }
 
 export interface Period {
@@ -40,13 +41,13 @@ const SPARKLINE_POINTS = 12;
 const DAILY_LIMIT_DAYS = 45;
 const WEEKLY_LIMIT_DAYS = 210;
 
-function instant(value: string | undefined): number | undefined {
-  if (!value) return undefined;
+function instant(value: QueryValue): number | undefined {
+  if (value === true || !value) return undefined;
   const time = Date.parse(value);
   return Number.isFinite(time) ? time : undefined;
 }
 
-function rangeOf(from?: string, to?: string): TimeRange | undefined {
+function rangeOf(from: QueryValue, to: QueryValue): TimeRange | undefined {
   const start = instant(from);
   const end = instant(to);
   if (start === undefined || end === undefined || end < start) return undefined;
