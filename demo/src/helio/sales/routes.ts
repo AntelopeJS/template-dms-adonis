@@ -5,6 +5,7 @@ import {
   JSONBody,
   Parameter,
   Post,
+  type QueryValue,
 } from "@antelopejs/interface-api";
 import { GetModel } from "@antelopejs/interface-database-decorators";
 import type { User } from "@antelopejs/interface-dms/auth/db";
@@ -49,8 +50,9 @@ function refuse(status: number, message: string): HTTPResult {
   return new HTTPResult(status, { message });
 }
 
-async function findQuote(id: string): Promise<Quote> {
-  const quote = await GetModel(QuoteModel).get(id);
+async function findQuote(id: QueryValue): Promise<Quote> {
+  const quote =
+    id === true || !id ? undefined : await GetModel(QuoteModel).get(id);
   if (!quote) throw refuse(404, "$helio.sales.quotes.errors.notFound");
   return quote;
 }
@@ -64,7 +66,7 @@ const NOT_IN_STATUS: Partial<Record<QuoteStatus, string>> = {
   sent: "$helio.sales.quotes.errors.notSent",
 };
 
-async function quoteIn(id: string, status: QuoteStatus): Promise<Quote> {
+async function quoteIn(id: QueryValue, status: QuoteStatus): Promise<Quote> {
   const quote = await findQuote(id);
   if (quote.status !== status) {
     throw refuse(
@@ -84,7 +86,7 @@ export class HelioQuoteRoutes extends Controller(QUOTE_ACTIONS_API) {
    */
   @Get("send-confirm")
   async sendConfirm(
-    @Parameter("id", "query") id: string,
+    @Parameter("id", "query") id: QueryValue,
     @AuthUserWithPermission(canEdit) _user: User,
   ): Promise<ConfirmDialogSerialized> {
     const quote = await findQuote(id);
@@ -140,7 +142,7 @@ export class HelioQuoteRoutes extends Controller(QUOTE_ACTIONS_API) {
    */
   @Post("send")
   async send(
-    @Parameter("id", "query") id: string,
+    @Parameter("id", "query") id: QueryValue,
     @AuthUserWithPermission(canEdit) _user: User,
   ): Promise<{ ok: true }> {
     const quote = await quoteIn(id, "draft");
@@ -149,12 +151,12 @@ export class HelioQuoteRoutes extends Controller(QUOTE_ACTIONS_API) {
       quote.validUntil && quote.validUntil > now
         ? quote.validUntil
         : new Date(now.getTime() + VALIDITY_DAYS * DAY_MS);
-    await GetModel(QuoteModel).update(id, {
+    await GetModel(QuoteModel).update(quote._id, {
       status: "sent",
       sentAt: now,
       validUntil,
     });
-    void mailQuoteSent(id);
+    void mailQuoteSent(quote._id);
     await quoteSent(quote);
     return { ok: true };
   }
@@ -167,16 +169,16 @@ export class HelioQuoteRoutes extends Controller(QUOTE_ACTIONS_API) {
    */
   @Post("accept")
   async accept(
-    @Parameter("id", "query") id: string,
+    @Parameter("id", "query") id: QueryValue,
     @AuthUserWithPermission(canEdit) _user: User,
   ): Promise<{ ok: true }> {
     const quote = await quoteIn(id, "sent");
-    await GetModel(QuoteModel).update(id, {
+    await GetModel(QuoteModel).update(quote._id, {
       status: "accepted",
       signedAt: new Date(helioNow()),
     });
     await quoteAccepted(quote);
-    void mailQuoteAccepted(id);
+    void mailQuoteAccepted(quote._id);
     fireQuoteAccepted(quote);
     return { ok: true };
   }
@@ -188,15 +190,15 @@ export class HelioQuoteRoutes extends Controller(QUOTE_ACTIONS_API) {
    */
   @Post("reject")
   async reject(
-    @Parameter("id", "query") id: string,
+    @Parameter("id", "query") id: QueryValue,
     @JSONBody() body: RejectBody | undefined,
     @AuthUserWithPermission(canEdit) _user: User,
   ): Promise<{ ok: true }> {
-    await quoteIn(id, "sent");
+    const quote = await quoteIn(id, "sent");
     const reason = body?.reason?.trim();
     const update: Partial<Quote> = { status: "rejected" };
     if (reason) update.rejectionReason = reason;
-    await GetModel(QuoteModel).update(id, update);
+    await GetModel(QuoteModel).update(quote._id, update);
     return { ok: true };
   }
 
@@ -206,7 +208,7 @@ export class HelioQuoteRoutes extends Controller(QUOTE_ACTIONS_API) {
    */
   @Post("portal-link")
   async portalLink(
-    @Parameter("id", "query") id: string,
+    @Parameter("id", "query") id: QueryValue,
     @AuthUserWithPermission(canRead) _user: User,
   ): Promise<{ url: string }> {
     const quote = await findQuote(id);
@@ -221,7 +223,7 @@ export class HelioQuoteRoutes extends Controller(QUOTE_ACTIONS_API) {
   /** The quote as a PDF, in the reader's language. */
   @Get("document")
   async document(
-    @Parameter("id", "query") id: string,
+    @Parameter("id", "query") id: QueryValue,
     @Parameter("accept-language", "header") acceptLanguage: string | undefined,
     @AuthUserWithPermission(canRead) _user: User,
   ): Promise<HTTPResult> {

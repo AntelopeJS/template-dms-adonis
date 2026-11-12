@@ -1,4 +1,9 @@
-import { Controller, Get, Parameter } from "@antelopejs/interface-api";
+import {
+  Controller,
+  Get,
+  Parameter,
+  type QueryValue,
+} from "@antelopejs/interface-api";
 import { AuthUser } from "@antelopejs/interface-dms/auth";
 import type { User } from "@antelopejs/interface-dms/auth/db";
 import { AuthUserWithPermission } from "@antelopejs/interface-dms/guards";
@@ -30,10 +35,10 @@ import { topReps } from "./team-metrics";
  */
 @AuthUserWithPermission(PageHelioDashboard)
 export class HelioDashboardApi extends Controller("/api/helio/dashboard") {
-  @Parameter("from", "query") declare from?: string;
-  @Parameter("to", "query") declare to?: string;
-  @Parameter("compareFrom", "query") declare compareFrom?: string;
-  @Parameter("compareTo", "query") declare compareTo?: string;
+  @Parameter("from", "query") declare from?: QueryValue;
+  @Parameter("to", "query") declare to?: QueryValue;
+  @Parameter("compareFrom", "query") declare compareFrom?: QueryValue;
+  @Parameter("compareTo", "query") declare compareTo?: QueryValue;
 
   private get period() {
     return readPeriod(this);

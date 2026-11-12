@@ -1,3 +1,5 @@
 packages:
   - demo
   - demo/frontend-vue
+allowBuilds:
+  lefthook: false
