@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { createServer, type AddressInfo } from "node:net";
+import { createServer, type AddressInfo, type Server as NetServer } from "node:net";
 import { join } from "node:path";
 
 import { equal, exists, exitIs, type CommandResult, type JourneyContext } from "@antelopejs/tooling-configs/verify";
@@ -48,14 +48,22 @@ export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function isTcpAddress(address: ReturnType<NetServer["address"]>): address is AddressInfo {
+  return address !== null && typeof address !== "string";
+}
+
 export function freePort(): Promise<number> {
   return new Promise((resolve, reject) => {
     const server = createServer();
     server.once("error", reject);
     server.listen(0, "127.0.0.1", () => {
-      // SAFETY: a TCP server that listens on a port reports an AddressInfo, not a pipe path.
-      const { port } = server.address() as AddressInfo;
-      server.close(() => resolve(port));
+      const address = server.address();
+      if (!isTcpAddress(address)) {
+        server.close();
+        reject(new Error(`the server reported ${String(address)} instead of a TCP address`));
+        return;
+      }
+      server.close(() => resolve(address.port));
     });
   });
 }
@@ -122,14 +130,25 @@ export async function settledConnections(context: JourneyContext, mongo: Mongo, 
 
 export async function databases(context: JourneyContext, step: string, mongo: Mongo): Promise<string[]> {
   const read = await mongosh(context, step, mongo, "JSON.stringify(db.adminCommand({ listDatabases: 1 }).databases.map((entry) => entry.name).sort())");
-  // SAFETY: mongosh printed the JSON array the script built.
-  return JSON.parse(read.stdout.trim()) as string[];
+  return stringArray(read.stdout);
 }
 
 export async function collections(context: JourneyContext, step: string, mongo: Mongo, database: string): Promise<string[]> {
   const read = await mongosh(context, step, mongo, `JSON.stringify(db.getSiblingDB('${database}').getCollectionNames().sort())`);
-  // SAFETY: mongosh printed the JSON array the script built.
-  return JSON.parse(read.stdout.trim()) as string[];
+  return stringArray(read.stdout);
+}
+
+function isStringArray(value: unknown): value is string[] {
+  if (!Array.isArray(value)) return false;
+  for (const item of value) if (typeof item !== "string") return false;
+  return true;
+}
+
+/** Parses the JSON array of strings a mongosh script printed, and throws on any other output. */
+function stringArray(output: string): string[] {
+  const parsed: unknown = JSON.parse(output.trim());
+  if (!isStringArray(parsed)) throw new Error(`mongosh printed ${output.trim()} instead of a JSON array of strings`);
+  return parsed;
 }
 
 export interface EnvOverrides {
