@@ -39,7 +39,7 @@ jobs:
         node ace generate:key
         node ace serve > server.log 2>&1 &
         for _ in $(seq 1 60); do
-          curl -sf http://localhost:3333/dms/info > info.json && break
+          curl -sf -o info.json http://localhost:3333/dms/info && break
           sleep 2
         done
         cat info.json || { cat server.log; exit 1; }
