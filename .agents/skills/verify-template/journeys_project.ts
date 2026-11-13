@@ -22,9 +22,32 @@ interface Manifest {
   devDependencies: Record<string, string>;
 }
 
+function isStringRecord(value: unknown): value is Record<string, string> {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) return false;
+  for (const entry of Object.values(value)) if (typeof entry !== "string") return false;
+  return true;
+}
+
+function isManifest(value: unknown): value is Manifest {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    Object.hasOwn(value, "scripts") &&
+    "scripts" in value &&
+    isStringRecord(value.scripts) &&
+    Object.hasOwn(value, "dependencies") &&
+    "dependencies" in value &&
+    isStringRecord(value.dependencies) &&
+    Object.hasOwn(value, "devDependencies") &&
+    "devDependencies" in value &&
+    isStringRecord(value.devDependencies)
+  );
+}
+
 function manifestOf(project: string): Manifest {
-  // SAFETY: the project's package.json is JSON with these three objects of strings.
-  return JSON.parse(readFileSync(join(project, "package.json"), "utf8")) as Manifest;
+  const parsed: unknown = JSON.parse(readFileSync(join(project, "package.json"), "utf8"));
+  if (!isManifest(parsed)) throw new Error("package.json lacks scripts, dependencies or devDependencies of strings");
+  return parsed;
 }
 
 export const projectJourneys = {
