@@ -68,7 +68,7 @@
     "@adonisjs/eslint-plugin": "^2.2.2",
     "@adonisjs/tsconfig": "^2.0.0",
     "@antelopejs/dms-frontend": ">=0.10.3 <0.11.0",
-    "@antelopejs/tooling-configs": "^0.5.4",
+    "@antelopejs/tooling-configs": "^0.5.8",
     "@japa/assert": "^4.2.0",
     "@japa/plugin-adonisjs": "^5.2.0",
     "@japa/runner": "^5.4.0",
