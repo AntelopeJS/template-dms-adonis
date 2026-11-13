@@ -23,6 +23,13 @@ jobs:
       # `pnpm test` boots the whole application, and the Antelope runtime
       # connects to MongoDB while constructing its modules.
       services-compose-file: .github/compose.yml
+      # Windows runners skip the compose services but ship MongoDB 7 as a
+      # disabled service, the major version of the compose image.
+      setup-commands: |
+        if [ "$RUNNER_OS" = Windows ]; then
+          powershell -NoProfile -Command 'Set-Service MongoDB -StartupType Manual; Start-Service MongoDB'
+          mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok'
+        fi
       # The build, then the server a user starts: AdonisJS on :3333 with the
       # DMS API on :5010. `/dms/info` answers only once the runtime has started
       # every module. `node ace serve` validates its environment from `.env`.
@@ -32,7 +39,7 @@ jobs:
         node ace generate:key
         node ace serve > server.log 2>&1 &
         for _ in $(seq 1 60); do
-          curl -sf http://localhost:3333/dms/info > info.json && break
+          curl -sf -o info.json http://localhost:3333/dms/info && break
           sleep 2
         done
         cat info.json || { cat server.log; exit 1; }
@@ -41,6 +48,7 @@ jobs:
         curl -s -o /dev/null -w '%{http_code}' 'http://localhost:5010/dms/page?path=/home' | grep -q 200
       renovate-sync: false
       test-job: true
+      windows: true
       docs-files: |
         README.md
     permissions:

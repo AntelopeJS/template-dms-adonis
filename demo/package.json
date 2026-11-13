@@ -28,7 +28,7 @@
     "@antelopejs/interface-dms-saas": "^0.8.0"
   },
   "devDependencies": {
-    "@antelopejs/tooling-configs": "^0.5.4",
+    "@antelopejs/tooling-configs": "^0.5.8",
     "@types/node": "^26.6.5",
     "knip": "^6.41.0",
     "oxfmt": "^0.77.0",

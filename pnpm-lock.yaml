@@ -73,8 +73,8 @@ importers:
         specifier: '>=0.10.3 <0.11.0'
         version: 0.10.3(@antelopejs/core@1.21.3)
       '@antelopejs/tooling-configs':
-        specifier: ^0.5.4
-        version: 0.5.4(knip@6.44.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(playwright-core@1.56.1)(sharp@0.34.5)
+        specifier: ^0.5.8
+        version: 0.5.8(knip@6.44.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(playwright-core@1.56.1)(sharp@0.34.5)
       '@japa/assert':
         specifier: ^4.2.0
         version: 4.2.0(@japa/runner@5.4.0)
@@ -155,8 +155,8 @@ importers:
         version: 0.8.0(@antelopejs/interface-api-util@0.3.2(@antelopejs/interface-api@0.3.2(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-api@0.3.2(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-core@0.4.1)(@antelopejs/interface-database-decorators@0.4.0(@antelopejs/interface-api@0.3.2(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-core@0.4.1)(@antelopejs/interface-database@0.3.2(@antelopejs/interface-core@0.4.1)))(@antelopejs/interface-database@0.3.2(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-file-storage@0.1.7(@antelopejs/interface-core@0.4.1))
     devDependencies:
       '@antelopejs/tooling-configs':
-        specifier: ^0.5.4
-        version: 0.5.4(knip@6.44.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(playwright-core@1.56.1)(sharp@0.34.5)
+        specifier: ^0.5.8
+        version: 0.5.8(knip@6.44.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(playwright-core@1.56.1)(sharp@0.34.5)
       '@types/node':
         specifier: ^26.6.5
         version: 26.6.6
@@ -535,8 +535,8 @@ packages:
   '@antelopejs/nodemailer@0.0.11':
     resolution: {integrity: sha512-ILodfChD344t+2+tJrIuv04NWOzrTWqFG4Ng6RwYF7OZjosry82syKOvEEUH+mTa8XxSa3j5kKRNteqqbR5MEg==}
 
-  '@antelopejs/tooling-configs@0.5.4':
-    resolution: {integrity: sha512-WcprlpQt0+IGAiJ558aZv8Mxfl75hY0fI8v42jN1bBYsQCAJT8SdoJiIN3J90Sp0AdrJcOZy1o0tqRuxJ7duyA==}
+  '@antelopejs/tooling-configs@0.5.8':
+    resolution: {integrity: sha512-F4q6E2HWXEF0f6MHHOCQGheRzaNkX4e8JeYI92x6KajWJIkk8HroThU8jmIaP7Q23w6fIv8fveHtyc7pJ2hQHg==}
     engines: {node: '>=22.18.0'}
     hasBin: true
     peerDependencies:
@@ -6453,7 +6453,7 @@ snapshots:
       '@antelopejs/interface-email': 0.2.0(@antelopejs/interface-core@0.4.1)
       nodemailer: 6.10.1
 
-  '@antelopejs/tooling-configs@0.5.4(knip@6.44.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(playwright-core@1.56.1)(sharp@0.34.5)':
+  '@antelopejs/tooling-configs@0.5.8(knip@6.44.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(playwright-core@1.56.1)(sharp@0.34.5)':
     dependencies:
       '@oxlint/plugins': 1.81.0
       dts-bundle-generator: 9.5.1
