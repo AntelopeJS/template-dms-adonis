@@ -2,7 +2,7 @@ import vue from 'eslint-plugin-vue'
 import ts from 'typescript-eslint'
 
 export default [
-	{ ignores: ['node_modules/**'] },
+	{ ignores: ['node_modules/**', '.dms-types/**'] },
 	...vue.configs['flat/essential'],
 	{
 		files: ['**/*.ts', '**/*.vue'],

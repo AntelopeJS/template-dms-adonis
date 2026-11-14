@@ -29,7 +29,7 @@ interface Runnable {
 
 /** The part of a model's table the seed uses: read a row, write a row. */
 interface SeedTableHandle<T> {
-  get(id: string): PromiseLike<object | null | undefined>;
+  get(id: string): { run(): PromiseLike<object | null | undefined> };
   insert(row: StoredRow<T>): Runnable;
 }
 
@@ -105,11 +105,12 @@ export async function insertMissing<T extends object>(
   prepare: PrepareInstance<T> = keepInstance,
 ): Promise<number> {
   const { table } = GetModel(model, instanceId);
+  const reader = { get: (id: string) => table.get(id).run() };
   let written = 0;
   for (const row of rows) {
-    if (await table.get(row._id)) continue;
+    if (await reader.get(row._id)) continue;
     const stored = toStoredRow(model, row, prepare);
-    if (await insertOnce(table, row._id, () => table.insert(stored).run())) {
+    if (await insertOnce(reader, row._id, () => table.insert(stored).run())) {
       written++;
     }
   }

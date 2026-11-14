@@ -1,16 +1,9 @@
 {
+	"extends": "./.dms-types/tsconfig.json",
 	"compilerOptions": {
-		"target": "ES2022",
-		"module": "ESNext",
-		"moduleResolution": "Bundler",
-		"lib": ["ES2022", "DOM", "DOM.Iterable"],
 		"types": ["node", "vite/client"],
-		"strict": true,
-		"noEmit": true,
 		"allowJs": true,
-		"checkJs": true,
-		"resolveJsonModule": true
+		"checkJs": true
 	},
-	"include": ["**/*.ts", "**/*.mjs"],
-	"exclude": ["node_modules", "dist"]
+	"files": [".dms-types/types.d.ts", "vitest.config.ts", "eslint.config.mjs"]
 }

@@ -7,7 +7,7 @@
   "scripts": {
     "prepare": "tsc",
     "build": "rimraf dist && tsc",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc -p frontend-vue && tsc -p frontend-vue/tests",
     "lint": "oxlint --type-aware --max-warnings=0 && pnpm --dir frontend-vue lint",
     "format": "oxfmt . && pnpm --dir frontend-vue format",
     "format:check": "oxfmt --check .",
@@ -15,12 +15,12 @@
     "test": "pnpm run build && node --test \"dist/**/*.test.js\" && pnpm --dir frontend-vue test"
   },
   "dependencies": {
-    "@antelopejs/interface-api": "^0.3.2",
-    "@antelopejs/interface-core": "^0.4.1",
-    "@antelopejs/interface-data-api": "^0.6.3",
-    "@antelopejs/interface-database": "^0.3.2",
-    "@antelopejs/interface-database-decorators": "^0.4.0",
-    "@antelopejs/interface-dms": "^0.13.2",
+    "@antelopejs/interface-api": "^0.3.3",
+    "@antelopejs/interface-core": "^0.5.1",
+    "@antelopejs/interface-data-api": "^0.8.0",
+    "@antelopejs/interface-database": "^0.4.0",
+    "@antelopejs/interface-database-decorators": "^0.5.2",
+    "@antelopejs/interface-dms": "^0.14.0",
     "@antelopejs/interface-dms-automation": "^0.6.2",
     "@antelopejs/interface-dms-mailing": "^0.10.1",
     "@antelopejs/interface-dms-marketing": "^0.6.1",
@@ -28,7 +28,7 @@
     "@antelopejs/interface-dms-saas": "^0.8.0"
   },
   "devDependencies": {
-    "@antelopejs/tooling-configs": "^0.5.8",
+    "@antelopejs/tooling-configs": "^0.7.1",
     "@types/node": "^26.6.5",
     "knip": "^6.41.0",
     "oxfmt": "^0.77.0",
