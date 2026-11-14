@@ -10,11 +10,13 @@ interface HeroAction {
 	variant?: 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost' | 'link'
 }
 
-// The opening of the home page (`CustomComponent("DemoHomeHero")` in
-// src/home.ts): an eyebrow, a display-size headline with its highlighted
-// words, a lead, link buttons, and a composition of icons beside the texts
-// from the `lg` breakpoint (under them on a phone), on a soft wash of the
-// theme's primary colour. Texts follow the `$` i18n convention.
+/**
+ * The opening of the home page (`CustomComponent("DemoHomeHero")` in
+ * src/home.ts): an eyebrow, a display-size headline with its highlighted
+ * words, a lead, link buttons, and a composition of icons beside the texts
+ * from the `lg` breakpoint (under them on a phone), on a soft wash of the
+ * theme's primary colour. Texts follow the `$` i18n convention.
+ */
 interface HomeHeroProps {
 	eyebrow?: string
 	title?: string
@@ -45,7 +47,7 @@ const EXTERNAL_LINK_ATTRIBUTES = {
 	rel: 'noopener noreferrer',
 } as const
 
-// The icon composition: the middle tile leads, the others lean behind it.
+/** The icon composition: the middle tile leads, the others lean behind it. */
 const ICON_TILES = [
 	'bg-primary/10 ring-primary/25 text-primary size-20 -rotate-6 sm:size-24',
 	'bg-(--dms-surface-card) ring-default text-highlighted z-10 size-24 shadow-md sm:size-28',
@@ -68,7 +70,7 @@ const headline = computed(() =>
 const actions = computed(() => props.actions.slice(0, MAX_ACTIONS))
 const icons = computed(() => props.icons.slice(0, MAX_ICONS))
 
-// An absolute address opens in a new tab; a route or an anchor in place.
+/** An absolute address opens in a new tab; a route or an anchor in place. */
 function linkProps(to: string): Record<string, string> {
 	return EXTERNAL_LINK.test(to) ? { to, ...EXTERNAL_LINK_ATTRIBUTES } : { to }
 }

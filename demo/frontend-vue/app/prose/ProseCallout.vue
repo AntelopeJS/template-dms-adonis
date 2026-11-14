@@ -1,15 +1,18 @@
 <script setup lang="ts">
+import type { VNodeChild } from 'vue'
 import type { ProseCalloutKind } from './markdown'
 
-// A `> [!KIND]` quote of a home section: a frame in the kind's tone, headed by
-// its icon and label. An SFC rather than part of the token renderer, so the
-// template resolves `UIcon` like every other component.
+/**
+ * A `> [!KIND]` quote of a home section: a frame in the kind's tone, headed by
+ * its icon and label. An SFC rather than part of the token renderer, so the
+ * template resolves `UIcon` like every other component.
+ */
 interface ProseCalloutProps {
 	kind: ProseCalloutKind
 }
 
 interface ProseCalloutSlots {
-	default?: () => unknown
+	default?: () => VNodeChild
 }
 
 /** How each callout kind is drawn: its tone's frame, icon and title colour. */
@@ -22,7 +25,7 @@ interface CalloutLook {
 const props = defineProps<ProseCalloutProps>()
 defineSlots<ProseCalloutSlots>()
 
-// Literal class strings: Tailwind only extracts classes it sees whole.
+/** Literal class strings: Tailwind only extracts classes it sees whole. */
 const CALLOUT_LOOKS: Record<ProseCalloutKind, CalloutLook> = {
 	note: {
 		frame: 'border-info/35 bg-info/5',

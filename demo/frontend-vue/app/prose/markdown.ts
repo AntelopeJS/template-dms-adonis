@@ -1,12 +1,13 @@
-// What the home page's Prose reads its Markdown into. `marked` only tokenizes
-// here: ProseTokens draws the tokens as Vue nodes itself, so no HTML string is
-// ever produced or injected, raw HTML in the source is dropped, and every link
-// and image address is checked before it reaches an attribute. The parse is
-// synchronous and runs the same on the server and in the browser, so the
-// hydrated page draws what the server sent.
-
+/**
+ * What the home page's Prose reads its Markdown into. `marked` only tokenizes
+ * here: ProseTokens draws the tokens as Vue nodes itself, so no HTML string is
+ * ever produced or injected, raw HTML in the source is dropped, and every link
+ * and image address is checked before it reaches an attribute. The parse is
+ * synchronous and runs the same on the server and in the browser, so the
+ * hydrated page draws what the server sent.
+ */
 import { decodeHTML } from 'entities'
-import { Lexer, type Token, type Tokens } from 'marked'
+import { Lexer, type MarkedToken, type Token, type Tokens } from 'marked'
 
 export type ProseHeadingLevel = 2 | 3 | 4
 
@@ -17,9 +18,16 @@ export type ProseHeadingLevel = 2 | 3 | 4
  */
 export type ProseLinkKind = 'internal' | 'anchor' | 'external' | 'contact'
 
+const CALLOUT_KINDS = [
+	'note',
+	'tip',
+	'important',
+	'warning',
+	'caution',
+] as const
+
 /** The GitHub alert kinds a quote turns into a callout with. */
-export type ProseCalloutKind =
-	'note' | 'tip' | 'important' | 'warning' | 'caution'
+export type ProseCalloutKind = (typeof CALLOUT_KINDS)[number]
 
 /** A heading token, with the anchor the parse gave it. */
 export interface ProseHeadingToken extends Tokens.Heading {
@@ -34,18 +42,39 @@ export interface ProseCalloutToken extends Tokens.Blockquote {
 
 const LEXER_OPTIONS = { gfm: true, breaks: false } as const
 
-const MIN_HEADING_LEVEL = 2
-const MAX_HEADING_LEVEL = 4
-
 const CALLOUT_MARKER =
 	/^\[!(note|tip|important|warning|caution)\][ \t]*(?:\n|$)/i
+
+const MARKED_TOKEN_TYPES = new Set<string>([
+	'blockquote',
+	'br',
+	'checkbox',
+	'code',
+	'codespan',
+	'def',
+	'del',
+	'em',
+	'escape',
+	'heading',
+	'hr',
+	'html',
+	'image',
+	'link',
+	'list',
+	'list_item',
+	'paragraph',
+	'space',
+	'strong',
+	'table',
+	'text',
+] satisfies MarkedToken['type'][])
 
 const SCHEME_PATTERN = /^([a-z][a-z\d+.-]*):/i
 const SAFE_LINK_SCHEMES = new Set(['http', 'https', 'mailto', 'tel'])
 const SAFE_IMAGE_SCHEMES = new Set(['http', 'https'])
 const CONTACT_LINK_PATTERN = /^(?:mailto|tel):/i
 const EXTERNAL_LINK_PATTERN = /^(?:[a-z][a-z\d+.-]*:|\/\/)/i
-// Characters a browser ignores inside a URL scheme (`java\tscript:`).
+/** Characters a browser ignores inside a URL scheme (`java\tscript:`). */
 const SPACE_CODE = 0x20
 const DELETE_CODE = 0x7f
 const LAST_C1_CODE = 0x9f
@@ -58,7 +87,7 @@ export const EXTERNAL_LINK_ATTRIBUTES = {
 
 /** Drops the control characters and spaces a browser ignores in a URL. */
 function stripIgnoredCharacters(url: string): string {
-	return [...url]
+	return Array.from(url)
 		.filter((character) => {
 			const code = character.codePointAt(0)!
 			return code > SPACE_CODE && (code < DELETE_CODE || code > LAST_C1_CODE)
@@ -125,18 +154,46 @@ export function slugify(text: string): string {
 const SECTION_FALLBACK_SLUG = 'section'
 
 function clampLevel(depth: number): ProseHeadingLevel {
-	return Math.min(
-		MAX_HEADING_LEVEL,
-		Math.max(MIN_HEADING_LEVEL, depth),
-	) as ProseHeadingLevel
+	if (depth <= 2) return 2
+	return depth === 3 ? 3 : 4
+}
+
+/** Whether a token is one of marked's own, not an extension's. */
+export function isMarkedToken(token: Token): token is MarkedToken {
+	return MARKED_TOKEN_TYPES.has(token.type)
+}
+
+function isCalloutKind(value: unknown): value is ProseCalloutKind {
+	return CALLOUT_KINDS.some((kind) => kind === value)
+}
+
+/** Whether a heading is one {@link parseProse} anchored. */
+export function isProseHeading(token: Token): token is ProseHeadingToken {
+	return (
+		token.type === 'heading' &&
+		'id' in token &&
+		typeof token.id === 'string' &&
+		'level' in token &&
+		(token.level === 2 || token.level === 3 || token.level === 4)
+	)
+}
+
+/** Whether a quote is one {@link parseProse} turned into a callout. */
+export function isProseCallout(token: Token): token is ProseCalloutToken {
+	return (
+		token.type === 'blockquote' &&
+		'callout' in token &&
+		isCalloutKind(token.callout)
+	)
 }
 
 function calloutOf(token: Tokens.Blockquote): ProseCalloutToken | undefined {
 	const marker = CALLOUT_MARKER.exec(token.text)
-	if (!marker?.[1]) return undefined
+	const callout = marker?.[1]?.toLowerCase()
+	if (!marker || !isCalloutKind(callout)) return undefined
 	return {
 		...token,
-		callout: marker[1].toLowerCase() as ProseCalloutKind,
+		callout,
 		tokens: new Lexer(LEXER_OPTIONS).lex(token.text.slice(marker[0].length)),
 	}
 }
@@ -157,16 +214,16 @@ export function parseProse(markdown: string): Token[] {
 	}
 
 	function visit(tokens: Token[]): Token[] {
-		return tokens.map((token) => {
+		return tokens.map((token): Token => {
+			if (!isMarkedToken(token)) return token
 			if (token.type === 'heading') {
-				const heading = token as Tokens.Heading
-				const id = uniqueId(plainText(heading.tokens))
-				const level = clampLevel(heading.depth)
-				return { ...heading, id, level } satisfies ProseHeadingToken
+				const id = uniqueId(plainText(token.tokens))
+				const level = clampLevel(token.depth)
+				return { ...token, id, level } satisfies ProseHeadingToken
 			}
 			if (token.type === 'blockquote') {
-				const quote = calloutOf(token as Tokens.Blockquote) ?? token
-				return { ...quote, tokens: visit(quote.tokens ?? []) } as Token
+				const quote = calloutOf(token) ?? token
+				return { ...quote, tokens: visit(quote.tokens) }
 			}
 			return token
 		})
