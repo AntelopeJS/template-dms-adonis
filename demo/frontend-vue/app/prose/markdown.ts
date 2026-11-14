@@ -18,16 +18,17 @@ export type ProseHeadingLevel = 2 | 3 | 4
  */
 export type ProseLinkKind = 'internal' | 'anchor' | 'external' | 'contact'
 
-const CALLOUT_KINDS = [
+/** The GitHub alert kinds a quote turns into a callout with. */
+export type ProseCalloutKind =
+	'note' | 'tip' | 'important' | 'warning' | 'caution'
+
+const CALLOUT_KINDS: readonly ProseCalloutKind[] = [
 	'note',
 	'tip',
 	'important',
 	'warning',
 	'caution',
-] as const
-
-/** The GitHub alert kinds a quote turns into a callout with. */
-export type ProseCalloutKind = (typeof CALLOUT_KINDS)[number]
+]
 
 /** A heading token, with the anchor the parse gave it. */
 export interface ProseHeadingToken extends Tokens.Heading {
@@ -224,6 +225,13 @@ export function parseProse(markdown: string): Token[] {
 			if (token.type === 'blockquote') {
 				const quote = calloutOf(token) ?? token
 				return { ...quote, tokens: visit(quote.tokens) }
+			}
+			if (token.type === 'list') {
+				const items = token.items.map((item) => ({
+					...item,
+					tokens: visit(item.tokens),
+				}))
+				return { ...token, items }
 			}
 			return token
 		})

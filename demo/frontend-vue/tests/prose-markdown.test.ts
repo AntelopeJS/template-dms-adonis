@@ -33,6 +33,12 @@ describe('parseProse', () => {
 		expect(headings(tokens)[0]?.id).toBe('the-id-field-more')
 	})
 
+	it('anchors a heading inside a list item', () => {
+		const tokens = parseProse('- ## In a list\n\n  body')
+
+		expect(JSON.stringify(tokens)).toContain('"id":"in-a-list"')
+	})
+
 	it('turns a [!KIND] quote into a callout, its marker taken out', () => {
 		const tokens = parseProse('> [!WARNING]\n> Back up **first**.')
 

@@ -24,6 +24,11 @@ interface CatalogJson {
 	readonly [key: string]: string | CatalogJson
 }
 
+/** Orders strings by code unit, as `Array#sort` does by default, whatever the host locale. */
+function byCodeUnit(left: string, right: string): number {
+	return Number(left > right) - Number(left < right)
+}
+
 function isMessage(value: unknown): value is string {
 	return typeof value === 'string'
 }
@@ -71,7 +76,7 @@ function readCatalog(file: string): Catalog {
 function catalog(locale: string): Catalog {
 	return readdirSync(LOCALE_DIR)
 		.filter((file) => file.endsWith(`-${locale}.json`))
-		.sort((left, right) => left.localeCompare(right))
+		.sort(byCodeUnit)
 		.reduce<Catalog>(
 			(merged, file) => merge(merged, readCatalog(file)),
 			new Map(),
@@ -100,7 +105,7 @@ function backendKeys(): string[] {
 			found.add(literal.slice(1).replace(/\.$/, ''))
 		}
 	}
-	return [...found].sort((left, right) => left.localeCompare(right))
+	return [...found].sort(byCodeUnit)
 }
 
 function resolveKey(root: Catalog, key: string): CatalogEntry | undefined {
@@ -120,8 +125,8 @@ const en = catalog('en-GB')
 const fr = catalog('fr-FR')
 
 assert.deepEqual(
-	keysOf(fr).sort((left, right) => left.localeCompare(right)),
-	keysOf(en).sort((left, right) => left.localeCompare(right)),
+	keysOf(fr).sort(byCodeUnit),
+	keysOf(en).sort(byCodeUnit),
 	'fr-FR and en-GB carry the same key set',
 )
 

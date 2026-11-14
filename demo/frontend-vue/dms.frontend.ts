@@ -15,7 +15,7 @@ const components = import.meta.glob<VueModule>('./app/components/**/*.vue')
 const frontendModule: DmsFrontendModule = {
 	setup(sdk) {
 		for (const [path, loader] of Object.entries(components).sort(
-			([left], [right]) => left.localeCompare(right),
+			([left], [right]) => Number(left > right) - Number(left < right),
 		)) {
 			const name = path
 				.split('/')
