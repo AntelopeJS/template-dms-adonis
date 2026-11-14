@@ -183,9 +183,10 @@ export async function writeWorkspace(
   now: Date,
 ): Promise<boolean> {
   const { id } = workspace;
-  if (await GetModel(TenantSubscriptionModel, id).table.get(id)) return false;
+  if (await GetModel(TenantSubscriptionModel, id).table.get(id).run())
+    return false;
   const createdAt = workspaceCreatedAt(workspace, now);
-  await Schema.get(TENANT_SCHEMA_NAME)?.createInstance(id);
+  await Schema.get(TENANT_SCHEMA_NAME)?.createInstance(id).run();
   await insertMissing<Role>(
     RoleModel,
     [memberRole(id, permissions, createdAt)],

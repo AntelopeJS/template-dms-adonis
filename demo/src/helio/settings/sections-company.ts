@@ -1,7 +1,10 @@
 import type { ControllerClass } from "@antelopejs/interface-api";
 import { DefaultDataTypes } from "@antelopejs/interface-dms/base/data-types/default-types";
 import type { FormSection } from "@antelopejs/interface-dms/base/form";
-import { AssetType } from "@antelopejs/interface-dms-media";
+import {
+  AssetType,
+  type AssetTypeOptions,
+} from "@antelopejs/interface-dms-media";
 import { DEFAULT_BRAND_COLOR } from "./defaults";
 import { LEGAL_FORMS } from "./options";
 
@@ -87,6 +90,19 @@ const identitySection: FormSection = {
   ],
 };
 
+/** The media-library asset type of the company logo, its permissions read from `page`. */
+function logoType(page: ControllerClass): AssetType {
+  const options: AssetTypeOptions = {
+    mimetypes: ["image/png", "image/svg+xml", "image/webp"],
+    binding: {
+      id: "helio.settings.logo",
+      folderName: "Logo de l'entreprise",
+      permissionsFromPage: page,
+    },
+  };
+  return new AssetType(options);
+}
+
 /**
  * The branding fields. The logo is a media-library asset, so the same logo is
  * reused by every document; its folder is named in French like the other Helio
@@ -111,14 +127,7 @@ function brandingSection(page: ControllerClass): FormSection {
         id: "logo",
         label: "$helio.settings.fields.logo",
         description: "$helio.settings.descriptions.logo",
-        type: new AssetType({
-          mimetypes: ["image/png", "image/svg+xml", "image/webp"],
-          binding: {
-            id: "helio.settings.logo",
-            folderName: "Logo de l'entreprise",
-            permissionsFromPage: page,
-          },
-        }),
+        type: logoType(page),
       },
       {
         id: "tagline",
