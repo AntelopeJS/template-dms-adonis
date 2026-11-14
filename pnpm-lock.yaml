@@ -13,16 +13,16 @@ importers:
         version: 7.6.0(@adonisjs/assembler@8.6.0(typescript@6.0.3))(pino-pretty@13.2.0)(youch@4.1.1)
       '@antelopejs/api':
         specifier: ^1.7.3
-        version: 1.7.3(@antelopejs/core@1.21.3)
+        version: 1.7.3(@antelopejs/core@1.23.1)
       '@antelopejs/auth-jwt':
         specifier: ^1.1.1
         version: 1.1.1
       '@antelopejs/core':
-        specifier: ^1.21.3
-        version: 1.21.3
+        specifier: ~1.23.1
+        version: 1.23.1
       '@antelopejs/dms':
         specifier: '>=0.19.4 <1.0.0'
-        version: 0.19.4(@antelopejs/core@1.21.3)
+        version: 0.19.4(@antelopejs/core@1.23.1)
       '@antelopejs/dms-api':
         specifier: '>=0.6.4 <1.0.0'
         version: 0.6.4(@antelopejs/interface-data-api@0.6.3(@antelopejs/interface-api-util@0.3.2(@antelopejs/interface-api@0.3.2(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-api@0.3.2(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-core@0.4.1)(@antelopejs/interface-database-decorators@0.4.0(@antelopejs/interface-api@0.3.2(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-core@0.4.1)(@antelopejs/interface-database@0.3.2(@antelopejs/interface-core@0.4.1)))(@antelopejs/interface-database@0.3.2(@antelopejs/interface-core@0.4.1)))(@antelopejs/interface-file-storage@0.1.7(@antelopejs/interface-core@0.4.1))
@@ -70,8 +70,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@antelopejs/dms-frontend':
-        specifier: '>=0.10.3 <0.11.0'
-        version: 0.10.3(@antelopejs/core@1.21.3)
+        specifier: '>=0.11.0 <0.12.0'
+        version: 0.11.1(@antelopejs/core@1.23.1)
       '@antelopejs/tooling-configs':
         specifier: ^0.5.8
         version: 0.5.8(knip@6.44.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2005))(playwright-core@1.56.1)(sharp@0.34.5)
@@ -385,8 +385,8 @@ packages:
   '@antelopejs/auth-jwt@1.1.1':
     resolution: {integrity: sha512-GMv09En5P/xBKa11UmsobecJxSwLUL3EjN7EHok1dP1981aVm9rKOsl5D3k+3nWnzAWZE0PwgEehbow/BIUINg==}
 
-  '@antelopejs/core@1.21.3':
-    resolution: {integrity: sha512-u0nXPLmbUXXNZ4/mv+SFQTWPJhzfT9zln28RY8M9FYIujPoejc2YgnLJJbc9YpbTKUo+AHrzhGleFhM3OZXE3g==}
+  '@antelopejs/core@1.23.1':
+    resolution: {integrity: sha512-0hTjFw5vHNwwTE6HYCvEHErKkJR9MiehE1UmY3P1M0LEky5j+TPWYcf7+Qtzp9U6ErYb+cRljHCzRaBu2pEbIw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -399,12 +399,12 @@ packages:
   '@antelopejs/dms-database@0.4.4':
     resolution: {integrity: sha512-xNzFpSPnDloLafjRqEnakBhRmGLojOpPyjIHBTOfePzBkQ1arnEqfULYe7nJS6BrKsptapdudKlkkdyYTxfLaw==}
 
-  '@antelopejs/dms-frontend@0.10.3':
-    resolution: {integrity: sha512-3OBlKwqbWShEH6+nsXvn8onNJjPd5L/6RMuhp9OtY5i3pbWlhoPxHor5QDL/btgHT6ckxrBw1D6cpw30b5TfOA==}
+  '@antelopejs/dms-frontend@0.11.1':
+    resolution: {integrity: sha512-Owu88uYgEfH3TTSVt30PYEeZFydq5aqLamZcSitYaFBNDUyZAglbR8HqAwqQM67nSFCwJ/sdQaqVcV52jDXjzw==}
     engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
-      '@antelopejs/core': '>=1.16.0 <2'
+      '@antelopejs/core': ~1.23.0
 
   '@antelopejs/dms-lang@0.5.3':
     resolution: {integrity: sha512-J/vDKR9GfqQ+MsHRQ84a+A5BxOobThg7jAfaT8F+xKptfF2OIpRIz4Y92vWqjZVMm3iht9qwwpiEvLE/nQgWiQ==}
@@ -452,6 +452,9 @@ packages:
 
   '@antelopejs/interface-core@0.4.1':
     resolution: {integrity: sha512-6UZWBp4IXHUNqP26uaqG+kmDfJW79LvPpskITmoouv57zsZ0RgyCLfc0sHs7Bcj/88hvhy/KLYgQ51p11IlBjQ==}
+
+  '@antelopejs/interface-core@0.5.1':
+    resolution: {integrity: sha512-ON/7TYA1yyT8UznzKi6vnwyjRU3byNE0OcFXBmf8dE/dqp8hKjeWHVyA2EUPOngmEimCLw4idZqOS5DJqMJx3g==}
 
   '@antelopejs/interface-data-api@0.6.3':
     resolution: {integrity: sha512-LlSQO0aomwQBUjZDQFw1E83+OdoClzwZcr8eTaiuXTETIt6Bsxfp9qwjWZEDnTREMHlF1hTp3HdaVVIRI6Ew6w==}
@@ -6089,7 +6092,7 @@ snapshots:
 
   '@alloc/quick-lru@5.3.0': {}
 
-  '@antelopejs/api@1.7.3(@antelopejs/core@1.21.3)':
+  '@antelopejs/api@1.7.3(@antelopejs/core@1.23.1)':
     dependencies:
       '@antelopejs/interface-api': 0.3.2(@antelopejs/interface-core@0.4.1)
       '@antelopejs/interface-api-util': 0.3.2(@antelopejs/interface-api@0.3.2(@antelopejs/interface-core@0.4.1))(@antelopejs/interface-core@0.4.1)
@@ -6097,7 +6100,7 @@ snapshots:
       reflect-metadata: 0.2.2
       ws: 8.22.0
     optionalDependencies:
-      '@antelopejs/core': 1.21.3
+      '@antelopejs/core': 1.23.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -6110,9 +6113,9 @@ snapshots:
       chai: 4.5.0
       jsonwebtoken: 9.0.3
 
-  '@antelopejs/core@1.21.3':
+  '@antelopejs/core@1.23.1':
     dependencies:
-      '@antelopejs/interface-core': 0.4.1
+      '@antelopejs/interface-core': 0.5.1
       '@clack/prompts': 1.8.1
       '@types/proper-lockfile': 4.1.4
       commander: 13.1.0
@@ -6174,9 +6177,9 @@ snapshots:
       - '@antelopejs/interface-data-api'
       - '@antelopejs/interface-file-storage'
 
-  '@antelopejs/dms-frontend@0.10.3(@antelopejs/core@1.21.3)':
+  '@antelopejs/dms-frontend@0.11.1(@antelopejs/core@1.23.1)':
     dependencies:
-      '@antelopejs/core': 1.21.3
+      '@antelopejs/core': 1.23.1
       '@intlify/message-compiler': 11.4.17
       chokidar: 4.0.3
       commander: 13.1.0
@@ -6276,7 +6279,7 @@ snapshots:
       - '@antelopejs/interface-file-storage'
       - '@types/node'
 
-  '@antelopejs/dms@0.19.4(@antelopejs/core@1.21.3)':
+  '@antelopejs/dms@0.19.4(@antelopejs/core@1.23.1)':
     dependencies:
       2fa: 0.1.2
       '@antelopejs/interface-api': 0.3.2(@antelopejs/interface-core@0.4.1)
@@ -6300,7 +6303,7 @@ snapshots:
       ua-parser-js: 2.0.10
       zod: 3.24.4
     optionalDependencies:
-      '@antelopejs/core': 1.21.3
+      '@antelopejs/core': 1.23.1
       '@antelopejs/interface-dms-automation': 0.6.2(@antelopejs/interface-core@0.4.1)
       '@antelopejs/interface-redis': 0.0.9(@antelopejs/interface-core@0.4.1)
       playwright-core: 1.56.1
@@ -6331,6 +6334,10 @@ snapshots:
       '@antelopejs/interface-core': 0.4.1
 
   '@antelopejs/interface-core@0.4.1':
+    dependencies:
+      reflect-metadata: 0.2.2
+
+  '@antelopejs/interface-core@0.5.1':
     dependencies:
       reflect-metadata: 0.2.2
 
