@@ -5,7 +5,15 @@
  * as in the browser, so hydration changes nothing.
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { type App, computed, createApp, createSSRApp, h, ref } from 'vue'
+import {
+	type App,
+	type ComputedRef,
+	createApp,
+	createSSRApp,
+	defineComponent,
+	h,
+	ref,
+} from 'vue'
 import { renderToString } from 'vue/server-renderer'
 import HomeProse from '../app/components/HomeProse.vue'
 
@@ -13,7 +21,12 @@ const data = ref<{ markdown?: string } | null>(null)
 const error = ref<unknown>(null)
 const pending = ref(false)
 const locale = ref('en-GB')
-const apiData = vi.fn()
+/** What HomeProse passes `useApiData` beside its URL. */
+interface ApiDataOptions {
+	query: ComputedRef<{ locale: string }>
+}
+
+const apiData = vi.fn<(url: () => string, options: ApiDataOptions) => void>()
 
 const STUBS = ['UIcon', 'USkeleton', 'DmsEmptyState']
 
@@ -22,17 +35,23 @@ function install(app: App): App {
 		app.component(name, (_, { attrs }) =>
 			h('i', { ...attrs, 'data-stub': name }),
 		)
-	app.component('DmsLink', {
-		props: ['to'],
-		setup:
-			(props: { to: string }, { slots }) =>
-			() =>
-				h('a', { href: props.to, 'data-dms-link': '' }, slots.default?.()),
-	})
-	app.component('DmsCodeSnippet', {
-		props: ['code', 'language'],
-		setup: (props: { code: string }) => () => h('pre', props.code),
-	})
+	app.component(
+		'DmsLink',
+		defineComponent({
+			props: { to: { type: String, required: true } },
+			setup:
+				(props, { slots }) =>
+				() =>
+					h('a', { href: props.to, 'data-dms-link': '' }, slots.default?.()),
+		}),
+	)
+	app.component(
+		'DmsCodeSnippet',
+		defineComponent({
+			props: { code: { type: String, required: true }, language: String },
+			setup: (props) => () => h('pre', props.code),
+		}),
+	)
 	return app
 }
 
@@ -60,7 +79,7 @@ beforeEach(() => {
 	locale.value = 'en-GB'
 	apiData.mockClear()
 	vi.stubGlobal('useI18n', () => ({ locale, t: (key: string) => key }))
-	vi.stubGlobal('useApiData', (url: () => string, options: unknown) => {
+	vi.stubGlobal('useApiData', (url: () => string, options: ApiDataOptions) => {
 		apiData(url, options)
 		return { data, pending, error, refresh: async () => {} }
 	})
@@ -190,10 +209,7 @@ describe('HomeProse', () => {
 	it("reads its route again in the reader's language", async () => {
 		await mount('Text')
 
-		const [url, options] = apiData.mock.calls[0]! as [
-			() => string,
-			{ query: ReturnType<typeof computed> },
-		]
+		const [url, options] = apiData.mock.calls[0]!
 		expect(url()).toBe('/dms/pages/home/sections/why')
 		expect(options.query.value).toEqual({ locale: 'en-GB' })
 		locale.value = 'fr-FR'

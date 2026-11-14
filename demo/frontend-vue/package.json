@@ -12,7 +12,7 @@
 		"dev": "pnpm --dir ../.. frontend:dev",
 		"build": "pnpm --dir ../.. frontend:build",
 		"format": "prettier --write .",
-		"lint": "node scripts/check-locales.mjs && eslint .",
+		"lint": "node scripts/check-locales.ts && eslint .",
 		"lint:fix": "eslint . --fix",
 		"test": "vitest run"
 	},
@@ -23,6 +23,7 @@
 	},
 	"devDependencies": {
 		"@nuxt/ui": "4.12.0",
+		"@types/node": "^26.6.5",
 		"@typescript/native": "npm:typescript@^7.0.2",
 		"@vitejs/plugin-vue": "^6.0.10",
 		"eslint": "^10.13.0",
@@ -32,6 +33,7 @@
 		"prettier-plugin-tailwindcss": "^0.8.1",
 		"typescript": "npm:@typescript/typescript6@^6.0.2",
 		"typescript-eslint": "^8.71.2",
+		"vite": "^8.3.6",
 		"vitest": "^5.0.5"
 	}
 }

@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import type { Token } from 'marked'
 import {
+	isProseCallout,
+	isProseHeading,
 	isSafeImageUrl,
 	isSafeLinkUrl,
 	parseProse,
@@ -9,12 +11,7 @@ import {
 } from '../app/prose/markdown'
 
 const headings = (tokens: Token[]) =>
-	tokens
-		.filter((token) => token.type === 'heading')
-		.map((token) => {
-			const { id, level } = token as Token & { id: string; level: number }
-			return { id, level }
-		})
+	tokens.filter(isProseHeading).map(({ id, level }) => ({ id, level }))
 
 describe('parseProse', () => {
 	it('anchors each heading once, clamped to levels 2 to 4', () => {
@@ -36,12 +33,18 @@ describe('parseProse', () => {
 		expect(headings(tokens)[0]?.id).toBe('the-id-field-more')
 	})
 
+	it('anchors a heading inside a list item', () => {
+		const tokens = parseProse('- ## In a list\n\n  body')
+
+		expect(JSON.stringify(tokens)).toContain('"id":"in-a-list"')
+	})
+
 	it('turns a [!KIND] quote into a callout, its marker taken out', () => {
 		const tokens = parseProse('> [!WARNING]\n> Back up **first**.')
 
-		expect(tokens[0]).toMatchObject({ type: 'blockquote', callout: 'warning' })
-		const quote = tokens[0] as { tokens: unknown[] }
-		expect(JSON.stringify(quote.tokens)).not.toContain('[!WARNING]')
+		const callout = tokens.find(isProseCallout)
+		expect(callout?.callout).toBe('warning')
+		expect(JSON.stringify(callout?.tokens)).not.toContain('[!WARNING]')
 	})
 
 	it('leaves a plain quote a quote', () => {

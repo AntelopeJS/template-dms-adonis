@@ -6,7 +6,17 @@ import { splitHeadline } from '../app/utils/heroHeadline'
 let app: App | undefined
 let host: HTMLDivElement
 
-async function mount(props: Record<string, unknown>) {
+/** The props a hero section of the home page answers with. */
+interface HeroProps {
+	eyebrow?: string
+	title?: string
+	highlight?: string
+	lead?: string
+	icons?: string[]
+	actions?: { label: string; to: string }[]
+}
+
+async function mount(props: HeroProps) {
 	app = createApp({ setup: () => () => h(HomeHero, props) })
 	app.component('UIcon', (_, { attrs }) =>
 		h('i', { ...attrs, 'data-stub': 'UIcon' }),
