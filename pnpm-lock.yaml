@@ -36,8 +36,8 @@ importers:
         specifier: '>=0.7.0 <0.8.0'
         version: 0.7.0(0ad9e7c202f5ae073252796e9c7c9906)
       '@antelopejs/dms-mailing':
-        specifier: '>=0.10.1 <0.11.0'
-        version: 0.10.1(@antelopejs/interface-file-storage@0.1.8(@antelopejs/interface-core@0.5.1))
+        specifier: '>=0.10.2 <0.11.0'
+        version: 0.10.2(@antelopejs/interface-file-storage@0.1.8(@antelopejs/interface-core@0.5.1))
       '@antelopejs/dms-marketing':
         specifier: '>=0.10.0 <0.11.0'
         version: 0.10.0(@antelopejs/interface-file-storage@0.1.8(@antelopejs/interface-core@0.5.1))
@@ -409,8 +409,8 @@ packages:
   '@antelopejs/dms-lang@0.7.0':
     resolution: {integrity: sha512-W8c1j1nqQaIYGEk0k+ocBeQNxyt7UgF8qgVdLH3UzmWAZVNLYcN9nHXIf3hwOz1AIE3iVpqlQXUjz1XYZiPBug==}
 
-  '@antelopejs/dms-mailing@0.10.1':
-    resolution: {integrity: sha512-ZIif6UIGX6DnNr6ASW+0jNAj9XgOv/hlFPhony7wKkXLGjDlFXGBgvrHIgYYAFpPdDgeZReGfmFriNt8gdgsmw==}
+  '@antelopejs/dms-mailing@0.10.2':
+    resolution: {integrity: sha512-Ee5S64MvLSf7A0I4UXITeLCXKGwEYuQ3er2AamHQapGVVd5WDxEH2xIw4+P2ORq8KqU0MWRcAu/m0SQmjNqNmA==}
 
   '@antelopejs/dms-marketing@0.10.0':
     resolution: {integrity: sha512-FCEkPLUjCfqxzs051MX3TMjPDp15ta2MuJMXWBJQbgYD90U2GZjpHOcqS1WPUgunAFV/+D0r6HRY/lAFxo4K6w==}
@@ -491,11 +491,6 @@ packages:
 
   '@antelopejs/interface-database@0.4.0':
     resolution: {integrity: sha512-cdVGd0qdHwkS3PHdbV9IJUyL3OoGjnmXoVbXdHPNmbwzmjUDkZQHFN2Y3b58SGsH11k3nS1EJLq0sTbKVhaKdQ==}
-    peerDependencies:
-      '@antelopejs/interface-core': '>=0.2.4 <1.0.0'
-
-  '@antelopejs/interface-dms-automation@0.6.2':
-    resolution: {integrity: sha512-MdF7aTCMq7NQbrrjWTc3OStxtMp8SKqZvIsvVdnBTo3q06T9C5SOHcEicMPCDT6xYuVRXggLL0dLWuheWLr0IQ==}
     peerDependencies:
       '@antelopejs/interface-core': '>=0.2.4 <1.0.0'
 
@@ -6291,7 +6286,7 @@ snapshots:
       - '@antelopejs/interface-database-decorators'
       - '@antelopejs/interface-file-storage'
 
-  '@antelopejs/dms-mailing@0.10.1(@antelopejs/interface-file-storage@0.1.8(@antelopejs/interface-core@0.5.1))':
+  '@antelopejs/dms-mailing@0.10.2(@antelopejs/interface-file-storage@0.1.8(@antelopejs/interface-core@0.5.1))':
     dependencies:
       '@antelopejs/interface-api': 0.3.3(@antelopejs/interface-core@0.5.1)
       '@antelopejs/interface-api-util': 0.3.2(@antelopejs/interface-api@0.3.3(@antelopejs/interface-core@0.5.1))(@antelopejs/interface-core@0.5.1)
@@ -6305,7 +6300,7 @@ snapshots:
       node-cron: 4.6.0
       zod: 3.25.76
     optionalDependencies:
-      '@antelopejs/interface-dms-automation': 0.6.2(@antelopejs/interface-core@0.5.1)
+      '@antelopejs/interface-dms-automation': 0.7.0(@antelopejs/interface-core@0.5.1)
     transitivePeerDependencies:
       - '@antelopejs/interface-file-storage'
 
@@ -6457,11 +6452,6 @@ snapshots:
   '@antelopejs/interface-database@0.4.0(@antelopejs/interface-core@0.5.1)':
     dependencies:
       '@antelopejs/interface-core': 0.5.1
-
-  '@antelopejs/interface-dms-automation@0.6.2(@antelopejs/interface-core@0.5.1)':
-    dependencies:
-      '@antelopejs/interface-core': 0.5.1
-    optional: true
 
   '@antelopejs/interface-dms-automation@0.7.0(@antelopejs/interface-core@0.5.1)':
     dependencies:
