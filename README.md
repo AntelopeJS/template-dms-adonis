@@ -142,9 +142,9 @@ ranges of `@adonisjs/core`, `@antelopejs/core`, `@antelopejs/dms` and
 
 ## The assistant
 
-This template does not load the AI assistant, `@antelopejs/dms-ai`, nor the page Builder, `@antelopejs/dms-builder`. Both show in development builds of the dashboard only, the ones `ajs dms dev` serves, and embedded mode serves a production build. Try them in [`template-dms`](https://github.com/AntelopeJS/template-dms) or [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo).
+This template does not load `@antelopejs/dms-assistant`, the module that brings the AI assistant and its onboarding. The assistant and the page Builder, which ships in `@antelopejs/dms`, show in development builds of the dashboard only, the ones `ajs dms dev` serves, and embedded mode serves a production build. Try them in [`template-dms`](https://github.com/AntelopeJS/template-dms) or [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo).
 
-There the assistant runs a coding agent, Claude Code or Codex, on your own subscription. When the project runs on your machine, the assistant uses the Claude Code login you already have, with no token and no API key. Codex needs one **Sign in with ChatGPT** in **Assistant** > **Settings**. The [AI assistant section of `template-dms`](https://github.com/AntelopeJS/template-dms#ai-assistant) has the steps, including what a Docker container needs.
+There the assistant runs a coding agent, Claude Code or Codex, on your own subscription. You set it up in the dashboard. After you create the administrator account, the assistant's onboarding opens on its own. It finds a Claude Code login you already have, or walks you through signing in to Claude or Codex. The [AI assistant section of `template-dms`](https://github.com/AntelopeJS/template-dms#ai-assistant) covers Docker too.
 
 ## Coding agents
 
