@@ -21,11 +21,11 @@
     "@antelopejs/interface-database": "^0.4.0",
     "@antelopejs/interface-database-decorators": "^0.5.2",
     "@antelopejs/interface-dms": "^0.14.0",
-    "@antelopejs/interface-dms-automation": "^0.6.2",
-    "@antelopejs/interface-dms-mailing": "^0.10.1",
-    "@antelopejs/interface-dms-marketing": "^0.6.1",
-    "@antelopejs/interface-dms-media": "^0.3.3",
-    "@antelopejs/interface-dms-saas": "^0.8.0"
+    "@antelopejs/interface-dms-automation": "^0.7.0",
+    "@antelopejs/interface-dms-mailing": "^0.11.0",
+    "@antelopejs/interface-dms-marketing": "^0.7.0",
+    "@antelopejs/interface-dms-media": "^0.4.0",
+    "@antelopejs/interface-dms-saas": "^0.10.0"
   },
   "devDependencies": {
     "@antelopejs/tooling-configs": "^0.7.1",
