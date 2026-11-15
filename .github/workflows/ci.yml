@@ -1,14 +1,13 @@
 name: ci
 
 on:
-  push:
-    branches:
-      - main
-  # No branch filter: pull requests get stacked on top of each other, and a
-  # filter on `main` would leave every intermediate step without a gate.
   pull_request:
-
-  workflow_dispatch: null
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [next]
+  schedule:
+    - cron: '17 2 * * *'
+  workflow_dispatch:
 permissions:
   contents: read
 
@@ -18,7 +17,7 @@ concurrency:
 
 jobs:
   ci:
-    uses: AntelopeJS/.github/.github/workflows/ci-node.yml@v1
+    uses: AntelopeJS/.github/.github/workflows/ci-node.yml@v2
     with:
       # `pnpm test` boots the whole application, and the Antelope runtime
       # connects to MongoDB while constructing its modules.
@@ -48,7 +47,6 @@ jobs:
         curl -s -o /dev/null -w '%{http_code}' 'http://localhost:5010/dms/page?path=/home' | grep -q 200
       renovate-sync: false
       test-job: true
-      windows: true
       docs-files: |
         README.md
     permissions:
@@ -59,4 +57,4 @@ jobs:
     permissions:
       contents: write
       actions: write
-    uses: AntelopeJS/.github/.github/workflows/ci-renovate-sync.yml@v1
+    uses: AntelopeJS/.github/.github/workflows/ci-renovate-sync.yml@v2
