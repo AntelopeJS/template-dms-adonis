@@ -20,7 +20,7 @@
     "@antelopejs/interface-data-api": "^0.8.0",
     "@antelopejs/interface-database": "^0.4.0",
     "@antelopejs/interface-database-decorators": "^0.5.2",
-    "@antelopejs/interface-dms": "^0.14.0",
+    "@antelopejs/interface-dms": "^0.14.2",
     "@antelopejs/interface-dms-automation": "^0.7.0",
     "@antelopejs/interface-dms-mailing": "^0.11.0",
     "@antelopejs/interface-dms-marketing": "^0.7.0",
@@ -28,7 +28,7 @@
     "@antelopejs/interface-dms-saas": "^0.10.0"
   },
   "devDependencies": {
-    "@antelopejs/tooling-configs": "^0.7.1",
+    "@antelopejs/tooling-configs": "^0.7.3",
     "@types/node": "^26.6.5",
     "knip": "^6.41.0",
     "oxfmt": "^0.77.0",

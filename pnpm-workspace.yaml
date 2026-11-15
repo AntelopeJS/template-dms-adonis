@@ -3,3 +3,5 @@ packages:
   - demo/frontend-vue
 allowBuilds:
   lefthook: false
+minimumReleaseAgeExclude:
+  - '@antelopejs/interface-*'
