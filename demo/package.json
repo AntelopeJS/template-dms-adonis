@@ -5,9 +5,9 @@
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "tsc",
-    "build": "rimraf dist && tsc",
-    "typecheck": "tsc --noEmit && tsc -p frontend-vue && tsc -p frontend-vue/tests",
+    "prepare": "antelopejs-tsc",
+    "build": "rimraf dist && antelopejs-tsc",
+    "typecheck": "antelopejs-tsc --noEmit && antelopejs-tsc -p frontend-vue && antelopejs-tsc -p frontend-vue/tests",
     "lint": "oxlint --type-aware --max-warnings=0 && pnpm --dir frontend-vue lint",
     "format": "oxfmt . && pnpm --dir frontend-vue format",
     "format:check": "oxfmt --check .",
@@ -28,14 +28,14 @@
     "@antelopejs/interface-dms-saas": "^0.10.0"
   },
   "devDependencies": {
-    "@antelopejs/tooling-configs": "^0.7.3",
+    "@antelopejs/tooling-configs": "^0.7.4",
     "@types/node": "^26.6.5",
     "knip": "^6.41.0",
     "oxfmt": "^0.77.0",
     "oxlint": "1.81.0",
     "oxlint-tsgolint": "^7.0.2004",
     "rimraf": "^6.1.3",
-    "typescript": "^7.0.2"
+    "typescript": "^6.0.2"
   },
   "antelopeJs": {
     "baseUrl": "dist",
