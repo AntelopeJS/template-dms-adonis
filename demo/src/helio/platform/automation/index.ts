@@ -105,9 +105,6 @@ function actionTypesUsed(): Set<string> {
  * the DMS added "dms.send-notification", a procedure is stored with an
  * "unknown type" warning. Gives up after a while and declares anyway (the
  * automation module tolerates a type that comes late).
- *
- * The DMS adds its types once it has provisioned its default tenant, so on a
- * fresh install the Helio e-mail templates the first runs send exist by then.
  */
 async function waitForActionTypes(): Promise<void> {
   const wanted = actionTypesUsed();
@@ -124,10 +121,11 @@ async function waitForActionTypes(): Promise<void> {
   );
 }
 
-/** Declares the shipped procedures once their action types are known, and runs the first-run ones that were just created. */
-async function declareProcedures(): Promise<void> {
+/** Declares the shipped procedures once their action types are known, and resolves to the ids of the first-run ones it just created. */
+async function declareProcedures(): Promise<string[]> {
   await waitForActionTypes();
   const outcomes: string[] = [];
+  const created: string[] = [];
   for (const declaration of HELIO_PROCEDURES) {
     const declared = await DeclareProcedure(declaration);
     outcomes.push(`${declared.id}=${declared.status}`);
@@ -140,22 +138,42 @@ async function declareProcedures(): Promise<void> {
       declared.status === "created" &&
       FIRST_RUN_PROCEDURES.has(declared.id)
     ) {
-      await (OWNER_NOTIFYING_PROCEDURES.has(declared.id)
-        ? firstRunWithOwner(declared.id)
-        : firstRun(declared.id));
+      created.push(declared.id);
     }
   }
   Logging.Info(`[helio] procedures: ${outcomes.join(", ")}`);
+  return created;
 }
+
+/** The first-run procedures this start created and has not run yet. */
+let pendingFirstRuns: Promise<string[]> = Promise.resolve([]);
 
 /**
  * Declares the five procedures shipped as code, in the background; call it
  * from start(). Never throws: Helio works without the automation module. The
  * procedures are the platform's, not a tenant's, so they are not written at
- * provisioning.
+ * provisioning; their first runs wait for it, in `runHelioFirstRuns`.
  */
 export function startHelioAutomation(): void {
-  declareProcedures().catch((error: unknown) => {
+  pendingFirstRuns = declareProcedures().catch((error: unknown) => {
     Logging.Warn(`[helio] automation setup failed: ${String(error)}`);
+    return [];
   });
+}
+
+/**
+ * Runs once each procedure `startHelioAutomation` just created and ships with
+ * a first run. A provisioning step after the mailing one: the DMS registers
+ * its action types before it provisions the default tenant, so a first run
+ * started as soon as the procedures are declared sends e-mails whose
+ * templates are not written yet. Never throws.
+ */
+export async function runHelioFirstRuns(): Promise<void> {
+  const ids = await pendingFirstRuns;
+  pendingFirstRuns = Promise.resolve([]);
+  for (const id of ids) {
+    await (OWNER_NOTIFYING_PROCEDURES.has(id)
+      ? firstRunWithOwner(id)
+      : firstRun(id));
+  }
 }
