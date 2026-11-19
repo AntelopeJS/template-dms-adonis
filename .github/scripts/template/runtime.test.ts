@@ -20,7 +20,8 @@ import {
   type Mongo,
 } from './stack.ts'
 
-const SETUP_LINE = /No owner exists yet\. To create it, open (\S+)\/onboarding\?token=([\w-]+)/
+const SETUP_LINE =
+  /\[DMS\] No owner exists yet\. To create it, open (\S+)\/onboarding\?token=([\w-]+)/
 
 await test('config-mapping', async (t) => {
   const project = copyProject()

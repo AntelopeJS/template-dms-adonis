@@ -8,6 +8,7 @@ import {
   commandEnv,
   copyProject,
   freePort,
+  killGroup,
   mustRun,
   sleep,
   withMongo,
@@ -43,8 +44,11 @@ await test('dashboard', async (t) => {
         cwd: project.dir,
         env: commandEnv(),
         detached: true,
-        stdio: 'ignore',
+        stdio: ['ignore', 'pipe', 'pipe'],
       })
+      let log = ''
+      dashboard.stdout.on('data', (chunk: Buffer) => (log += chunk.toString()))
+      dashboard.stderr.on('data', (chunk: Buffer) => (log += chunk.toString()))
       try {
         const wizard = `http://localhost:${port}/onboarding?token=${token}`
         let status = 0
@@ -55,7 +59,7 @@ await test('dashboard', async (t) => {
           body = (await response?.text()) ?? ''
           if (status !== 200) await sleep(1000)
         }
-        assert.equal(status, 200, 'the wizard answers')
+        assert.equal(status, 200, `the wizard answers:\n${log.slice(-4000)}`)
         assert.match(body, /<title>Set up your platform/, "the wizard's title is translated")
         assert.match(body, /Welcome to Antelope DMS/, 'the wizard renders its first step')
         assert.match(body, /"homepage":"\/home"/, "the dashboard carries the provider's homepage")
@@ -65,7 +69,7 @@ await test('dashboard', async (t) => {
           'the dashboard calls the DMS API at DMS_API_BASE_URL of .env'
         )
       } finally {
-        if (dashboard.pid !== undefined) process.kill(-dashboard.pid, 'SIGKILL')
+        killGroup(dashboard)
       }
     })
   })

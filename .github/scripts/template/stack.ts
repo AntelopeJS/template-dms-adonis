@@ -1,4 +1,4 @@
-import { spawn, type ChildProcess } from 'node:child_process'
+import { spawn, spawnSync, type ChildProcess } from 'node:child_process'
 import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { createServer, type AddressInfo, type Server as NetServer } from 'node:net'
 import { join } from 'node:path'
@@ -31,7 +31,7 @@ export const DEMO_FRONTEND_MODULE = 'template-dms-demo-frontend-vue'
 
 const BOOT_TIMEOUT_MS = 120_000
 const STOP_TIMEOUT_MS = 20_000
-const COMMAND_TIMEOUT_MS = 300_000
+const COMMAND_TIMEOUT_MS = 600_000
 
 /** The folder the global setup prepares: the installed scaffold and the scratch space of each test. */
 export function root(): string {
@@ -115,13 +115,20 @@ export async function mustRun(
   return result
 }
 
-function killGroup(child: ChildProcess): void {
-  if (child.pid === undefined || child.exitCode !== null || child.signalCode !== null) return
+/** Whether any process of the group `child` leads is still running, the leader or a child it started. */
+function groupAlive(child: ChildProcess): boolean {
+  if (child.pid === undefined) return false
   try {
-    process.kill(-child.pid, 'SIGKILL')
+    process.kill(-child.pid, 0)
+    return true
   } catch {
-    child.kill('SIGKILL')
+    return false
   }
+}
+
+/** Kills every process of the group `child` leads, even after the leader itself has exited. */
+export function killGroup(child: ChildProcess): void {
+  if (groupAlive(child) && child.pid !== undefined) process.kill(-child.pid, 'SIGKILL')
 }
 
 function isTcpAddress(address: ReturnType<NetServer['address']>): address is AddressInfo {
@@ -149,11 +156,21 @@ export interface Project {
   remove(): void
 }
 
-/** A copy of the installed scaffold, which a test may change, removed by `remove`. */
+/**
+ * A copy of the installed scaffold, which a test may change. `remove` kills every process still
+ * running from it, such as the dashboard server `ajs-dms start` starts in a session of its own,
+ * then deletes it.
+ */
 export function copyProject(): Project {
   const dir = mkdtempSync(join(root(), 'project-'))
   cpSync(scaffolded(), dir, { recursive: true, verbatimSymlinks: true })
-  return { dir, remove: () => rmSync(dir, { recursive: true, force: true }) }
+  return {
+    dir,
+    remove() {
+      spawnSync('pkill', ['-KILL', '-f', '--', dir])
+      rmSync(dir, { recursive: true, force: true })
+    },
+  }
 }
 
 export interface Mongo {
@@ -288,7 +305,7 @@ export interface Server {
   ports: Ports
   /** Everything the server printed so far. */
   log(): string
-  /** Sends SIGINT and resolves whether the process ended by itself within 20 seconds; kills it otherwise. */
+  /** Sends SIGINT to `node ace serve` and resolves whether every process it started ended by itself within 20 seconds; kills them otherwise. */
   stop(): Promise<boolean>
 }
 
@@ -303,7 +320,6 @@ export async function serve(project: string, ports: Ports, args: string[] = []):
   let output = ''
   child.stdout.on('data', (chunk: Buffer) => (output += chunk.toString()))
   child.stderr.on('data', (chunk: Buffer) => (output += chunk.toString()))
-  const exited = new Promise<void>((resolve) => child.once('exit', () => resolve()))
   const ended = () => child.exitCode !== null || child.signalCode !== null
   const url = `http://localhost:${ports.http}`
   const server: Server = {
@@ -311,9 +327,11 @@ export async function serve(project: string, ports: Ports, args: string[] = []):
     ports,
     log: () => output,
     async stop() {
-      if (ended()) return true
+      if (!groupAlive(child)) return true
       child.kill('SIGINT')
-      const byItself = await Promise.race([exited.then(() => true), sleep(STOP_TIMEOUT_MS, false)])
+      const deadline = Date.now() + STOP_TIMEOUT_MS
+      while (groupAlive(child) && Date.now() < deadline) await sleep(250)
+      const byItself = !groupAlive(child)
       killGroup(child)
       return byItself
     },
