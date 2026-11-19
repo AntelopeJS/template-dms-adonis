@@ -214,4 +214,11 @@ void describe("provisioning steps", () => {
       names.indexOf("mailing webhook secret") > names.indexOf("mailing"),
     );
   });
+
+  void it("runs the automation first runs after the mail templates exist", () => {
+    assert.ok(names.includes("automation first runs"));
+    assert.ok(
+      names.indexOf("automation first runs") > names.indexOf("mailing"),
+    );
+  });
 });
