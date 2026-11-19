@@ -41,7 +41,7 @@ installer, translated in English and French.
 Prefer [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo)
 if you do not already have a Node.js app. There the `ajs` CLI owns the process
 (**standalone** mode), the dashboard runs with hot reload, and the assistant and
-the page Builder are available (see [The assistant](#the-assistant)).
+its mockups are available (see [The assistant](#the-assistant)).
 
 ## Install
 
@@ -142,7 +142,7 @@ ranges of `@adonisjs/core`, `@antelopejs/core`, `@antelopejs/dms` and
 
 ## The assistant
 
-This template does not load `@antelopejs/dms-assistant`, the module that brings the AI assistant and its onboarding and replaces `@antelopejs/dms-ai` and `@antelopejs/dms-builder`. The assistant and the page Builder, which ships in `@antelopejs/dms`, show in development builds of the dashboard only, the ones `ajs dms dev` serves, and embedded mode serves a production build. Try them in [`template-dms`](https://github.com/AntelopeJS/template-dms) or [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo).
+This template does not load `@antelopejs/dms-assistant`, the module that brings the AI assistant and its onboarding and replaces `@antelopejs/dms-ai` and `@antelopejs/dms-builder`. The assistant and the mockup viewer show in development builds of the dashboard only, the ones `ajs dms dev` serves, and embedded mode serves a production build. Try them in [`template-dms`](https://github.com/AntelopeJS/template-dms) or [`template-dms-demo`](https://github.com/AntelopeJS/template-dms-demo).
 
 There the assistant runs a coding agent, Claude Code or Codex, on your own subscription. You set it up in the dashboard. After you create the administrator account, the assistant's onboarding opens on its own. It finds a Claude Code login you already have, or walks you through signing in to Claude or Codex. The [AI assistant section of `template-dms`](https://github.com/AntelopeJS/template-dms#ai-assistant) covers Docker too.
 
