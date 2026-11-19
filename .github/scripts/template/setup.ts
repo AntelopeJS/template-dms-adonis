@@ -40,7 +40,7 @@ async function bareRepository(folder: string): Promise<string> {
   return `file://${folder}.git`
 }
 
-/** Copies the template's working tree, uncommitted changes included, the way `antelopejs-verify` serves it. */
+/** Copies the template's working tree, uncommitted changes included. */
 async function copyWorkingTree(target: string): Promise<void> {
   const listed = await mustRun(
     'git',
