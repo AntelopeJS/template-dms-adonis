@@ -66,7 +66,13 @@ suppressions and sync, and prints only what failed.
 
 ## Guardrails
 
-Lint with `oxlint` and format with `oxfmt`; both read the configs at the repository root. Fix every finding: no rule warns.
+CI runs `pnpm run checks` in full on every pull request and reports what failed. The commit hook formats and lints the staged files. Locally, run only the fast check for what you touched:
+
+- `pnpm run typecheck` after you change types or signatures.
+- `pnpm exec oxlint <files>` and `pnpm exec oxfmt <files>` on the files you changed.
+- One test file, not the suite. In a module that tests with `ajs module test`: `pnpm run build`, then `pnpm exec ajs module test . -f dist/<path>.test.js`.
+
+Prove a change works with the verification skill in [`.agents/skills/verify-template/SKILL.md`](.agents/skills/verify-template/SKILL.md) before you call it done.
 
 ### Comments
 
@@ -83,5 +89,9 @@ No tool checks these:
 - A type guard checks the nested elements and values it claims.
 - A no-upward import rule rejects same-tier peers; probe it with an import.
 - A finding only an evasion or a patched internal can trigger goes under Attention and never blocks.
+
+### Suppressions
+
+`guardrails.suppressions.json` caps lint directives, `@ts-expect-error`, `SAFETY:` comments and rules a lint config turns off. Over a cap, fix the code or remove another suppression of that kind; only the operator raises a number. After removing suppressions, run `pnpm run suppressions:update` and commit the file.
 
 <!-- antelopejs-guardrails:end -->
