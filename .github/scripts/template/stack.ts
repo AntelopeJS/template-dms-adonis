@@ -49,14 +49,16 @@ export function scaffolded(): string {
 }
 
 /**
- * The environment of every command a test runs: the test's own, without the variables that turn
- * a nested `node` into a `node --test` child.
+ * The variables of the caller's run that a user's project never sees: those that turn a nested
+ * `node` into a `node --test` child, and those of this repository's CI run (its pull request
+ * base and tier), which `antelopejs-checks` would otherwise apply to the scaffolded project.
  */
+const CALLER_ONLY = /^(NODE_TEST_CONTEXT|NODE_OPTIONS|GITHUB_\w+|ANTELOPEJS_\w+)$/
+
+/** The environment of every command a test runs: the test's own, without `CALLER_ONLY`. */
 export function commandEnv(extra: NodeJS.ProcessEnv = {}): NodeJS.ProcessEnv {
-  const env = { ...process.env, ...extra }
-  delete env.NODE_TEST_CONTEXT
-  delete env.NODE_OPTIONS
-  return env
+  const own = Object.entries(process.env).filter(([name]) => !CALLER_ONLY.test(name))
+  return { ...Object.fromEntries(own), ...extra }
 }
 
 export interface CommandResult {
