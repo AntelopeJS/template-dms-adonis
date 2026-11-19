@@ -31,10 +31,17 @@ jobs:
           powershell -NoProfile -Command 'Set-Service MongoDB -StartupType Manual; Start-Service MongoDB'
           mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok'
         fi
-      # The build, then the server a user starts: AdonisJS on :3333 with the
+      # The template's own journeys first: `.github/scripts/template/` scaffolds
+      # a project with `ajs project init --template` and drives it, each test
+      # beside a MongoDB container of its own, so they run on Linux only, and
+      # outside the fast tier of a pull request. `.github/scripts` stays out of
+      # every scaffolded project.
+      # Then the build, then the server a user starts: AdonisJS on :3333 with the
       # DMS API on :5010. `/dms/info` answers only once the runtime has started
       # every module. `node ace serve` validates its environment from `.env`.
       extra-commands: |
+        pnpm exec tsc -p .github/scripts/template
+        if [ "$ANTELOPEJS_CI_TIER" != fast ] && [ "$RUNNER_OS" = Linux ]; then node --test --test-concurrency=3 --test-global-setup=.github/scripts/template/setup.ts '.github/scripts/template/*.test.ts'; fi
         pnpm build
         cp .env.example .env
         node ace generate:key
