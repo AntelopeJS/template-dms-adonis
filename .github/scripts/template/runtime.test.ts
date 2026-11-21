@@ -21,7 +21,7 @@ import {
 } from './stack.ts'
 
 const SETUP_LINE =
-  /\[DMS\] No owner exists yet\. To create it, open (\S+)\/onboarding\?token=([\w-]+)/
+  /\[DMS\] No owner exists yet\. To create it, open (\S+)\/onboarding\?token=<DMS_SETUP_TOKEN>/
 
 await test('config-mapping', async (t) => {
   const project = copyProject()
@@ -75,7 +75,8 @@ await test('first-run-setup-token', async (t) => {
   const project = copyProject()
   t.after(() => project.remove())
   await withMongo(async (mongo) => {
-    const ports = await writeEnv(project.dir, mongo)
+    const token = 'template-test-runtime-setup-token'
+    const ports = await writeEnv(project.dir, mongo, { DMS_SETUP_TOKEN: token })
     await withServer(project.dir, ports, async (server) => {
       let announced: RegExpExecArray | null = null
       for (let attempt = 0; attempt < 60 && !announced; attempt += 1) {
@@ -87,8 +88,7 @@ await test('first-run-setup-token', async (t) => {
         `the terminal prints the onboarding address:\n${server.log().slice(-2000)}`
       )
       assert.equal(announced[1], 'http://localhost:3001', 'on the origin of DMS_CLIENT_BASE_URL')
-      const token = announced[2] ?? ''
-      assert.ok(token.length >= 16, 'the address carries a generated token')
+      assert.ok(!server.log().includes(token), 'the terminal never prints the setup token')
 
       const api = `http://localhost:${ports.api}/api/onboarding`
       const before = await getJson(`${api}/informations`)
@@ -97,7 +97,7 @@ await test('first-run-setup-token', async (t) => {
       const forged = await register(api, `${token}x`)
       assert.equal(forged, 403, 'another token is refused')
       const registered = await register(api, token)
-      assert.equal(registered, 200, 'the printed token creates the administrator')
+      assert.equal(registered, 200, 'DMS_SETUP_TOKEN creates the administrator')
       const after = await getJson(`${api}/informations`)
       assert.ok(isRecord(after.json))
       assert.equal(after.json.has_onboarded, true)
