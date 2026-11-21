@@ -61,7 +61,7 @@ await test('dashboard', async (t) => {
         }
         assert.equal(status, 200, `the wizard answers:\n${log.slice(-4000)}`)
         assert.match(body, /<title>Set up your platform/, "the wizard's title is translated")
-        assert.match(body, /Welcome to Antelope DMS/, 'the wizard renders its first step')
+        assert.match(body, /Welcome to AntelopeJS DMS/, 'the wizard renders its first step')
         assert.match(body, /"homepage":"\/home"/, "the dashboard carries the provider's homepage")
         assert.match(
           body,

@@ -86,22 +86,24 @@ pnpm frontend:build
 pnpm frontend:start
 ```
 
-A fresh database has no account. The `pnpm dev` terminal prints the address
-that creates the administrator, with a one-time setup token:
+A fresh database has no account. Creating the administrator takes a setup
+token: set `DMS_SETUP_TOKEN` in `.env` to a value of at least 16 characters
+before you start `pnpm dev`. The `pnpm dev` terminal prints the address that
+creates the administrator, without the token:
 
 ```text
-[WARN] [DMS] No owner exists yet. To create it, open http://localhost:3001/onboarding?token=...
+[WARN] [DMS] No owner exists yet. To create it, open http://localhost:3001/onboarding?token=<DMS_SETUP_TOKEN>
 ```
 
-Open that address. The first-run wizard creates the administrator; after that
+Open that address with your token in place of `<DMS_SETUP_TOKEN>`. The first-run wizard creates the administrator; after that
 the dashboard at `http://localhost:3001` shows the sign-in page, and the demo's
 home page once you sign in. The DMS writes the Helio data once, when it
 creates its `default` tenant on an empty database. To get it back, start
 against an empty database. Set `HELIO_SIMULATORS=off` in the environment to
 stop the live service desk and fleet monitoring simulators. The line
-repeats at every start until an administrator exists. To choose the token
-yourself, set `DMS_SETUP_TOKEN` in `.env` to at least 16 characters: the line
-then prints `token=<DMS_SETUP_TOKEN>` and you put your value in the address. Run
+repeats at every start until an administrator exists. With `DMS_SETUP_TOKEN`
+empty, the DMS generates a token and never prints it, so the wizard refuses
+every token you type. Run
 `pnpm frontend:build` again after you add or remove a DMS module.
 
 `ajs dms dev` (hot reload) does not work in embedded mode, because it needs a
