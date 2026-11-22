@@ -31,6 +31,7 @@ export default class AntelopeProvider {
     const publicOptions = publicModuleOptions((name) => env.get(name))
     this.runtime = createRuntime({
       projectFolder: this.app.makePath(),
+      dev: this.app.inDev,
       modules: {
         '@antelopejs/dms': {
           config: {
