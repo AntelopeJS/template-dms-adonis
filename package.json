@@ -59,7 +59,7 @@
     "@antelopejs/dms-media": ">=0.8.3 <0.9.0",
     "@antelopejs/dms-saas": ">=0.13.0 <0.14.0",
     "@antelopejs/file-storage-local": "^0.2.2",
-    "@antelopejs/mongodb": "~1.8.12",
+    "@antelopejs/mongodb": "~1.8.13",
     "@antelopejs/nodemailer": ">=0.0.13 <0.1.0",
     "reflect-metadata": "^0.2.2"
   },
@@ -68,7 +68,7 @@
     "@adonisjs/eslint-plugin": "^2.2.2",
     "@adonisjs/tsconfig": "^2.0.0",
     "@antelopejs/dms-frontend": ">=0.11.9 <0.12.0",
-    "@antelopejs/tooling-configs": ">=0.9.2 <0.10.0",
+    "@antelopejs/tooling-configs": ">=0.9.3 <0.10.0",
     "@japa/assert": "^4.2.0",
     "@japa/plugin-adonisjs": "^5.2.0",
     "@japa/runner": "^5.4.0",
