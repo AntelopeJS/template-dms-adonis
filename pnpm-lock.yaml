@@ -51,8 +51,8 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2
       '@antelopejs/mongodb':
-        specifier: ~1.8.12
-        version: 1.8.12
+        specifier: ~1.8.13
+        version: 1.8.13
       '@antelopejs/nodemailer':
         specifier: '>=0.0.13 <0.1.0'
         version: 0.0.13
@@ -73,8 +73,8 @@ importers:
         specifier: '>=0.11.9 <0.12.0'
         version: 0.11.9(@antelopejs/core@1.24.6)
       '@antelopejs/tooling-configs':
-        specifier: '>=0.9.2 <0.10.0'
-        version: 0.9.2(knip@6.46.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2007))(playwright-core@1.65.1)(sharp@0.34.5)
+        specifier: '>=0.9.3 <0.10.0'
+        version: 0.9.3(knip@6.46.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2007))(playwright-core@1.65.1)(sharp@0.34.5)
       '@japa/assert':
         specifier: ^4.2.0
         version: 4.2.0(@japa/runner@5.4.0)
@@ -155,8 +155,8 @@ importers:
         version: 0.11.0(@antelopejs/interface-api-util@0.3.3(@antelopejs/interface-api@0.3.4(@antelopejs/interface-core@0.5.2))(@antelopejs/interface-core@0.5.2))(@antelopejs/interface-api@0.3.4(@antelopejs/interface-core@0.5.2))(@antelopejs/interface-core@0.5.2)(@antelopejs/interface-database-decorators@0.5.4(@antelopejs/interface-api@0.3.4(@antelopejs/interface-core@0.5.2))(@antelopejs/interface-core@0.5.2)(@antelopejs/interface-database@0.4.3(@antelopejs/interface-core@0.5.2)))(@antelopejs/interface-database@0.4.3(@antelopejs/interface-core@0.5.2))(@antelopejs/interface-file-storage@0.1.9(@antelopejs/interface-core@0.5.2))
     devDependencies:
       '@antelopejs/tooling-configs':
-        specifier: '>=0.9.2 <0.10.0'
-        version: 0.9.2(knip@6.46.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2007))(playwright-core@1.65.1)(sharp@0.34.5)
+        specifier: '>=0.9.3 <0.10.0'
+        version: 0.9.3(knip@6.46.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2007))(playwright-core@1.65.1)(sharp@0.34.5)
       '@types/node':
         specifier: ^26.6.6
         version: 26.6.6
@@ -543,14 +543,14 @@ packages:
     peerDependencies:
       '@antelopejs/interface-core': '>=0.5.1 <0.6.0'
 
-  '@antelopejs/mongodb@1.8.12':
-    resolution: {integrity: sha512-6jAA6YmViKUzd2EYGl4eNC6Kw2OgjEYm8ltWE6oItBfXAQkYK47IwuqLRY0QZb6lRa5pwbdZeKJ3E5ksk9EY2w==}
+  '@antelopejs/mongodb@1.8.13':
+    resolution: {integrity: sha512-z4qjnoRPQJf6dY1pTttDZ/+6c0/tKTiPxVIxoZACVopUW61mEeD5wqWnyAna7N7Bnj5/xYNfH4j4gPGbVYAlSw==}
 
   '@antelopejs/nodemailer@0.0.13':
     resolution: {integrity: sha512-kO52oZoSGZrV64+d0FnGHXJ2YLhqPDJULXunmg62798QADyiEuM859k1LeSBhO7SvHIobuNaOui+ZR/MhmqPkA==}
 
-  '@antelopejs/tooling-configs@0.9.2':
-    resolution: {integrity: sha512-ne8nyzONTzEPf+1tHZQE6osGvqHZOuHb8QufNZjES6hJasD0EMdFphGqsygBP3cInzzbOQY1F0UJqfmD1oZCTA==}
+  '@antelopejs/tooling-configs@0.9.3':
+    resolution: {integrity: sha512-iNFWt6wP+fLAVB84m5QW9ncG6z3g1qnVmCX9VKcaCctIfWnsCUDUVQum2Fa1S0UaLQY5/pWs5clAfWrnyjxXJQ==}
     engines: {node: '>=22.18.0'}
     hasBin: true
     peerDependencies:
@@ -6602,7 +6602,7 @@ snapshots:
       - supports-color
     optional: true
 
-  '@antelopejs/mongodb@1.8.12':
+  '@antelopejs/mongodb@1.8.13':
     dependencies:
       '@antelopejs/interface-core': 0.5.2
       '@antelopejs/interface-database': 0.4.3(@antelopejs/interface-core@0.5.2)
@@ -6631,7 +6631,7 @@ snapshots:
       '@types/nodemailer': 6.4.24
       nodemailer: 6.10.1
 
-  '@antelopejs/tooling-configs@0.9.2(knip@6.46.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2007))(playwright-core@1.65.1)(sharp@0.34.5)':
+  '@antelopejs/tooling-configs@0.9.3(knip@6.46.1)(oxfmt@0.77.0)(oxlint@1.81.0(oxlint-tsgolint@7.0.2007))(playwright-core@1.65.1)(sharp@0.34.5)':
     dependencies:
       '@oxlint/plugins': 1.94.0
       dts-bundle-generator: 9.5.1
