@@ -1,12 +1,9 @@
-/**
- * Draws the tokens `parseProse` read, element by element, with the theme's
- * tokens: no HTML string is built, so nothing the Markdown says can inject
- * markup. Raw HTML tokens are dropped (the text between inline tags stays),
- * and a link or image whose address is refused is drawn as its text. A DMS
- * route goes through `DmsLink`, fenced code through `DmsCodeSnippet`: both are
- * public components of the DMS.
- */
-import { defineComponent, h, resolveComponent, type VNodeChild } from 'vue'
+import {
+	type FunctionalComponent,
+	h,
+	resolveComponent,
+	type VNodeChild,
+} from 'vue'
 import { decodeHTML } from 'entities'
 import type { MarkedToken, Token, Tokens } from 'marked'
 import ProseCallout from './ProseCallout.vue'
@@ -308,10 +305,9 @@ interface ProseTokensProps {
 }
 
 /** Draws the tokens of a parsed Markdown text (`parseProse`). */
-const ProseTokens = defineComponent(
-	(props: ProseTokensProps) => () =>
-		renderBlocks(props.tokens, props.translate),
-	{ name: 'DemoProseTokens', props: ['tokens', 'translate'] },
-)
+const ProseTokens: FunctionalComponent<ProseTokensProps> = (props) =>
+	renderBlocks(props.tokens, props.translate)
+ProseTokens.displayName = 'DemoProseTokens'
+ProseTokens.props = ['tokens', 'translate']
 
 export default ProseTokens

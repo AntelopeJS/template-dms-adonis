@@ -1,3 +1,4 @@
+import { required } from './required'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { type App, createApp, h } from 'vue'
 import HomeHero from '../app/components/HomeHero.vue'
@@ -74,11 +75,11 @@ describe('HomeHero', () => {
 			],
 		})
 
-		const section = host.querySelector('section')!
+		const section = required(host.querySelector('section'), 'the section')
 		expect(section.querySelector('p')?.textContent?.trim()).toBe(
 			't:home.eyebrow',
 		)
-		const title = section.querySelector('h2')!
+		const title = required(section.querySelector('h2'), 'the title')
 		expect(section.getAttribute('aria-labelledby')).toBe(title.id)
 		expect(title.querySelector('.text-primary')?.textContent?.trim()).toBe(
 			'in a day',

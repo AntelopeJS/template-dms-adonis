@@ -17,10 +17,7 @@ const frontendModule: DmsFrontendModule = {
 		for (const [path, loader] of Object.entries(components).sort(
 			([left], [right]) => Number(left > right) - Number(left < right),
 		)) {
-			const name = path
-				.split('/')
-				.at(-1)!
-				.replace(/\.vue$/, '')
+			const name = (path.split('/').at(-1) ?? path).replace(/\.vue$/, '')
 			sdk.registerComponent(`Demo${name}`, defineAsyncComponent(loader))
 		}
 	},
