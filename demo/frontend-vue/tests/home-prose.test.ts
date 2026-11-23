@@ -1,16 +1,10 @@
-/**
- * A home section draws the Markdown its route answers as elements of its own,
- * never an HTML string, so raw HTML and script addresses never reach the
- * page; asks again in the reader's language; and draws the same on the server
- * as in the browser, so hydration changes nothing.
- */
+import { required } from './required'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
 	type App,
 	type ComputedRef,
 	createApp,
 	createSSRApp,
-	defineComponent,
 	h,
 	ref,
 } from 'vue'
@@ -35,22 +29,11 @@ function install(app: App): App {
 		app.component(name, (_, { attrs }) =>
 			h('i', { ...attrs, 'data-stub': name }),
 		)
-	app.component(
-		'DmsLink',
-		defineComponent({
-			props: { to: { type: String, required: true } },
-			setup:
-				(props, { slots }) =>
-				() =>
-					h('a', { href: props.to, 'data-dms-link': '' }, slots.default?.()),
-		}),
+	app.component('DmsLink', (props: { to: string }, { slots }) =>
+		h('a', { href: props.to, 'data-dms-link': '' }, slots.default?.()),
 	)
-	app.component(
-		'DmsCodeSnippet',
-		defineComponent({
-			props: { code: { type: String, required: true }, language: String },
-			setup: (props) => () => h('pre', props.code),
-		}),
+	app.component('DmsCodeSnippet', (props: { code: string }) =>
+		h('pre', props.code),
 	)
 	return app
 }
@@ -130,7 +113,7 @@ describe('HomeProse', () => {
 	it('draws every Markdown element with its own element', async () => {
 		await mount(GUIDE)
 
-		const article = host.querySelector('article')!
+		const article = required(host.querySelector('article'), 'the article')
 		expect(article.querySelector('h2#welcome')?.textContent).toContain(
 			'Welcome',
 		)
@@ -173,7 +156,10 @@ describe('HomeProse', () => {
 		await mount(GUIDE)
 
 		const link = (text: string) =>
-			[...host.querySelectorAll('a')].find((a) => a.textContent === text)!
+			required(
+				[...host.querySelectorAll('a')].find((a) => a.textContent === text),
+				`the ${text} link`,
+			)
 		expect(link('Orders').hasAttribute('data-dms-link')).toBe(true)
 		expect(link('site').getAttribute('target')).toBe('_blank')
 		expect(link('site').getAttribute('rel')).toBe('noopener noreferrer')
@@ -196,7 +182,7 @@ describe('HomeProse', () => {
 			].join('\n'),
 		)
 
-		const article = host.querySelector('article')!
+		const article = required(host.querySelector('article'), 'the article')
 		expect(article.querySelector('script, b, img')).toBe(null)
 		expect(article.querySelectorAll('a')).toHaveLength(0)
 		expect(article.innerHTML).not.toContain('javascript:')
@@ -209,7 +195,7 @@ describe('HomeProse', () => {
 	it("reads its route again in the reader's language", async () => {
 		await mount('Text')
 
-		const [url, options] = apiData.mock.calls[0]!
+		const [url, options] = required(apiData.mock.calls[0], 'the first API call')
 		expect(url()).toBe('/dms/pages/home/sections/why')
 		expect(options.query.value).toEqual({ locale: 'en-GB' })
 		locale.value = 'fr-FR'

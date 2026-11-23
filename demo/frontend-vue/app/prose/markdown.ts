@@ -1,11 +1,3 @@
-/**
- * What the home page's Prose reads its Markdown into. `marked` only tokenizes
- * here: ProseTokens draws the tokens as Vue nodes itself, so no HTML string is
- * ever produced or injected, raw HTML in the source is dropped, and every link
- * and image address is checked before it reaches an attribute. The parse is
- * synchronous and runs the same on the server and in the browser, so the
- * hydrated page draws what the server sent.
- */
 import { decodeHTML } from 'entities'
 import { Lexer, type MarkedToken, type Token, type Tokens } from 'marked'
 
@@ -90,7 +82,7 @@ export const EXTERNAL_LINK_ATTRIBUTES = {
 function stripIgnoredCharacters(url: string): string {
 	return Array.from(url)
 		.filter((character) => {
-			const code = character.codePointAt(0)!
+			const code = character.codePointAt(0) ?? SPACE_CODE
 			return code > SPACE_CODE && (code < DELETE_CODE || code > LAST_C1_CODE)
 		})
 		.join('')
@@ -146,7 +138,7 @@ function plainText(tokens: Token[] | undefined): string {
 export function slugify(text: string): string {
 	return text
 		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
+		.replace(/[\u0300-\u036F]/g, '')
 		.toLowerCase()
 		.replace(/[^a-z\d]+/g, '-')
 		.replace(/^-+|-+$/g, '')
@@ -164,8 +156,10 @@ export function isMarkedToken(token: Token): token is MarkedToken {
 	return MARKED_TOKEN_TYPES.has(token.type)
 }
 
+const CALLOUT_KIND_SET: ReadonlySet<unknown> = new Set(CALLOUT_KINDS)
+
 function isCalloutKind(value: unknown): value is ProseCalloutKind {
-	return CALLOUT_KINDS.some((kind) => kind === value)
+	return CALLOUT_KIND_SET.has(value)
 }
 
 /** Whether a heading is one {@link parseProse} anchored. */

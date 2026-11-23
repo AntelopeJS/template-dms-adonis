@@ -11,7 +11,7 @@ test.group('DMS homepage', () => {
     assert.isString(homepage)
 
     const url = new URL('/dms/page', env.get('DMS_API_BASE_URL'))
-    url.searchParams.set('path', homepage!)
+    url.searchParams.set('path', String(homepage))
     const response = await fetch(url)
     assert.notEqual(
       response.status,

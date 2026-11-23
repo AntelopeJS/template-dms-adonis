@@ -22,11 +22,8 @@ export const PLAN_IDS = {
 
 /** Which permission ids a plan holds itself (inherited ones excluded). */
 export type PlanGrant =
-  /** Every registered id outside the paid add-ons and the demo-only pages. */
   | { kind: "base" }
-  /** Every registered id under these subtrees. */
   | { kind: "subtrees"; prefixes: readonly string[] }
-  /** Every registered id: the publisher's own workspace. */
   | { kind: "all" };
 
 export interface SeedPlan {

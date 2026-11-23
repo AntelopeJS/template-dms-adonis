@@ -1,9 +1,3 @@
-/**
- * Fails when the locale catalogs drift: every locale must carry the same key
- * set, and every `$demo.…` or `$helio.…` key the backend under `../src` writes
- * must resolve to a string in each locale. Keys are matched whole, so a key
- * assembled at runtime escapes this check. `pnpm lint` runs it.
- */
 import assert from 'node:assert/strict'
 import { readdirSync, readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
