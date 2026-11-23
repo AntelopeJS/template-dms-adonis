@@ -300,18 +300,29 @@ export async function pointTestEnv(project: string, mongo: Mongo): Promise<void>
   })
 }
 
+/** A program and its arguments. */
+type Command = [program: string, ...args: string[]]
+
+/** The server the README's quick start runs. */
+export const DEV_SERVER: Command = ['node', 'ace', 'serve']
+
 export interface Server {
   url: string
   ports: Ports
   /** Everything the server printed so far. */
   log(): string
-  /** Sends SIGINT to `node ace serve` and resolves whether every process it started ended by itself within 20 seconds; kills them otherwise. */
+  /** Sends SIGINT to the server and resolves whether every process it started ended by itself within 20 seconds; kills them otherwise. */
   stop(): Promise<boolean>
 }
 
-/** Starts `node ace serve` and resolves once `/dms/info` answers 200; rejects with the server's output when it dies or never answers. */
-export async function serve(project: string, ports: Ports, args: string[] = []): Promise<Server> {
-  const child = spawn('node', ['ace', 'serve', ...args], {
+/** Starts `command` in `project`, `node ace serve` by default, and resolves once `/dms/info` answers 200; rejects with the server's output when it dies or never answers. */
+export async function serve(
+  project: string,
+  ports: Ports,
+  command: Command = DEV_SERVER
+): Promise<Server> {
+  const [program, ...args] = command
+  const child = spawn(program, args, {
     cwd: project,
     env: commandEnv(),
     detached: true,
@@ -346,9 +357,7 @@ export async function serve(project: string, ports: Ports, args: string[] = []):
     await sleep(500)
   }
   killGroup(child)
-  throw new Error(
-    `node ace serve ${args.join(' ')} never answered /dms/info:\n${output.slice(-4000)}`
-  )
+  throw new Error(`${command.join(' ')} never answered /dms/info:\n${output.slice(-4000)}`)
 }
 
 /** Runs `body` against a started server and stops it afterwards, even when `body` throws. */
@@ -356,9 +365,9 @@ export async function withServer<T>(
   project: string,
   ports: Ports,
   body: (server: Server) => Promise<T>,
-  args: string[] = []
+  command: Command = DEV_SERVER
 ): Promise<T> {
-  const server = await serve(project, ports, args)
+  const server = await serve(project, ports, command)
   try {
     return await body(server)
   } finally {

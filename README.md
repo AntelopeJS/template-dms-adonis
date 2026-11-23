@@ -118,12 +118,15 @@ module under `build/demo`:
 pnpm build
 cd build
 pnpm install --prod --ignore-workspace
+cp ../.env .env
 node bin/server.js
 ```
 
 `--ignore-workspace` keeps the install inside `build/`. Without it, the install
 reads the project's `pnpm-workspace.yaml` and reinstalls the whole workspace
-without its development dependencies.
+without its development dependencies. `pnpm build` leaves `.env` out of
+`build/`, and the server refuses to start without its variables: copy it for a
+local run, or set them in the environment of the deployment.
 
 ## Documentation
 
