@@ -54,8 +54,8 @@ importers:
         specifier: ~1.8.13
         version: 1.8.13
       '@antelopejs/nodemailer':
-        specifier: '>=0.0.13 <0.1.0'
-        version: 0.0.13
+        specifier: '>=0.0.14 <0.1.0'
+        version: 0.0.14
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -546,8 +546,8 @@ packages:
   '@antelopejs/mongodb@1.8.13':
     resolution: {integrity: sha512-z4qjnoRPQJf6dY1pTttDZ/+6c0/tKTiPxVIxoZACVopUW61mEeD5wqWnyAna7N7Bnj5/xYNfH4j4gPGbVYAlSw==}
 
-  '@antelopejs/nodemailer@0.0.13':
-    resolution: {integrity: sha512-kO52oZoSGZrV64+d0FnGHXJ2YLhqPDJULXunmg62798QADyiEuM859k1LeSBhO7SvHIobuNaOui+ZR/MhmqPkA==}
+  '@antelopejs/nodemailer@0.0.14':
+    resolution: {integrity: sha512-VjvS6m5TUxcl/YfibmlW1M5B9Ju3Ctpp3w4RRdUB/TPyeedTZUMYFhe8T785eKkCLiDKjpDJw3rY3XosZJFzpQ==}
 
   '@antelopejs/tooling-configs@0.10.0':
     resolution: {integrity: sha512-5UwQirzbFvd6Elzab7B8sssS2zVp5m2zIc0sAr7hpAMvHq7Cy0JIqY0XEZlwFJ3NwJZez5fBPbTU/6/lYJt+0Q==}
@@ -7038,7 +7038,7 @@ snapshots:
       - snappy
       - socks
 
-  '@antelopejs/nodemailer@0.0.13':
+  '@antelopejs/nodemailer@0.0.14':
     dependencies:
       '@antelopejs/interface-core': 0.5.2
       '@antelopejs/interface-email': 0.2.1(@antelopejs/interface-core@0.5.2)

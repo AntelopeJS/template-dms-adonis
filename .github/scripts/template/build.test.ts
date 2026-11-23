@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
-import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { test } from 'node:test'
 
@@ -8,6 +7,8 @@ import {
   commandEnv,
   copyProject,
   freePort,
+  getJson,
+  isRecord,
   killGroup,
   mustRun,
   sleep,
@@ -16,19 +17,26 @@ import {
   writeEnv,
 } from './stack.ts'
 
-await test('build-output', async (t) => {
+await test('production-server', async (t) => {
   const project = copyProject()
   t.after(() => project.remove())
-  await mustRun('pnpm', ['build'], { cwd: project.dir })
-  for (const file of [
-    'build/bin/server.js',
-    'build/ace.js',
-    'build/package.json',
-    'build/providers/antelope_provider.js',
-    'build/start/routes.js',
-  ]) {
-    assert.ok(existsSync(join(project.dir, file)), `${file} exists`)
-  }
+  await withMongo(async (mongo) => {
+    const ports = await writeEnv(project.dir, mongo)
+    await mustRun('pnpm', ['build'], { cwd: project.dir })
+    const build = join(project.dir, 'build')
+    await mustRun('pnpm', ['install', '--prod', '--ignore-workspace'], { cwd: build })
+    await mustRun('cp', ['../.env', '.env'], { cwd: build })
+    await withServer(
+      build,
+      ports,
+      async (server) => {
+        const home = await getJson(`${server.url}/`)
+        assert.ok(isRecord(home.json) && isRecord(home.json.dms), 'the home route reports the DMS')
+        assert.equal(home.json.dms.running, true, 'the built server runs the DMS')
+      },
+      ['node', 'bin/server.js']
+    )
+  })
 })
 
 await test('dashboard', async (t) => {

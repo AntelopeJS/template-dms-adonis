@@ -5,6 +5,7 @@ import {
   collections,
   copyProject,
   DEFAULT_DATABASE,
+  DEV_SERVER,
   DEMO_FRONTEND_MODULE,
   EXPECTED_MODULES,
   getJson,
@@ -84,7 +85,7 @@ await test('serve-hmr', async (t) => {
   t.after(() => project.remove())
   await withMongo(async (mongo) => {
     const ports = await writeEnv(project.dir, mongo)
-    const server = await serve(project.dir, ports, ['--hmr'])
+    const server = await serve(project.dir, ports, [...DEV_SERVER, '--hmr'])
     let stopped = false
     try {
       const home = await getJson(`${server.url}/`)
