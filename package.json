@@ -60,7 +60,7 @@
     "@antelopejs/dms-saas": ">=0.14.0 <0.15.0",
     "@antelopejs/file-storage-local": "^0.2.2",
     "@antelopejs/mongodb": "~1.8.13",
-    "@antelopejs/nodemailer": ">=0.0.13 <0.1.0",
+    "@antelopejs/nodemailer": ">=0.0.14 <0.1.0",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
