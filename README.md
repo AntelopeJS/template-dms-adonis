@@ -102,8 +102,9 @@ creates its `default` tenant on an empty database. To get it back, start
 against an empty database. Set `HELIO_SIMULATORS=off` in the environment to
 stop the live service desk and fleet monitoring simulators. The line
 repeats at every start until an administrator exists. With `DMS_SETUP_TOKEN`
-empty, the DMS generates a token and never prints it, so the wizard refuses
-every token you type. Run
+empty, development prints the token it generates in that address, and
+production shows `<DMS_SETUP_TOKEN>` instead, so the wizard refuses every token
+you type. Run
 `pnpm frontend:build` again after you add or remove a DMS module.
 
 `ajs dms dev` (hot reload) does not work in embedded mode, because it needs a

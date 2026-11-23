@@ -105,4 +105,17 @@ await test('docs-commands', () => {
     [],
     'the Compatibility section names the DMS and AntelopeJS core'
   )
+
+  for (const [name, text] of [
+    ['README.md', readme],
+    ['.env.example', example],
+  ] as const) {
+    assert.doesNotMatch(text, /never prints/, `${name} says the DMS never prints the token`)
+    assert.match(text, /development\s+(?:#\s*)?prints/, `${name} says development prints the token`)
+    assert.match(
+      text,
+      /production\s+(?:#\s*)?shows `?<DMS_SETUP_TOKEN>/,
+      `${name} says production shows the placeholder`
+    )
+  }
 })
