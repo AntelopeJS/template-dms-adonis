@@ -1,0 +1,39 @@
+name: stress-proof
+on:
+  workflow_dispatch:
+    inputs:
+      tier:
+        default: nightly
+permissions:
+  contents: read
+jobs:
+  stress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ANTELOPEJS_CI_TIER: ${{ inputs.tier }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: docker compose -f .github/compose.yml up -d --wait
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run typecheck
+      - env:
+          CI: '1'
+        run: |
+          loops=$((4 * $(nproc)))
+          for _ in $(seq "$loops"); do (while :; do :; done) & done
+          trap 'kill $(jobs -p) 2> /dev/null' EXIT
+          echo "tier=$ANTELOPEJS_CI_TIER loops=$loops cpus=$(nproc)"
+          failed=0
+          for run in 1 2 3; do
+            pnpm run test 2>&1 | tee "$RUNNER_TEMP/run$run.log" | grep -E "unreachable|below|passed|failed" || true
+            [ "${PIPESTATUS[0]}" -eq 0 ] || failed=$((failed + 1))
+          done
+          [ "$failed" -eq 0 ]
