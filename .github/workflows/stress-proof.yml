@@ -35,3 +35,13 @@ jobs:
             [ "${PIPESTATUS[0]}" -eq 0 ] || failed=$((failed + 1))
           done
           [ "$failed" -eq 0 ]
+      - env:
+          CI: '1'
+        run: |
+          cp .env.example .env
+          node ace generate:key > /dev/null
+          loops=$((4 * $(nproc)))
+          for _ in $(seq "$loops"); do (while :; do :; done) & done
+          trap 'kill $(jobs -p) 2> /dev/null' EXIT
+          echo "elapsed ms of the spawn, ${loops} busy loops on $(nproc) CPUs (old budget 24000):"
+          node .github/probe.mjs 5
