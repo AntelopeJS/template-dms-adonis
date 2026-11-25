@@ -8,4 +8,6 @@ export default antelopeKnipConfig({
   entry: ["src/home.ts"],
   /** `frontend-vue` is its own workspace package of the root `pnpm-workspace.yaml`. */
   ignore: ["frontend-vue/**"],
+  /** `prepare` runs `ajs` from the root workspace's `@antelopejs/core`. */
+  ignoreBinaries: ["ajs"],
 });
