@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { cpSync, mkdtempSync } from 'node:fs'
+import { cpSync, existsSync, mkdtempSync } from 'node:fs'
 import { join } from 'node:path'
 import { test } from 'node:test'
 
@@ -62,10 +62,14 @@ await test('demo-sync', async (t) => {
   for (const folder of ['src', 'content', 'frontend-vue']) {
     cpSync(join(cwd, 'demo', folder), join(source, folder), {
       recursive: true,
-      filter: (path) => !path.includes('node_modules'),
+      filter: (path) => !/node_modules|\.dms-types/.test(path),
     })
   }
   await mustRun('pnpm', ['-s', 'demo:sync', source], { cwd })
   const status = await mustRun('git', ['status', '--porcelain', 'demo'], { cwd })
   assert.equal(status.stdout.trim(), '', 'demo/ is unchanged')
+  assert.ok(
+    existsSync(join(cwd, 'demo/frontend-vue/.dms-types/tsconfig.json')),
+    'the sync keeps the types pnpm install generated'
+  )
 })

@@ -10,15 +10,19 @@ source_root=$(cd "$1" && pwd)
 target_root="$(cd "$(dirname "$0")/.." && pwd)/demo"
 
 mkdir -p "$target_root"
-rsync -a --delete \
+mirror() {
+  rsync -a --delete --filter=':- .gitignore' "$@"
+}
+mirror \
   --exclude '/capture-*' \
   --exclude '/process-group*' \
   --exclude '/package-manager.test.ts' \
   --exclude '/dms-frontend-pin.test.ts' \
+  --exclude '/codex-pin.test.ts' \
   "$source_root/src/" "$target_root/src/"
-rsync -a --delete "$source_root/content/" "$target_root/content/"
-rsync -a --delete \
-  --exclude node_modules \
+mirror "$source_root/content/" "$target_root/content/"
+mirror \
+  --exclude /.dms-types \
   --exclude .nuxt \
   --exclude .output \
   --exclude pnpm-lock.yaml \
