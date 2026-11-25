@@ -7,7 +7,6 @@ import {
   GetModel,
   triggerEvent,
 } from "@antelopejs/interface-database-decorators";
-import { insertOnce } from "../../shared/insert-once";
 
 const MS_PER_DAY = 86_400_000;
 
@@ -23,14 +22,14 @@ export function addMonths(from: Date, months: number): Date {
   return date;
 }
 
-interface Runnable {
-  run(): PromiseLike<string[]>;
+interface Runnable<Result> {
+  run(): PromiseLike<Result>;
 }
 
 /** The part of a model's table the seed uses: read a row, write a row. */
 interface SeedTableHandle<T> {
-  get(id: string): { run(): PromiseLike<object | null | undefined> };
-  insert(row: StoredRow<T>): Runnable;
+  get(id: string): Runnable<object | null | undefined>;
+  insert(row: StoredRow<T>): Runnable<string[]>;
 }
 
 interface ModelInstance<T> {
@@ -105,14 +104,17 @@ export async function insertMissing<T extends object>(
   prepare: PrepareInstance<T> = keepInstance,
 ): Promise<number> {
   const { table } = GetModel(model, instanceId);
-  const reader = { get: (id: string) => table.get(id).run() };
   let written = 0;
   for (const row of rows) {
-    if (await reader.get(row._id)) continue;
+    if (await table.get(row._id).run()) continue;
     const stored = toStoredRow(model, row, prepare);
-    if (await insertOnce(reader, row._id, () => table.insert(stored).run())) {
-      written++;
+    try {
+      await table.insert(stored).run();
+    } catch (error) {
+      if (await table.get(row._id).run()) continue;
+      throw error;
     }
+    written++;
   }
   return written;
 }

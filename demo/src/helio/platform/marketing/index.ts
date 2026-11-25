@@ -16,8 +16,11 @@ import { helioNow } from "../../shared/clock";
  * to the tenant. The traffic is imported after the funnels, because an
  * exposure only counts once its split left draft. An import that answers
  * `in_progress` or `failed` is not done, so the step fails and runs again later.
+ * Once `signal` aborts, the next import does not start and the step rejects.
  */
-export async function provisionHelioMarketing(): Promise<void> {
+export async function provisionHelioMarketing(
+  signal?: AbortSignal,
+): Promise<void> {
   const now = helioNow();
   const site = await EnsureWebsite(HELIO_WEBSITE);
   const funnels = [];
@@ -28,6 +31,7 @@ export async function provisionHelioMarketing(): Promise<void> {
     `[helio] marketing declared: website ${site.status}, funnels ${funnels.map((f) => `${f.id} ${f.status}`).join(", ")}`,
   );
   for (const batch of historyImports(now)) {
+    signal?.throwIfAborted();
     const result = await ImportAnalytics(batch);
     Logging.Info(
       `[helio] marketing history ${result.importId}: ${result.status}, ${result.sessions} visits, ${result.events} events, ${result.dropped} dropped`,

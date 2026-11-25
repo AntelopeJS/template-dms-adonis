@@ -24,7 +24,6 @@ import {
   recordNotice,
 } from "../mailing";
 import { helioNow } from "../../shared/clock";
-import { insertOnce } from "../../shared/insert-once";
 
 const SENT = new Set(["queued", "sent", "delivered"]);
 
@@ -190,8 +189,8 @@ async function kickoffTask(project: Project, quoteNumber: string) {
   const existing = await tasks.getBy("project", project._id);
   const _id = `kickoff-${project._id}`;
   if (existing.some((task) => task._id === _id)) return;
-  await insertOnce(tasks, _id, () =>
-    tasks.insert({
+  try {
+    await tasks.insert({
       _id,
       project: project._id,
       title: `Appel de lancement avec le client (devis ${quoteNumber})`,
@@ -200,8 +199,11 @@ async function kickoffTask(project: Project, quoteNumber: string) {
       dueDate: new Date(helioNow() + 3 * DAY_MS),
       estimateHours: 1,
       position: Math.max(0, ...existing.map(({ position }) => position)) + 1000,
-    }),
-  );
+    });
+  } catch (error) {
+    if (await tasks.get(_id)) return;
+    throw error;
+  }
 }
 
 /**

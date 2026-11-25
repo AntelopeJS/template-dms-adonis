@@ -1,9 +1,9 @@
 {
-	"helio": {
-		"nav": {
-			"root": "Helio",
-			"sales": "Sales",
-			"operations": "Operations"
-		}
-	}
+  "helio": {
+    "nav": {
+      "root": "Helio",
+      "sales": "Sales",
+      "operations": "Operations"
+    }
+  }
 }

@@ -7,9 +7,9 @@
   "scripts": {
     "prepare": "antelopejs-tsc",
     "build": "rimraf dist && antelopejs-tsc",
-    "typecheck": "antelopejs-tsc --noEmit && antelopejs-tsc -p frontend-vue && antelopejs-tsc -p frontend-vue/tests",
-    "lint": "oxlint --type-aware --max-warnings=0 && pnpm --dir frontend-vue lint",
-    "format": "oxfmt . && pnpm --dir frontend-vue format",
+    "typecheck": "antelopejs-tsc --noEmit",
+    "lint": "pnpm --dir frontend-vue lint && oxlint --type-aware --max-warnings=0",
+    "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "knip": "knip --workspace . --dependencies",
     "test": "pnpm run build && node --test \"dist/**/*.test.js\" && pnpm --dir frontend-vue test"

@@ -51,8 +51,10 @@ function refuse(status: number, message: string): HTTPResult {
 }
 
 async function findQuote(id: QueryValue): Promise<Quote> {
-  const quote =
-    id === true || !id ? undefined : await GetModel(QuoteModel).get(id);
+  if (id === undefined || id === true) {
+    throw refuse(404, "$helio.sales.quotes.errors.notFound");
+  }
+  const quote = await GetModel(QuoteModel).get(id);
   if (!quote) throw refuse(404, "$helio.sales.quotes.errors.notFound");
   return quote;
 }

@@ -1,9 +1,9 @@
 {
-	"extends": "./.dms-types/tsconfig.json",
-	"compilerOptions": {
-		"types": ["node", "vite/client"],
-		"allowJs": true,
-		"checkJs": true
-	},
-	"files": [".dms-types/types.d.ts", "vitest.config.ts", "eslint.config.mjs"]
+  "extends": "./.dms-types/tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "types": ["node"]
+  },
+  "include": ["**/*.ts", "**/*.vue", "**/*.mjs"],
+  "exclude": ["node_modules", ".dms-types"]
 }

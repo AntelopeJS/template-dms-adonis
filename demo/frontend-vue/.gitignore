@@ -10,3 +10,6 @@ logs
 
 # Misc
 .DS_Store
+
+# Types written by ajs dms prepare-types for type-aware lint
+.dms-types

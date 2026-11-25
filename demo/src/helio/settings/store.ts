@@ -16,7 +16,6 @@ import {
 } from "./types";
 import { isNumberPattern } from "./number-pattern";
 import { isValidVatNumber, normalizeVatNumber } from "./vat";
-import { insertOnce } from "../shared/insert-once";
 
 const HTTP_BAD_REQUEST = 400;
 
@@ -62,10 +61,14 @@ async function readStored(): Promise<HelioSettingsValues> {
   const stored = await model.get(HELIO_SETTINGS_ID);
   if (stored) return stored;
   const defaults = buildDefaultSettings();
-  const wrote = await insertOnce(model, HELIO_SETTINGS_ID, () =>
-    model.insert(defaults),
-  );
-  return wrote ? defaults : readStored();
+  try {
+    await model.insert(defaults);
+  } catch (error) {
+    const written = await model.get(HELIO_SETTINGS_ID);
+    if (written) return written;
+    throw error;
+  }
+  return defaults;
 }
 
 /**

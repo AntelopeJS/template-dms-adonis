@@ -34,5 +34,5 @@ const file = process.argv[1];
 const manifest = JSON.parse(fs.readFileSync(file, "utf8"));
 manifest.scripts.dev = "pnpm --dir ../.. frontend:dev";
 manifest.scripts.build = "pnpm --dir ../.. frontend:build";
-fs.writeFileSync(file, `${JSON.stringify(manifest, null, "\t")}\n`);
+fs.writeFileSync(file, `${JSON.stringify(manifest, null, 2)}\n`);
 ' "$target_root/frontend-vue/package.json"
