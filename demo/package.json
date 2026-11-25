@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "antelopejs-tsc && pnpm --dir frontend-vue -s run types",
+    "prepare": "antelopejs-tsc && ajs dms prepare-types -q --out frontend-vue/.dms-types",
     "build": "rimraf dist && antelopejs-tsc",
     "typecheck": "antelopejs-tsc --noEmit",
     "lint": "oxlint --type-aware --max-warnings=0 && pnpm --dir frontend-vue lint",

@@ -58,7 +58,6 @@ await test('demo-sync', async (t) => {
     ],
     { cwd }
   )
-  await mustRun('pnpm', ['-s', '--dir', 'demo/frontend-vue', 'run', 'types'], { cwd })
   const source = mkdtempSync(join(root(), 'template-dms-demo-'))
   for (const folder of ['src', 'content', 'frontend-vue']) {
     cpSync(join(cwd, 'demo', folder), join(source, folder), {
@@ -71,6 +70,6 @@ await test('demo-sync', async (t) => {
   assert.equal(status.stdout.trim(), '', 'demo/ is unchanged')
   assert.ok(
     existsSync(join(cwd, 'demo/frontend-vue/.dms-types/tsconfig.json')),
-    'the sync keeps the types lint generated'
+    'the sync keeps the types pnpm install generated'
   )
 })
