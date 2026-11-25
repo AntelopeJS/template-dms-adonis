@@ -5,10 +5,10 @@
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "antelopejs-tsc",
+    "prepare": "antelopejs-tsc && pnpm --dir frontend-vue -s run types",
     "build": "rimraf dist && antelopejs-tsc",
     "typecheck": "antelopejs-tsc --noEmit",
-    "lint": "pnpm --dir frontend-vue lint && oxlint --type-aware --max-warnings=0",
+    "lint": "oxlint --type-aware --max-warnings=0 && pnpm --dir frontend-vue lint",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "knip": "knip --workspace . --dependencies",
