@@ -155,6 +155,9 @@
 					"value": "{count} day | {count} days",
 					"detail": "{receivable} due for {sales} invoiced in {days} days"
 				}
+			},
+			"errors": {
+				"invoiceNotFound": "This invoice no longer exists."
 			}
 		}
 	}

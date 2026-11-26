@@ -172,6 +172,9 @@
 			},
 			"rules": {
 				"siteOfOtherCustomer": "This installation belongs to another customer. Pick one of this customer's installations or leave the field empty."
+			},
+			"errors": {
+				"forbidden": "You do not have the permission this action needs."
 			}
 		}
 	}

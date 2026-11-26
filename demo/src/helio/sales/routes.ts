@@ -61,17 +61,17 @@ async function findQuote(id: QueryValue): Promise<Quote> {
  * What a status change says when the quote no longer stands in the status it
  * needs: a stale table (another user just sent it) gets a clear message.
  */
-const NOT_IN_STATUS: Partial<Record<QuoteStatus, string>> = {
-  draft: "$helio.sales.quotes.errors.notDraft",
-  sent: "$helio.sales.quotes.errors.notSent",
-};
+const NOT_IN_STATUS = new Map<QuoteStatus, string>([
+  ["draft", "$helio.sales.quotes.errors.notDraft"],
+  ["sent", "$helio.sales.quotes.errors.notSent"],
+]);
 
 async function quoteIn(id: QueryValue, status: QuoteStatus): Promise<Quote> {
   const quote = await findQuote(id);
   if (quote.status !== status) {
     throw refuse(
       409,
-      NOT_IN_STATUS[status] ?? "$helio.sales.quotes.errors.notSent",
+      NOT_IN_STATUS.get(status) ?? "$helio.sales.quotes.errors.notSent",
     );
   }
   return quote;

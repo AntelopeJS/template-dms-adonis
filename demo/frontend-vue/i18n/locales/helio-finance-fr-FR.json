@@ -155,6 +155,9 @@
 					"value": "{count} jour | {count} jours",
 					"detail": "{receivable} dus pour {sales} facturés en {days} jours"
 				}
+			},
+			"errors": {
+				"invoiceNotFound": "Cette facture n'existe plus."
 			}
 		}
 	}
