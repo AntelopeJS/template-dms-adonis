@@ -5,11 +5,11 @@
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "antelopejs-tsc",
+    "prepare": "antelopejs-tsc && ajs dms prepare-types -q --out frontend-vue/.dms-types",
     "build": "rimraf dist && antelopejs-tsc",
-    "typecheck": "antelopejs-tsc --noEmit && antelopejs-tsc -p frontend-vue && antelopejs-tsc -p frontend-vue/tests",
+    "typecheck": "antelopejs-tsc --noEmit",
     "lint": "oxlint --type-aware --max-warnings=0 && pnpm --dir frontend-vue lint",
-    "format": "oxfmt . && pnpm --dir frontend-vue format",
+    "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "knip": "knip --workspace . --dependencies",
     "test": "pnpm run build && node --test \"dist/**/*.test.js\" && pnpm --dir frontend-vue test"
@@ -28,7 +28,7 @@
     "@antelopejs/interface-dms-saas": ">=0.12.1 <0.13.0"
   },
   "devDependencies": {
-    "@antelopejs/tooling-configs": ">=0.10.5 <0.11.0",
+    "@antelopejs/tooling-configs": "^0.10.5",
     "@types/node": "^26.6.6",
     "knip": "^6.46.1",
     "oxfmt": "^0.77.0",

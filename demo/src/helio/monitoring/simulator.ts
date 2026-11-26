@@ -1,4 +1,3 @@
-import { Events, GetResponsibleModule } from "@antelopejs/interface-core";
 import { Logging } from "@antelopejs/interface-core/logging";
 import { GetModel } from "@antelopejs/interface-database-decorators";
 import { PublishMessage } from "@antelopejs/interface-dms/realtime";
@@ -105,16 +104,3 @@ export function stopMonitoringSimulator(): void {
   clearInterval(state.timer);
   state.timer = undefined;
 }
-
-/**
- * The simulator follows this module's own lifecycle, so no shared file has to
- * wire it: it starts when the module has started (the schema and the DMS are
- * up) and stops with it, hot reloads included.
- */
-const ownModule = GetResponsibleModule();
-Events.ModuleStarted.register((module) => {
-  if (module === ownModule) startMonitoringSimulator();
-});
-Events.ModuleStopped.register((module) => {
-  if (module === ownModule) stopMonitoringSimulator();
-});

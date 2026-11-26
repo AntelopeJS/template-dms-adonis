@@ -37,7 +37,9 @@ const SENT_STATUSES = new Set(["queued", "sent", "delivered"]);
 
 /**
  * Sends one e-mail through the Mailing module. Never throws: the outcome is
- * returned when there is one, and a refusal or a provider error is logged. A
+ * returned when there is one, and a refusal or a provider error is logged, as
+ * a warning except for an address the suppression list holds, which the
+ * history import puts there on purpose. A
  * mail is a side effect of the business action, never its condition: a send
  * that fails (no SMTP account, the Mailing module not loaded, an address on
  * the suppression list) is logged and the action carries on. The domain
@@ -56,7 +58,8 @@ export async function sendHelioMail(
       source,
     });
     if (!SENT_STATUSES.has(result.status)) {
-      Logging.Warn(
+      const log = result.status === "suppressed" ? Logging.Info : Logging.Warn;
+      log(
         `[helio] mail ${mail.slug} to ${mail.to.email}: ${result.status} ${result.error ?? ""}`,
       );
     }

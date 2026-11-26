@@ -19,7 +19,6 @@ import { nextTicketNumber } from "./numbering";
 import { SERVICE_TOPIC } from "./options";
 import { refreshSlaHours, slaDueAt } from "./sla";
 import { SUBJECTS } from "./subjects";
-import { insertOnce } from "../shared/insert-once";
 
 const SIMULATED_PREFIX = "ticket-sim-";
 const MINUTE_MS = 60_000;
@@ -178,7 +177,14 @@ export async function simulateTicket(): Promise<void> {
   const changes = await advanceSimulated(rng, model, tickets);
   await announce("tickets.updated", changes.updated);
   await announce("tickets.deleted", changes.deleted);
+  await openSimulatedTicket(rng, tickets);
+}
 
+/**
+ * Opens a new ticket under a fresh time-based id, during office hours or as
+ * a rare night alert. `tickets` only spaces urgent ones out.
+ */
+async function openSimulatedTicket(rng: Rng, tickets: Ticket[]): Promise<void> {
   const officeHours = isBusinessHours(new Date());
   await refreshSlaHours();
   if (!officeHours && !rng.chance(NIGHT_ALERT_CHANCE)) return;
@@ -194,9 +200,7 @@ export async function simulateTicket(): Promise<void> {
     alertOnly: !officeHours,
     urgentAllowed: Date.now() - lastUrgent >= URGENT_SPACING_MS,
   });
-  if (!(await insertOnce(model, ticket._id, () => model.insert(ticket)))) {
-    return;
-  }
+  await GetModel(TicketModel).insert(ticket);
   await announce("tickets.created", [ticket._id]);
   if (ticket.priority === "urgent") await notifyUrgentTicket(ticket);
   fireTicketOpened(ticket);

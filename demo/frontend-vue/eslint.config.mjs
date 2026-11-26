@@ -1,3 +1,5 @@
-import { antelopeNuxtConfig } from '@antelopejs/tooling-configs/eslint'
+import { antelopeNuxtConfig } from "@antelopejs/tooling-configs/eslint";
 
-export default antelopeNuxtConfig().prepend({ ignores: ['.dms-types/**'] })
+export default antelopeNuxtConfig({
+  typeAware: { tsconfigRootDir: import.meta.dirname },
+}).prepend({ ignores: [".dms-types/**"] });

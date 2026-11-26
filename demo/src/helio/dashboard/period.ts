@@ -42,7 +42,7 @@ const DAILY_LIMIT_DAYS = 45;
 const WEEKLY_LIMIT_DAYS = 210;
 
 function instant(value: QueryValue): number | undefined {
-  if (value === true || !value) return undefined;
+  if (value === undefined || value === true) return undefined;
   const time = Date.parse(value);
   return Number.isFinite(time) ? time : undefined;
 }

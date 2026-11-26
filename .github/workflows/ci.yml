@@ -65,6 +65,29 @@ jobs:
       affected-tests: true
     permissions:
       contents: read
+  demo-drift:
+    if: github.repository == 'AntelopeJS/template-dms-adonis'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: AntelopeJS/template-dms-demo
+          ref: main
+          path: .template-dms-demo
+          persist-credentials: false
+      - run: scripts/sync-demo.sh .template-dms-demo
+      - run: |
+          drift=$(git status --porcelain -- demo)
+          if [ -n "$drift" ]; then
+            echo "$drift"
+            echo "::error::demo/ differs from template-dms-demo main: run pnpm demo:sync <template-dms-demo checkout> and commit the result"
+            exit 1
+          fi
   renovate-sync:
     if: >-
       github.event_name == 'pull_request' && startsWith(github.head_ref, 'renovate/') && github.event.pull_request.head.repo.full_name == github.repository

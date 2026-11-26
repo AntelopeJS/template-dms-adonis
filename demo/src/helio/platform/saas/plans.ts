@@ -20,11 +20,24 @@ export const PLAN_IDS = {
   hq: "helio-plan-hq",
 } as const;
 
+/** Every registered id outside the paid add-ons and the demo-only pages. */
+interface BaseGrant {
+  kind: "base";
+}
+
+/** Every registered id under these subtrees. */
+interface SubtreesGrant {
+  kind: "subtrees";
+  prefixes: readonly string[];
+}
+
+/** Every registered id: the publisher's own workspace. */
+interface AllGrant {
+  kind: "all";
+}
+
 /** Which permission ids a plan holds itself (inherited ones excluded). */
-export type PlanGrant =
-  | { kind: "base" }
-  | { kind: "subtrees"; prefixes: readonly string[] }
-  | { kind: "all" };
+export type PlanGrant = BaseGrant | SubtreesGrant | AllGrant;
 
 export interface SeedPlan {
   id: string;

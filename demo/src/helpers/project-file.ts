@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 /** The absolute path of a file at the project root, whether the caller runs from `src` or from `dist`. */
@@ -9,4 +9,9 @@ export function projectPath(relativePath: string): string {
 /** The text of a file at the project root, whether the caller runs from `src` or from `dist`. */
 export function readProjectFile(relativePath: string): string {
   return readFileSync(projectPath(relativePath), "utf8");
+}
+
+/** The entry names of a directory at the project root, whether the caller runs from `src` or from `dist`. */
+export function listProjectDirectory(relativePath: string): string[] {
+  return readdirSync(projectPath(relativePath));
 }

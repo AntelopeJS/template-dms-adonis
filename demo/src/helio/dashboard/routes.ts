@@ -35,10 +35,10 @@ import { topReps } from "./team-metrics";
  */
 @AuthUserWithPermission(PageHelioDashboard)
 export class HelioDashboardApi extends Controller("/api/helio/dashboard") {
-  @Parameter("from", "query") declare from?: QueryValue;
-  @Parameter("to", "query") declare to?: QueryValue;
-  @Parameter("compareFrom", "query") declare compareFrom?: QueryValue;
-  @Parameter("compareTo", "query") declare compareTo?: QueryValue;
+  @Parameter("from", "query") declare from: QueryValue;
+  @Parameter("to", "query") declare to: QueryValue;
+  @Parameter("compareFrom", "query") declare compareFrom: QueryValue;
+  @Parameter("compareTo", "query") declare compareTo: QueryValue;
 
   private get period() {
     return readPeriod(this);

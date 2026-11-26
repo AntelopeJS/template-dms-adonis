@@ -1,4 +1,4 @@
 import "./database";
 import "./controller";
 import "./page";
-import "./simulator";
+export { startMonitoringSimulator, stopMonitoringSimulator } from "./simulator";
