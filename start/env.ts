@@ -18,7 +18,7 @@ export default await Env.create(new URL('../', import.meta.url), {
   DMS_API_PORT: Env.schema.number(),
   /**
    * The origin browsers reach the DMS API at. `@antelopejs/api` requires it as `publicBaseUrl`
-   * outside development, and the embedded runtime never runs in development.
+   * outside development; the provider passes `dev` to the runtime in development.
    */
   DMS_API_BASE_URL: Env.schema.string(),
   DMS_CLIENT_BASE_URL: Env.schema.string(),
@@ -26,14 +26,14 @@ export default await Env.create(new URL('../', import.meta.url), {
   /** Signs the backend's calls to the dashboard's HTML renderer; the dashboard holds the same value. */
   DMS_HTML_RENDER_SECRET: Env.schema.string(),
   /**
-   * The dashboard bootstrap credential. The embedded runtime never runs in development, so the DMS
-   * publishes no per-boot credential for `ajs dms dev`: the DMS and the dashboard (`ajs dms dev`,
-   * `ajs dms build`) both read this one from `.env`.
+   * The dashboard bootstrap credential. The DMS and the dashboard (`ajs dms build`) both read
+   * this one from `.env`, in development and in production.
    */
   DMS_BOOTSTRAP_SECRET: Env.schema.string(),
   /**
-   * The setup token of the first administrator, at least 16 characters. The embedded DMS never
-   * prints the token it generates when this is empty, so set it to create the administrator.
+   * The setup token of the first administrator, at least 16 characters. When it is empty,
+   * development prints the token the DMS generates and production shows `<DMS_SETUP_TOKEN>`
+   * instead, so set it to create the administrator.
    */
   DMS_SETUP_TOKEN: Env.schema.string.optional(),
 

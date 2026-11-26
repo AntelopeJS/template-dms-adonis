@@ -15,20 +15,20 @@
     "test": "pnpm run build && node --test \"dist/**/*.test.js\" && pnpm --dir frontend-vue test"
   },
   "dependencies": {
-    "@antelopejs/interface-api": "^0.3.4",
-    "@antelopejs/interface-core": "^0.5.2",
-    "@antelopejs/interface-data-api": "^0.8.2",
-    "@antelopejs/interface-database": "^0.4.3",
+    "@antelopejs/interface-api": "^0.3.5",
+    "@antelopejs/interface-core": "^0.5.4",
+    "@antelopejs/interface-data-api": "^0.8.3",
+    "@antelopejs/interface-database": "^0.4.4",
     "@antelopejs/interface-database-decorators": "^0.5.4",
-    "@antelopejs/interface-dms": ">=0.16.0 <0.17.0",
+    "@antelopejs/interface-dms": ">=0.17.1 <0.18.0",
     "@antelopejs/interface-dms-automation": "^0.7.3",
-    "@antelopejs/interface-dms-mailing": "^0.11.3",
-    "@antelopejs/interface-dms-marketing": ">=0.8.0 <0.9.0",
-    "@antelopejs/interface-dms-media": ">=0.5.0 <0.6.0",
-    "@antelopejs/interface-dms-saas": ">=0.12.0 <0.13.0"
+    "@antelopejs/interface-dms-mailing": "^0.11.5",
+    "@antelopejs/interface-dms-marketing": ">=0.9.0 <0.10.0",
+    "@antelopejs/interface-dms-media": ">=0.5.1 <0.6.0",
+    "@antelopejs/interface-dms-saas": ">=0.12.1 <0.13.0"
   },
   "devDependencies": {
-    "@antelopejs/tooling-configs": ">=0.10.0 <0.11.0",
+    "@antelopejs/tooling-configs": ">=0.10.5 <0.11.0",
     "@types/node": "^26.6.6",
     "knip": "^6.46.1",
     "oxfmt": "^0.77.0",

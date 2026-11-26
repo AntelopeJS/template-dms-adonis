@@ -112,7 +112,11 @@ export class PageHelioInvoices extends PageController(
     @AuthUserWithPermission(invoiceListAction) user: User,
   ): Promise<HTTPResult> {
     const invoice = await GetModel(InvoiceModel).get(id);
-    if (!invoice) throw new HTTPResult(HTTP_NOT_FOUND, "Invoice not found");
+    if (!invoice)
+      throw new HTTPResult(
+        HTTP_NOT_FOUND,
+        "$helio.finance.errors.invoiceNotFound",
+      );
     const html = renderInvoiceDocument(
       await loadDocumentData(invoice),
       user.language,

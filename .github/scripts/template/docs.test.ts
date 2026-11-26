@@ -109,8 +109,13 @@ await test('docs-commands', () => {
   for (const [name, text] of [
     ['README.md', readme],
     ['.env.example', example],
+    ['start/env.ts', env],
   ] as const) {
-    assert.doesNotMatch(text, /never prints/, `${name} says the DMS never prints the token`)
+    assert.doesNotMatch(
+      text,
+      /never (?:prints|runs)/,
+      `${name} says the DMS never prints the token`
+    )
     assert.match(text, /development\s+(?:#\s*)?prints/, `${name} says development prints the token`)
     assert.match(
       text,
