@@ -12,6 +12,7 @@ it("registers only the home page components: Helio is made of DMS blocks", async
     registerErrorPage: vi.fn(),
     registerPlugin: vi.fn(),
     registerMiddleware: vi.fn(),
+    registerAccessRedirect: vi.fn(),
     provide: vi.fn(),
     use: vi.fn(),
   });

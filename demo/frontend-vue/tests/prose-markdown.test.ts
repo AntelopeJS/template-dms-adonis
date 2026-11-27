@@ -43,7 +43,13 @@ describe("parseProse", () => {
       type: "proseCallout",
       callout: "warning",
     });
-    expect(JSON.stringify(tokens[0]?.tokens)).not.toContain("[!WARNING]");
+    const [callout] = tokens;
+    const body =
+      callout && isProseToken(callout) && callout.type === "proseCallout"
+        ? JSON.stringify(callout.tokens)
+        : "";
+    expect(body).toContain("Back up");
+    expect(body).not.toContain("[!WARNING]");
   });
 
   it("leaves a plain quote a quote", () => {
