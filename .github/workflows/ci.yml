@@ -40,16 +40,23 @@ jobs:
       # a project with `ajs project init --template` and drives it, each test
       # beside a MongoDB container of its own, so they run on Linux only, and
       # outside the fast tier of a pull request. `.github/scripts` stays out of
-      # every scaffolded project, whose copy of this workflow skips both lines.
-      # Then the build, then the server a user starts: AdonisJS on :3333 with the
-      # DMS API on :5010. `/dms/info` answers only once the runtime has started
-      # every module. `node ace serve` validates its environment from `.env`.
+      # every scaffolded project, whose copy of this workflow skips that block.
+      # They run in a job of their own, split here into 3 shards by `node
+      # --test-shard`; a scaffolded project keeps 1 shard. The last shard also
+      # typechecks the journeys and runs the build, then the server a user
+      # starts: AdonisJS on :3333 with the DMS API on :5010. `/dms/info` answers
+      # only once the runtime has started every module. `node ace serve`
+      # validates its environment from `.env`.
+      extra-commands-job: true
+      extra-commands-shards: ${{ github.repository == 'AntelopeJS/template-dms-adonis' && 3 || 1 }}
       extra-commands: |
+        shard="${ANTELOPEJS_CI_SHARD:-1/1}"
         if [ -d .github/scripts/template ]; then
-          pnpm exec tsc -p .github/scripts/template
           if [ "$ANTELOPEJS_CI_TIER" != fast ] && [ "$RUNNER_OS" = Linux ]; then
-            node --test --test-concurrency=3 --test-timeout=1200000 --test-global-setup=.github/scripts/template/setup.ts '.github/scripts/template/*.test.ts'
+            node --test --test-shard="$shard" --test-concurrency=3 --test-timeout=1200000 --test-global-setup=.github/scripts/template/setup.ts '.github/scripts/template/*.test.ts'
           fi
+          [ "${shard%/*}" = "${shard#*/}" ] || exit 0
+          pnpm exec tsc -p .github/scripts/template
         fi
         pnpm build
         cp .env.example .env
