@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "pnpm --dir ../.. frontend:dev",
     "build": "pnpm --dir ../.. frontend:build",
-    "lint": "pnpm -s run types && node scripts/check-locales.ts && eslint .",
+    "lint": "pnpm -s run typecheck && node scripts/check-locales.ts && eslint .",
     "lint:fix": "pnpm -s run types && eslint . --fix",
     "test": "vitest run",
+    "typecheck": "pnpm -s run types && tsc --noEmit",
     "types": "pnpm --dir .. exec ajs dms prepare-types -q --out frontend-vue/.dms-types"
   },
   "dependencies": {
@@ -18,9 +19,9 @@
     "vue": "^3.5.45"
   },
   "devDependencies": {
-    "@antelopejs/tooling-configs": "^0.10.5",
+    "@antelopejs/tooling-configs": "^0.10.7",
     "@nuxt/eslint-config": "^1.17.0",
-    "@nuxt/ui": "4.13.0",
+    "@nuxt/ui": "4.13.1",
     "@vitejs/plugin-vue": "^6.0.11",
     "eslint": "^10.15.0",
     "jsdom": "^30.1.3",
@@ -30,5 +31,5 @@
   "engines": {
     "@antelopejs/dms-frontend": ">=0.11.9 <0.12.0"
   },
-  "packageManager": "pnpm@10.33.0"
+  "packageManager": "pnpm@10.34.9"
 }
