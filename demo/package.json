@@ -35,7 +35,7 @@
     "oxlint": "1.95.0",
     "oxlint-tsgolint": "^7.0.2007",
     "rimraf": "^6.1.4",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.0"
   },
   "antelopeJs": {
     "baseUrl": "dist",
