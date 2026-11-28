@@ -152,12 +152,14 @@ await test('mongo-unreachable', async (t) => {
   })
 })
 
-/** Reads the connection count until it reaches `target` or five seconds pass, so a close still in flight is not counted. */
-async function settledConnections(mongo: Mongo, target: number): Promise<number> {
-  let latest = await connections(mongo)
-  for (let attempt = 0; attempt < 10 && latest !== target; attempt += 1) {
+const SERVER_APP_NAME = 'template-restart-persistence'
+
+/** Reads the server's connection count until it reaches 0 or five seconds pass, so a close still in flight is not counted. */
+async function settledConnections(mongo: Mongo): Promise<number> {
+  let latest = await connections(mongo, SERVER_APP_NAME)
+  for (let attempt = 0; attempt < 10 && latest !== 0; attempt += 1) {
     await sleep(500)
-    latest = await connections(mongo)
+    latest = await connections(mongo, SERVER_APP_NAME)
   }
   return latest
 }
@@ -166,11 +168,12 @@ await test('restart-persistence', async (t) => {
   const project = copyProject()
   t.after(() => project.remove())
   await withMongo(async (mongo) => {
-    const ports = await writeEnv(project.dir, mongo)
-    const baseline = await connections(mongo)
+    const ports = await writeEnv(project.dir, mongo, {
+      MONGODB_URL: `${mongo.url}/?appName=${SERVER_APP_NAME}`,
+    })
     const first = await serve(project.dir, ports)
     try {
-      assert.ok((await connections(mongo)) > baseline, 'the server holds connections')
+      assert.ok((await connections(mongo, SERVER_APP_NAME)) > 0, 'the server holds connections')
       const marked = await mongosh(
         mongo,
         `db.getSiblingDB('${DEFAULT_DATABASE}').getCollection('test_marker').insertOne({ _id: 'kept' }).acknowledged`
@@ -179,11 +182,7 @@ await test('restart-persistence', async (t) => {
     } finally {
       assert.equal(await first.stop(), true, 'SIGINT ended the server')
     }
-    assert.equal(
-      await settledConnections(mongo, baseline),
-      baseline,
-      'every connection of the server is closed'
-    )
+    assert.equal(await settledConnections(mongo), 0, 'every connection of the server is closed')
     const before = await collections(mongo, DEFAULT_DATABASE)
     await withServer(project.dir, ports, async () => {
       const marker = await mongosh(

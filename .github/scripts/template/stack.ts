@@ -252,8 +252,14 @@ export function collections(mongo: Mongo, database: string): Promise<string[]> {
   return stringArray(mongo, `db.getSiblingDB('${database}').getCollectionNames().sort()`)
 }
 
-export async function connections(mongo: Mongo): Promise<number> {
-  return Number(await mongosh(mongo, 'db.serverStatus().connections.current'))
+/** Counts the open connections of the clients that set `appName` in their connection string. */
+export async function connections(mongo: Mongo, appName: string): Promise<number> {
+  return Number(
+    await mongosh(
+      mongo,
+      `db.getSiblingDB('admin').aggregate([{ $currentOp: { allUsers: true, idleConnections: true } }, { $match: { appName: '${appName}' } }]).toArray().length`
+    )
+  )
 }
 
 /** Replaces the value of each `NAME=` line of an env file. */
