@@ -1,8 +1,0 @@
-pre-commit:
-  commands:
-    antelopejs-format:
-      run: pnpm exec oxfmt --no-error-on-unmatched-pattern {staged_files}
-      stage_fixed: true
-    antelopejs-lint:
-      glob: "*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,vue}"
-      run: pnpm exec antelopejs-lint-staged {staged_files}
