@@ -80,7 +80,7 @@ jobs:
       contents: read
   demo-drift:
     if: github.repository == 'AntelopeJS/template-dms-adonis'
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     permissions:
       contents: read
     steps:
@@ -112,7 +112,7 @@ jobs:
   verdict:
     needs: [ci, demo-drift, renovate-sync]
     if: ${{ !cancelled() }}
-    runs-on: ${{ vars.RUNNER_CI || 'ubuntu-latest' }}
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 5
     permissions: {}
     steps:
