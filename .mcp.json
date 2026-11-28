@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dms": {
+      "command": "node",
+      "args": ["node_modules/.cache/dms/mcp-bridge.cjs"]
+    }
+  }
+}

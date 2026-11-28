@@ -27,7 +27,7 @@ On a host where `~/.cache` is writable by its group, SWC refuses to load and `no
 | A template journey (`.github/scripts/template/`) | `pnpm exec tsc -p .github/scripts/template`, then the one journey file: `node --test --test-concurrency=1 --test-timeout=1200000 --test-global-setup=.github/scripts/template/setup.ts .github/scripts/template/<file>.test.ts`. Each journey scaffolds a project and starts its own `mongo:7` container on a free port, so it takes about a minute. |
 | `demo/src`, `demo/content` or `demo/frontend-vue` copied from template-dms-demo | Nothing here. Change template-dms-demo, then run `pnpm demo:sync <template-dms-demo checkout>`. The `demo-drift` job fails on a hand edit. |
 | A lint directive, `@ts-expect-error` or `SAFETY:` comment | `pnpm run suppressions`. After you remove one, run `pnpm run suppressions:update` and commit `guardrails.suppressions.json`. |
-| `.github/workflows/ci.yml`, `lefthook.yml`, the AGENTS.md Guardrails block, `.agents/skills/{verify-changes,technical-writing,unslop}` | Nothing by hand. `antelopejs-sync` writes them: bump `@antelopejs/tooling-configs`, run `pnpm run sync`, then `pnpm run sync:check`. |
+| `.github/workflows/ci.yml`, the AGENTS.md Guardrails block | Nothing by hand. `antelopejs-sync` writes them: bump `@antelopejs/tooling-configs`, run `pnpm run sync`, then `pnpm run sync:check`. |
 | A new key of `start/env.ts` | Add it to `.env.example` and `.env.test`: CI has no `.env` while it tests. |
 
 Never run `pnpm test` or `pnpm run checks`: they run every suite. Run at most 4 test workers, since other agents share the machine.
