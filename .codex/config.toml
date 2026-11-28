@@ -1,0 +1,3 @@
+[mcp_servers.dms]
+command = "node"
+args = ["-e", "require('.cache/dms/mcp-bridge.cjs')"]
