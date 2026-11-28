@@ -152,7 +152,7 @@ This template does not load `@antelopejs/dms-assistant`, the module that brings 
 
 There the assistant runs a coding agent, Claude Code or Codex, on your own subscription. You set it up in the dashboard. After you create the administrator account, the assistant's onboarding opens on its own. It finds a Claude Code login you already have, or walks you through signing in to Claude or Codex. The [AI assistant section of `template-dms`](https://github.com/AntelopeJS/template-dms#ai-assistant) covers Docker too.
 
-There the first start in development also writes `.mcp.json` and `.codex/config.toml`, so Claude Code and Codex sessions you open in the project reach the same DMS tools. Commit both files. They hold only a relative path to a launcher under `node_modules`, with no machine path and no secret. [MCP server](https://dms.antelopejs.com/docs/ai-and-claude-code/mcp-server) explains them.
+The DMS MCP server is separate from the assistant and works in embedded mode: `@antelopejs/dms` serves it while `pnpm dev` runs. The first `pnpm dev` writes `.mcp.json` and `.codex/config.toml`, which point the Claude Code and Codex sessions you open in the project at it. Both files are committed, as in `template-dms-demo`. They hold only the relative path of a launcher that every development start rewrites under `node_modules/.cache/dms/`, with no machine path and no secret. `pnpm test` starts the runtime in test, not in development, so it writes neither file. [MCP server](https://dms.antelopejs.com/docs/ai-and-claude-code/mcp-server) explains them.
 
 ## Coding agents
 
